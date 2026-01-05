@@ -1,1 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The Real Estate Marketing System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A complete, execution-ready marketing system for real estate organizations. Built for consistency, reuse, and long-term operation.">
 
+  <style>
+    :root{
+      --bg:#0f172a;
+      --surface:#111827;
+      --card:#1f2937;
+      --panel:#273449;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --line:#374151;
+      --accent:#60a5fa;
+      --accent2:#93c5fd;
+      --shadow: 0 18px 44px rgba(0,0,0,.42);
+      --radius:16px;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #0b1220, var(--bg));
+      color: var(--text);
+    }
+
+    .wrap{
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 64px 24px 72px;
+    }
+
+    .card{
+      background: linear-gradient(180deg, var(--card), var(--surface));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 54px;
+    }
+
+    h1{
+      margin:0 0 14px 0;
+      font-size:42px;
+      letter-spacing:-0.6px;
+    }
+
+    h2{
+      margin:0 0 14px 0;
+      font-size:26px;
+      letter-spacing:-0.3px;
+    }
+
+    h3{
+      margin:0 0 10px 0;
+      font-size:18px;
+      text-transform:uppercase;
+      letter-spacing:.6px;
+      color:#f3f4f6;
+    }
+
+    p{
+      margin:0 0 14px 0;
+      font-size:16px;
+      line-height:1.75;
+      color:var(--muted);
+      max-width:80ch;
+    }
+
+    hr{
+      margin:42px 0;
+      border:none;
+      border-top:1px solid var(--line);
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:22px;
+    }
+
+    .price{
+      font-size:20px;
+      font-weight:800;
+      color:#f3f4f6;
+    }
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:12px;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:12px 18px;
+      border-radius:12px;
+      font-weight:800;
+      text-decoration:none;
+      border:1px solid var(--line);
+    }
+
+    .btn-primary{
+      background:linear-gradient(180deg, var(--accent), var(--accent2));
+      color:#0b1220;
+    }
+
+    .btn-secondary{
+      background:transparent;
+      color:var(--accent2);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+      gap:18px;
+      margin-top:18px;
+    }
+
+    .panel{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:18px;
+      background:var(--panel);
+    }
+
+    .panel p{
+      font-size:15px;
+    }
+
+    .two-col{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:24px;
+      margin-top:18px;
+    }
+
+    ul{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+    }
+
+    li{
+      margin-bottom:8px;
+      line-height:1.6;
+    }
+
+    .steps{
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+      gap:18px;
+      margin-top:18px;
+    }
+
+    .step{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:16px;
+      background:var(--panel);
+    }
+
+    .footer{
+      margin-top:42px;
+      border-top:1px solid var(--line);
+      padding-top:20px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      justify-content:space-between;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .footer a{
+      color:var(--accent2);
+      font-weight:800;
+      text-decoration:none;
+      margin-right:14px;
+    }
+
+    @media (max-width:900px){
+      .card{padding:30px;}
+      h1{font-size:32px;}
+      .two-col{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+
+      <!-- HERO -->
+      <section class="hero">
+        <h1>The Real Estate Marketing System</h1>
+
+        <p>
+          A complete, execution-ready marketing system designed for real estate organizations that
+          want consistency, speed, and long-term reuse — without agencies, SaaS subscriptions, or
+          ongoing creative work.
+        </p>
+
+        <div class="price">$___ one-time purchase</div>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="/table-of-contents">View Full System Table of Contents</a>
+          <a class="btn btn-secondary" href="/faq">Read the FAQ</a>
+        </div>
+      </section>
+
+      <hr>
+
+      <!-- PROBLEM -->
+      <section>
+        <h2>The Problem</h2>
+        <p>
+          Most real estate marketing efforts fail not because of effort, but because there is no
+          system behind them.
+        </p>
+
+        <div class="grid">
+          <div class="panel"><p>Inconsistent branding across agents, teams, and listings</p></div>
+          <div class="panel"><p>Constant redesigns and one-off assets that can’t be reused</p></div>
+          <div class="panel"><p>Dependence on agencies or tools that don’t scale internally</p></div>
+          <div class="panel"><p>No governance, standards, or long-term structure</p></div>
+        </div>
+      </section>
+
+      <hr>
+
+      <!-- WHAT THIS IS -->
+      <section>
+        <h2>What This Is</h2>
+        <p>
+          This is not a template pack, a software platform, or a creative service.
+        </p>
+        <p>
+          It is a complete marketing system — a structured framework of standardized formats,
+          layouts, and documentation designed to support consistent execution over time.
+        </p>
+      </section>
+
+      <hr>
+
+      <!-- WHAT IT REPLACES -->
+      <section>
+        <h2>What This Replaces</h2>
+        <div class="grid">
+          <div class="panel"><p>Ad-hoc design requests</p></div>
+          <div class="panel"><p>Repeated onboarding of new vendors</p></div>
+          <div class="panel"><p>Fragmented Canva or Drive folders</p></div>
+          <div class="panel"><p>Marketing decisions made from scratch each time</p></div>
+        </div>
+      </section>
+
+      <hr>
+
+      <!-- WHO IT'S FOR -->
+      <section>
+        <h2>Who It’s For</h2>
+        <div class="two-col">
+          <div class="panel">
+            <h3>Good Fit</h3>
+            <ul>
+              <li>Brokers and teams who want internal consistency</li>
+              <li>Organizations managing multiple agents or brands</li>
+              <li>Operators who want systems, not services</li>
+            </ul>
+          </div>
+
+          <div class="panel">
+            <h3>Not a Fit</h3>
+            <ul>
+              <li>One-off listings with no reuse plan</li>
+              <li>Anyone looking for done-for-you marketing</li>
+              <li>Teams unwilling to follow standards</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <hr>
+
+      <!-- HOW IT WORKS -->
+      <section>
+        <h2>How It’s Used</h2>
+        <div class="steps">
+          <div class="step"><p>Duplicate the system into your Canva account</p></div>
+          <div class="step"><p>Apply your branding once</p></div>
+          <div class="step"><p>Reuse across listings, agents, and campaigns</p></div>
+          <div class="step"><p>Maintain consistency over time</p></div>
+        </div>
+      </section>
+
+      <hr>
+
+      <!-- DELIVERY -->
+      <section>
+        <h2>Access & Delivery</h2>
+        <p>
+          This is a one-time purchase. You receive access to the full system, including all base
+          formats and documentation. A Canva account is required to use the templates.
+        </p>
+      </section>
+
+      <hr>
+
+      <!-- LICENSE -->
+      <section>
+        <h2>License & Use</h2>
+        <p>
+          Licensed for internal use within a single organization. Redistribution, resale, or use
+          as the basis for competing products is not permitted.
+        </p>
+      </section>
+
+      <!-- FOOTER -->
+      <div class="footer">
+        <div>© Operational Systems, LLC</div>
+        <div>
+          <a href="/table-of-contents">Table of Contents</a>
+          <a href="/faq">FAQ</a>
+          <a href="https://operational-systems.com">Parent Company</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

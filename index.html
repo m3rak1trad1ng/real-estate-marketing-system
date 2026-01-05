@@ -17,7 +17,7 @@
       --panelBot:#1b263a;
 
       --text:#e5e7eb;
-      --muted:#aab2c0;
+      --body:#cbd5e1;     /* consistent body color */
       --line:#374151;
 
       --blue:#93c5fd;
@@ -88,10 +88,10 @@
       text-align:center;
       font-size: 17px;
       line-height: 1.8;
-      color: rgba(229,231,235,.92);
+      color: var(--body);
     }
 
-    /* Buttons — ALL the same bright blue */
+    /* Buttons — all same bright blue */
     .top-actions{
       display:flex;
       flex-wrap:wrap;
@@ -127,12 +127,12 @@
       opacity:.9;
     }
 
-    /* One box per section */
+    /* Section box */
     .section-box{
       border: 1px solid rgba(55,65,81,.85);
       background: linear-gradient(180deg, rgba(35,49,73,.88), rgba(27,38,58,.84));
       border-radius: 16px;
-      padding: 22px 24px; /* consistent internal padding fixes alignment */
+      padding: 22px 24px;
       max-width: 880px;
       margin: 0 auto;
     }
@@ -140,35 +140,37 @@
     /* Standard paragraph */
     .prose{
       max-width: 74ch;
-      color: var(--muted);
+      color: var(--body);
       font-size: 15px;
       line-height: 1.75;
       margin: 0;
       text-align:left;
     }
 
-    /* Lead sentence in Problem/Included/etc — bigger than bullets */
+    /* Lead sentence(s) — bigger than bullets, smaller than h2 */
     .lead{
-      color: rgba(229,231,235,.92);
-      font-size: 17px;      /* bigger than bullets */
+      max-width: 74ch;
+      color: var(--body);
+      font-size: 17px;     /* increased */
       line-height: 1.85;
-      margin: 0 0 14px 0;   /* space before bullets */
+      margin: 0 0 14px 0;
+      text-align:left;
     }
 
-    /* Bullets — readable + aligned */
+    /* Bullets */
     .list{
       margin: 0;
       padding-left: 18px;
       max-width: 74ch;
       text-align:left;
-      color: rgba(214,222,235,.90);
+      color: var(--body);
       font-size: 15px;
       line-height: 1.65;
     }
     .list li{margin: 9px 0;}
-    .list li::marker{color: rgba(147,197,253,.55);}
+    .list li::marker{color: rgba(147,197,253,.45);}
 
-    /* FAQ — toned down */
+    /* FAQ */
     .faq-wrap{
       max-width: 880px;
       margin: 0 auto;
@@ -176,7 +178,7 @@
 
     details{
       border: 1px solid rgba(55,65,81,.85);
-      background: rgba(11,18,32,.38);
+      background: rgba(11,18,32,.40);
       border-radius: 14px;
       padding: 12px 14px;
       margin-bottom: 10px;
@@ -186,7 +188,7 @@
       cursor:pointer;
       list-style:none;
       font-weight: 800;
-      color: rgba(214,222,235,.84);
+      color: rgba(203,213,225,.88);
       font-size: 14px;
       line-height:1.35;
       display:flex;
@@ -199,8 +201,8 @@
     .chev{
       width: 10px;
       height: 10px;
-      border-right: 2px solid rgba(147,197,253,.30);
-      border-bottom: 2px solid rgba(147,197,253,.30);
+      border-right: 2px solid rgba(147,197,253,.28);
+      border-bottom: 2px solid rgba(147,197,253,.28);
       transform: rotate(-45deg);
       transition: transform .15s ease;
       opacity:.85;
@@ -211,7 +213,7 @@
 
     .answer{
       margin-top: 10px;
-      color: rgba(170,178,192,.95);
+      color: var(--body);
       font-size: 14px;
       line-height: 1.75;
       max-width: 74ch;
@@ -226,11 +228,11 @@
       flex-wrap:wrap;
       gap: 10px 18px;
       justify-content:space-between;
-      color: rgba(163,170,183,.92);
+      color: rgba(203,213,225,.75);
       font-size: 13px;
     }
     .footer a{
-      color: rgba(147,197,253,.78);
+      color: rgba(147,197,253,.70);
       text-decoration:none;
       font-weight: 800;
       margin-right: 14px;
@@ -251,7 +253,6 @@
     <div class="shell">
       <div class="content">
 
-        <!-- HERO -->
         <h1>The Real Estate Marketing System</h1>
 
         <!-- VERBATIM -->
@@ -270,7 +271,7 @@
         <section id="problem">
           <h2>The Problem It Solves</h2>
           <div class="section-box">
-            <!-- combined lead sentence (verbatim pieces, just moved) -->
+            <!-- COMBINED (your two sentences, together, above bullets; nothing after bullets) -->
             <p class="lead">
               Most real estate marketing fails not because of effort—but because there is no system. This creates wasted time, inconsistent branding, and marketing that can’t scale beyond the person creating it.
             </p>
@@ -358,11 +359,12 @@
         <section id="access">
           <h2>Access & Delivery</h2>
           <div class="section-box">
-            <p class="lead">
+            <!-- all same color now (no special lead styling here) -->
+            <p class="prose">
               Access is requested at checkout.
             </p>
 
-            <p class="prose">
+            <p class="prose" style="margin-top:12px;">
               The system is delivered as a complete, organized set of ready-to-use Canva files. Each base format can be duplicated and applied right away.
             </p>
 
@@ -480,7 +482,6 @@
           </div>
         </section>
 
-        <!-- FOOTER -->
         <div class="footer">
           <div>© Operational Systems, LLC</div>
           <div>
@@ -494,7 +495,6 @@
   </div>
 
   <script>
-    // FAQ: only one open at a time
     (function(){
       const all = Array.from(document.querySelectorAll('#faq details'));
       all.forEach(d => {

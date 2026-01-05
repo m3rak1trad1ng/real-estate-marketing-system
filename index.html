@@ -12,23 +12,31 @@
       --bg2:#0f172a;
       --surface:#111827;
       --card:#1f2937;
-      --panel:#273449;
+
+      /* Section box */
+      --panel:#253247;
+      --panel2:#1f2a3d;
+
       --text:#e5e7eb;
       --muted:#a3aab7;
       --line:#374151;
+
       --accent:#60a5fa;
       --accent2:#93c5fd;
+
       --shadow: 0 18px 44px rgba(0,0,0,.42);
       --radius:18px;
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
+
     body{
       margin:0;
       font-family: Arial, Helvetica, sans-serif;
-      background: radial-gradient(1200px 700px at 10% 0%, rgba(96,165,250,.10), transparent 60%),
-                  linear-gradient(180deg, var(--bg), var(--bg2));
+      background:
+        radial-gradient(1200px 700px at 10% 0%, rgba(96,165,250,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
       color: var(--text);
     }
 
@@ -47,7 +55,6 @@
       position: relative;
       overflow: hidden;
     }
-
     .shell:before{
       content:"";
       position:absolute;
@@ -55,7 +62,6 @@
       background: radial-gradient(900px 420px at 25% 0%, rgba(147,197,253,.10), transparent 55%);
       pointer-events:none;
     }
-
     .content{position:relative}
 
     /* Typography tuned for readability */
@@ -64,25 +70,29 @@
       font-size: 42px;
       letter-spacing:-0.6px;
       line-height:1.15;
+      text-align:center;
     }
     h2{
-      margin:0 0 10px 0;
+      margin:0 0 14px 0;
       font-size: 24px;
       letter-spacing:-0.3px;
       line-height:1.25;
+      text-align:center;
     }
+
     .kicker{
-      margin: 0 0 18px 0;
+      margin: 0 auto 18px auto;
       color: var(--muted);
       font-size: 16px;
       line-height: 1.75;
-      max-width: 66ch; /* key: readable line length */
+      max-width: 66ch; /* readable line length */
+      text-align:center;
     }
 
     .divider{
       margin: 34px 0;
       border:none;
-      border-top: 1px solid var(--line);
+      border-top: 1px solid rgba(55,65,81,.75);
       opacity:.9;
     }
 
@@ -91,6 +101,7 @@
       flex-wrap:wrap;
       gap:12px;
       align-items:center;
+      justify-content:center;
       margin-top: 14px;
     }
 
@@ -103,7 +114,7 @@
       border-radius: 12px;
       font-weight: 800;
       text-decoration:none;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(55,65,81,.85);
       font-size: 14px;
       letter-spacing:.2px;
       cursor:pointer;
@@ -126,6 +137,7 @@
       margin-top: 18px;
       padding-top: 14px;
       border-top: 1px solid rgba(55,65,81,.55);
+      justify-content:center;
     }
     .mini-nav a{
       color: var(--muted);
@@ -135,58 +147,45 @@
     }
     .mini-nav a:hover{color: var(--accent2);}
 
-    /* Blocks */
-    .block{
+    /* One box per section */
+    .section-box{
       border: 1px solid rgba(55,65,81,.85);
-      background: rgba(39,52,73,.68);
+      background: linear-gradient(180deg, rgba(37,50,71,.88), rgba(31,42,61,.80));
       border-radius: 16px;
-      padding: 18px;
-    }
-
-    .block h3{
-      margin:0 0 10px 0;
-      font-size: 13px;
-      letter-spacing:.55px;
-      text-transform: uppercase;
-      color: #f3f4f6;
+      padding: 20px;
+      max-width: 860px;
+      margin: 0 auto;
     }
 
     .prose{
-      max-width: 70ch;
+      max-width: 74ch;
       color: var(--muted);
       font-size: 15px;
       line-height: 1.75;
-      margin:0;
+      margin:0 auto 12px auto;
+      text-align:left;
     }
 
     .list{
-      margin: 12px 0 0 0;
+      margin: 10px auto 12px auto;
       padding-left: 18px;
       color: var(--muted);
-      max-width: 72ch;
+      max-width: 74ch;
+      text-align:left;
     }
     .list li{margin: 8px 0; line-height:1.6;}
 
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 16px;
-      margin-top: 14px;
-    }
-    .col-6{grid-column: span 6;}
-    .col-12{grid-column: span 12;}
-
-    /* FAQ accordion */
+    /* FAQ accordion — darker + less “bright” */
     .faq{
-      margin-top: 10px;
+      margin: 0 auto;
+      max-width: 860px;
       display:flex;
       flex-direction:column;
       gap: 10px;
-      max-width: 78ch;
     }
     details{
       border: 1px solid rgba(55,65,81,.85);
-      background: rgba(39,52,73,.52);
+      background: rgba(17,24,39,.35); /* darker */
       border-radius: 14px;
       padding: 12px 14px;
     }
@@ -194,7 +193,7 @@
       cursor:pointer;
       list-style:none;
       font-weight: 800;
-      color: #f3f4f6;
+      color: #e8edf6;
       font-size: 14px;
       line-height:1.35;
       display:flex;
@@ -206,14 +205,16 @@
     .chev{
       width: 10px;
       height: 10px;
-      border-right: 2px solid rgba(147,197,253,.95);
-      border-bottom: 2px solid rgba(147,197,253,.95);
+      border-right: 2px solid rgba(147,197,253,.75); /* less bright */
+      border-bottom: 2px solid rgba(147,197,253,.75);
       transform: rotate(-45deg);
       transition: transform .15s ease;
       flex: 0 0 auto;
       margin-top: 2px;
+      opacity:.9;
     }
     details[open] .chev{transform: rotate(45deg);}
+
     .answer{
       margin-top: 10px;
       color: var(--muted);
@@ -222,38 +223,7 @@
       max-width: 74ch;
     }
 
-    /* Sticky CTA bar */
-    .sticky{
-      position:fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
-      background: rgba(11,18,32,.78);
-      border-top: 1px solid rgba(55,65,81,.65);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      display:none; /* toggled by JS */
-      z-index: 999;
-    }
-    .sticky-inner{
-      max-width: 1060px;
-      margin: 0 auto;
-      display:flex;
-      flex-wrap:wrap;
-      gap: 10px;
-      align-items:center;
-      justify-content:space-between;
-    }
-    .sticky-title{
-      color:#f3f4f6;
-      font-weight: 800;
-      font-size: 13px;
-      letter-spacing:.2px;
-      margin:0;
-    }
-    .sticky-actions{display:flex; gap:10px; flex-wrap:wrap;}
-
+    /* Footer */
     .footer{
       margin-top: 40px;
       padding-top: 18px;
@@ -272,13 +242,59 @@
       margin-right: 14px;
     }
 
-    /* Mobile */
+    /* Sticky CTA bar */
+    .sticky{
+      position:fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
+      background: rgba(11,18,32,.78);
+      border-top: 1px solid rgba(55,65,81,.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display:none;
+      z-index: 999;
+    }
+    .sticky-inner{
+      max-width: 1060px;
+      margin: 0 auto;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px 14px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .sticky-title{
+      color:#f3f4f6;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing:.2px;
+      margin:0;
+    }
+    .sticky-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-end;
+    }
+    .sticky-link{
+      color: rgba(147,197,253,.85);
+      font-weight: 800;
+      text-decoration:none;
+      font-size: 13px;
+      padding: 8px 6px;
+    }
+    .sticky-link:hover{color: var(--accent2);}
+
     @media (max-width: 900px){
       .shell{padding: 28px;}
       h1{font-size: 30px;}
       .wrap{padding: 40px 16px 92px;}
-      .grid{gap: 12px;}
-      .col-6{grid-column: span 12;}
+      .section-box{padding:16px;}
+      .sticky-inner{justify-content:center;}
+      .sticky-actions{justify-content:center;}
     }
   </style>
 </head>
@@ -291,7 +307,7 @@
         <!-- HERO -->
         <h1>The Real Estate Marketing System</h1>
 
-        <!-- VERBATIM (from your page) -->
+        <!-- VERBATIM -->
         <p class="kicker">
           A Canva-based marketing system that standardizes social media, print, and email—replacing one-off marketing with a single, repeatable structure that teams and professionals can rely on.
         </p>
@@ -317,13 +333,13 @@
         <section id="problem">
           <h2>The Problem It Solves</h2>
 
-          <!-- VERBATIM -->
-          <p class="kicker">
-            Most real estate marketing fails not because of effort—but because there is no system.
-          </p>
+          <div class="section-box">
+            <!-- VERBATIM -->
+            <p class="prose">
+              Most real estate marketing fails not because of effort—but because there is no system.
+            </p>
 
-          <div class="block">
-            <h3>Where it breaks down</h3>
+            <!-- VERBATIM -->
             <ul class="list">
               <li>Every new listing or campaign starts from a different place</li>
               <li>The same core pieces are rebuilt over and over</li>
@@ -332,15 +348,11 @@
               <li>Marketing exists, but never becomes operationally repeatable</li>
               <li>Multiple agents using different tools, layouts, and processes—resulting in inconsistent marketing and constant oversight</li>
             </ul>
-          </div>
 
-          <div class="grid">
-            <div class="block col-12">
-              <!-- VERBATIM -->
-              <p class="prose">
-                This creates wasted time, inconsistent branding, and marketing that can’t scale beyond the person creating it.
-              </p>
-            </div>
+            <!-- VERBATIM -->
+            <p class="prose" style="margin-bottom:0;">
+              This creates wasted time, inconsistent branding, and marketing that can’t scale beyond the person creating it.
+            </p>
           </div>
         </section>
 
@@ -350,12 +362,13 @@
         <section id="included">
           <h2>What’s Included</h2>
 
-          <div class="block">
+          <div class="section-box">
             <!-- VERBATIM -->
             <p class="prose">
               Delivered as a complete system of 130+ standardized base formats across social, email, and print—built for consistency, reuse, and scale without redesigning.
             </p>
 
+            <!-- VERBATIM -->
             <ul class="list">
               <li>Standardized social media formats for all major platform sizes</li>
               <li>Email templates built for repeat campaigns and announcements</li>
@@ -366,7 +379,7 @@
             </ul>
 
             <!-- VERBATIM -->
-            <p class="prose" style="margin-top:12px;">
+            <p class="prose">
               A complete, standardized marketing system that keeps teams, listings, and campaigns consistent—without redesigning or re-deciding every time.
             </p>
 
@@ -378,41 +391,40 @@
 
         <hr class="divider">
 
-        <!-- WHO FOR / NOT FIT -->
+        <!-- WHO FOR -->
         <section id="for">
           <h2>Who This Is For</h2>
 
-          <div class="grid">
-            <div class="block col-12">
-              <!-- VERBATIM -->
-              <p class="prose">
-                This system is built for real estate professionals who want marketing to operate as an internal system, not a recurring design project.
-              </p>
-            </div>
+          <div class="section-box">
+            <!-- VERBATIM -->
+            <p class="prose">
+              This system is built for real estate professionals who want marketing to operate as an internal system, not a recurring design project.
+            </p>
 
-            <div class="block col-12">
-              <ul class="list">
-                <li>Owners, managers, and team leads who need consistent marketing across agents, listings, and channels—without constant oversight</li>
-                <li>Brokerages that want one standard structure instead of reinventing every campaign</li>
-                <li>Independent agents who want marketing that looks intentional, professional, and unified—not improvised</li>
-                <li>Teams that want decisions made once and applied consistently—so execution stays fast and repeatable</li>
-              </ul>
+            <!-- VERBATIM -->
+            <ul class="list">
+              <li>Owners, managers, and team leads who need consistent marketing across agents, listings, and channels—without constant oversight</li>
+              <li>Brokerages that want one standard structure instead of reinventing every campaign</li>
+              <li>Independent agents who want marketing that looks intentional, professional, and unified—not improvised</li>
+              <li>Teams that want decisions made once and applied consistently—so execution stays fast and repeatable</li>
+            </ul>
 
-              <!-- VERBATIM -->
-              <p class="prose" style="margin-top:12px;">
-                This is not about creative exploration. It’s about standardization, repeatability, and control.
-              </p>
-            </div>
+            <!-- VERBATIM -->
+            <p class="prose" style="margin-bottom:0;">
+              This is not about creative exploration. It’s about standardization, repeatability, and control.
+            </p>
           </div>
         </section>
 
         <hr class="divider">
 
+        <!-- NOT A FIT -->
         <section id="notfit">
           <h2>Not A Fit If:</h2>
 
-          <div class="block">
-            <ul class="list">
+          <div class="section-box">
+            <!-- VERBATIM -->
+            <ul class="list" style="margin-bottom:0;">
               <li>You expect a new custom design every time something is published</li>
               <li>You prefer rebuilding layouts and revisiting design decisions for each campaign</li>
               <li>You’re looking for individual templates rather than a defined, repeatable system</li>
@@ -426,7 +438,7 @@
         <section id="access">
           <h2>Access & Delivery</h2>
 
-          <div class="block">
+          <div class="section-box">
             <!-- VERBATIM -->
             <p class="prose">
               Access is requested at checkout.
@@ -456,7 +468,6 @@
           <h2>FAQ</h2>
 
           <div class="faq" role="list">
-
             <details>
               <summary>
                 How is this different from buying Canva templates?
@@ -591,7 +602,6 @@
               <a class="btn btn-secondary" href="/faq">View Full FAQ</a>
               <a class="btn btn-secondary" href="/table-of-contents">View Full System Table of Contents</a>
             </div>
-
           </div>
         </section>
 
@@ -618,19 +628,22 @@
       <div class="sticky-actions">
         <a class="btn btn-primary" href="#access">Request Access</a>
         <a class="btn btn-secondary" href="/table-of-contents">View Full System Table of Contents</a>
+
+        <!-- Optional: keep as a small text link (not a bright 3rd button) -->
+        <a class="sticky-link" href="#faq">FAQ</a>
       </div>
     </div>
   </div>
 
   <script>
-    // Sticky CTA appears after user scrolls past the hero
+    // Sticky CTA appears after user scrolls past the hero CTAs
     (function(){
       const bar = document.getElementById('stickyBar');
       const trigger = document.getElementById('top-cta');
 
       function toggle(){
         const rect = trigger.getBoundingClientRect();
-        const show = rect.bottom < 0; // hero CTAs are above the viewport
+        const show = rect.bottom < 0;
         bar.style.display = show ? 'block' : 'none';
         bar.setAttribute('aria-hidden', show ? 'false' : 'true');
       }
@@ -640,7 +653,7 @@
       toggle();
     })();
 
-    // FAQ behavior: only one open at a time (cleaner scan)
+    // FAQ behavior: only one open at a time
     (function(){
       const all = Array.from(document.querySelectorAll('#faq details'));
       all.forEach(d => {

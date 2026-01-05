@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>The Real Estate Marketing System</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A Canva-based marketing system that standardizes social media, print, and email—replacing one-off marketing with a single, repeatable structure that teams and professionals can rely on.">
+  <meta name="description" content="A Canva-based marketing system designed to bring structure and consistency to real estate marketing by replacing fragmented, one-off materials with a single, repeatable standard.">
 
   <style>
     :root{
@@ -13,12 +13,12 @@
       --surface:#111827;
       --card:#1f2937;
 
-      /* Section box */
-      --panel:#253247;
-      --panel2:#1f2a3d;
+      --panelTop:#233149;
+      --panelBot:#1b263a;
 
       --text:#e5e7eb;
-      --muted:#a3aab7;
+      --muted:#aab2c0;
+      --muted2:#c7cfdd;      /* slightly brighter for key lines */
       --line:#374151;
 
       --accent:#60a5fa;
@@ -59,12 +59,11 @@
       content:"";
       position:absolute;
       inset:-2px;
-      background: radial-gradient(900px 420px at 25% 0%, rgba(147,197,253,.10), transparent 55%);
+      background: radial-gradient(900px 420px at 25% 0%, rgba(147,197,253,.08), transparent 55%);
       pointer-events:none;
     }
     .content{position:relative}
 
-    /* Typography tuned for readability */
     h1{
       margin:0 0 10px 0;
       font-size: 42px;
@@ -72,6 +71,7 @@
       line-height:1.15;
       text-align:center;
     }
+
     h2{
       margin:0 0 14px 0;
       font-size: 24px;
@@ -80,20 +80,14 @@
       text-align:center;
     }
 
-    .kicker{
-      margin: 0 auto 18px auto;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.75;
-      max-width: 66ch; /* readable line length */
+    /* Make the hero description stand out more */
+    .hero-desc{
+      margin: 0 auto 20px auto;
+      max-width: 74ch;
       text-align:center;
-    }
-
-    .divider{
-      margin: 34px 0;
-      border:none;
-      border-top: 1px solid rgba(55,65,81,.75);
-      opacity:.9;
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--muted2);
     }
 
     .top-actions{
@@ -102,14 +96,13 @@
       gap:12px;
       align-items:center;
       justify-content:center;
-      margin-top: 14px;
+      margin-top: 10px;
     }
 
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:10px;
       padding: 12px 16px;
       border-radius: 12px;
       font-weight: 800;
@@ -119,41 +112,31 @@
       letter-spacing:.2px;
       cursor:pointer;
       user-select:none;
+      background: rgba(255,255,255,.03);
+      color: var(--accent2);
     }
+
+    /* Primary button: only Request Access (single visual anchor) */
     .btn-primary{
       background: linear-gradient(180deg, var(--accent), var(--accent2));
       color:#0b1220;
       border-color: rgba(255,255,255,.10);
     }
-    .btn-secondary{
-      background: rgba(255,255,255,.03);
-      color: var(--accent2);
-    }
 
-    .mini-nav{
-      display:flex;
-      flex-wrap:wrap;
-      gap: 10px 14px;
-      margin-top: 18px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(55,65,81,.55);
-      justify-content:center;
+    .divider{
+      margin: 34px 0;
+      border:none;
+      border-top: 1px solid rgba(55,65,81,.75);
+      opacity:.9;
     }
-    .mini-nav a{
-      color: var(--muted);
-      text-decoration:none;
-      font-weight: 700;
-      font-size: 13px;
-    }
-    .mini-nav a:hover{color: var(--accent2);}
 
     /* One box per section */
     .section-box{
       border: 1px solid rgba(55,65,81,.85);
-      background: linear-gradient(180deg, rgba(37,50,71,.88), rgba(31,42,61,.80));
+      background: linear-gradient(180deg, rgba(35,49,73,.88), rgba(27,38,58,.84));
       border-radius: 16px;
-      padding: 20px;
-      max-width: 860px;
+      padding: 22px;
+      max-width: 880px;
       margin: 0 auto;
     }
 
@@ -166,34 +149,34 @@
       text-align:left;
     }
 
+    /* Improve bullet scanability without getting “bright” */
     .list{
       margin: 10px auto 12px auto;
       padding-left: 18px;
-      color: var(--muted);
       max-width: 74ch;
       text-align:left;
+      color: rgba(199,207,221,.92);
     }
-    .list li{margin: 8px 0; line-height:1.6;}
+    .list li{margin: 9px 0; line-height:1.62;}
+    .list li::marker{color: rgba(147,197,253,.75);}
 
-    /* FAQ accordion — darker + less “bright” */
-    .faq{
+    /* FAQ accordion — make it match the rest (darker + less contrast) */
+    .faq-wrap{
+      max-width: 880px;
       margin: 0 auto;
-      max-width: 860px;
-      display:flex;
-      flex-direction:column;
-      gap: 10px;
     }
     details{
       border: 1px solid rgba(55,65,81,.85);
-      background: rgba(17,24,39,.35); /* darker */
+      background: rgba(17,24,39,.22);
       border-radius: 14px;
       padding: 12px 14px;
+      margin-bottom: 10px;
     }
     summary{
       cursor:pointer;
       list-style:none;
       font-weight: 800;
-      color: #e8edf6;
+      color: rgba(229,231,235,.92);
       font-size: 14px;
       line-height:1.35;
       display:flex;
@@ -205,13 +188,13 @@
     .chev{
       width: 10px;
       height: 10px;
-      border-right: 2px solid rgba(147,197,253,.75); /* less bright */
-      border-bottom: 2px solid rgba(147,197,253,.75);
+      border-right: 2px solid rgba(147,197,253,.55);
+      border-bottom: 2px solid rgba(147,197,253,.55);
       transform: rotate(-45deg);
       transition: transform .15s ease;
+      opacity:.85;
       flex: 0 0 auto;
       margin-top: 2px;
-      opacity:.9;
     }
     details[open] .chev{transform: rotate(45deg);}
 
@@ -223,34 +206,35 @@
       max-width: 74ch;
     }
 
-    /* Footer */
+    /* Footer — reduce duplicates */
     .footer{
       margin-top: 40px;
       padding-top: 18px;
       border-top: 1px solid rgba(55,65,81,.85);
       display:flex;
       flex-wrap:wrap;
-      gap: 12px 18px;
+      gap: 10px 18px;
       justify-content:space-between;
       color: rgba(163,170,183,.92);
       font-size: 13px;
     }
     .footer a{
-      color: var(--accent2);
+      color: rgba(147,197,253,.85);
       text-decoration:none;
       font-weight: 800;
       margin-right: 14px;
     }
+    .footer a:hover{color: var(--accent2);}
 
-    /* Sticky CTA bar */
+    /* Sticky bar — smaller + calmer. Can function as the “nav” */
     .sticky{
       position:fixed;
       left: 0;
       right: 0;
       bottom: 0;
-      padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
-      background: rgba(11,18,32,.78);
-      border-top: 1px solid rgba(55,65,81,.65);
+      padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+      background: rgba(11,18,32,.72);
+      border-top: 1px solid rgba(55,65,81,.55);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       display:none;
@@ -260,17 +244,20 @@
       max-width: 1060px;
       margin: 0 auto;
       display:flex;
-      flex-wrap:wrap;
-      gap: 10px 14px;
       align-items:center;
       justify-content:space-between;
+      gap: 10px 14px;
     }
     .sticky-title{
-      color:#f3f4f6;
+      color: rgba(229,231,235,.90);
       font-weight: 800;
-      font-size: 13px;
+      font-size: 12.5px;
       letter-spacing:.2px;
       margin:0;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      max-width: 42vw;
     }
     .sticky-actions{
       display:flex;
@@ -280,11 +267,11 @@
       justify-content:flex-end;
     }
     .sticky-link{
-      color: rgba(147,197,253,.85);
+      color: rgba(147,197,253,.78);
       font-weight: 800;
       text-decoration:none;
-      font-size: 13px;
-      padding: 8px 6px;
+      font-size: 12.5px;
+      padding: 6px 6px;
     }
     .sticky-link:hover{color: var(--accent2);}
 
@@ -294,6 +281,7 @@
       .wrap{padding: 40px 16px 92px;}
       .section-box{padding:16px;}
       .sticky-inner{justify-content:center;}
+      .sticky-title{display:none;} /* keep bar minimal on mobile */
       .sticky-actions{justify-content:center;}
     }
   </style>
@@ -307,24 +295,15 @@
         <!-- HERO -->
         <h1>The Real Estate Marketing System</h1>
 
-        <!-- VERBATIM -->
-        <p class="kicker">
-          A Canva-based marketing system that standardizes social media, print, and email—replacing one-off marketing with a single, repeatable structure that teams and professionals can rely on.
+        <!-- VERBATIM (your sentence, exactly as provided) -->
+        <p class="hero-desc">
+          A Canva-based marketing system designed to bring structure and consistency to real estate marketing by replacing fragmented, one-off materials with a single, repeatable standard.
         </p>
 
         <div class="top-actions" id="top-cta">
           <a class="btn btn-primary" href="#access">Request Access</a>
-          <a class="btn btn-secondary" href="/table-of-contents">View Full System Table of Contents</a>
-          <a class="btn btn-secondary" href="#faq">FAQ</a>
-        </div>
-
-        <div class="mini-nav">
-          <a href="#problem">Problem</a>
-          <a href="#included">What’s Included</a>
-          <a href="#for">Who It’s For</a>
-          <a href="#notfit">Not A Fit</a>
-          <a href="#access">Access & Delivery</a>
-          <a href="#faq">FAQ</a>
+          <a class="btn" href="/table-of-contents">View Full System Table of Contents</a>
+          <a class="btn" href="#faq">FAQ</a>
         </div>
 
         <hr class="divider">
@@ -332,14 +311,11 @@
         <!-- PROBLEM -->
         <section id="problem">
           <h2>The Problem It Solves</h2>
-
           <div class="section-box">
-            <!-- VERBATIM -->
             <p class="prose">
               Most real estate marketing fails not because of effort—but because there is no system.
             </p>
 
-            <!-- VERBATIM -->
             <ul class="list">
               <li>Every new listing or campaign starts from a different place</li>
               <li>The same core pieces are rebuilt over and over</li>
@@ -349,7 +325,6 @@
               <li>Multiple agents using different tools, layouts, and processes—resulting in inconsistent marketing and constant oversight</li>
             </ul>
 
-            <!-- VERBATIM -->
             <p class="prose" style="margin-bottom:0;">
               This creates wasted time, inconsistent branding, and marketing that can’t scale beyond the person creating it.
             </p>
@@ -361,14 +336,11 @@
         <!-- INCLUDED -->
         <section id="included">
           <h2>What’s Included</h2>
-
           <div class="section-box">
-            <!-- VERBATIM -->
             <p class="prose">
               Delivered as a complete system of 130+ standardized base formats across social, email, and print—built for consistency, reuse, and scale without redesigning.
             </p>
 
-            <!-- VERBATIM -->
             <ul class="list">
               <li>Standardized social media formats for all major platform sizes</li>
               <li>Email templates built for repeat campaigns and announcements</li>
@@ -378,13 +350,12 @@
               <li>Delivered as a unified system designed to work together</li>
             </ul>
 
-            <!-- VERBATIM -->
             <p class="prose">
               A complete, standardized marketing system that keeps teams, listings, and campaigns consistent—without redesigning or re-deciding every time.
             </p>
 
             <div class="top-actions" style="margin-top:14px;">
-              <a class="btn btn-primary" href="/table-of-contents">View Full System Table of Contents</a>
+              <a class="btn" href="/table-of-contents">View Full System Table of Contents</a>
             </div>
           </div>
         </section>
@@ -394,14 +365,11 @@
         <!-- WHO FOR -->
         <section id="for">
           <h2>Who This Is For</h2>
-
           <div class="section-box">
-            <!-- VERBATIM -->
             <p class="prose">
               This system is built for real estate professionals who want marketing to operate as an internal system, not a recurring design project.
             </p>
 
-            <!-- VERBATIM -->
             <ul class="list">
               <li>Owners, managers, and team leads who need consistent marketing across agents, listings, and channels—without constant oversight</li>
               <li>Brokerages that want one standard structure instead of reinventing every campaign</li>
@@ -409,7 +377,6 @@
               <li>Teams that want decisions made once and applied consistently—so execution stays fast and repeatable</li>
             </ul>
 
-            <!-- VERBATIM -->
             <p class="prose" style="margin-bottom:0;">
               This is not about creative exploration. It’s about standardization, repeatability, and control.
             </p>
@@ -421,9 +388,7 @@
         <!-- NOT A FIT -->
         <section id="notfit">
           <h2>Not A Fit If:</h2>
-
           <div class="section-box">
-            <!-- VERBATIM -->
             <ul class="list" style="margin-bottom:0;">
               <li>You expect a new custom design every time something is published</li>
               <li>You prefer rebuilding layouts and revisiting design decisions for each campaign</li>
@@ -437,26 +402,21 @@
         <!-- ACCESS -->
         <section id="access">
           <h2>Access & Delivery</h2>
-
           <div class="section-box">
-            <!-- VERBATIM -->
             <p class="prose">
               Access is requested at checkout.
             </p>
 
-            <!-- VERBATIM -->
             <p class="prose">
               The system is delivered as a complete, organized set of ready-to-use Canva files. Each base format can be duplicated and applied right away.
             </p>
 
-            <!-- VERBATIM -->
             <p class="prose">
               All structural rules, margins, and standards are included up front so marketing can be executed consistently without rebuilding layouts or making new design decisions.
             </p>
 
             <div class="top-actions" style="margin-top:14px;">
               <a class="btn btn-primary" href="#top-cta">Request Access</a>
-              <a class="btn btn-secondary" href="/table-of-contents">View Full System Table of Contents</a>
             </div>
           </div>
         </section>
@@ -467,151 +427,111 @@
         <section id="faq">
           <h2>FAQ</h2>
 
-          <div class="faq" role="list">
+          <div class="faq-wrap">
             <details>
-              <summary>
-                How is this different from buying Canva templates?
-                <span class="chev" aria-hidden="true"></span>
-              </summary>
+              <summary>How is this different from buying Canva templates? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
                 Most Canva templates are individual designs meant to be customized once and replaced. This is a standardized marketing system—shared structures, formats, and rules designed to be reused across listings, campaigns, and teams without redesigning each time.
               </div>
             </details>
 
             <details>
-              <summary>
-                What exactly do I receive when I purchase?
-                <span class="chev" aria-hidden="true"></span>
-              </summary>
+              <summary>What exactly do I receive when I purchase? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
                 You receive access to a complete system of 130+ standardized base formats across social media, email, and print—organized, governed, and built to support repeatable marketing over time.
               </div>
             </details>
 
             <details>
-              <summary>
-                Is this built for individual agents or teams?
-                <span class="chev" aria-hidden="true"></span>
-              </summary>
+              <summary>Is this built for individual agents or teams? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
                 Both. Independent agents benefit from consistent, professional output, while teams and brokerages gain a shared structure that keeps marketing aligned across multiple agents, listings, and channels.
               </div>
             </details>
 
             <details>
-              <summary>
-                Can I customize the designs?
-                <span class="chev" aria-hidden="true"></span>
-              </summary>
+              <summary>Can I customize the designs? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
                 Yes. All files are fully editable in Canva. You can update text, images, colors, and branding while the underlying structure maintains consistency.
               </div>
             </details>
 
             <details>
-              <summary>
-                Are the margins and layouts locked?
-                <span class="chev" aria-hidden="true"></span>
-              </summary>
+              <summary>Are the margins and layouts locked? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
                 No. The standards are defined, not technically locked. You can change them—but the value comes from having decisions made once instead of revisiting them for every campaign.
               </div>
             </details>
 
             <details>
-              <summary>
-                Do agents need design experience to use this?
-                <span class="chev" aria-hidden="true"></span>
-              </summary>
+              <summary>Do agents need design experience to use this? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
                 No. If an agent can edit text and images in Canva, they can use the system without design expertise or layout decision-making.
               </div>
             </details>
 
             <details>
-              <summary>
-                How does this help keep a team consistent?
-                <span class="chev" aria-hidden="true"></span>
-              </summary>
+              <summary>How does this help keep a team consistent? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
                 Everyone works from the same base formats, dimensions, and structure. This ensures marketing looks unified regardless of who creates it—without constant oversight or redesign.
               </div>
             </details>
 
             <details>
-              <summary>
-                How long does it take to get set up?
-                <span class="chev" aria-hidden="true"></span>
-              </summary>
+              <summary>How long does it take to get set up? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
                 Initial setup is handled once by management. This typically involves duplicating the system, applying branding, and defining internal usage. After that, agents can use the system immediately.
               </div>
             </details>
 
             <details>
-              <summary>
-                Does this replace the need for custom design work?
-                <span class="chev" aria-hidden="true"></span>
-              </summary>
+              <summary>Does this replace the need for custom design work? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
                 It replaces routine, repeatable marketing design. Custom design may still be used for special projects or branding work outside the system.
               </div>
             </details>
 
             <details>
-              <summary>
-                How is access delivered after purchase?
-                <span class="chev" aria-hidden="true"></span>
-              </summary>
+              <summary>How is access delivered after purchase? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
                 Access is delivered automatically after checkout. You receive organized Canva files that can be duplicated and used immediately.
               </div>
             </details>
 
             <details>
-              <summary>
-                Is this a one-time purchase or a subscription?
-                <span class="chev" aria-hidden="true"></span>
-              </summary>
+              <summary>Is this a one-time purchase or a subscription? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
                 This is a one-time purchase. There are no subscriptions or recurring fees.
               </div>
             </details>
 
             <details>
-              <summary>
-                Are there any usage limits or restrictions?
-                <span class="chev" aria-hidden="true"></span>
-              </summary>
+              <summary>Are there any usage limits or restrictions? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
                 The system is licensed for internal use within your organization only. It may be used across your listings, campaigns, and team, but may not be resold, shared, or distributed outside your organization.
               </div>
             </details>
 
             <details>
-              <summary>
-                Are refunds available?
-                <span class="chev" aria-hidden="true"></span>
-              </summary>
+              <summary>Are refunds available? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
                 Because this is a digital system delivered immediately, all sales are final. Please review the full system table of contents before purchasing to ensure it’s the right fit.
               </div>
             </details>
 
-            <div class="top-actions" style="margin-top:10px;">
-              <a class="btn btn-secondary" href="/faq">View Full FAQ</a>
-              <a class="btn btn-secondary" href="/table-of-contents">View Full System Table of Contents</a>
+            <div class="top-actions" style="margin-top:12px;">
+              <a class="btn" href="/faq">View Full FAQ</a>
+              <a class="btn" href="/table-of-contents">View Full System Table of Contents</a>
             </div>
           </div>
         </section>
 
-        <!-- FOOTER -->
+        <!-- FOOTER (reduced) -->
         <div class="footer">
           <div>© Operational Systems, LLC</div>
           <div>
             <a href="/table-of-contents">Table of Contents</a>
             <a href="/faq">FAQ</a>
-            <a href="https://operational-systems.com">Parent Company</a>
             <a href="/privacy.html">Privacy</a>
             <a href="/terms.html">Terms</a>
           </div>
@@ -621,22 +541,20 @@
     </div>
   </div>
 
-  <!-- Sticky CTA bar -->
+  <!-- Sticky CTA bar (smaller). Use as “nav-lite” instead of the old mini-nav. -->
   <div class="sticky" id="stickyBar" aria-hidden="true">
     <div class="sticky-inner">
       <p class="sticky-title">The Real Estate Marketing System</p>
       <div class="sticky-actions">
         <a class="btn btn-primary" href="#access">Request Access</a>
-        <a class="btn btn-secondary" href="/table-of-contents">View Full System Table of Contents</a>
-
-        <!-- Optional: keep as a small text link (not a bright 3rd button) -->
+        <a class="btn" href="/table-of-contents">View Full System Table of Contents</a>
         <a class="sticky-link" href="#faq">FAQ</a>
       </div>
     </div>
   </div>
 
   <script>
-    // Sticky CTA appears after user scrolls past the hero CTAs
+    // Sticky CTA appears after user scrolls past the hero buttons
     (function(){
       const bar = document.getElementById('stickyBar');
       const trigger = document.getElementById('top-cta');
@@ -653,7 +571,7 @@
       toggle();
     })();
 
-    // FAQ behavior: only one open at a time
+    // FAQ: only one open at a time
     (function(){
       const all = Array.from(document.querySelectorAll('#faq details'));
       all.forEach(d => {

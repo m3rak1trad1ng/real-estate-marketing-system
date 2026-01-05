@@ -17,7 +17,7 @@
       --panelBot:#1b263a;
 
       --text:#e5e7eb;
-      --body:#cbd5e1;     /* consistent body color */
+      --body:#cbd5e1;
       --line:#374151;
 
       --blue:#93c5fd;
@@ -25,6 +25,16 @@
 
       --shadow: 0 18px 44px rgba(0,0,0,.42);
       --radius:18px;
+
+      /* --- QUICK PALETTE SWAPS (optional) ---
+        To test: replace ONLY the values above.
+
+        Palette 1 (deeper slate):
+        --bg:#070c17; --bg2:#0b1220; --surface:#0f172a; --card:#111b2e; --line:#2b3648; --body:#c7d2e2; --blue:#8ab4ff; --blueText:#070c17;
+
+        Palette 2 (less navy, more neutral charcoal):
+        --bg:#0a0a0c; --bg2:#111216; --surface:#151821; --card:#1b1f2a; --line:#2e3442; --body:#ced5e3; --blue:#93c5fd; --blueText:#0a0a0c;
+      */
     }
 
     *{box-sizing:border-box}
@@ -42,7 +52,7 @@
     .wrap{
       max-width: 1060px;
       margin: 0 auto;
-      padding: 64px 22px 80px;
+      padding: 64px 22px 86px;
     }
 
     .shell{
@@ -73,12 +83,13 @@
       text-align:center;
     }
 
+    /* Make section headings stand out more */
     h2{
-      margin:0 0 14px 0;
-      font-size: 24px;
-      letter-spacing:-0.3px;
+      margin: 0 0 12px 0;
+      font-size: 26px;          /* was 24 */
+      letter-spacing:-0.35px;
       line-height:1.25;
-      text-align:center;
+      text-align:left;          /* cleaner scanning */
     }
 
     /* Hero description */
@@ -120,19 +131,20 @@
     }
     .btn:hover{ background: rgba(147,197,253,1); }
 
-    .divider{
-      margin: 34px 0;
-      border:none;
-      border-top: 1px solid rgba(55,65,81,.75);
-      opacity:.9;
+    /* Remove divider bars; use section spacing instead */
+    section{
+      max-width: 880px;
+      margin: 0 auto;
+      padding-top: 26px;
     }
+    section:first-of-type{ padding-top: 0; }
 
-    /* Section box */
+    /* Content column (replaces the “boxes”) */
     .section-box{
-      border: 1px solid rgba(55,65,81,.85);
-      background: linear-gradient(180deg, rgba(35,49,73,.88), rgba(27,38,58,.84));
-      border-radius: 16px;
-      padding: 22px 24px;
+      border: none;
+      background: transparent;
+      border-radius: 0;
+      padding: 0;
       max-width: 880px;
       margin: 0 auto;
     }
@@ -147,13 +159,14 @@
       text-align:left;
     }
 
-    /* Lead sentence(s) — bigger than bullets, smaller than h2 */
+    /* Lead sentence(s) — stand out more (your request) */
     .lead{
       max-width: 74ch;
       color: var(--body);
-      font-size: 17px;     /* increased */
-      line-height: 1.85;
-      margin: 0 0 14px 0;
+      font-size: 18px;          /* was 17 */
+      font-weight: 800;         /* added */
+      line-height: 1.75;
+      margin: 0 0 12px 0;
       text-align:left;
     }
 
@@ -170,7 +183,7 @@
     .list li{margin: 9px 0;}
     .list li::marker{color: rgba(147,197,253,.45);}
 
-    /* FAQ */
+    /* FAQ (leave alone per your instruction) */
     .faq-wrap{
       max-width: 880px;
       margin: 0 auto;
@@ -221,7 +234,7 @@
 
     /* Footer */
     .footer{
-      margin-top: 40px;
+      margin-top: 46px;
       padding-top: 18px;
       border-top: 1px solid rgba(55,65,81,.85);
       display:flex;
@@ -230,6 +243,9 @@
       justify-content:space-between;
       color: rgba(203,213,225,.75);
       font-size: 13px;
+      max-width: 880px;
+      margin-left:auto;
+      margin-right:auto;
     }
     .footer a{
       color: rgba(147,197,253,.70);
@@ -242,8 +258,8 @@
       .shell{padding: 28px;}
       h1{font-size: 30px;}
       .wrap{padding: 40px 16px 72px;}
-      .section-box{padding:16px;}
       .btn{min-width: 0; width: 100%;}
+      section{padding-top: 22px;}
     }
   </style>
 </head>
@@ -255,23 +271,18 @@
 
         <h1>The Real Estate Marketing System</h1>
 
-        <!-- VERBATIM -->
         <p class="hero-desc">
           A Canva-based marketing system designed to bring structure and consistency to real estate marketing by replacing fragmented, one-off materials with a single, repeatable standard.
         </p>
 
-        <!-- ONLY 1 button at top -->
         <div class="top-actions" id="top-cta">
           <a class="btn" href="#access">Request Access</a>
         </div>
-
-        <hr class="divider">
 
         <!-- PROBLEM -->
         <section id="problem">
           <h2>The Problem It Solves</h2>
           <div class="section-box">
-            <!-- COMBINED (your two sentences, together, above bullets; nothing after bullets) -->
             <p class="lead">
               Most real estate marketing fails not because of effort—but because there is no system. This creates wasted time, inconsistent branding, and marketing that can’t scale beyond the person creating it.
             </p>
@@ -287,14 +298,17 @@
           </div>
         </section>
 
-        <hr class="divider">
-
         <!-- INCLUDED -->
         <section id="included">
           <h2>What’s Included</h2>
           <div class="section-box">
+            <!-- ALL NON-BULLETED SENTENCES ABOVE BULLETS (per your request) -->
             <p class="lead">
               Delivered as a complete system of 130+ standardized base formats across social, email, and print—built for consistency, reuse, and scale without redesigning.
+            </p>
+
+            <p class="prose" style="margin-top:10px; margin-bottom:14px;">
+              A complete, standardized marketing system that keeps teams, listings, and campaigns consistent—without redesigning or re-deciding every time.
             </p>
 
             <ul class="list">
@@ -306,24 +320,23 @@
               <li>Delivered as a unified system designed to work together</li>
             </ul>
 
-            <p class="prose" style="margin-top:14px;">
-              A complete, standardized marketing system that keeps teams, listings, and campaigns consistent—without redesigning or re-deciding every time.
-            </p>
-
             <div class="top-actions" style="margin-top:14px;">
               <a class="btn" href="/table-of-contents">View Full System Table of Contents</a>
             </div>
           </div>
         </section>
 
-        <hr class="divider">
-
         <!-- WHO FOR -->
         <section id="for">
           <h2>Who This Is For</h2>
           <div class="section-box">
+            <!-- ALL NON-BULLETED SENTENCES ABOVE BULLETS (per your request) -->
             <p class="lead">
               This system is built for real estate professionals who want marketing to operate as an internal system, not a recurring design project.
+            </p>
+
+            <p class="prose" style="margin-top:10px; margin-bottom:14px;">
+              This is not about creative exploration. It’s about standardization, repeatability, and control.
             </p>
 
             <ul class="list">
@@ -332,14 +345,8 @@
               <li>Independent agents who want marketing that looks intentional, professional, and unified—not improvised</li>
               <li>Teams that want decisions made once and applied consistently—so execution stays fast and repeatable</li>
             </ul>
-
-            <p class="prose" style="margin-top:14px;">
-              This is not about creative exploration. It’s about standardization, repeatability, and control.
-            </p>
           </div>
         </section>
-
-        <hr class="divider">
 
         <!-- NOT A FIT -->
         <section id="notfit">
@@ -353,13 +360,10 @@
           </div>
         </section>
 
-        <hr class="divider">
-
         <!-- ACCESS -->
         <section id="access">
           <h2>Access & Delivery</h2>
           <div class="section-box">
-            <!-- all same color now (no special lead styling here) -->
             <p class="prose">
               Access is requested at checkout.
             </p>
@@ -377,8 +381,6 @@
             </div>
           </div>
         </section>
-
-        <hr class="divider">
 
         <!-- FAQ -->
         <section id="faq">

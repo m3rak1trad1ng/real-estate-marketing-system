@@ -18,11 +18,11 @@
 
       --text:#e5e7eb;
       --muted:#aab2c0;
-      --muted2:#c7cfdd;      /* slightly brighter for key lines */
+      --muted2:#c7cfdd;
       --line:#374151;
 
-      --accent:#60a5fa;
-      --accent2:#93c5fd;
+      --accent:#93c5fd;      /* calm solid */
+      --accentText:#0b1220;
 
       --shadow: 0 18px 44px rgba(0,0,0,.42);
       --radius:18px;
@@ -35,7 +35,7 @@
       margin:0;
       font-family: Arial, Helvetica, sans-serif;
       background:
-        radial-gradient(1200px 700px at 10% 0%, rgba(96,165,250,.10), transparent 60%),
+        radial-gradient(1200px 700px at 10% 0%, rgba(147,197,253,.08), transparent 60%),
         linear-gradient(180deg, var(--bg), var(--bg2));
       color: var(--text);
     }
@@ -43,7 +43,7 @@
     .wrap{
       max-width: 1060px;
       margin: 0 auto;
-      padding: 64px 22px 96px;
+      padding: 64px 22px 80px;
     }
 
     .shell{
@@ -55,13 +55,15 @@
       position: relative;
       overflow: hidden;
     }
+
     .shell:before{
       content:"";
       position:absolute;
       inset:-2px;
-      background: radial-gradient(900px 420px at 25% 0%, rgba(147,197,253,.08), transparent 55%);
+      background: radial-gradient(900px 420px at 25% 0%, rgba(147,197,253,.07), transparent 55%);
       pointer-events:none;
     }
+
     .content{position:relative}
 
     h1{
@@ -80,16 +82,17 @@
       text-align:center;
     }
 
-    /* Make the hero description stand out more */
+    /* Hero description — stronger */
     .hero-desc{
       margin: 0 auto 20px auto;
       max-width: 74ch;
       text-align:center;
       font-size: 17px;
       line-height: 1.8;
-      color: var(--muted2);
+      color: rgba(229,231,235,.92);
     }
 
+    /* Buttons */
     .top-actions{
       display:flex;
       flex-wrap:wrap;
@@ -112,16 +115,24 @@
       letter-spacing:.2px;
       cursor:pointer;
       user-select:none;
-      background: rgba(255,255,255,.03);
-      color: var(--accent2);
+      min-width: 220px; /* makes pairs feel uniform */
     }
 
-    /* Primary button: only Request Access (single visual anchor) */
+    /* Primary — solid, calm */
     .btn-primary{
-      background: linear-gradient(180deg, var(--accent), var(--accent2));
-      color:#0b1220;
-      border-color: rgba(255,255,255,.10);
+      background: rgba(147,197,253,.92);
+      color: var(--accentText);
+      border-color: rgba(255,255,255,.08);
     }
+    .btn-primary:hover{ background: rgba(147,197,253,1); }
+
+    /* Secondary — subtle */
+    .btn-secondary{
+      background: rgba(255,255,255,.04);
+      color: rgba(199,207,221,.95);
+      border-color: rgba(55,65,81,.85);
+    }
+    .btn-secondary:hover{ background: rgba(255,255,255,.06); }
 
     .divider{
       margin: 34px 0;
@@ -149,34 +160,49 @@
       text-align:left;
     }
 
-    /* Improve bullet scanability without getting “bright” */
+    /* Make pre/post bullet sentences pop */
+    .prose-lead{
+      color: rgba(229,231,235,.92);
+      font-size: 16.5px;
+      line-height: 1.85;
+    }
+
+    .prose-note{
+      color: rgba(229,231,235,.86);
+      font-size: 15.5px;
+      line-height: 1.8;
+    }
+
+    /* Bullets — more readable */
     .list{
       margin: 10px auto 12px auto;
       padding-left: 18px;
       max-width: 74ch;
       text-align:left;
-      color: rgba(199,207,221,.92);
+      color: rgba(214,222,235,.90);
     }
     .list li{margin: 9px 0; line-height:1.62;}
-    .list li::marker{color: rgba(147,197,253,.75);}
+    .list li::marker{color: rgba(147,197,253,.55);}
 
-    /* FAQ accordion — make it match the rest (darker + less contrast) */
+    /* FAQ — toned down hard */
     .faq-wrap{
       max-width: 880px;
       margin: 0 auto;
     }
+
     details{
       border: 1px solid rgba(55,65,81,.85);
-      background: rgba(17,24,39,.22);
+      background: rgba(11,18,32,.35); /* darker than before */
       border-radius: 14px;
       padding: 12px 14px;
       margin-bottom: 10px;
     }
+
     summary{
       cursor:pointer;
       list-style:none;
       font-weight: 800;
-      color: rgba(229,231,235,.92);
+      color: rgba(214,222,235,.86);  /* less bright */
       font-size: 14px;
       line-height:1.35;
       display:flex;
@@ -185,11 +211,12 @@
       align-items:center;
     }
     summary::-webkit-details-marker{display:none}
+
     .chev{
       width: 10px;
       height: 10px;
-      border-right: 2px solid rgba(147,197,253,.55);
-      border-bottom: 2px solid rgba(147,197,253,.55);
+      border-right: 2px solid rgba(147,197,253,.38); /* dim */
+      border-bottom: 2px solid rgba(147,197,253,.38);
       transform: rotate(-45deg);
       transition: transform .15s ease;
       opacity:.85;
@@ -200,13 +227,13 @@
 
     .answer{
       margin-top: 10px;
-      color: var(--muted);
+      color: rgba(170,178,192,.95);
       font-size: 14px;
       line-height: 1.75;
       max-width: 74ch;
     }
 
-    /* Footer — reduce duplicates */
+    /* Footer — minimal */
     .footer{
       margin-top: 40px;
       padding-top: 18px;
@@ -219,70 +246,19 @@
       font-size: 13px;
     }
     .footer a{
-      color: rgba(147,197,253,.85);
+      color: rgba(147,197,253,.78);
       text-decoration:none;
       font-weight: 800;
       margin-right: 14px;
     }
-    .footer a:hover{color: var(--accent2);}
-
-    /* Sticky bar — smaller + calmer. Can function as the “nav” */
-    .sticky{
-      position:fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
-      background: rgba(11,18,32,.72);
-      border-top: 1px solid rgba(55,65,81,.55);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      display:none;
-      z-index: 999;
-    }
-    .sticky-inner{
-      max-width: 1060px;
-      margin: 0 auto;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 10px 14px;
-    }
-    .sticky-title{
-      color: rgba(229,231,235,.90);
-      font-weight: 800;
-      font-size: 12.5px;
-      letter-spacing:.2px;
-      margin:0;
-      white-space: nowrap;
-      overflow:hidden;
-      text-overflow: ellipsis;
-      max-width: 42vw;
-    }
-    .sticky-actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:flex-end;
-    }
-    .sticky-link{
-      color: rgba(147,197,253,.78);
-      font-weight: 800;
-      text-decoration:none;
-      font-size: 12.5px;
-      padding: 6px 6px;
-    }
-    .sticky-link:hover{color: var(--accent2);}
+    .footer a:hover{color: rgba(147,197,253,.92);}
 
     @media (max-width: 900px){
       .shell{padding: 28px;}
       h1{font-size: 30px;}
-      .wrap{padding: 40px 16px 92px;}
+      .wrap{padding: 40px 16px 72px;}
       .section-box{padding:16px;}
-      .sticky-inner{justify-content:center;}
-      .sticky-title{display:none;} /* keep bar minimal on mobile */
-      .sticky-actions{justify-content:center;}
+      .btn{min-width: 0; width: 100%;} /* stacked uniform on mobile */
     }
   </style>
 </head>
@@ -295,15 +271,15 @@
         <!-- HERO -->
         <h1>The Real Estate Marketing System</h1>
 
-        <!-- VERBATIM (your sentence, exactly as provided) -->
+        <!-- VERBATIM -->
         <p class="hero-desc">
           A Canva-based marketing system designed to bring structure and consistency to real estate marketing by replacing fragmented, one-off materials with a single, repeatable standard.
         </p>
 
+        <!-- 2 buttons only (clean) -->
         <div class="top-actions" id="top-cta">
           <a class="btn btn-primary" href="#access">Request Access</a>
-          <a class="btn" href="/table-of-contents">View Full System Table of Contents</a>
-          <a class="btn" href="#faq">FAQ</a>
+          <a class="btn btn-secondary" href="/table-of-contents">View Full System Table of Contents</a>
         </div>
 
         <hr class="divider">
@@ -312,7 +288,7 @@
         <section id="problem">
           <h2>The Problem It Solves</h2>
           <div class="section-box">
-            <p class="prose">
+            <p class="prose prose-lead">
               Most real estate marketing fails not because of effort—but because there is no system.
             </p>
 
@@ -325,7 +301,7 @@
               <li>Multiple agents using different tools, layouts, and processes—resulting in inconsistent marketing and constant oversight</li>
             </ul>
 
-            <p class="prose" style="margin-bottom:0;">
+            <p class="prose prose-note" style="margin-bottom:0;">
               This creates wasted time, inconsistent branding, and marketing that can’t scale beyond the person creating it.
             </p>
           </div>
@@ -337,7 +313,7 @@
         <section id="included">
           <h2>What’s Included</h2>
           <div class="section-box">
-            <p class="prose">
+            <p class="prose prose-lead">
               Delivered as a complete system of 130+ standardized base formats across social, email, and print—built for consistency, reuse, and scale without redesigning.
             </p>
 
@@ -350,12 +326,12 @@
               <li>Delivered as a unified system designed to work together</li>
             </ul>
 
-            <p class="prose">
+            <p class="prose prose-note">
               A complete, standardized marketing system that keeps teams, listings, and campaigns consistent—without redesigning or re-deciding every time.
             </p>
 
             <div class="top-actions" style="margin-top:14px;">
-              <a class="btn" href="/table-of-contents">View Full System Table of Contents</a>
+              <a class="btn btn-secondary" href="/table-of-contents">View Full System Table of Contents</a>
             </div>
           </div>
         </section>
@@ -366,7 +342,7 @@
         <section id="for">
           <h2>Who This Is For</h2>
           <div class="section-box">
-            <p class="prose">
+            <p class="prose prose-lead">
               This system is built for real estate professionals who want marketing to operate as an internal system, not a recurring design project.
             </p>
 
@@ -377,7 +353,7 @@
               <li>Teams that want decisions made once and applied consistently—so execution stays fast and repeatable</li>
             </ul>
 
-            <p class="prose" style="margin-bottom:0;">
+            <p class="prose prose-note" style="margin-bottom:0;">
               This is not about creative exploration. It’s about standardization, repeatability, and control.
             </p>
           </div>
@@ -403,7 +379,7 @@
         <section id="access">
           <h2>Access & Delivery</h2>
           <div class="section-box">
-            <p class="prose">
+            <p class="prose prose-lead">
               Access is requested at checkout.
             </p>
 
@@ -520,18 +496,16 @@
             </details>
 
             <div class="top-actions" style="margin-top:12px;">
-              <a class="btn" href="/faq">View Full FAQ</a>
-              <a class="btn" href="/table-of-contents">View Full System Table of Contents</a>
+              <a class="btn btn-secondary" href="/faq">View Full FAQ</a>
+              <a class="btn btn-secondary" href="/table-of-contents">View Full System Table of Contents</a>
             </div>
           </div>
         </section>
 
-        <!-- FOOTER (reduced) -->
+        <!-- FOOTER -->
         <div class="footer">
           <div>© Operational Systems, LLC</div>
           <div>
-            <a href="/table-of-contents">Table of Contents</a>
-            <a href="/faq">FAQ</a>
             <a href="/privacy.html">Privacy</a>
             <a href="/terms.html">Terms</a>
           </div>
@@ -541,37 +515,8 @@
     </div>
   </div>
 
-  <!-- Sticky CTA bar (smaller). Use as “nav-lite” instead of the old mini-nav. -->
-  <div class="sticky" id="stickyBar" aria-hidden="true">
-    <div class="sticky-inner">
-      <p class="sticky-title">The Real Estate Marketing System</p>
-      <div class="sticky-actions">
-        <a class="btn btn-primary" href="#access">Request Access</a>
-        <a class="btn" href="/table-of-contents">View Full System Table of Contents</a>
-        <a class="sticky-link" href="#faq">FAQ</a>
-      </div>
-    </div>
-  </div>
-
   <script>
-    // Sticky CTA appears after user scrolls past the hero buttons
-    (function(){
-      const bar = document.getElementById('stickyBar');
-      const trigger = document.getElementById('top-cta');
-
-      function toggle(){
-        const rect = trigger.getBoundingClientRect();
-        const show = rect.bottom < 0;
-        bar.style.display = show ? 'block' : 'none';
-        bar.setAttribute('aria-hidden', show ? 'false' : 'true');
-      }
-
-      window.addEventListener('scroll', toggle, {passive:true});
-      window.addEventListener('resize', toggle);
-      toggle();
-    })();
-
-    // FAQ: only one open at a time
+    // FAQ: only one open at a time (keeps it tidy)
     (function(){
       const all = Array.from(document.querySelectorAll('#faq details'));
       all.forEach(d => {

@@ -25,16 +25,6 @@
 
       --shadow: 0 18px 44px rgba(0,0,0,.42);
       --radius:18px;
-
-      /* --- QUICK PALETTE SWAPS (optional) ---
-        To test: replace ONLY the values above.
-
-        Palette 1 (deeper slate):
-        --bg:#070c17; --bg2:#0b1220; --surface:#0f172a; --card:#111b2e; --line:#2b3648; --body:#c7d2e2; --blue:#8ab4ff; --blueText:#070c17;
-
-        Palette 2 (less navy, more neutral charcoal):
-        --bg:#0a0a0c; --bg2:#111216; --surface:#151821; --card:#1b1f2a; --line:#2e3442; --body:#ced5e3; --blue:#93c5fd; --blueText:#0a0a0c;
-      */
     }
 
     *{box-sizing:border-box}
@@ -42,9 +32,10 @@
 
     body{
       margin:0;
-      font-family: Arial, Helvetica, sans-serif;
+      /* cleaner, more readable font rendering vs Arial on dark */
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       background:
-        radial-gradient(1200px 700px at 10% 0%, rgba(147,197,253,.08), transparent 60%),
+        radial-gradient(1200px 700px at 10% 0%, rgba(147,197,253,.07), transparent 60%),
         linear-gradient(180deg, var(--bg), var(--bg2));
       color: var(--text);
     }
@@ -52,12 +43,12 @@
     .wrap{
       max-width: 1060px;
       margin: 0 auto;
-      padding: 64px 22px 86px;
+      padding: 64px 22px 80px;
     }
 
     .shell{
       background: linear-gradient(180deg, var(--card), var(--surface));
-      border:1px solid var(--line);
+      border:1px solid rgba(55,65,81,.85);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 52px;
@@ -69,7 +60,7 @@
       content:"";
       position:absolute;
       inset:-2px;
-      background: radial-gradient(900px 420px at 25% 0%, rgba(147,197,253,.07), transparent 55%);
+      background: radial-gradient(900px 420px at 25% 0%, rgba(147,197,253,.06), transparent 55%);
       pointer-events:none;
     }
 
@@ -79,17 +70,18 @@
       margin:0 0 10px 0;
       font-size: 42px;
       letter-spacing:-0.6px;
-      line-height:1.15;
+      line-height:1.12;
       text-align:center;
     }
 
-    /* Make section headings stand out more */
+    /* Section headings: slightly stronger signal */
     h2{
-      margin: 0 0 12px 0;
-      font-size: 26px;          /* was 24 */
+      margin:0 0 14px 0;
+      font-size: 26px;               /* increased */
       letter-spacing:-0.35px;
-      line-height:1.25;
-      text-align:left;          /* cleaner scanning */
+      line-height:1.22;
+      color: rgba(229,231,235,.96);
+      text-align:left;               /* faster scanning */
     }
 
     /* Hero description */
@@ -98,8 +90,8 @@
       max-width: 74ch;
       text-align:center;
       font-size: 17px;
-      line-height: 1.8;
-      color: var(--body);
+      line-height: 1.75;
+      color: rgba(203,213,225,.92);  /* slightly softer than pure white */
     }
 
     /* Buttons — all same bright blue */
@@ -131,59 +123,92 @@
     }
     .btn:hover{ background: rgba(147,197,253,1); }
 
-    /* Remove divider bars; use section spacing instead */
+    /* Remove hard dividers: use section spacing + subtle separators */
     section{
-      max-width: 880px;
+      max-width: 900px;
       margin: 0 auto;
-      padding-top: 26px;
+      padding: 26px 0 0;
     }
-    section:first-of-type{ padding-top: 0; }
+    section + section{
+      margin-top: 26px;
+      padding-top: 26px;
+      border-top: 1px solid rgba(55,65,81,.55);
+    }
 
-    /* Content column (replaces the “boxes”) */
+    /* Keep a soft “panel” but less boxy/weird */
     .section-box{
-      border: none;
-      background: transparent;
-      border-radius: 0;
-      padding: 0;
-      max-width: 880px;
-      margin: 0 auto;
+      border: 1px solid rgba(55,65,81,.65);
+      background: rgba(15,23,42,.28); /* flatter, less gradient */
+      border-radius: 16px;
+      padding: 22px 24px;
     }
 
     /* Standard paragraph */
     .prose{
       max-width: 74ch;
-      color: var(--body);
+      color: rgba(203,213,225,.90);
       font-size: 15px;
       line-height: 1.75;
       margin: 0;
       text-align:left;
     }
 
-    /* Lead sentence(s) — stand out more (your request) */
+    /* Option 2: "Signal sentence" styling (stands out, but not huge bold blocks) */
     .lead{
       max-width: 74ch;
-      color: var(--body);
-      font-size: 18px;          /* was 17 */
-      font-weight: 800;         /* added */
-      line-height: 1.75;
-      margin: 0 0 12px 0;
-      text-align:left;
-    }
-
-    /* Bullets */
-    .list{
-      margin: 0;
-      padding-left: 18px;
-      max-width: 74ch;
-      text-align:left;
-      color: var(--body);
-      font-size: 15px;
+      color: rgba(229,231,235,.96);
+      font-size: 18px;             /* increased per your request */
+      font-weight: 650;            /* strong but not shouty */
       line-height: 1.65;
+      margin: 0 0 14px 0;
+      text-align:left;
     }
-    .list li{margin: 9px 0;}
-    .list li::marker{color: rgba(147,197,253,.45);}
 
-    /* FAQ (leave alone per your instruction) */
+    /* Option 2: Bullets become scannable signal tiles (NO COPY CHANGES) */
+    .signal-list{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+      max-width: 74ch;
+    }
+
+    .signal-list li{
+      position: relative;
+      padding: 12px 14px 12px 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(55,65,81,.55);
+      background: rgba(11,18,32,.28);
+      color: rgba(203,213,225,.92);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .signal-list li:before{
+      content:"";
+      position:absolute;
+      left: 10px;
+      top: 18px;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(147,197,253,.55);
+      box-shadow: 0 0 0 3px rgba(147,197,253,.08);
+    }
+
+    /* 2-column scan on desktop, 1-column on mobile */
+    @media (min-width: 900px){
+      .signal-list{
+        grid-template-columns: 1fr 1fr;
+      }
+      /* keep long bullets from feeling cramped */
+      .signal-list li{
+        min-height: 56px;
+      }
+    }
+
+    /* FAQ — unchanged (per your instruction) */
     .faq-wrap{
       max-width: 880px;
       margin: 0 auto;
@@ -234,7 +259,7 @@
 
     /* Footer */
     .footer{
-      margin-top: 46px;
+      margin-top: 40px;
       padding-top: 18px;
       border-top: 1px solid rgba(55,65,81,.85);
       display:flex;
@@ -243,9 +268,6 @@
       justify-content:space-between;
       color: rgba(203,213,225,.75);
       font-size: 13px;
-      max-width: 880px;
-      margin-left:auto;
-      margin-right:auto;
     }
     .footer a{
       color: rgba(147,197,253,.70);
@@ -258,8 +280,10 @@
       .shell{padding: 28px;}
       h1{font-size: 30px;}
       .wrap{padding: 40px 16px 72px;}
+      .section-box{padding:16px;}
       .btn{min-width: 0; width: 100%;}
-      section{padding-top: 22px;}
+      h2{font-size: 24px;}
+      .lead{font-size: 17px;}
     }
   </style>
 </head>
@@ -287,7 +311,7 @@
               Most real estate marketing fails not because of effort—but because there is no system. This creates wasted time, inconsistent branding, and marketing that can’t scale beyond the person creating it.
             </p>
 
-            <ul class="list">
+            <ul class="signal-list">
               <li>Every new listing or campaign starts from a different place</li>
               <li>The same core pieces are rebuilt over and over</li>
               <li>Marketing looks acceptable in isolation, but inconsistent across channels</li>
@@ -302,7 +326,7 @@
         <section id="included">
           <h2>What’s Included</h2>
           <div class="section-box">
-            <!-- ALL NON-BULLETED SENTENCES ABOVE BULLETS (per your request) -->
+            <!-- ALL NON-BULLETED SENTENCES ABOVE BULLETS (verbatim, reordered only) -->
             <p class="lead">
               Delivered as a complete system of 130+ standardized base formats across social, email, and print—built for consistency, reuse, and scale without redesigning.
             </p>
@@ -311,7 +335,7 @@
               A complete, standardized marketing system that keeps teams, listings, and campaigns consistent—without redesigning or re-deciding every time.
             </p>
 
-            <ul class="list">
+            <ul class="signal-list">
               <li>Standardized social media formats for all major platform sizes</li>
               <li>Email templates built for repeat campaigns and announcements</li>
               <li>Print-ready formats for core real estate marketing materials</li>
@@ -330,7 +354,7 @@
         <section id="for">
           <h2>Who This Is For</h2>
           <div class="section-box">
-            <!-- ALL NON-BULLETED SENTENCES ABOVE BULLETS (per your request) -->
+            <!-- ALL NON-BULLETED SENTENCES ABOVE BULLETS (verbatim, reordered only) -->
             <p class="lead">
               This system is built for real estate professionals who want marketing to operate as an internal system, not a recurring design project.
             </p>
@@ -339,7 +363,7 @@
               This is not about creative exploration. It’s about standardization, repeatability, and control.
             </p>
 
-            <ul class="list">
+            <ul class="signal-list">
               <li>Owners, managers, and team leads who need consistent marketing across agents, listings, and channels—without constant oversight</li>
               <li>Brokerages that want one standard structure instead of reinventing every campaign</li>
               <li>Independent agents who want marketing that looks intentional, professional, and unified—not improvised</li>
@@ -352,7 +376,7 @@
         <section id="notfit">
           <h2>Not A Fit If:</h2>
           <div class="section-box">
-            <ul class="list" style="margin-bottom:0;">
+            <ul class="signal-list">
               <li>You expect a new custom design every time something is published</li>
               <li>You prefer rebuilding layouts and revisiting design decisions for each campaign</li>
               <li>You’re looking for individual templates rather than a defined, repeatable system</li>

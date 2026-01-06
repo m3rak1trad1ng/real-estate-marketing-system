@@ -122,9 +122,9 @@
     }
     .hero-desc{
       margin: 0 auto 0 auto;
-      max-width: 78ch;
-      font-size: 18px;
-      line-height: 1.7;
+      max-width: 86ch;              /* slightly wider */
+      font-size: 20px;               /* larger per your request */
+      line-height: 1.75;
       color: var(--muted);
       font-weight: 500;
       margin-bottom: 6px;
@@ -223,16 +223,20 @@
       text-align: left;
     }
 
-    /* System Index intro copy (widened + forced 2-line breaks via <br>) */
+    /* System Index intro copy: LEFT aligned, wider, and widow-resistant */
     .toc-intro-copy{
       margin: 0;
-      font-size: 18px;
-      line-height: 1.7;
+      font-size: 18px;               /* larger per your request */
+      line-height: 1.75;
       color: var(--muted);
-      text-align: center;
-      max-width: 860px;     /* wider so it doesn't feel smushed */
+      text-align: left;              /* key change */
+      max-width: 84ch;               /* wider so it doesn’t “pinch” */
       margin-left: auto;
       margin-right: auto;
+      text-wrap: pretty;             /* gentle line improvements */
+    }
+    @supports (text-wrap: balance){
+      .toc-intro-copy{ text-wrap: balance; } /* reduces widows in supporting browsers */
     }
 
     /* (Top-of-page numeric breakdown removed per request) */
@@ -350,15 +354,14 @@
       .page-frame{ margin: 12px 12px 18px; border-radius: 16px; }
       .wrap{ padding: 16px 16px 30px; }
       h1{ font-size: 32px; letter-spacing: -0.7px; }
-      .hero-desc{ font-size: 16px; }
+      .hero-desc{ font-size: 17px; } /* keep readable on mobile */
       .btn{ width: 100%; }
       section{ margin-top: 34px; }
       .footer{ margin-top: 28px; }
       .footer-links{ gap: 12px; }
 
-      /* On small screens, let the intro copy breathe naturally */
       .toc-intro-copy{
-        max-width: 70ch;
+        max-width: 70ch;   /* prevents overly long lines on small screens */
       }
     }
   </style>
@@ -394,15 +397,12 @@
 
             <!-- Top summary counts removed per request -->
 
-            <!-- Forced 2-line layout (desktop) + no widows -->
-            <p class="toc-intro-copy" style="margin-top:10px;">
-              Each item below represents a standardized base format intended<br>
-              to be duplicated and reused across listings and campaigns, with structural decisions made once and applied consistently.
+            <p class="toc-intro-copy" style="margin-top:12px;">
+              Each item below represents a standardized base format intended to be duplicated and reused across listings and campaigns, with structural decisions made once and applied consistently.
             </p>
 
-            <p class="toc-intro-copy" style="margin-top:12px;">
-              Many formats are labeled by common use case (e.g., “Buyer Tips”),<br>
-              but the underlying structures are reusable and can be repurposed for any similar content type after initial setup.
+            <p class="toc-intro-copy" style="margin-top:14px;">
+              Many formats are labeled by common use case (e.g., “Buyer Tips”), but the underlying structures are reusable and can be repurposed for any similar content type after initial setup.
             </p>
 
             <div class="toc-transition" aria-hidden="true"></div>

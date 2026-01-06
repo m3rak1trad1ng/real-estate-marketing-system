@@ -32,7 +32,7 @@
       --topbarH: 52px;
       --anchorGap: 14px;
 
-      /* ✅ one source of truth for intro text block width */
+      /* NEW: intro block width target (controls “widow” behavior) */
       --introCh: 92ch;
     }
 
@@ -125,13 +125,15 @@
     }
     .hero-desc{
       margin: 0 auto 0 auto;
-      max-width: var(--introCh); /* ✅ matches System Index intro block */
+      max-width: 78ch;
+
+      /* UPDATED: larger hero text */
       font-size: 20px;
-      line-height: 1.75;
+      line-height: 1.7;
+
       color: var(--muted);
       font-weight: 500;
       margin-bottom: 6px;
-      text-align: center;
     }
 
     /* Buttons */
@@ -206,11 +208,6 @@
       margin: 0 auto;
     }
 
-    /* ✅ WIDER container used ONLY for System Index intro copy */
-    .section-inner.wide{
-      max-width: var(--introCh); /* ✅ matches hero-desc width */
-    }
-
     /* Centered “subtitle” lines */
     .section-summary{
       margin: 0 0 12px 0;
@@ -232,79 +229,24 @@
       text-align: left;
     }
 
-    /* System Index intro copy:
-       - left aligned
-       - uses full width of the (wide) container
-       - nudges line breaks to avoid ugly widows without forcing weird spacing
+    /* ===== System Index intro block (UPDATED) =====
+       Goal:
+       - Box centered on the page
+       - Text left-aligned inside that box
+       - Wider width to reduce “widow” single words
     */
+    .toc-intro-box{
+      max-width: var(--introCh);
+      margin: 14px auto 0;
+      text-align: left;
+    }
     .toc-intro-copy{
       margin: 0;
-      font-size: 18px;
-      line-height: 1.75;
+      font-size: 18px;     /* UPDATED: larger System Index copy */
+      line-height: 1.8;    /* UPDATED: easier reading */
       color: var(--muted);
       text-align: left;
-      width: 100%;
-      hyphens: auto;
-      text-wrap: pretty;
-      max-width: none;
-    }
-    @supports (text-wrap: balance){
-      .toc-intro-copy{ text-wrap: balance; }
-    }
-
-    /* (Top-of-page numeric breakdown removed per request) */
-    .counts{
-      margin-top: 6px;
-      color: rgba(71,85,105,.92);
-      font-size: 13px;
-      line-height: 1.6;
-      text-align: center;
-    }
-    .counts strong{ color: #0f172a; }
-
-    /* (Top-of-page total file count removed per request) */
-    .toc-total{
-      margin: 0;
-      font-size: 13px;
-      line-height: 1.4;
-      font-weight: 700;
-      color: rgba(71,85,105,.92);
-      text-align: center;
-    }
-
-    h3{
-      margin: 18px 0 10px 0;
-      font-size: 16px;
-      line-height: 1.25;
-      font-weight: 800;
-      color: #0f172a;
-      letter-spacing: -0.2px;
-      text-align: left;
-    }
-
-    ul.list{
-      margin: 0;
-      padding-left: 18px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.72;
-      text-align: left;
-    }
-    ul.list li{ margin: 8px 0; }
-    ul.list li::marker{ color: rgba(100,116,139,.78); }
-
-    /* Two-column lists */
-    ul.list.two-col{
-      column-count: 2;
-      column-gap: 40px;
-    }
-    ul.list.two-col li{
-      break-inside: avoid;
-      -webkit-column-break-inside: avoid;
-      page-break-inside: avoid;
-    }
-    @media (max-width: 820px){
-      ul.list.two-col{ column-count: 1; }
+      text-wrap: pretty;   /* safe improvement; ignored if unsupported */
     }
 
     /* Divider between major groups */
@@ -364,16 +306,23 @@
     .footer a:hover{ text-decoration: underline; }
 
     @media (max-width: 820px){
+      :root{ --introCh: 70ch; } /* keep it readable on smaller screens */
+
       .page-frame{ margin: 12px 12px 18px; border-radius: 16px; }
       .wrap{ padding: 16px 16px 30px; }
       h1{ font-size: 32px; letter-spacing: -0.7px; }
+
+      /* mobile hero */
       .hero-desc{ font-size: 17px; }
+
       .btn{ width: 100%; }
       section{ margin-top: 34px; }
       .footer{ margin-top: 28px; }
       .footer-links{ gap: 12px; }
 
-      :root{ --introCh: 78ch; } /* keeps it readable on small screens */
+      /* mobile intro copy */
+      .toc-intro-box{ margin-top: 12px; }
+      .toc-intro-copy{ font-size: 16px; line-height: 1.75; }
     }
   </style>
 </head>
@@ -404,17 +353,20 @@
       <main>
         <section id="toc-intro">
           <h2>System Index</h2>
+          <div class="section-inner">
 
-          <!-- ✅ matches hero-desc block width, but left-aligned text -->
-          <div class="section-inner wide">
+            <!-- Top summary counts removed per request -->
 
-            <p class="toc-intro-copy" style="margin-top:12px;">
-              Each item below represents a standardized base format intended to be duplicated and reused across listings and campaigns, with structural decisions made once and applied consistently.
-            </p>
+            <!-- UPDATED: centered box, left-aligned text, wider to reduce widows -->
+            <div class="toc-intro-box">
+              <p class="toc-intro-copy">
+                Each item below represents a standardized base format intended to be duplicated and reused across listings and campaigns, with structural decisions made once and applied consistently.
+              </p>
 
-            <p class="toc-intro-copy" style="margin-top:14px;">
-              Many formats are labeled by common use case (e.g., “Buyer Tips”), but the underlying structures are reusable and can be repurposed for any similar content type after initial setup.
-            </p>
+              <p class="toc-intro-copy" style="margin-top:14px;">
+                Many formats are labeled by common use case (e.g., “Buyer Tips”), but the underlying structures are reusable and can be repurposed for any similar content type after initial setup.
+              </p>
+            </div>
 
             <div class="toc-transition" aria-hidden="true"></div>
           </div>

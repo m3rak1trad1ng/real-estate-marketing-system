@@ -32,8 +32,10 @@
       --topbarH: 52px;
       --anchorGap: 14px;
 
-      /* NEW: width control for the System Index intro copy block */
-      --introMax: 86ch;
+      /* ✅ GLOBAL RHYTHM / MEASURES (LOCK THIS)
+         Use these for consistent line-length and alignment across pages. */
+      --measure-wide: 78ch;   /* hero + main reading width */
+      --measure-tight: 70ch;  /* slightly tighter (optional) */
     }
 
     *{ box-sizing: border-box; }
@@ -125,12 +127,13 @@
     }
     .hero-desc{
       margin: 0 auto 0 auto;
-      max-width: 78ch;
-      font-size: 20px; /* UPDATED: larger */
+      max-width: var(--measure-wide);
+      font-size: 20px; /* ✅ larger per request */
       line-height: 1.7;
       color: var(--muted);
       font-weight: 500;
       margin-bottom: 6px;
+      text-wrap: pretty;
     }
 
     /* Buttons */
@@ -201,21 +204,22 @@
     }
 
     .section-inner{
-      max-width: 78ch;
+      max-width: var(--measure-wide);
       margin: 0 auto;
     }
 
     /* Centered “subtitle” lines */
     .section-summary{
       margin: 0 0 12px 0;
-      font-size: 17px;   /* UPDATED: slightly smaller */
+      font-size: 18px;
       line-height: 1.55;
-      font-weight: 600;  /* UPDATED: slightly lighter */
+      font-weight: 650;
       color: #0f172a;
       text-align: center;
-      max-width: 70ch;
+      max-width: var(--measure-tight);
       margin-left: auto;
       margin-right: auto;
+      text-wrap: pretty;
     }
 
     .prose{
@@ -224,42 +228,21 @@
       line-height: 1.75;
       color: var(--muted);
       text-align: left;
-    }
-
-    /* System Index intro copy block:
-       centered container, left-aligned text inside, wider to reduce awkward wraps */
-    .toc-copy{
-      max-width: var(--introMax);
-      margin-left: auto;
-      margin-right: auto;
-      text-align: left;
-    }
-    .toc-copy .prose{
-      font-size: 17px; /* UPDATED: larger under System Index */
-      line-height: 1.75;
       text-wrap: pretty;
-      hyphens: none;
     }
 
-    /* (Top-of-page numeric breakdown removed per request) */
-    .counts{
-      margin-top: 6px;
-      color: rgba(71,85,105,.92);
-      font-size: 13px;
-      line-height: 1.6;
-      text-align: center;
+    /* System Index intro block:
+       ✅ centered box, left-aligned text, controlled measure (prevents widows & "smushed" look) */
+    .intro-block{
+      max-width: var(--measure-wide); /* ✅ global rhythm width */
+      margin: 12px auto 0;
     }
-    .counts strong{ color: #0f172a; }
-
-    /* (Top-of-page total file count removed per request) */
-    .toc-total{
+    .intro-block p{
+      font-size: 17px;   /* ✅ slightly larger per request */
+      line-height: 1.75;
       margin: 0;
-      font-size: 13px;
-      line-height: 1.4;
-      font-weight: 700;
-      color: rgba(71,85,105,.92);
-      text-align: center;
     }
+    .intro-block p + p{ margin-top: 12px; }
 
     h3{
       margin: 18px 0 10px 0;
@@ -273,10 +256,10 @@
 
     ul.list{
       margin: 0;
-      padding-left: 14px; /* UPDATED: was 18px */
+      padding-left: 18px;
       color: var(--muted);
       font-size: 16px;
-      line-height: 1.68; /* UPDATED: slightly tighter */
+      line-height: 1.72;
       text-align: left;
     }
     ul.list li{ margin: 8px 0; }
@@ -299,7 +282,7 @@
     /* Divider between major groups */
     .section-divider{
       margin: 26px auto 0;
-      max-width: 78ch;
+      max-width: var(--measure-wide);
       height: 1px;
       background: rgba(148,163,184,.45);
       border-radius: 999px;
@@ -307,15 +290,12 @@
 
     /* Transition divider between System Index intro and first inventory section */
     .toc-transition{
-      margin: 16px auto 0; /* UPDATED: less vertical drop */
-      max-width: 78ch;
+      margin: 22px auto 0;
+      max-width: var(--measure-wide);
       height: 1px;
       background: rgba(148,163,184,.45);
       border-radius: 999px;
     }
-
-    /* Reduce the gap before Social Media so it doesn't feel like a page break */
-    #social{ margin-top: 26px; } /* UPDATED: was 38px inherited */
 
     /* Final sentence spacing */
     .final-confirmation{
@@ -328,6 +308,7 @@
       line-height: 1.7;
       font-weight: 800;
       text-align: center;
+      text-wrap: pretty;
     }
 
     /* Footer */
@@ -359,11 +340,8 @@
       .page-frame{ margin: 12px 12px 18px; border-radius: 16px; }
       .wrap{ padding: 16px 16px 30px; }
       h1{ font-size: 32px; letter-spacing: -0.7px; }
-      .hero-desc{ font-size: 17px; } /* responsive scaling */
-      .toc-copy .prose{ font-size: 16px; } /* responsive scaling */
-      .btn{ width: 100%; }
+      .hero-desc{ font-size: 17px; } /* keep larger but responsive */
       section{ margin-top: 34px; }
-      #social{ margin-top: 24px; }
       .footer{ margin-top: 28px; }
       .footer-links{ gap: 12px; }
     }
@@ -397,15 +375,12 @@
         <section id="toc-intro">
           <h2>System Index</h2>
           <div class="section-inner">
-
-            <!-- Top summary counts removed per request -->
-
-            <div class="toc-copy">
-              <p class="prose" style="margin-top:10px;">
+            <div class="intro-block">
+              <p class="prose">
                 Each item below represents a standardized base format intended to be duplicated and reused across listings and campaigns, with structural decisions made once and applied consistently.
               </p>
 
-              <p class="prose" style="margin-top:12px;">
+              <p class="prose">
                 Many formats are labeled by common use case (e.g., “Buyer Tips”), but the underlying structures are reusable and can be repurposed for any similar content type after initial setup.
               </p>
             </div>

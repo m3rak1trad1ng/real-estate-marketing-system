@@ -108,11 +108,10 @@
 
     /* Hero */
     header{
-    text-align: center;
-    margin-top: 6px;
-    padding-bottom: 12px;
+      text-align: center;
+      margin-top: 6px;
+      padding-bottom: 6px;
     }
-
     h1{
       margin: 0 0 10px 0;
       font-size: 46px;
@@ -178,7 +177,7 @@
     section{ scroll-margin-top: calc(var(--topbarH) + var(--anchorGap)); }
 
     h2{
-      margin: 0 0 14px 0;
+      margin: 0 0 10px 0; /* ✅ tighter */
       font-size: 24px;
       line-height: 1.2;
       letter-spacing: -0.5px;
@@ -190,10 +189,10 @@
     h2::after{
       content:"";
       display:block;
-      width: 140px;
+      width: 112px;              /* ✅ shorter */
       height: 1px;
-      margin: 12px auto 0;
-      background: rgba(15, 23, 42, 0.14);
+      margin: 10px auto 0;       /* ✅ tighter */
+      background: rgba(15, 23, 42, 0.10); /* ✅ lighter */
       border-radius: 999px;
     }
 
@@ -204,7 +203,7 @@
 
     /* Centered “subtitle” lines */
     .section-summary{
-      margin: 0 0 14px 0;
+      margin: 0 0 12px 0;
       font-size: 18px;
       line-height: 1.55;
       font-weight: 650;
@@ -224,9 +223,9 @@
     }
 
     .counts{
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 14px;
+      margin-top: 6px; /* ✅ tighter */
+      color: rgba(71,85,105,.92); /* ✅ slightly more muted */
+      font-size: 13px; /* ✅ slightly smaller */
       line-height: 1.6;
       text-align: center;
     }
@@ -276,6 +275,15 @@
       border-radius: 999px;
     }
 
+    /* ✅ Intro block divider after System Index text */
+    .intro-divider{
+      margin: 20px auto 0;
+      max-width: 78ch;
+      height: 1px;
+      background: rgba(148,163,184,.38);
+      border-radius: 999px;
+    }
+
     /* Final sentence spacing */
     .final-confirmation{
       margin-top: 26px;
@@ -319,7 +327,6 @@
       .hero-desc{ font-size: 16px; }
       .btn{ width: 100%; }
       section{ margin-top: 34px; }
-      h2::after{ width: 110px; }
       .footer{ margin-top: 28px; }
       .footer-links{ gap: 12px; }
     }
@@ -343,9 +350,9 @@
       <header>
         <h1>Full System Table of Contents</h1>
 
+        <!-- ✅ COPY LOCKED -->
         <p class="hero-desc">
-          This is the complete structural index of what’s included in the Real Estate Marketing System.
-          It’s provided here so you can validate scope before purchase.
+          This is the complete structural index of what’s included in the Real Estate Marketing System. It’s provided here so you can validate scope before purchase.
         </p>
         <!-- ✅ top buttons removed -->
       </header>
@@ -356,7 +363,7 @@
           <div class="section-inner">
             <p class="section-summary">Total included files: <strong>116</strong></p>
 
-            <p class="counts" style="margin-top:10px;">
+            <p class="counts">
               <strong>Social:</strong> 36 &nbsp;·&nbsp;
               <strong>Print:</strong> 28 &nbsp;·&nbsp;
               <strong>Email:</strong> 10 &nbsp;·&nbsp;
@@ -365,13 +372,16 @@
               <strong>Quick Start &amp; Support:</strong> 19
             </p>
 
-            <p class="prose" style="margin-top:10px;">
+            <!-- ✅ centered + constrained + copy locked -->
+            <p class="prose" style="margin-top:12px; text-align:center; max-width:78ch; margin-left:auto; margin-right:auto;">
               Each item below represents a standardized base format intended to be duplicated and reused across listings and campaigns, with structural decisions made once and applied consistently.
             </p>
 
-            <p class="prose" style="margin-top:10px;">
+            <p class="prose" style="margin-top:10px; text-align:center; max-width:78ch; margin-left:auto; margin-right:auto;">
               Many formats are labeled by common use case (e.g., “Buyer Tips”), but the underlying structures are reusable and can be repurposed for any similar content type after initial setup.
             </p>
+
+            <div class="intro-divider" aria-hidden="true"></div>
           </div>
         </section>
 

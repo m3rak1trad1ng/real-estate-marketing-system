@@ -32,8 +32,8 @@
       --topbarH: 52px;
       --anchorGap: 14px;
 
-      /* ✅ Controls width of the System Index copy block (prevents widows without “smushing”) */
-      --introMax: 78ch;
+      /* NEW: width control for the System Index intro copy block */
+      --introMax: 86ch;
     }
 
     *{ box-sizing: border-box; }
@@ -126,11 +126,8 @@
     .hero-desc{
       margin: 0 auto 0 auto;
       max-width: 78ch;
-
-      /* ✅ UPDATED: larger as requested */
-      font-size: 20px;
+      font-size: 20px; /* UPDATED: larger */
       line-height: 1.7;
-
       color: var(--muted);
       font-weight: 500;
       margin-bottom: 6px;
@@ -211,9 +208,9 @@
     /* Centered “subtitle” lines */
     .section-summary{
       margin: 0 0 12px 0;
-      font-size: 18px;
+      font-size: 17px;   /* UPDATED: slightly smaller */
       line-height: 1.55;
-      font-weight: 650;
+      font-weight: 600;  /* UPDATED: slightly lighter */
       color: #0f172a;
       text-align: center;
       max-width: 70ch;
@@ -227,6 +224,21 @@
       line-height: 1.75;
       color: var(--muted);
       text-align: left;
+    }
+
+    /* System Index intro copy block:
+       centered container, left-aligned text inside, wider to reduce awkward wraps */
+    .toc-copy{
+      max-width: var(--introMax);
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+    }
+    .toc-copy .prose{
+      font-size: 17px; /* UPDATED: larger under System Index */
+      line-height: 1.75;
+      text-wrap: pretty;
+      hyphens: none;
     }
 
     /* (Top-of-page numeric breakdown removed per request) */
@@ -249,24 +261,6 @@
       text-align: center;
     }
 
-    /* ✅ NEW: centered “box” but left-aligned text inside */
-    .toc-intro-box{
-      max-width: var(--introMax);
-      margin: 14px auto 0;
-      text-align: left;
-    }
-
-    /* ✅ UPDATED: larger System Index copy */
-    .toc-intro-copy{
-      margin: 0;
-      font-size: 18px;
-      line-height: 1.8;
-      color: var(--muted);
-      text-align: left;
-      text-wrap: pretty;
-    }
-
-    /* ✅ RESTORED: your original h3 + list styling (this is what got “fucked up”) */
     h3{
       margin: 18px 0 10px 0;
       font-size: 16px;
@@ -279,10 +273,10 @@
 
     ul.list{
       margin: 0;
-      padding-left: 18px;
+      padding-left: 14px; /* UPDATED: was 18px */
       color: var(--muted);
       font-size: 16px;
-      line-height: 1.72;
+      line-height: 1.68; /* UPDATED: slightly tighter */
       text-align: left;
     }
     ul.list li{ margin: 8px 0; }
@@ -311,16 +305,19 @@
       border-radius: 999px;
     }
 
-    /* ✅ Transition divider between System Index intro and first inventory section */
+    /* Transition divider between System Index intro and first inventory section */
     .toc-transition{
-      margin: 22px auto 0;
+      margin: 16px auto 0; /* UPDATED: less vertical drop */
       max-width: 78ch;
       height: 1px;
       background: rgba(148,163,184,.45);
       border-radius: 999px;
     }
 
-    /* ✅ Final sentence spacing (UPDATED) */
+    /* Reduce the gap before Social Media so it doesn't feel like a page break */
+    #social{ margin-top: 26px; } /* UPDATED: was 38px inherited */
+
+    /* Final sentence spacing */
     .final-confirmation{
       margin-top: 30px;
       margin-bottom: 26px;
@@ -362,18 +359,13 @@
       .page-frame{ margin: 12px 12px 18px; border-radius: 16px; }
       .wrap{ padding: 16px 16px 30px; }
       h1{ font-size: 32px; letter-spacing: -0.7px; }
-
-      /* mobile hero */
-      .hero-desc{ font-size: 17px; }
-
+      .hero-desc{ font-size: 17px; } /* responsive scaling */
+      .toc-copy .prose{ font-size: 16px; } /* responsive scaling */
       .btn{ width: 100%; }
       section{ margin-top: 34px; }
+      #social{ margin-top: 24px; }
       .footer{ margin-top: 28px; }
       .footer-links{ gap: 12px; }
-
-      /* keep intro readable on mobile */
-      :root{ --introMax: 70ch; }
-      .toc-intro-copy{ font-size: 16px; line-height: 1.75; }
     }
   </style>
 </head>
@@ -395,7 +387,7 @@
       <header>
         <h1>Full System Table of Contents</h1>
 
-        <!-- ✅ COPY LOCKED -->
+        <!-- COPY LOCKED -->
         <p class="hero-desc">
           This is the complete structural index of what’s included in the Real Estate Marketing System. It’s provided here so you can validate scope before purchase.
         </p>
@@ -408,13 +400,12 @@
 
             <!-- Top summary counts removed per request -->
 
-            <!-- ✅ Centered box, text aligned left inside, wider to reduce widows -->
-            <div class="toc-intro-box">
-              <p class="toc-intro-copy">
+            <div class="toc-copy">
+              <p class="prose" style="margin-top:10px;">
                 Each item below represents a standardized base format intended to be duplicated and reused across listings and campaigns, with structural decisions made once and applied consistently.
               </p>
 
-              <p class="toc-intro-copy" style="margin-top:14px;">
+              <p class="prose" style="margin-top:12px;">
                 Many formats are labeled by common use case (e.g., “Buyer Tips”), but the underlying structures are reusable and can be repurposed for any similar content type after initial setup.
               </p>
             </div>

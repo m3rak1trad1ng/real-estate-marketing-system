@@ -1,1 +1,599 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Full System Table of Contents — The Real Estate Marketing System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A complete, buyer-facing index of what is included in The Real Estate Marketing System.">
 
+  <!-- Font: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #c9cdd3;
+      --frame: #e9edf2;
+      --frameBorder: rgba(15, 23, 42, 0.32);
+      --frameShadow: 0 28px 80px rgba(15, 23, 42, 0.20);
+
+      --text: #0f172a;
+      --muted: #475569;
+      --muted2:#64748b;
+      --line: rgba(148,163,184,.45);
+
+      --accent: #0f766e;
+      --accentHover: #115e59;
+      --accentText: #ffffff;
+
+      --max: 980px;
+
+      --topbarH: 52px;
+      --anchorGap: 14px;
+    }
+
+    *{ box-sizing: border-box; }
+
+    html{ scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior: auto; }
+      *{ transition: none !important; }
+    }
+
+    body{
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Sticky nav */
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(201,205,211,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar-inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 8px 18px;
+      min-height: var(--topbarH);
+      display:flex;
+      align-items:center;
+      justify-content: center;
+    }
+    .nav{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      align-items:center;
+      justify-content:center;
+    }
+    .nav a{
+      font-size: 13px;
+      color: rgba(15,23,42,.72);
+      text-decoration: none;
+      font-weight: 650;
+      padding: 7px 10px;
+      border-radius: 999px;
+      transition: background .12s ease, color .12s ease;
+    }
+    .nav a:hover{
+      background: rgba(15,23,42,.08);
+      color: rgba(15,23,42,.92);
+    }
+    .nav a.active{
+      background: rgba(15,118,110,.16);
+      color: rgba(15,118,110,.98);
+    }
+
+    /* Content frame */
+    .page-frame{
+      max-width: var(--max);
+      margin: 16px auto 24px;
+      background: var(--frame);
+      border: 1px solid var(--frameBorder);
+      border-radius: 20px;
+      box-shadow: var(--frameShadow);
+      overflow: clip;
+    }
+
+    .wrap{
+      padding: 18px 24px 28px;
+    }
+
+    /* Hero */
+    header{
+      text-align: center;
+      margin-top: 4px;
+    }
+    h1{
+      margin: 0 0 10px 0;
+      font-size: 46px;
+      line-height: 1.06;
+      letter-spacing: -1px;
+      font-weight: 800;
+      color: #0b1220;
+    }
+    .hero-desc{
+      margin: 0 auto 12px auto;
+      max-width: 78ch;
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* Buttons */
+    .actions{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items:center;
+      justify-content: center;
+      margin-top: 6px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: .2px;
+      text-decoration: none;
+      background: var(--accent);
+      color: var(--accentText);
+      border: 1px solid rgba(0,0,0,.08);
+      box-shadow: 0 14px 30px rgba(15,118,110,.22);
+      transition: transform .06s ease, box-shadow .12s ease, background .12s ease;
+      min-width: 0;
+    }
+    .btn:hover{
+      background: var(--accentHover);
+      box-shadow: 0 16px 34px rgba(15,118,110,.26);
+    }
+    .btn:active{ transform: translateY(1px); }
+
+    .btn.subtle{
+      box-shadow: 0 12px 26px rgba(15,23,42,.14);
+    }
+    .btn.subtle:hover{
+      box-shadow: 0 14px 30px rgba(15,23,42,.16);
+    }
+
+    /* Sections */
+    main{ margin-top: 20px; }
+
+    section{ margin-top: 38px; }
+    section:first-of-type{ margin-top: 20px; }
+
+    /* ✅ Make the anchor itself respect the sticky header */
+    section{
+      scroll-margin-top: calc(var(--topbarH) + var(--anchorGap));
+    }
+
+    h2{
+      margin: 0 0 14px 0;
+      font-size: 24px;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+      font-weight: 800;
+      color: #0b1220;
+      text-align: center;
+      position: relative;
+    }
+
+    h2::after{
+      content:"";
+      display:block;
+      width: 140px;
+      height: 1px;
+      margin: 12px auto 0;
+      background: rgba(15, 23, 42, 0.14);
+      border-radius: 999px;
+    }
+
+    .section-inner{
+      max-width: 78ch;
+      margin: 0 auto;
+    }
+
+    .lead{
+      margin: 0 0 14px 0;
+      font-size: 18px;
+      line-height: 1.55;
+      font-weight: 650;
+      color: #0f172a;
+      text-align: left;
+    }
+
+    .prose{
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--muted);
+      text-align: left;
+    }
+
+    ul.list{
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.72;
+      text-align: left;
+    }
+    ul.list li{ margin: 8px 0; }
+    ul.list li::marker{ color: rgba(100,116,139,.78); }
+
+    /* Optional subheads without changing the system look */
+    h3{
+      margin: 18px 0 10px 0;
+      font-size: 16px;
+      line-height: 1.25;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.2px;
+      text-align: left;
+    }
+
+    /* Footer */
+    .footer{
+      margin-top: 34px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(148,163,184,.45);
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted2);
+      font-size: 13px;
+    }
+    .footer a{
+      color: rgba(15,23,42,.72);
+      text-decoration:none;
+      font-weight: 800;
+      margin-right: 14px;
+    }
+    .footer a:hover{ text-decoration: underline; }
+
+    @media (max-width: 820px){
+      .page-frame{
+        margin: 12px 12px 18px;
+        border-radius: 16px;
+      }
+      .wrap{ padding: 16px 16px 30px; }
+      h1{ font-size: 32px; letter-spacing: -0.7px; }
+      .hero-desc{ font-size: 16px; }
+      .btn{ width: 100%; }
+      section{ margin-top: 34px; }
+      h2::after{ width: 110px; }
+      .footer{ margin-top: 28px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar" id="topbar">
+    <div class="topbar-inner" id="topbar-inner">
+      <nav class="nav" aria-label="Primary navigation" id="nav">
+        <a href="/" >Overview</a>
+        <a href="/table-of-contents" class="active">Table of Contents</a>
+        <a href="/faq">FAQ</a>
+        <a href="/#access">Request Access</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="page-frame">
+    <div class="wrap">
+      <header>
+        <h1>Full System Table of Contents</h1>
+
+        <p class="hero-desc">
+          This is the complete structural index of what’s included in the Real Estate Marketing System.
+          It’s provided here so you can validate scope and fit before purchase.
+        </p>
+
+        <div class="actions" id="top-cta">
+          <a class="btn" href="/#access">Request Access</a>
+          <a class="btn subtle" href="/">Back to Main Page</a>
+        </div>
+      </header>
+
+      <main>
+        <section id="toc-intro">
+          <h2>System Index</h2>
+          <div class="section-inner">
+            <p class="lead">
+              Total included files: <strong>116</strong>
+            </p>
+            <p class="prose">
+              Organized into standard, reusable base formats across social, print, email, presentations, and internal governance.
+              Each item below represents a base format intended to be duplicated and reused across listings and campaigns.
+            </p>
+          </div>
+        </section>
+
+        <section id="social">
+          <h2>Social Media</h2>
+          <div class="section-inner">
+            <p class="lead">36 standardized social templates across core posting formats.</p>
+
+            <h3>Single Post Templates (18)</h3>
+            <ul class="list">
+              <li>Coming Soon — Square (1080×1080), Portrait (1080×1350), Story (1080×1920)</li>
+              <li>Just Listed — Square, Portrait, Story</li>
+              <li>Open House — Square, Portrait, Story</li>
+              <li>Price Reduced — Square, Portrait, Story</li>
+              <li>Under Contract — Square, Portrait, Story</li>
+              <li>Sold / Closed — Square, Portrait, Story</li>
+            </ul>
+
+            <h3>Social Carousels (5)</h3>
+            <ul class="list">
+              <li>Listing Highlights Carousel — Square (1080×1080)</li>
+              <li>Buyer Tips Carousel — Square (1080×1080)</li>
+              <li>Seller Tips Carousel — Square (1080×1080)</li>
+              <li>Market Update Carousel — Square (1080×1080)</li>
+              <li>Client Testimonial Carousel — Square (1080×1080)</li>
+            </ul>
+
+            <h3>Education & Branding (11)</h3>
+            <ul class="list">
+              <li>Buyer Tip — Square (1080×1080)</li>
+              <li>Seller Tip — Square (1080×1080)</li>
+              <li>Market Stat — Square (1080×1080)</li>
+              <li>FAQ — Square (1080×1080)</li>
+              <li>Myth vs Fact — Square (1080×1080)</li>
+              <li>Neighborhood Highlight — Square (1080×1080)</li>
+              <li>Agent Introduction — Square (1080×1080)</li>
+              <li>Agent Spotlight — Square (1080×1080)</li>
+              <li>Community Highlight — Square (1080×1080)</li>
+              <li>Holiday / Seasonal — Square (1080×1080)</li>
+              <li>Office Culture — Square (1080×1080)</li>
+            </ul>
+
+            <h3>Recruiting (2)</h3>
+            <ul class="list">
+              <li>Recruiting — Square (1080×1080)</li>
+              <li>Recruiting — Portrait (1080×1350)</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="print">
+          <h2>Print</h2>
+          <div class="section-inner">
+            <p class="lead">28 print-ready templates covering core real estate marketing materials.</p>
+
+            <h3>Property Marketing — Flyers (6)</h3>
+            <ul class="list">
+              <li>Property Flyer — Letter (8.5×11)</li>
+              <li>Property Flyer — Half Sheet (5.5×8.5)</li>
+              <li>Open House Flyer — Letter (8.5×11)</li>
+              <li>Open House Flyer — Half Sheet (5.5×8.5)</li>
+              <li>Feature Sheet — Letter (8.5×11)</li>
+              <li>Feature Sheet — Half Sheet (5.5×8.5)</li>
+            </ul>
+
+            <h3>Postcards / Mailers (4)</h3>
+            <ul class="list">
+              <li>Property Postcard — 4×6</li>
+              <li>Property Postcard — 5×7</li>
+              <li>Neighborhood Mailer — 5×7</li>
+              <li>Market Update Mailer — Letter (8.5×11)</li>
+            </ul>
+
+            <h3>Signage (6)</h3>
+            <ul class="list">
+              <li>Yard Sign — Listing — 18×24</li>
+              <li>Open House Sign — 18×24</li>
+              <li>Directional Sign — 12×18</li>
+              <li>Yard Sign Rider — 6×24</li>
+              <li>Yard Sign Rider — 6×18</li>
+              <li>Window / Event Sign — 18×24</li>
+            </ul>
+
+            <h3>Door-to-Door Outreach (1)</h3>
+            <ul class="list">
+              <li>Door Hanger — 3.5×8.5</li>
+            </ul>
+
+            <h3>Business Identity (6)</h3>
+            <ul class="list">
+              <li>Business Card — Front (3.5×2)</li>
+              <li>Business Card — Back (3.5×2)</li>
+              <li>Letterhead — 8.5×11</li>
+              <li>Envelope — #10 (9.5×4.125)</li>
+              <li>Thank You Card — 5×7</li>
+              <li>Referral Card — 5×7</li>
+            </ul>
+
+            <h3>Farming & Outreach (5)</h3>
+            <ul class="list">
+              <li>Just Listed Mailer — 5×7</li>
+              <li>Just Sold Mailer — 5×7</li>
+              <li>Neighborhood Intro Mailer — Letter (8.5×11)</li>
+              <li>Holiday Mailer — 5×7</li>
+              <li>Anniversary Mailer — 5×7</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="email">
+          <h2>Email</h2>
+          <div class="section-inner">
+            <p class="lead">10 email templates built for repeat campaigns (600px width).</p>
+            <ul class="list">
+              <li>New Listing Announcement (600px)</li>
+              <li>Open House Invitation (600px)</li>
+              <li>Price Reduction (600px)</li>
+              <li>Market Update (600px)</li>
+              <li>Buyer Education (600px)</li>
+              <li>Seller Education (600px)</li>
+              <li>Client Testimonial (600px)</li>
+              <li>Referral Ask (600px)</li>
+              <li>Holiday Message (600px)</li>
+              <li>General Newsletter (600px)</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="decks">
+          <h2>Presentations &amp; Decks</h2>
+          <div class="section-inner">
+            <p class="lead">9 decks (16:9) covering core sales, recruiting, and internal use cases.</p>
+            <ul class="list">
+              <li>Listing Presentation (16:9)</li>
+              <li>Buyer Consultation (16:9)</li>
+              <li>Recruiting Pitch (16:9)</li>
+              <li>Brokerage Overview (16:9)</li>
+              <li>Team Overview (16:9)</li>
+              <li>Market Update Deck (16:9)</li>
+              <li>Agent Onboarding Deck (16:9)</li>
+              <li>Training Overview (16:9)</li>
+              <li>Internal Strategy Deck (16:9)</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="governance">
+          <h2>Internal Ops &amp; Governance</h2>
+          <div class="section-inner">
+            <p class="lead">14 internal documents defining standards, enforcement, and usage rules.</p>
+            <ul class="list">
+              <li>Brand Standards Summary (8.5×11)</li>
+              <li>Logo Usage Rules (8.5×11)</li>
+              <li>Color Usage Rules (8.5×11)</li>
+              <li>Font Usage Rules (8.5×11)</li>
+              <li>Social Posting Rules (8.5×11)</li>
+              <li>Print Usage Rules (8.5×11)</li>
+              <li>Email Usage Rules (8.5×11)</li>
+              <li>Agent Marketing Do’s &amp; Don’ts (8.5×11)</li>
+              <li>Manager Enforcement Guide (8.5×11)</li>
+              <li>Template Duplication Rules (8.5×11)</li>
+              <li>File Naming Rules (8.5×11)</li>
+              <li>Compliance Reminder (8.5×11)</li>
+              <li>Internal FAQ (8.5×11)</li>
+              <li>Marketing Request Policy (8.5×11)</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="support">
+          <h2>Quick Start &amp; Support</h2>
+          <div class="section-inner">
+            <p class="lead">19 support documents covering orientation, setup, workflows, and troubleshooting.</p>
+
+            <h3>System Orientation (5)</h3>
+            <ul class="list">
+              <li>System Overview &amp; What’s Included (8.5×11)</li>
+              <li>How This System Is Meant to Be Used (8.5×11)</li>
+              <li>License &amp; Usage Summary (8.5×11)</li>
+              <li>System Map (Visual Overview) (8.5×11)</li>
+              <li>Recommended Build Order (8.5×11)</li>
+            </ul>
+
+            <h3>Quick Start Guides (6)</h3>
+            <ul class="list">
+              <li>Quick Start Overview (8.5×11)</li>
+              <li>System Setup Checklist (8.5×11)</li>
+              <li>Canva Folder Structure Guide (8.5×11)</li>
+              <li>How to Duplicate Templates (8.5×11)</li>
+              <li>How to Replace Images &amp; Text (8.5×11)</li>
+              <li>Export &amp; Download Guide (8.5×11)</li>
+            </ul>
+
+            <h3>Usage &amp; Workflows (4)</h3>
+            <ul class="list">
+              <li>Social Posting Workflow (8.5×11)</li>
+              <li>Print Ordering Workflow (8.5×11)</li>
+              <li>Email Usage Workflow (8.5×11)</li>
+              <li>Presentation Usage Workflow (8.5×11)</li>
+            </ul>
+
+            <h3>Support &amp; Troubleshooting (4)</h3>
+            <ul class="list">
+              <li>Common Mistakes &amp; Fixes (8.5×11)</li>
+              <li>Canva Permissions &amp; Access Guide (8.5×11)</li>
+              <li>Version Control &amp; File Safety Rules (8.5×11)</li>
+              <li>Support &amp; Escalation Guide (8.5×11)</li>
+            </ul>
+
+            <div class="actions" style="margin-top:16px;">
+              <a class="btn" href="/#access">Request Access</a>
+              <a class="btn subtle" href="/">Back to Main Page</a>
+            </div>
+          </div>
+        </section>
+
+        <div class="footer">
+          <div>© Operational Systems, LLC</div>
+          <div>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const topbar = document.getElementById('topbar');
+      const nav = document.getElementById('nav');
+
+      function getTopbarH(){
+        if (!topbar) return 52;
+        return Math.ceil(topbar.getBoundingClientRect().height);
+      }
+
+      function setTopbarH(){
+        const h = getTopbarH();
+        document.documentElement.style.setProperty('--topbarH', h + 'px');
+        return h;
+      }
+
+      setTopbarH();
+      requestAnimationFrame(setTopbarH);
+      window.addEventListener('load', setTopbarH);
+      window.addEventListener('resize', setTopbarH);
+
+      // Only intercept in-page anchor links (href="#...")
+      if (nav){
+        nav.addEventListener('click', (e) => {
+          const a = e.target.closest('a[href^="#"]');
+          if (!a) return;
+          // You currently don’t use in-page anchors on this page,
+          // but keeping this logic prevents regressions if you add them later.
+          e.preventDefault();
+          const id = a.getAttribute('href').slice(1);
+          const section = document.getElementById(id);
+          if (!section) return;
+
+          const heading = section.querySelector('h2') || section;
+          const gapRaw = getComputedStyle(document.documentElement).getPropertyValue('--anchorGap');
+          const gap = parseInt(gapRaw, 10) || 14;
+
+          const topbarH = setTopbarH();
+          const y = heading.getBoundingClientRect().top + window.pageYOffset - (topbarH + gap);
+          const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          window.scrollTo({ top: Math.max(0, y), behavior: prefersReduced ? 'auto' : 'smooth' });
+
+          history.pushState(null, '', '#' + id);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

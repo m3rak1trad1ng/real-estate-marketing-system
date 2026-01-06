@@ -127,6 +127,7 @@
       line-height: 1.7;
       color: var(--muted);
       font-weight: 500;
+      margin-bottom: 6px; /* ✅ tighten hero-to-index transition */
     }
 
     /* Buttons */
@@ -177,7 +178,7 @@
     section{ scroll-margin-top: calc(var(--topbarH) + var(--anchorGap)); }
 
     h2{
-      margin: 0 0 10px 0; /* ✅ tighter */
+      margin: 0 0 10px 0;
       font-size: 24px;
       line-height: 1.2;
       letter-spacing: -0.5px;
@@ -189,10 +190,10 @@
     h2::after{
       content:"";
       display:block;
-      width: 112px;              /* ✅ shorter */
+      width: 96px;                 /* ✅ shorter underline */
       height: 1px;
-      margin: 10px auto 0;       /* ✅ tighter */
-      background: rgba(15, 23, 42, 0.10); /* ✅ lighter */
+      margin: 10px auto 0;
+      background: rgba(15, 23, 42, 0.09); /* ✅ slightly lighter */
       border-radius: 999px;
     }
 
@@ -223,9 +224,9 @@
     }
 
     .counts{
-      margin-top: 6px; /* ✅ tighter */
-      color: rgba(71,85,105,.92); /* ✅ slightly more muted */
-      font-size: 13px; /* ✅ slightly smaller */
+      margin-top: 6px;
+      color: rgba(71,85,105,.92);
+      font-size: 13px;
       line-height: 1.6;
       text-align: center;
     }
@@ -275,12 +276,21 @@
       border-radius: 999px;
     }
 
-    /* ✅ Intro block divider after System Index text */
+    /* Intro block divider after System Index text */
     .intro-divider{
-      margin: 20px auto 0;
+      margin: 18px auto 0; /* ✅ slightly tighter */
       max-width: 78ch;
       height: 1px;
-      background: rgba(148,163,184,.38);
+      background: rgba(148,163,184,.40);
+      border-radius: 999px;
+    }
+
+    /* ✅ Transition divider between System Index intro and first inventory section */
+    .toc-transition{
+      margin: 22px auto 0;
+      max-width: 78ch;
+      height: 1px;
+      background: rgba(148,163,184,.45);
       border-radius: 999px;
     }
 
@@ -354,7 +364,6 @@
         <p class="hero-desc">
           This is the complete structural index of what’s included in the Real Estate Marketing System. It’s provided here so you can validate scope before purchase.
         </p>
-        <!-- ✅ top buttons removed -->
       </header>
 
       <main>
@@ -382,6 +391,7 @@
             </p>
 
             <div class="intro-divider" aria-hidden="true"></div>
+            <div class="toc-transition" aria-hidden="true"></div>
           </div>
         </section>
 

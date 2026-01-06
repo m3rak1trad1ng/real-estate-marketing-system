@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="A Canva-based marketing system designed to bring structure and consistency to real estate marketing by replacing fragmented, one-off materials with a single, repeatable standard.">
 
-  <!-- Modern, highly readable font -->
+  <!-- Font: Inter (modern + readable) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -20,18 +20,25 @@
       --muted2:#64748b;
       --line: #e2e8f0;
 
-      /* neutral button (no blue) */
-      --btnBg: #0f172a;
-      --btnBgHover: #111c33;
+      /* unified button (NOT blue, NOT black) */
+      --btnBg: #334155;          /* slate */
+      --btnBgHover: #1f2937;     /* deeper slate */
       --btnText: #ffffff;
-      --btnBorder: rgba(15,23,42,.10);
+      --btnBorder: rgba(15,23,42,.12);
 
       /* layout */
       --max: 980px;
+
+      /* sticky nav height (used to prevent anchor overlap) */
+      --topbarH: 56px;
     }
 
     *{ box-sizing: border-box; }
-    html{ scroll-behavior: smooth; }
+    html{
+      scroll-behavior: smooth;
+      /* prevents anchor jumps from hiding under sticky nav */
+      scroll-padding-top: calc(var(--topbarH) + 18px);
+    }
 
     body{
       margin: 0;
@@ -46,7 +53,7 @@
     .wrap{
       max-width: var(--max);
       margin: 0 auto;
-      padding: 30px 20px 90px; /* reduced top padding to tighten nav->hero gap */
+      padding: 30px 20px 90px;
     }
 
     /* Sticky jump nav */
@@ -61,7 +68,8 @@
     .topbar-inner{
       max-width: var(--max);
       margin: 0 auto;
-      padding: 8px 20px; /* slightly tighter */
+      padding: 8px 20px;
+      min-height: var(--topbarH);
       display:flex;
       align-items:center;
       justify-content: center;
@@ -86,15 +94,20 @@
       color: #0f172a;
     }
 
+    /* Fix anchor overlap even if browser ignores scroll-padding-top */
+    section{
+      scroll-margin-top: calc(var(--topbarH) + 18px);
+    }
+
     /* Hero */
     header{
-      padding-top: 0;     /* remove extra gap */
+      padding-top: 0;
       text-align: center;
-      margin-top: 10px;   /* small controlled spacing below nav */
+      margin-top: 10px;
     }
     h1{
       margin: 0 0 12px 0;
-      font-size: 46px;           /* stronger headline */
+      font-size: 46px;
       line-height: 1.08;
       letter-spacing: -1px;
       font-weight: 800;
@@ -103,13 +116,13 @@
     .hero-desc{
       margin: 0 auto 20px auto;
       max-width: 78ch;
-      font-size: 18px;           /* slightly larger for readability */
+      font-size: 18px;
       line-height: 1.7;
       color: var(--muted);
       font-weight: 500;
     }
 
-    /* Unified button (neutral, modern) */
+    /* Unified button (soft slate, modern) */
     .actions{
       display:flex;
       flex-wrap: wrap;
@@ -131,12 +144,12 @@
       background: var(--btnBg);
       color: var(--btnText);
       border: 1px solid var(--btnBorder);
-      box-shadow: 0 10px 24px rgba(15,23,42,.12);
+      box-shadow: 0 10px 24px rgba(15,23,42,.10);
       min-width: 0;
     }
     .btn:hover{
       background: var(--btnBgHover);
-      box-shadow: 0 12px 28px rgba(15,23,42,.14);
+      box-shadow: 0 12px 28px rgba(15,23,42,.12);
     }
 
     /* Sections: separation by spacing only */
@@ -152,20 +165,26 @@
       margin-top: 0;
     }
 
+    /* Center section headlines (per your request) */
     h2{
       margin: 0 0 12px 0;
       font-size: 24px;
       line-height: 1.2;
       letter-spacing: -0.5px;
-      font-weight: 800; /* clearer anchor */
+      font-weight: 800;
       color: #0b1220;
-      text-align: left;
+      text-align: center; /* CHANGED */
+    }
+
+    /* Center the section content block, but keep text readable inside (left aligned) */
+    .section-inner{
+      max-width: 78ch;
+      margin: 0 auto;
     }
 
     /* Leads: readable, not shouty */
     .lead{
       margin: 0 0 14px 0;
-      max-width: 78ch;
       font-size: 18px;
       line-height: 1.55;
       font-weight: 600;
@@ -176,18 +195,16 @@
     /* Normal paragraph */
     .prose{
       margin: 0;
-      max-width: 78ch;
       font-size: 16px;
       line-height: 1.75;
       color: var(--muted);
       text-align: left;
     }
 
-    /* Bullets: lightweight, scannable */
+    /* Bullets */
     ul.list{
       margin: 0;
       padding-left: 18px;
-      max-width: 78ch;
       color: var(--muted);
       font-size: 16px;
       line-height: 1.65;
@@ -197,7 +214,7 @@
     ul.list li::marker{ color: var(--muted2); }
 
     /* FAQ */
-    .faq-wrap{ max-width: 78ch; }
+    .faq-wrap{ max-width: 78ch; margin: 0 auto; }
     details{
       border: 1px solid var(--line);
       border-radius: 10px;
@@ -266,6 +283,7 @@
       .hero-desc{ font-size: 16px; }
       .btn{ width: 100%; }
       section{ padding-top: 28px; margin-top: 28px; }
+      :root{ --topbarH: 64px; } /* a touch taller when nav wraps */
     }
   </style>
 </head>
@@ -300,76 +318,94 @@
     <main>
       <section id="problem">
         <h2>The Problem It Solves</h2>
-        <p class="lead">
-          Most real estate marketing fails not because of effort—but because there is no system. This creates wasted time, inconsistent branding, and marketing that can’t scale beyond the person creating it.
-        </p>
-        <ul class="list">
-          <li>Every new listing or campaign starts from a different place</li>
-          <li>The same core pieces are rebuilt over and over</li>
-          <li>Marketing looks acceptable in isolation, but inconsistent across channels</li>
-          <li>Design decisions are revisited repeatedly instead of settled once</li>
-          <li>Marketing exists, but never becomes operationally repeatable</li>
-          <li>Multiple agents using different tools, layouts, and processes—resulting in inconsistent marketing and constant oversight</li>
-        </ul>
+        <div class="section-inner">
+          <p class="lead">
+            Most real estate marketing fails not because of effort—but because there is no system. This creates wasted time, inconsistent branding, and marketing that can’t scale beyond the person creating it.
+          </p>
+          <ul class="list">
+            <li>Every new listing or campaign starts from a different place</li>
+            <li>The same core pieces are rebuilt over and over</li>
+            <li>Marketing looks acceptable in isolation, but inconsistent across channels</li>
+            <li>Design decisions are revisited repeatedly instead of settled once</li>
+            <li>Marketing exists, but never becomes operationally repeatable</li>
+            <li>Multiple agents using different tools, layouts, and processes—resulting in inconsistent marketing and constant oversight</li>
+          </ul>
+        </div>
       </section>
 
       <section id="included">
         <h2>What’s Included</h2>
-        <p class="lead">
-          Delivered as a complete system of 130+ standardized base formats across social, email, and print—built for consistency, reuse, and scale without redesigning.
-        </p>
-        <p class="prose">
-          A complete, standardized marketing system that keeps teams, listings, and campaigns consistent—without redesigning or re-deciding every time.
-        </p>
-        <ul class="list" style="margin-top:14px;">
-          <li>Standardized social media formats for all major platform sizes</li>
-          <li>Email templates built for repeat campaigns and announcements</li>
-          <li>Print-ready formats for core real estate marketing materials</li>
-          <li>Defined margins and structural rules that maintain consistency</li>
-          <li>Fully editable Canva files built on established structural standards</li>
-          <li>Delivered as a unified system designed to work together</li>
-        </ul>
-        <div class="actions" style="margin-top:16px;">
-          <a class="btn" href="/table-of-contents">View Full System Table of Contents</a>
+        <div class="section-inner">
+          <p class="lead">
+            Delivered as a complete system of 130+ standardized base formats across social, email, and print—built for consistency, reuse, and scale without redesigning.
+          </p>
+
+          <p class="prose">
+            A complete, standardized marketing system that keeps teams, listings, and campaigns consistent—without redesigning or re-deciding every time.
+          </p>
+
+          <ul class="list" style="margin-top:14px;">
+            <li>Standardized social media formats for all major platform sizes</li>
+            <li>Email templates built for repeat campaigns and announcements</li>
+            <li>Print-ready formats for core real estate marketing materials</li>
+            <li>Defined margins and structural rules that maintain consistency</li>
+            <li>Fully editable Canva files built on established structural standards</li>
+            <li>Delivered as a unified system designed to work together</li>
+          </ul>
+
+          <div class="actions" style="margin-top:16px;">
+            <a class="btn" href="/table-of-contents">View Full System Table of Contents</a>
+          </a>
         </div>
       </section>
 
       <section id="for">
         <h2>Who This Is For</h2>
-        <p class="lead">
-          This system is built for real estate professionals who want marketing to operate as an internal system, not a recurring design project.
-        </p>
-        <p class="prose">
-          This is not about creative exploration. It’s about standardization, repeatability, and control.
-        </p>
-        <ul class="list" style="margin-top:14px;">
-          <li>Owners, managers, and team leads who need consistent marketing across agents, listings, and channels—without constant oversight</li>
-          <li>Brokerages that want one standard structure instead of reinventing every campaign</li>
-          <li>Independent agents who want marketing that looks intentional, professional, and unified—not improvised</li>
-          <li>Teams that want decisions made once and applied consistently—so execution stays fast and repeatable</li>
-        </ul>
+        <div class="section-inner">
+          <p class="lead">
+            This system is built for real estate professionals who want marketing to operate as an internal system, not a recurring design project.
+          </p>
+
+          <p class="prose">
+            This is not about creative exploration. It’s about standardization, repeatability, and control.
+          </p>
+
+          <ul class="list" style="margin-top:14px;">
+            <li>Owners, managers, and team leads who need consistent marketing across agents, listings, and channels—without constant oversight</li>
+            <li>Brokerages that want one standard structure instead of reinventing every campaign</li>
+            <li>Independent agents who want marketing that looks intentional, professional, and unified—not improvised</li>
+            <li>Teams that want decisions made once and applied consistently—so execution stays fast and repeatable</li>
+          </ul>
+        </div>
       </section>
 
       <section id="notfit">
         <h2>Not A Fit If:</h2>
-        <ul class="list">
-          <li>You expect a new custom design every time something is published</li>
-          <li>You prefer rebuilding layouts and revisiting design decisions for each campaign</li>
-          <li>You’re looking for individual templates rather than a defined, repeatable system</li>
-        </ul>
+        <div class="section-inner">
+          <ul class="list">
+            <li>You expect a new custom design every time something is published</li>
+            <li>You prefer rebuilding layouts and revisiting design decisions for each campaign</li>
+            <li>You’re looking for individual templates rather than a defined, repeatable system</li>
+          </ul>
+        </div>
       </section>
 
       <section id="access">
         <h2>Access &amp; Delivery</h2>
-        <p class="prose">Access is requested at checkout.</p>
-        <p class="prose" style="margin-top:12px;">
-          The system is delivered as a complete, organized set of ready-to-use Canva files. Each base format can be duplicated and applied right away.
-        </p>
-        <p class="prose" style="margin-top:12px;">
-          All structural rules, margins, and standards are included up front so marketing can be executed consistently without rebuilding layouts or making new design decisions.
-        </p>
-        <div class="actions" style="margin-top:16px;">
-          <a class="btn" href="#top-cta">Request Access</a>
+        <div class="section-inner">
+          <p class="prose">Access is requested at checkout.</p>
+
+          <p class="prose" style="margin-top:12px;">
+            The system is delivered as a complete, organized set of ready-to-use Canva files. Each base format can be duplicated and applied right away.
+          </p>
+
+          <p class="prose" style="margin-top:12px;">
+            All structural rules, margins, and standards are included up front so marketing can be executed consistently without rebuilding layouts or making new design decisions.
+          </p>
+
+          <div class="actions" style="margin-top:16px;">
+            <a class="btn" href="#top-cta">Request Access</a>
+          </div>
         </div>
       </section>
 
@@ -430,7 +466,7 @@
             <summary>How long does it take to get set up? <span class="chev" aria-hidden="true"></span></summary>
             <div class="answer">
               Initial setup is handled once by management. This typically involves duplicating the system, applying branding, and defining internal usage. After that, agents can use the system immediately.
-            </div>
+              </div>
           </details>
 
           <details>

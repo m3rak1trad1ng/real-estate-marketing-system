@@ -104,15 +104,10 @@
       overflow: clip;
     }
 
-    .wrap{
-      padding: 18px 24px 28px;
-    }
+    .wrap{ padding: 18px 24px 28px; }
 
     /* Hero */
-    header{
-      text-align: center;
-      margin-top: 4px;
-    }
+    header{ text-align: center; margin-top: 4px; }
     h1{
       margin: 0 0 10px 0;
       font-size: 46px;
@@ -171,13 +166,9 @@
 
     /* Sections */
     main{ margin-top: 20px; }
-
     section{ margin-top: 38px; }
     section:first-of-type{ margin-top: 20px; }
-
-    section{
-      scroll-margin-top: calc(var(--topbarH) + var(--anchorGap));
-    }
+    section{ scroll-margin-top: calc(var(--topbarH) + var(--anchorGap)); }
 
     h2{
       margin: 0 0 14px 0;
@@ -247,7 +238,7 @@
       color: var(--muted);
       font-size: 14px;
       line-height: 1.6;
-      text-align: left;
+      text-align: center; /* ✅ centered per your note */
     }
     .counts strong{ color: #0f172a; }
 
@@ -262,9 +253,7 @@
       page-break-inside: avoid;
     }
     @media (max-width: 820px){
-      ul.list.two-col{
-        column-count: 1;
-      }
+      ul.list.two-col{ column-count: 1; }
     }
 
     /* Footer */
@@ -289,10 +278,7 @@
     .footer a:hover{ text-decoration: underline; }
 
     @media (max-width: 820px){
-      .page-frame{
-        margin: 12px 12px 18px;
-        border-radius: 16px;
-      }
+      .page-frame{ margin: 12px 12px 18px; border-radius: 16px; }
       .wrap{ padding: 16px 16px 30px; }
       h1{ font-size: 32px; letter-spacing: -0.7px; }
       .hero-desc{ font-size: 16px; }
@@ -362,23 +348,18 @@
               <li>Coming Soon — Square (1080×1080)</li>
               <li>Coming Soon — Portrait (1080×1350)</li>
               <li>Coming Soon — Story (1080×1920)</li>
-
               <li>Just Listed — Square (1080×1080)</li>
               <li>Just Listed — Portrait (1080×1350)</li>
               <li>Just Listed — Story (1080×1920)</li>
-
               <li>Open House — Square (1080×1080)</li>
               <li>Open House — Portrait (1080×1350)</li>
               <li>Open House — Story (1080×1920)</li>
-
               <li>Price Reduced — Square (1080×1080)</li>
               <li>Price Reduced — Portrait (1080×1350)</li>
               <li>Price Reduced — Story (1080×1920)</li>
-
               <li>Under Contract — Square (1080×1080)</li>
               <li>Under Contract — Portrait (1080×1350)</li>
               <li>Under Contract — Story (1080×1920)</li>
-
               <li>Sold / Closed — Square (1080×1080)</li>
               <li>Sold / Closed — Portrait (1080×1350)</li>
               <li>Sold / Closed — Story (1080×1920)</li>
@@ -422,7 +403,7 @@
             <p class="lead">28 print-ready templates covering core real estate marketing materials.</p>
 
             <h3>Property Marketing — Flyers (6)</h3>
-            <ul class="list">
+            <ul class="list two-col">
               <li>Property Flyer — Letter (8.5×11)</li>
               <li>Property Flyer — Half Sheet (5.5×8.5)</li>
               <li>Open House Flyer — Letter (8.5×11)</li>
@@ -432,7 +413,7 @@
             </ul>
 
             <h3>Postcards / Mailers (4)</h3>
-            <ul class="list">
+            <ul class="list two-col">
               <li>Property Postcard — 4×6</li>
               <li>Property Postcard — 5×7</li>
               <li>Neighborhood Mailer — 5×7</li>
@@ -440,7 +421,7 @@
             </ul>
 
             <h3>Signage (6)</h3>
-            <ul class="list">
+            <ul class="list two-col">
               <li>Yard Sign — Listing — 18×24</li>
               <li>Open House Sign — 18×24</li>
               <li>Directional Sign — 12×18</li>
@@ -455,7 +436,7 @@
             </ul>
 
             <h3>Business Identity (6)</h3>
-            <ul class="list">
+            <ul class="list two-col">
               <li>Business Card — Front (3.5×2)</li>
               <li>Business Card — Back (3.5×2)</li>
               <li>Letterhead (8.5×11)</li>
@@ -464,8 +445,8 @@
               <li>Referral Card — 5×7</li>
             </ul>
 
-            <h3>Farming &amp; Outreach (5)</h3>
-            <ul class="list">
+            <h3>Client Outreach (5)</h3>
+            <ul class="list two-col">
               <li>Just Listed Mailer — 5×7</li>
               <li>Just Sold Mailer — 5×7</li>
               <li>Neighborhood Intro Mailer — Letter (8.5×11)</li>
@@ -596,18 +577,15 @@
   <script>
     (function(){
       const topbar = document.getElementById('topbar');
-
       function getTopbarH(){
         if (!topbar) return 52;
         return Math.ceil(topbar.getBoundingClientRect().height);
       }
-
       function setTopbarH(){
         const h = getTopbarH();
         document.documentElement.style.setProperty('--topbarH', h + 'px');
         return h;
       }
-
       setTopbarH();
       requestAnimationFrame(setTopbarH);
       window.addEventListener('load', setTopbarH);

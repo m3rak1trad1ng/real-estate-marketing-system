@@ -13,36 +13,34 @@
 
   <style>
     :root{
-      /* Background recommendation (not harsh white) */
-      --bg: #e7edf5;            /* main background */
-      --frame: #f4f7fb;         /* content rectangle background */
-      --frameBorder: rgba(148,163,184,.38);
+      /* MAKE IT OBVIOUS (higher contrast) */
+      --bg: #cfd8e6;                 /* clearly darker outer background */
+      --frame: #ffffff;              /* clearly lighter inner rectangle */
+      --frameBorder: rgba(71, 85, 105, .30); /* stronger border */
+      --frameShadow: 0 26px 70px rgba(15, 23, 42, .18);
 
       --text: #0f172a;
       --muted: #475569;
       --muted2:#64748b;
-      --line: rgba(148,163,184,.35);
+      --line: rgba(148,163,184,.45);
 
-      /* CTA color (kept teal; easy to read + not “90s blue”) */
+      /* unified button style */
       --accent: #0f766e;
       --accentHover: #115e59;
       --accentText: #ffffff;
 
       --max: 980px;
 
-      /* Sticky nav height fallback; JS measures real height */
+      /* sticky nav height fallback; JS measures real height */
       --topbarH: 52px;
 
-      /* How much space to leave between sticky nav and section headline */
-      --anchorGap: 12px;
+      /* consistent landing gap under nav */
+      --anchorGap: 14px;
     }
 
     *{ box-sizing: border-box; }
 
-    html{
-      scroll-behavior: smooth;
-    }
-
+    html{ scroll-behavior: smooth; }
     @media (prefers-reduced-motion: reduce){
       html{ scroll-behavior: auto; }
       *{ transition: none !important; }
@@ -62,14 +60,14 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(231,237,245,.90);
+      background: rgba(207,216,230,.92);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
     }
     .topbar-inner{
       max-width: var(--max);
       margin: 0 auto;
-      padding: 6px 18px;
+      padding: 8px 18px;
       min-height: var(--topbarH);
       display:flex;
       align-items:center;
@@ -87,38 +85,38 @@
       color: rgba(15,23,42,.72);
       text-decoration: none;
       font-weight: 650;
-      padding: 6px 8px;
-      border-radius: 10px;
+      padding: 7px 10px;
+      border-radius: 999px;
       transition: background .12s ease, color .12s ease;
     }
     .nav a:hover{
-      background: rgba(15,23,42,.06);
+      background: rgba(15,23,42,.08);
       color: rgba(15,23,42,.92);
     }
     .nav a.active{
-      background: rgba(15,118,110,.14);
-      color: rgba(15,118,110,.95);
+      background: rgba(15,118,110,.16);
+      color: rgba(15,118,110,.98);
     }
 
-    /* One single page container (content rectangle) */
+    /* One obvious content rectangle */
     .page-frame{
       max-width: var(--max);
-      margin: 14px auto 0;
+      margin: 16px auto 28px;
       background: var(--frame);
       border: 1px solid var(--frameBorder);
-      border-radius: 18px;
-      box-shadow: 0 18px 52px rgba(15,23,42,.08);
+      border-radius: 20px;
+      box-shadow: var(--frameShadow);
       overflow: clip;
     }
 
     .wrap{
-      padding: 20px 22px 84px;
+      padding: 22px 24px 88px;
     }
 
     /* Hero */
     header{
       text-align: center;
-      margin-top: 6px;
+      margin-top: 8px;
     }
     h1{
       margin: 0 0 10px 0;
@@ -158,34 +156,33 @@
       text-decoration: none;
       background: var(--accent);
       color: var(--accentText);
-      border: 1px solid rgba(0,0,0,.06);
-      box-shadow: 0 12px 26px rgba(15,118,110,.20);
+      border: 1px solid rgba(0,0,0,.08);
+      box-shadow: 0 14px 30px rgba(15,118,110,.22);
       transition: transform .06s ease, box-shadow .12s ease, background .12s ease;
       min-width: 0;
     }
     .btn:hover{
       background: var(--accentHover);
-      box-shadow: 0 14px 30px rgba(15,118,110,.24);
+      box-shadow: 0 16px 34px rgba(15,118,110,.26);
     }
     .btn:active{ transform: translateY(1px); }
 
     .btn.subtle{
-      box-shadow: 0 10px 22px rgba(15,23,42,.12);
-    }
-    .btn.subtle:hover{
       box-shadow: 0 12px 26px rgba(15,23,42,.14);
     }
+    .btn.subtle:hover{
+      box-shadow: 0 14px 30px rgba(15,23,42,.16);
+    }
 
-    /* Section rhythm */
+    /* Section rhythm (FIX UNEVEN ANCHORS):
+       remove section padding-top; use margins only so headings align consistently */
     main{ margin-top: 30px; }
 
     section{
-      padding: 34px 0 0;
-      margin: 34px 0 0;
+      margin-top: 40px;
     }
     section:first-of-type{
-      padding-top: 0;
-      margin-top: 0;
+      margin-top: 26px; /* small gap under hero, consistent */
     }
 
     h2{
@@ -229,7 +226,7 @@
       text-align: left;
     }
     ul.list li{ margin: 8px 0; }
-    ul.list li::marker{ color: rgba(100,116,139,.75); }
+    ul.list li::marker{ color: rgba(100,116,139,.78); }
 
     /* FAQ */
     .faq-wrap{
@@ -237,11 +234,11 @@
       margin: 0 auto;
     }
     details{
-      border: 1px solid rgba(148,163,184,.42);
+      border: 1px solid rgba(148,163,184,.55);
       border-radius: 12px;
       padding: 12px 12px;
       margin-bottom: 10px;
-      background: rgba(255,255,255,.55);
+      background: #ffffff;
     }
     summary{
       cursor: pointer;
@@ -278,9 +275,9 @@
 
     /* Footer */
     .footer{
-      margin-top: 52px;
+      margin-top: 56px;
       padding-top: 18px;
-      border-top: 1px solid rgba(148,163,184,.35);
+      border-top: 1px solid rgba(148,163,184,.45);
       display:flex;
       flex-wrap: wrap;
       gap: 10px 18px;
@@ -298,19 +295,22 @@
     .footer a:hover{ text-decoration: underline; }
 
     @media (max-width: 820px){
-      .page-frame{ margin-top: 10px; border-radius: 14px; }
+      .page-frame{
+        margin: 12px 12px 22px;
+        border-radius: 16px;
+      }
       .wrap{ padding: 18px 16px 76px; }
       h1{ font-size: 32px; letter-spacing: -0.7px; }
       .hero-desc{ font-size: 16px; }
       .btn{ width: 100%; }
-      section{ padding-top: 28px; margin-top: 28px; }
+      section{ margin-top: 34px; }
     }
   </style>
 </head>
 
 <body>
   <div class="topbar" id="topbar">
-    <div class="topbar-inner">
+    <div class="topbar-inner" id="topbar-inner">
       <nav class="nav" aria-label="Section navigation" id="nav">
         <a href="#problem">The Problem It Solves</a>
         <a href="#included">What’s Included</a>
@@ -555,7 +555,7 @@
       });
 
       // Measure sticky nav height and store in CSS var
-      const topbarInner = document.querySelector('.topbar-inner');
+      const topbarInner = document.getElementById('topbar-inner');
       function setTopbarH(){
         if (!topbarInner) return;
         const h = Math.ceil(topbarInner.getBoundingClientRect().height);
@@ -566,18 +566,20 @@
       window.addEventListener('load', setTopbarH);
       window.addEventListener('resize', setTopbarH);
 
-      // Reliable anchor scrolling with offset (fixes headline clipping)
+      // CONSISTENT anchor landing: always scroll to the section's H2 (not the section top)
       function scrollToHash(hash, pushState){
         const id = (hash || "").replace('#','');
         if (!id) return;
 
-        const target = document.getElementById(id);
-        if (!target) return;
+        const section = document.getElementById(id);
+        if (!section) return;
+
+        const heading = section.querySelector('h2') || section;
 
         const topbarH = Math.ceil(topbarInner ? topbarInner.getBoundingClientRect().height : 52);
-        const gap = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--anchorGap'), 10) || 12;
+        const gap = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--anchorGap'), 10) || 14;
 
-        const y = target.getBoundingClientRect().top + window.pageYOffset - (topbarH + gap);
+        const y = heading.getBoundingClientRect().top + window.pageYOffset - (topbarH + gap);
 
         const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         window.scrollTo({ top: Math.max(0, y), behavior: prefersReduced ? 'auto' : 'smooth' });
@@ -585,7 +587,7 @@
         if (pushState) history.pushState(null, '', '#' + id);
       }
 
-      // Intercept nav clicks and scroll with correct offset
+      // Intercept nav clicks (so all anchors land the same)
       const nav = document.getElementById('nav');
       if (nav){
         nav.addEventListener('click', (e) => {
@@ -598,16 +600,15 @@
 
       // If page loads with a hash, scroll to it with offset
       if (location.hash){
-        // allow layout to settle
         setTimeout(() => scrollToHash(location.hash, false), 0);
       }
 
-      // If back/forward changes hash, handle it
+      // Back/forward
       window.addEventListener('popstate', () => {
         if (location.hash) scrollToHash(location.hash, false);
       });
 
-      // Scrollspy active nav link
+      // Scrollspy active nav link (unchanged behavior)
       const navLinks = Array.from(document.querySelectorAll('.nav a'));
       const sections = navLinks
         .map(a => document.querySelector(a.getAttribute('href')))

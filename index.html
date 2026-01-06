@@ -13,7 +13,7 @@
 
   <style>
     :root{
-      /* Slightly deeper + duller (less glare, more obvious frame contrast) */
+      /* Deeper + duller (less glare) */
       --bg: #c9cdd3;
       --frame: #e9edf2;
       --frameBorder: rgba(15, 23, 42, 0.32);
@@ -97,7 +97,7 @@
     /* Content frame */
     .page-frame{
       max-width: var(--max);
-      margin: 16px auto 28px;
+      margin: 16px auto 24px;
       background: var(--frame);
       border: 1px solid var(--frameBorder);
       border-radius: 20px;
@@ -106,18 +106,18 @@
     }
 
     .wrap{
-      padding: 20px 24px 72px; /* reduced bottom padding */
+      padding: 18px 24px 44px; /* reduced bottom padding */
     }
 
-    /* Spacer ONLY to help last section anchor—kept small */
+    /* Small spacer ONLY to allow last anchor to land (not a giant empty page) */
     .end-spacer{
-      height: calc(var(--topbarH) + 120px);
+      height: calc(var(--topbarH) + 24px);
     }
 
     /* Hero */
     header{
       text-align: center;
-      margin-top: 6px;
+      margin-top: 4px;
     }
     h1{
       margin: 0 0 10px 0;
@@ -128,7 +128,7 @@
       color: #0b1220;
     }
     .hero-desc{
-      margin: 0 auto 14px auto;
+      margin: 0 auto 12px auto;
       max-width: 78ch;
       font-size: 18px;
       line-height: 1.7;
@@ -175,12 +175,12 @@
       box-shadow: 0 14px 30px rgba(15,23,42,.16);
     }
 
-    /* Sections (weighted rhythm) */
-    main{ margin-top: 22px; }
+    /* Sections (tightened rhythm) */
+    main{ margin-top: 20px; }
 
-    section{ margin-top: 44px; }
-    section:first-of-type{ margin-top: 22px; } /* tighter hero -> first section */
-    #faq{ margin-top: 56px; } /* more lead-in to FAQ */
+    section{ margin-top: 38px; }
+    section:first-of-type{ margin-top: 20px; }
+    #faq{ margin-top: 48px; }
 
     h2{
       margin: 0 0 14px 0;
@@ -193,15 +193,15 @@
       position: relative;
     }
 
-    /* Subtle anchor underline to aid scanning */
+    /* Neutral, typographic rule (not green, not decorative) */
     h2::after{
       content:"";
       display:block;
-      width: 56px;
-      height: 3px;
-      margin: 10px auto 0;
+      width: 140px;
+      height: 1px;
+      margin: 12px auto 0;
+      background: rgba(15, 23, 42, 0.14);
       border-radius: 999px;
-      background: rgba(15,118,110,.30);
     }
 
     .section-inner{
@@ -247,7 +247,7 @@
       border-radius: 12px;
       padding: 12px 12px;
       margin-bottom: 10px;
-      background: rgba(255,255,255,.92); /* slightly dulled, less stark */
+      background: rgba(255,255,255,.92);
     }
     summary{
       cursor: pointer;
@@ -282,10 +282,10 @@
       max-width: 76ch;
     }
 
-    /* Footer */
+    /* Footer (tightened) */
     .footer{
-      margin-top: 52px;
-      padding-top: 18px;
+      margin-top: 34px; /* reduced */
+      padding-top: 16px;
       border-top: 1px solid rgba(148,163,184,.45);
       display:flex;
       flex-wrap: wrap;
@@ -305,16 +305,18 @@
 
     @media (max-width: 820px){
       .page-frame{
-        margin: 12px 12px 22px;
+        margin: 12px 12px 18px;
         border-radius: 16px;
       }
-      .wrap{ padding: 18px 16px 86px; }
+      .wrap{ padding: 16px 16px 48px; }
       h1{ font-size: 32px; letter-spacing: -0.7px; }
       .hero-desc{ font-size: 16px; }
       .btn{ width: 100%; }
-      section{ margin-top: 36px; }
-      #faq{ margin-top: 46px; }
-      .end-spacer{ height: calc(var(--topbarH) + 140px); }
+      section{ margin-top: 34px; }
+      #faq{ margin-top: 42px; }
+      h2::after{ width: 110px; }
+      .end-spacer{ height: calc(var(--topbarH) + 26px); }
+      .footer{ margin-top: 28px; }
     }
   </style>
 </head>

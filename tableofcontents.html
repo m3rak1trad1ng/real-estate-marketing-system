@@ -238,7 +238,7 @@
       color: var(--muted);
       font-size: 14px;
       line-height: 1.6;
-      text-align: center; /* ✅ centered per your note */
+      text-align: center; /* ✅ centered */
     }
     .counts strong{ color: #0f172a; }
 
@@ -254,6 +254,15 @@
     }
     @media (max-width: 820px){
       ul.list.two-col{ column-count: 1; }
+    }
+
+    /* Optional subtle divider between major sections */
+    .section-divider{
+      margin: 26px auto 0;
+      max-width: 78ch;
+      height: 1px;
+      background: rgba(148,163,184,.45);
+      border-radius: 999px;
     }
 
     /* Footer */
@@ -323,10 +332,7 @@
           <h2>System Index</h2>
           <div class="section-inner">
             <p class="lead">Total included files: <strong>116</strong></p>
-            <p class="prose">
-              Organized into standard, reusable base formats across social, print, email, presentations, and internal governance.
-              Each item below represents a base format intended to be duplicated and reused across listings and campaigns.
-            </p>
+
             <p class="counts" style="margin-top:10px;">
               <strong>Social:</strong> 36 &nbsp;·&nbsp;
               <strong>Print:</strong> 28 &nbsp;·&nbsp;
@@ -334,6 +340,14 @@
               <strong>Presentations:</strong> 9 &nbsp;·&nbsp;
               <strong>Governance:</strong> 14 &nbsp;·&nbsp;
               <strong>Quick Start &amp; Support:</strong> 19
+            </p>
+
+            <p class="prose" style="margin-top:10px;">
+              Each item below is a standardized base format (not a finished design). Formats are meant to be duplicated and reused across listings and campaigns while keeping structure consistent.
+            </p>
+
+            <p class="prose" style="margin-top:10px;">
+              Many formats are labeled by common use case (e.g., “Buyer Tips”), but the underlying structures are reusable and can be repurposed for any similar content type after initial setup.
             </p>
           </div>
         </section>
@@ -394,6 +408,8 @@
               <li>Recruiting — Square (1080×1080)</li>
               <li>Recruiting — Portrait (1080×1350)</li>
             </ul>
+
+            <div class="section-divider" aria-hidden="true"></div>
           </div>
         </section>
 
@@ -430,11 +446,6 @@
               <li>Window / Event Sign — 18×24</li>
             </ul>
 
-            <h3>Door-to-Door Outreach (1)</h3>
-            <ul class="list">
-              <li>Door Hanger — 3.5×8.5</li>
-            </ul>
-
             <h3>Business Identity (6)</h3>
             <ul class="list two-col">
               <li>Business Card — Front (3.5×2)</li>
@@ -453,6 +464,14 @@
               <li>Holiday Mailer — 5×7</li>
               <li>Anniversary Mailer — 5×7</li>
             </ul>
+
+            <!-- ✅ moved to bottom of Print for balance -->
+            <h3>Door-to-Door Outreach (1)</h3>
+            <ul class="list">
+              <li>Door Hanger — 3.5×8.5</li>
+            </ul>
+
+            <div class="section-divider" aria-hidden="true"></div>
           </div>
         </section>
 
@@ -472,6 +491,8 @@
               <li>Holiday Message (600px)</li>
               <li>General Newsletter (600px)</li>
             </ul>
+
+            <div class="section-divider" aria-hidden="true"></div>
           </div>
         </section>
 
@@ -490,6 +511,8 @@
               <li>Training Overview (16:9)</li>
               <li>Internal Strategy Deck (16:9)</li>
             </ul>
+
+            <div class="section-divider" aria-hidden="true"></div>
           </div>
         </section>
 
@@ -513,6 +536,8 @@
               <li>Internal FAQ (8.5×11)</li>
               <li>Marketing Request Policy (8.5×11)</li>
             </ul>
+
+            <div class="section-divider" aria-hidden="true"></div>
           </div>
         </section>
 
@@ -555,6 +580,10 @@
               <li>Version Control &amp; File Safety Rules (8.5×11)</li>
               <li>Support &amp; Escalation Guide (8.5×11)</li>
             </ul>
+
+            <p class="prose" style="margin-top:14px;">
+              This table reflects the full system as delivered. No subscriptions. No required updates.
+            </p>
 
             <div class="actions" style="margin-top:16px;">
               <a class="btn" href="index.html#access">Request Access</a>

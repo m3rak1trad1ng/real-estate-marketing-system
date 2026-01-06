@@ -123,11 +123,11 @@
     .hero-desc{
       margin: 0 auto 0 auto;
       max-width: 78ch;
-      font-size: 18px;
-      line-height: 1.7;
+      font-size: 20px;          /* UPDATED: was 18px */
+      line-height: 1.65;        /* UPDATED: was 1.7 */
       color: var(--muted);
       font-weight: 500;
-      margin-bottom: 6px;
+      margin-bottom: 10px;      /* UPDATED: was 6px */
     }
 
     /* Buttons */
@@ -221,6 +221,18 @@
       line-height: 1.75;
       color: var(--muted);
       text-align: left;
+    }
+
+    /* UPDATED: Larger System Index intro copy */
+    .toc-intro-copy{
+      margin: 0;
+      font-size: 18px;          /* NEW (was effectively 16px via .prose) */
+      line-height: 1.65;
+      color: var(--muted);
+      text-align: center;
+      max-width: 70ch;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     /* (Top-of-page numeric breakdown removed per request) */
@@ -338,7 +350,7 @@
       .page-frame{ margin: 12px 12px 18px; border-radius: 16px; }
       .wrap{ padding: 16px 16px 30px; }
       h1{ font-size: 32px; letter-spacing: -0.7px; }
-      .hero-desc{ font-size: 16px; }
+      .hero-desc{ font-size: 18px; }  /* UPDATED: was 16px */
       .btn{ width: 100%; }
       section{ margin-top: 34px; }
       .footer{ margin-top: 28px; }
@@ -377,12 +389,12 @@
 
             <!-- Top summary counts removed per request -->
 
-            <!-- ✅ centered + constrained + copy locked -->
-            <p class="prose" style="margin-top:10px; text-align:center; max-width:70ch; margin-left:auto; margin-right:auto; line-height:1.65;">
+            <!-- ✅ centered + constrained + copy locked (UPDATED SIZE) -->
+            <p class="toc-intro-copy" style="margin-top:10px;">
               Each item below represents a standardized base format intended to be duplicated and reused across listings and campaigns, with structural decisions made once and applied consistently.
             </p>
 
-            <p class="prose" style="margin-top:8px; text-align:center; max-width:70ch; margin-left:auto; margin-right:auto; line-height:1.65;">
+            <p class="toc-intro-copy" style="margin-top:8px;">
               Many formats are labeled by common use case (e.g., “Buyer Tips”), but the underlying structures are reusable and can be repurposed for any similar content type after initial setup.
             </p>
 

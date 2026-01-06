@@ -108,9 +108,9 @@
       padding: 22px 24px 140px;
     }
 
-    /* Spacer so last section can land cleanly */
+    /* BIG spacer so FAQ (last section) can land perfectly */
     .end-spacer{
-      height: calc(var(--topbarH) + 160px);
+      height: calc(var(--topbarH) + 520px);
     }
 
     /* Hero */
@@ -299,7 +299,7 @@
       .hero-desc{ font-size: 16px; }
       .btn{ width: 100%; }
       section{ margin-top: 34px; }
-      .end-spacer{ height: calc(var(--topbarH) + 190px); }
+      .end-spacer{ height: calc(var(--topbarH) + 560px); }
     }
   </style>
 </head>
@@ -574,7 +574,7 @@
         return Number.isFinite(n) ? n : 14;
       }
 
-      // CONSISTENT anchor landing: scroll to H2, then apply FAQ-only nudge
+      // Scroll to H2 consistently (no FAQ special-case)
       function scrollToHash(hash, pushState){
         const id = (hash || "").replace('#','');
         if (!id) return;
@@ -587,11 +587,7 @@
         const topbarH = setTopbarH();
         const gap = getAnchorGap();
 
-        // Base position
-        let y = heading.getBoundingClientRect().top + window.pageYOffset - (topbarH + gap);
-
-        // FAQ-only: nudge downward so it doesn't show previous section content
-        if (id === 'faq') y += 220;
+        const y = heading.getBoundingClientRect().top + window.pageYOffset - (topbarH + gap);
 
         const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         window.scrollTo({ top: Math.max(0, y), behavior: prefersReduced ? 'auto' : 'smooth' });

@@ -232,15 +232,19 @@
     }
     .counts strong{ color: #0f172a; }
 
-    /* ✅ Total line styled to match header hierarchy (RECENT UPDATE APPLIED) */
+    /* ✅ Total line styled as metadata (OPTION A APPLIED) */
     .toc-total{
-      margin: 0 0 6px 0;
-      font-size: 14px;               /* was 15px */
+      margin: 0 0 10px 0;            /* more breathing room under it */
+      font-size: 13px;               /* smaller than before */
       line-height: 1.4;
-      font-weight: 800;
-      color: rgba(15,23,42,.88);     /* slightly softened */
+      font-weight: 700;              /* less “headline” */
+      color: rgba(71,85,105,.92);    /* same family as counts */
       text-align: center;
-      letter-spacing: .1px;
+      letter-spacing: 0;
+    }
+    .toc-total strong{
+      color: inherit;                 /* keeps 116 consistent with the line */
+      font-weight: 800;               /* still slightly emphasized */
     }
 
     h3{

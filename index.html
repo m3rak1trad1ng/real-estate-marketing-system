@@ -13,7 +13,6 @@
 
   <style>
     :root{
-      /* Deeper + duller (less glare) */
       --bg: #c9cdd3;
       --frame: #e9edf2;
       --frameBorder: rgba(15, 23, 42, 0.32);
@@ -106,7 +105,7 @@
     }
 
     .wrap{
-      padding: 18px 24px 28px; /* tighter bottom padding (no spacer hack now) */
+      padding: 18px 24px 28px;
     }
 
     /* Hero */
@@ -170,12 +169,17 @@
       box-shadow: 0 14px 30px rgba(15,23,42,.16);
     }
 
-    /* Sections (tightened rhythm) */
+    /* Sections */
     main{ margin-top: 20px; }
 
     section{ margin-top: 38px; }
     section:first-of-type{ margin-top: 20px; }
     #faq{ margin-top: 48px; }
+
+    /* ✅ Make the anchor itself respect the sticky header */
+    section{
+      scroll-margin-top: calc(var(--topbarH) + var(--anchorGap));
+    }
 
     h2{
       margin: 0 0 14px 0;
@@ -186,12 +190,8 @@
       color: #0b1220;
       text-align: center;
       position: relative;
-
-      /* ✅ This replaces the need for a giant bottom spacer */
-      scroll-margin-top: calc(var(--topbarH) + var(--anchorGap));
     }
 
-    /* Neutral rule under H2 (kept) */
     h2::after{
       content:"";
       display:block;
@@ -240,16 +240,13 @@
       max-width: 78ch;
       margin: 0 auto;
     }
-
-    /* ✅ Less white, closer to frame */
     details{
       border: 1px solid rgba(148,163,184,.58);
       border-radius: 12px;
       padding: 12px 12px;
       margin-bottom: 10px;
-      background: rgba(233, 237, 242, 0.92); /* blends with frame */
+      background: rgba(233, 237, 242, 0.92);
     }
-
     summary{
       cursor: pointer;
       list-style: none;
@@ -284,7 +281,7 @@
       max-width: 76ch;
     }
 
-    /* Footer (tightened) */
+    /* Footer */
     .footer{
       margin-top: 34px;
       padding-top: 16px;
@@ -558,6 +555,13 @@
 
   <script>
     (function(){
+      const topbar = document.getElementById('topbar');
+      const nav = document.getElementById('nav');
+      const navLinks = Array.from(document.querySelectorAll('.nav a'));
+      const sections = navLinks
+        .map(a => document.querySelector(a.getAttribute('href')))
+        .filter(Boolean);
+
       // FAQ: only one open at a time
       const allFaq = Array.from(document.querySelectorAll('#faq details'));
       allFaq.forEach(d => {
@@ -567,47 +571,99 @@
         });
       });
 
-      const topbar = document.getElementById('topbar');
-
       function getTopbarH(){
         if (!topbar) return 52;
         return Math.ceil(topbar.getBoundingClientRect().height);
       }
+
       function setTopbarH(){
         const h = getTopbarH();
         document.documentElement.style.setProperty('--topbarH', h + 'px');
         return h;
       }
 
+      function getAnchorGap(){
+        const raw = getComputedStyle(document.documentElement).getPropertyValue('--anchorGap');
+        const n = parseInt(raw, 10);
+        return Number.isFinite(n) ? n : 14;
+      }
+
+      // ✅ Precise scroll to the H2 inside each section (fixes “nav is fucked”)
+      function scrollToSection(id, pushState){
+        const section = document.getElementById(id);
+        if (!section) return;
+
+        const heading = section.querySelector('h2') || section;
+
+        const topbarH = setTopbarH();
+        const gap = getAnchorGap();
+        const y = heading.getBoundingClientRect().top + window.pageYOffset - (topbarH + gap);
+
+        const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: Math.max(0, y), behavior: prefersReduced ? 'auto' : 'smooth' });
+
+        if (pushState) history.pushState(null, '', '#' + id);
+      }
+
+      // Intercept nav clicks to ensure consistent landing
+      if (nav){
+        nav.addEventListener('click', (e) => {
+          const a = e.target.closest('a[href^="#"]');
+          if (!a) return;
+          e.preventDefault();
+          const id = a.getAttribute('href').slice(1);
+          scrollToSection(id, true);
+        });
+      }
+
+      // Load hash
       setTopbarH();
       requestAnimationFrame(setTopbarH);
       window.addEventListener('load', setTopbarH);
-      window.addEventListener('resize', setTopbarH);
 
-      // Scrollspy active nav link
-      const navLinks = Array.from(document.querySelectorAll('.nav a'));
-      const sections = navLinks
-        .map(a => document.querySelector(a.getAttribute('href')))
-        .filter(Boolean);
+      if (location.hash){
+        const id = location.hash.slice(1);
+        setTimeout(() => scrollToSection(id, false), 0);
+      }
 
-      const linkById = new Map(navLinks.map(a => [a.getAttribute('href').slice(1), a]));
-
-      const obs = new IntersectionObserver((entries) => {
-        const visible = entries
-          .filter(e => e.isIntersecting)
-          .sort((a,b) => (b.intersectionRatio - a.intersectionRatio))[0];
-        if (!visible) return;
-
-        navLinks.forEach(a => a.classList.remove('active'));
-        const link = linkById.get(visible.target.id);
-        if (link) link.classList.add('active');
-      }, {
-        root: null,
-        rootMargin: `-${getTopbarH()}px 0px -55% 0px`,
-        threshold: [0.15, 0.25, 0.35, 0.5]
+      // Back/forward
+      window.addEventListener('popstate', () => {
+        if (!location.hash) return;
+        scrollToSection(location.hash.slice(1), false);
       });
 
-      sections.forEach(s => obs.observe(s));
+      // Scrollspy (rebuild on resize so it doesn’t drift)
+      let observer = null;
+
+      function buildObserver(){
+        if (observer) observer.disconnect();
+
+        const topbarH = setTopbarH();
+        const linkById = new Map(navLinks.map(a => [a.getAttribute('href').slice(1), a]));
+
+        observer = new IntersectionObserver((entries) => {
+          const visible = entries
+            .filter(e => e.isIntersecting)
+            .sort((a,b) => (b.intersectionRatio - a.intersectionRatio))[0];
+          if (!visible) return;
+
+          navLinks.forEach(a => a.classList.remove('active'));
+          const link = linkById.get(visible.target.id);
+          if (link) link.classList.add('active');
+        }, {
+          root: null,
+          rootMargin: `-${topbarH}px 0px -55% 0px`,
+          threshold: [0.15, 0.25, 0.35, 0.5]
+        });
+
+        sections.forEach(s => observer.observe(s));
+      }
+
+      buildObserver();
+      window.addEventListener('resize', () => {
+        setTopbarH();
+        buildObserver();
+      });
     })();
   </script>
 </body>

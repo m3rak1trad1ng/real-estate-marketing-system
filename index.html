@@ -13,30 +13,40 @@
 
   <style>
     :root{
-      /* less-bright light theme */
-      --bg: #e9eef5;          /* darker than before (less “bright white”) */
-      --frame: #f3f6fb;       /* tinted container (NOT pure white) */
+      /* Background recommendation (not harsh white) */
+      --bg: #e7edf5;            /* main background */
+      --frame: #f4f7fb;         /* content rectangle background */
+      --frameBorder: rgba(148,163,184,.38);
+
       --text: #0f172a;
       --muted: #475569;
       --muted2:#64748b;
       --line: rgba(148,163,184,.35);
 
-      /* unified button (kept teal for urgency) */
+      /* CTA color (kept teal; easy to read + not “90s blue”) */
       --accent: #0f766e;
       --accentHover: #115e59;
       --accentText: #ffffff;
 
       --max: 980px;
 
-      /* sticky nav height fallback (JS will set exact) */
+      /* Sticky nav height fallback; JS measures real height */
       --topbarH: 52px;
 
-      /* EXACT landing cushion: headline becomes first readable line */
-      --targetOffset: 14px;
+      /* How much space to leave between sticky nav and section headline */
+      --anchorGap: 12px;
     }
 
     *{ box-sizing: border-box; }
-    html{ scroll-behavior: smooth; }
+
+    html{
+      scroll-behavior: smooth;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior: auto; }
+      *{ transition: none !important; }
+    }
 
     body{
       margin: 0;
@@ -52,9 +62,9 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(233,238,245,.88);
+      background: rgba(231,237,245,.90);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(148,163,184,.35);
+      border-bottom: 1px solid var(--line);
     }
     .topbar-inner{
       max-width: var(--max);
@@ -90,12 +100,12 @@
       color: rgba(15,118,110,.95);
     }
 
-    /* One single page container */
+    /* One single page container (content rectangle) */
     .page-frame{
       max-width: var(--max);
       margin: 14px auto 0;
       background: var(--frame);
-      border: 1px solid rgba(148,163,184,.35);
+      border: 1px solid var(--frameBorder);
       border-radius: 18px;
       box-shadow: 0 18px 52px rgba(15,23,42,.08);
       overflow: clip;
@@ -105,7 +115,7 @@
       padding: 20px 22px 84px;
     }
 
-    /* HERO */
+    /* Hero */
     header{
       text-align: center;
       margin-top: 6px;
@@ -159,7 +169,6 @@
     }
     .btn:active{ transform: translateY(1px); }
 
-    /* secondary CTAs: same button style, calmer shadow */
     .btn.subtle{
       box-shadow: 0 10px 22px rgba(15,23,42,.12);
     }
@@ -167,28 +176,16 @@
       box-shadow: 0 12px 26px rgba(15,23,42,.14);
     }
 
-    /* SECTION RHYTHM (rebalance) */
+    /* Section rhythm */
     main{ margin-top: 30px; }
 
     section{
       padding: 34px 0 0;
       margin: 34px 0 0;
-      /* keep normal flow; target shim will control anchor landing */
-      position: relative;
     }
     section:first-of-type{
       padding-top: 0;
       margin-top: 0;
-    }
-
-    /* Anchor landing fix (reliable):
-       When section is targeted, we create an invisible block above it equal to
-       sticky nav height + a small cushion, then pull the section up by the same amount. */
-    section:target::before{
-      content:"";
-      display:block;
-      height: calc(var(--topbarH) + var(--targetOffset));
-      margin-top: calc(-1 * (var(--topbarH) + var(--targetOffset)));
     }
 
     h2{
@@ -240,11 +237,11 @@
       margin: 0 auto;
     }
     details{
-      border: 1px solid rgba(148,163,184,.40);
+      border: 1px solid rgba(148,163,184,.42);
       border-radius: 12px;
       padding: 12px 12px;
       margin-bottom: 10px;
-      background: rgba(255,255,255,.55); /* softer than pure white */
+      background: rgba(255,255,255,.55);
     }
     summary{
       cursor: pointer;
@@ -312,9 +309,9 @@
 </head>
 
 <body>
-  <div class="topbar">
+  <div class="topbar" id="topbar">
     <div class="topbar-inner">
-      <nav class="nav" aria-label="Section navigation">
+      <nav class="nav" aria-label="Section navigation" id="nav">
         <a href="#problem">The Problem It Solves</a>
         <a href="#included">What’s Included</a>
         <a href="#for">Who This Is For</a>
@@ -557,7 +554,7 @@
         });
       });
 
-      // Measure sticky nav height and set CSS var so :target offset is correct
+      // Measure sticky nav height and store in CSS var
       const topbarInner = document.querySelector('.topbar-inner');
       function setTopbarH(){
         if (!topbarInner) return;
@@ -565,9 +562,52 @@
         document.documentElement.style.setProperty('--topbarH', h + 'px');
       }
       setTopbarH();
+      requestAnimationFrame(setTopbarH);
+      window.addEventListener('load', setTopbarH);
       window.addEventListener('resize', setTopbarH);
 
-      // Scrollspy: highlight active nav link
+      // Reliable anchor scrolling with offset (fixes headline clipping)
+      function scrollToHash(hash, pushState){
+        const id = (hash || "").replace('#','');
+        if (!id) return;
+
+        const target = document.getElementById(id);
+        if (!target) return;
+
+        const topbarH = Math.ceil(topbarInner ? topbarInner.getBoundingClientRect().height : 52);
+        const gap = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--anchorGap'), 10) || 12;
+
+        const y = target.getBoundingClientRect().top + window.pageYOffset - (topbarH + gap);
+
+        const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: Math.max(0, y), behavior: prefersReduced ? 'auto' : 'smooth' });
+
+        if (pushState) history.pushState(null, '', '#' + id);
+      }
+
+      // Intercept nav clicks and scroll with correct offset
+      const nav = document.getElementById('nav');
+      if (nav){
+        nav.addEventListener('click', (e) => {
+          const a = e.target.closest('a[href^="#"]');
+          if (!a) return;
+          e.preventDefault();
+          scrollToHash(a.getAttribute('href'), true);
+        });
+      }
+
+      // If page loads with a hash, scroll to it with offset
+      if (location.hash){
+        // allow layout to settle
+        setTimeout(() => scrollToHash(location.hash, false), 0);
+      }
+
+      // If back/forward changes hash, handle it
+      window.addEventListener('popstate', () => {
+        if (location.hash) scrollToHash(location.hash, false);
+      });
+
+      // Scrollspy active nav link
       const navLinks = Array.from(document.querySelectorAll('.nav a'));
       const sections = navLinks
         .map(a => document.querySelector(a.getAttribute('href')))
@@ -579,7 +619,6 @@
         const visible = entries
           .filter(e => e.isIntersecting)
           .sort((a,b) => (b.intersectionRatio - a.intersectionRatio))[0];
-
         if (!visible) return;
 
         navLinks.forEach(a => a.classList.remove('active'));

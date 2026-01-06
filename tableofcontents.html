@@ -122,8 +122,8 @@
     }
     .hero-desc{
       margin: 0 auto 0 auto;
-      max-width: 86ch;              /* slightly wider */
-      font-size: 20px;               /* larger per your request */
+      max-width: 86ch;
+      font-size: 20px;
       line-height: 1.75;
       color: var(--muted);
       font-weight: 500;
@@ -202,6 +202,11 @@
       margin: 0 auto;
     }
 
+    /* ✅ WIDER container (used only where applied) */
+    .section-inner.wide{
+      max-width: 92ch;
+    }
+
     /* Centered “subtitle” lines */
     .section-summary{
       margin: 0 0 12px 0;
@@ -223,20 +228,20 @@
       text-align: left;
     }
 
-    /* System Index intro copy: LEFT aligned, wider, and widow-resistant */
+    /* System Index intro copy: left aligned, uses full width of the (wide) container */
     .toc-intro-copy{
       margin: 0;
-      font-size: 18px;               /* larger per your request */
+      font-size: 18px;
       line-height: 1.75;
       color: var(--muted);
-      text-align: left;              /* key change */
-      max-width: 84ch;               /* wider so it doesn’t “pinch” */
-      margin-left: auto;
-      margin-right: auto;
-      text-wrap: pretty;             /* gentle line improvements */
+      text-align: left;
+      width: 100%;
+      hyphens: auto;
+      overflow-wrap: normal;
+      text-wrap: pretty;
     }
     @supports (text-wrap: balance){
-      .toc-intro-copy{ text-wrap: balance; } /* reduces widows in supporting browsers */
+      .toc-intro-copy{ text-wrap: balance; }
     }
 
     /* (Top-of-page numeric breakdown removed per request) */
@@ -354,14 +359,14 @@
       .page-frame{ margin: 12px 12px 18px; border-radius: 16px; }
       .wrap{ padding: 16px 16px 30px; }
       h1{ font-size: 32px; letter-spacing: -0.7px; }
-      .hero-desc{ font-size: 17px; } /* keep readable on mobile */
+      .hero-desc{ font-size: 17px; }
       .btn{ width: 100%; }
       section{ margin-top: 34px; }
       .footer{ margin-top: 28px; }
       .footer-links{ gap: 12px; }
 
-      .toc-intro-copy{
-        max-width: 70ch;   /* prevents overly long lines on small screens */
+      .section-inner.wide{
+        max-width: 78ch; /* don’t go too wide on smaller screens */
       }
     }
   </style>
@@ -393,9 +398,9 @@
       <main>
         <section id="toc-intro">
           <h2>System Index</h2>
-          <div class="section-inner">
 
-            <!-- Top summary counts removed per request -->
+          <!-- ✅ widen only THIS section so the text fills the available space -->
+          <div class="section-inner wide">
 
             <p class="toc-intro-copy" style="margin-top:12px;">
               Each item below represents a standardized base format intended to be duplicated and reused across listings and campaigns, with structural decisions made once and applied consistently.

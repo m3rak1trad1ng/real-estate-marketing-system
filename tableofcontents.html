@@ -31,6 +31,9 @@
 
       --topbarH: 52px;
       --anchorGap: 14px;
+
+      /* ✅ one source of truth for intro text block width */
+      --introCh: 92ch;
     }
 
     *{ box-sizing: border-box; }
@@ -122,12 +125,13 @@
     }
     .hero-desc{
       margin: 0 auto 0 auto;
-      max-width: 86ch;
+      max-width: var(--introCh); /* ✅ matches System Index intro block */
       font-size: 20px;
       line-height: 1.75;
       color: var(--muted);
       font-weight: 500;
       margin-bottom: 6px;
+      text-align: center;
     }
 
     /* Buttons */
@@ -198,13 +202,13 @@
     }
 
     .section-inner{
-      max-width: 86ch;
+      max-width: 78ch;
       margin: 0 auto;
     }
 
-    /* ✅ WIDER container (used only where applied) */
+    /* ✅ WIDER container used ONLY for System Index intro copy */
     .section-inner.wide{
-      max-width: var(--max);
+      max-width: var(--introCh); /* ✅ matches hero-desc width */
     }
 
     /* Centered “subtitle” lines */
@@ -228,7 +232,11 @@
       text-align: left;
     }
 
-    /* System Index intro copy: left aligned, uses full width of the (wide) container */
+    /* System Index intro copy:
+       - left aligned
+       - uses full width of the (wide) container
+       - nudges line breaks to avoid ugly widows without forcing weird spacing
+    */
     .toc-intro-copy{
       margin: 0;
       font-size: 18px;
@@ -237,8 +245,8 @@
       text-align: left;
       width: 100%;
       hyphens: auto;
-      overflow-wrap: normal;
       text-wrap: pretty;
+      max-width: none;
     }
     @supports (text-wrap: balance){
       .toc-intro-copy{ text-wrap: balance; }
@@ -365,9 +373,7 @@
       .footer{ margin-top: 28px; }
       .footer-links{ gap: 12px; }
 
-      .section-inner.wide{
-        max-width: 78ch; /* don’t go too wide on smaller screens */
-      }
+      :root{ --introCh: 78ch; } /* keeps it readable on small screens */
     }
   </style>
 </head>
@@ -399,7 +405,7 @@
         <section id="toc-intro">
           <h2>System Index</h2>
 
-          <!-- ✅ widen only THIS section so the text fills the available space -->
+          <!-- ✅ matches hero-desc block width, but left-aligned text -->
           <div class="section-inner wide">
 
             <p class="toc-intro-copy" style="margin-top:12px;">

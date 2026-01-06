@@ -11,26 +11,28 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-  :root{
-  --bg: #d0d4da;
-  --frame: #edf0f4;
-  --frameBorder: rgba(15, 23, 42, 0.35);
-  --frameShadow: 0 32px 90px rgba(15, 23, 42, 0.22);
+  <style>
+    :root{
+      /* Option 5 — Neutral Graphite (darker, less glare) */
+      --bg: #d0d4da;
+      --frame: #edf0f4;
+      --frameBorder: rgba(15, 23, 42, 0.35);
+      --frameShadow: 0 32px 90px rgba(15, 23, 42, 0.22);
 
-  --text: #0f172a;
-  --muted: #475569;
-  --muted2:#64748b;
-  --line: rgba(148,163,184,.45);
+      --text: #0f172a;
+      --muted: #475569;
+      --muted2:#64748b;
+      --line: rgba(148,163,184,.45);
 
-  --accent: #0f766e;
-  --accentHover: #115e59;
-  --accentText: #ffffff;
+      --accent: #0f766e;
+      --accentHover: #115e59;
+      --accentText: #ffffff;
 
-  --max: 980px;
+      --max: 980px;
 
-  --topbarH: 52px;
-  --anchorGap: 14px;
-}
+      --topbarH: 52px;
+      --anchorGap: 14px;
+    }
 
     *{ box-sizing: border-box; }
 
@@ -54,7 +56,7 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(207,216,230,.92);
+      background: rgba(208,212,218,.92);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
     }
@@ -107,7 +109,7 @@
       padding: 22px 24px 140px;
     }
 
-    /* BIG spacer so FAQ (last section) can land perfectly */
+    /* BIG spacer so FAQ (last section) can land cleanly */
     .end-spacer{
       height: calc(var(--topbarH) + 520px);
     }
@@ -573,7 +575,7 @@
         return Number.isFinite(n) ? n : 14;
       }
 
-      // Scroll to H2 consistently (no FAQ special-case)
+      // Scroll to H2 consistently
       function scrollToHash(hash, pushState){
         const id = (hash || "").replace('#','');
         if (!id) return;

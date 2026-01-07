@@ -109,11 +109,6 @@
       padding: 22px 24px 140px;
     }
 
-    /* BIG spacer so FAQ (last section) can land cleanly */
-    .end-spacer{
-      height: calc(var(--topbarH) + 520px);
-    }
-
     /* Hero */
     header{
       text-align: center;
@@ -300,7 +295,6 @@
       .hero-desc{ font-size: 16px; }
       .btn{ width: 100%; }
       section{ margin-top: 34px; }
-      .end-spacer{ height: calc(var(--topbarH) + 560px); }
     }
   </style>
 </head>
@@ -329,7 +323,7 @@
         </p>
 
         <div class="actions" id="top-cta">
-          <a class="btn" href="#access">Request Access</a>
+          <a class="btn" href="access.html">Request Access</a>
         </div>
       </header>
 
@@ -372,7 +366,6 @@
             </ul>
 
             <div class="actions" style="margin-top:16px;">
-              <!-- UPDATED: use the actual file path used on this site -->
               <a class="btn subtle" href="tableofcontents.html">View Full System Table of Contents</a>
             </div>
           </div>
@@ -423,7 +416,7 @@
             </p>
 
             <div class="actions" style="margin-top:16px;">
-              <a class="btn" href="#top-cta">Request Access</a>
+              <a class="btn" href="access.html">Request Access</a>
             </div>
           </div>
         </section>
@@ -524,23 +517,18 @@
             </details>
 
             <div class="actions" style="margin-top:14px;">
-              <!-- UPDATED: use canonical FAQ folder URL -->
               <a class="btn subtle" href="/faq/">View Full FAQ</a>
             </div>
           </div>
         </section>
 
         <div class="footer">
-          <!-- UPDATED: link company name to parent company site -->
           <div>© <a href="https://operational-systems.com">Operational Systems, LLC</a></div>
           <div>
-            <!-- UPDATED: use consistent local file links -->
             <a href="privacy.html">Privacy</a>
             <a href="terms.html">Terms</a>
           </div>
         </div>
-
-        <div class="end-spacer" aria-hidden="true"></div>
       </main>
     </div>
   </div>
@@ -579,7 +567,6 @@
         return Number.isFinite(n) ? n : 14;
       }
 
-      // Scroll to H2 consistently
       function scrollToHash(hash, pushState){
         const id = (hash || "").replace('#','');
         if (!id) return;
@@ -600,7 +587,6 @@
         if (pushState) history.pushState(null, '', '#' + id);
       }
 
-      // Intercept nav clicks
       const nav = document.getElementById('nav');
       if (nav){
         nav.addEventListener('click', (e) => {
@@ -611,17 +597,14 @@
         });
       }
 
-      // Load hash
       if (location.hash){
         setTimeout(() => scrollToHash(location.hash, false), 0);
       }
 
-      // Back/forward
       window.addEventListener('popstate', () => {
         if (location.hash) scrollToHash(location.hash, false);
       });
 
-      // Scrollspy active nav link
       const navLinks = Array.from(document.querySelectorAll('.nav a'));
       const sections = navLinks
         .map(a => document.querySelector(a.getAttribute('href')))

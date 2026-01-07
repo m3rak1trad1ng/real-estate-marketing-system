@@ -131,14 +131,15 @@
       color: #0b1220;
     }
 
-    /* ✅ UPDATED to match main page opening sentence sizing/rhythm */
+    /* ✅ Match Main Page .hero-desc typography + max-width behavior */
     .hero-desc{
-      margin: 0 auto 12px auto; /* main page uses 12px bottom */
+      margin: 0 auto 14px auto; /* match main page */
       max-width: 78ch;
       font-size: 18px;
       line-height: 1.7;
       color: var(--muted);
       font-weight: 500;
+      text-align: center; /* match main page explicitly */
     }
 
     /* Buttons */
@@ -188,9 +189,9 @@
     section:first-of-type{ margin-top: 12px; }
     section{ scroll-margin-top: calc(var(--topbarH) + var(--anchorGap)); }
 
-    /* ✅ UPDATED to match main page subheadline sizing + underline */
+    /* ✅ Match Main Page section headline sizing + underline rule */
     h2{
-      margin: 0 0 14px 0; /* main page */
+      margin: 0 0 14px 0; /* main page spec */
       font-size: 24px;
       line-height: 1.2;
       letter-spacing: -0.5px;
@@ -202,10 +203,10 @@
     h2::after{
       content:"";
       display:block;
-      width: 140px; /* main page */
+      width: 140px; /* main page spec */
       height: 1px;
-      margin: 12px auto 0; /* main page */
-      background: rgba(15, 23, 42, 0.14); /* main page */
+      margin: 12px auto 0; /* main page spec */
+      background: rgba(15, 23, 42, 0.14); /* main page spec */
       border-radius: 999px;
     }
 
@@ -333,8 +334,8 @@
       .hero-desc{ font-size: 16px; }
       .btn{ width: 100%; }
       section{ margin-top: 34px; }
-      /* ✅ Match main page underline width on mobile */
-      h2::after{ width: 110px; }
+      /* NOTE: Do NOT override h2::after width here.
+         Keep headline underline uniform across pages (140px). */
       .footer{ margin-top: 28px; }
       .footer-links{ gap: 12px; }
     }

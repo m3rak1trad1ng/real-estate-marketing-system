@@ -32,10 +32,15 @@
       --topbarH: 52px;
       --anchorGap: 14px;
 
-      /* ✅ GLOBAL RHYTHM / MEASURES (LOCK THIS)
-         Use these for consistent line-length and alignment across pages. */
-      --measure-wide: 78ch;   /* hero + main reading width */
-      --measure-tight: 70ch;  /* slightly tighter (optional) */
+      /* ================================
+         GLOBAL RHYTHM RULE (LOCKED)
+         Use a 12px baseline rhythm for vertical spacing.
+         When adjusting spacing later, change margins/padding in
+         increments of 12px (12/24/36/48...) unless there is a
+         clear, intentional exception.
+         (Defining variable only — does NOT change layout by itself.)
+      ================================= */
+      --rhythm: 12px;
     }
 
     *{ box-sizing: border-box; }
@@ -125,15 +130,15 @@
       font-weight: 800;
       color: #0b1220;
     }
+
+    /* ✅ UPDATED to match main page opening sentence sizing/rhythm */
     .hero-desc{
-      margin: 0 auto 0 auto;
-      max-width: var(--measure-wide);
-      font-size: 20px; /* ✅ larger per request */
+      margin: 0 auto 12px auto; /* main page uses 12px bottom */
+      max-width: 78ch;
+      font-size: 18px;
       line-height: 1.7;
       color: var(--muted);
       font-weight: 500;
-      margin-bottom: 6px;
-      text-wrap: pretty;
     }
 
     /* Buttons */
@@ -183,8 +188,9 @@
     section:first-of-type{ margin-top: 12px; }
     section{ scroll-margin-top: calc(var(--topbarH) + var(--anchorGap)); }
 
+    /* ✅ UPDATED to match main page subheadline sizing + underline */
     h2{
-      margin: 0 0 10px 0;
+      margin: 0 0 14px 0; /* main page */
       font-size: 24px;
       line-height: 1.2;
       letter-spacing: -0.5px;
@@ -196,15 +202,15 @@
     h2::after{
       content:"";
       display:block;
-      width: 96px;
+      width: 140px; /* main page */
       height: 1px;
-      margin: 10px auto 0;
-      background: rgba(15, 23, 42, 0.09);
+      margin: 12px auto 0; /* main page */
+      background: rgba(15, 23, 42, 0.14); /* main page */
       border-radius: 999px;
     }
 
     .section-inner{
-      max-width: var(--measure-wide);
+      max-width: 78ch;
       margin: 0 auto;
     }
 
@@ -216,10 +222,9 @@
       font-weight: 650;
       color: #0f172a;
       text-align: center;
-      max-width: var(--measure-tight);
+      max-width: 70ch;
       margin-left: auto;
       margin-right: auto;
-      text-wrap: pretty;
     }
 
     .prose{
@@ -228,21 +233,7 @@
       line-height: 1.75;
       color: var(--muted);
       text-align: left;
-      text-wrap: pretty;
     }
-
-    /* System Index intro block:
-       ✅ centered box, left-aligned text, controlled measure (prevents widows & "smushed" look) */
-    .intro-block{
-      max-width: var(--measure-wide); /* ✅ global rhythm width */
-      margin: 12px auto 0;
-    }
-    .intro-block p{
-      font-size: 17px;   /* ✅ slightly larger per request */
-      line-height: 1.75;
-      margin: 0;
-    }
-    .intro-block p + p{ margin-top: 12px; }
 
     h3{
       margin: 18px 0 10px 0;
@@ -282,7 +273,7 @@
     /* Divider between major groups */
     .section-divider{
       margin: 26px auto 0;
-      max-width: var(--measure-wide);
+      max-width: 78ch;
       height: 1px;
       background: rgba(148,163,184,.45);
       border-radius: 999px;
@@ -291,7 +282,7 @@
     /* Transition divider between System Index intro and first inventory section */
     .toc-transition{
       margin: 22px auto 0;
-      max-width: var(--measure-wide);
+      max-width: 78ch;
       height: 1px;
       background: rgba(148,163,184,.45);
       border-radius: 999px;
@@ -308,7 +299,6 @@
       line-height: 1.7;
       font-weight: 800;
       text-align: center;
-      text-wrap: pretty;
     }
 
     /* Footer */
@@ -340,8 +330,11 @@
       .page-frame{ margin: 12px 12px 18px; border-radius: 16px; }
       .wrap{ padding: 16px 16px 30px; }
       h1{ font-size: 32px; letter-spacing: -0.7px; }
-      .hero-desc{ font-size: 17px; } /* keep larger but responsive */
+      .hero-desc{ font-size: 16px; }
+      .btn{ width: 100%; }
       section{ margin-top: 34px; }
+      /* ✅ Match main page underline width on mobile */
+      h2::after{ width: 110px; }
       .footer{ margin-top: 28px; }
       .footer-links{ gap: 12px; }
     }
@@ -375,12 +368,14 @@
         <section id="toc-intro">
           <h2>System Index</h2>
           <div class="section-inner">
-            <div class="intro-block">
-              <p class="prose">
+
+            <!-- Centered, left-aligned text box (kept as-is) -->
+            <div style="max-width: 86ch; margin: 0 auto;">
+              <p class="prose" style="text-align:left; line-height:1.65;">
                 Each item below represents a standardized base format intended to be duplicated and reused across listings and campaigns, with structural decisions made once and applied consistently.
               </p>
 
-              <p class="prose">
+              <p class="prose" style="margin-top:12px; text-align:left; line-height:1.65;">
                 Many formats are labeled by common use case (e.g., “Buyer Tips”), but the underlying structures are reusable and can be repurposed for any similar content type after initial setup.
               </p>
             </div>

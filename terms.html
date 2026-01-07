@@ -1,1 +1,388 @@
+<!-- terms.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Terms of Use — The Real Estate Marketing System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Terms of Use for The Real Estate Marketing System.">
+
+  <!-- Font: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #d0d4da;
+      --frame: #edf0f4;
+      --frameBorder: rgba(15, 23, 42, 0.35);
+      --frameShadow: 0 32px 90px rgba(15, 23, 42, 0.22);
+
+      --text: #0f172a;
+      --muted: #475569;
+      --muted2:#64748b;
+      --line: rgba(148,163,184,.45);
+
+      --accent: #0f766e;
+      --accentHover: #115e59;
+      --accentText: #ffffff;
+
+      --max: 980px;
+
+      --topbarH: 52px;
+      --anchorGap: 14px;
+    }
+
+    *{ box-sizing: border-box; }
+
+    html{ scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior: auto; }
+      *{ transition: none !important; }
+    }
+
+    body{
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Sticky nav */
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(208,212,218,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar-inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 8px 18px;
+      min-height: var(--topbarH);
+      display:flex;
+      align-items:center;
+      justify-content: center;
+    }
+    .nav{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      align-items:center;
+      justify-content:center;
+    }
+    .nav a{
+      font-size: 13px;
+      color: rgba(15,23,42,.72);
+      text-decoration: none;
+      font-weight: 650;
+      padding: 7px 10px;
+      border-radius: 999px;
+      transition: background .12s ease, color .12s ease;
+    }
+    .nav a:hover{
+      background: rgba(15,23,42,.08);
+      color: rgba(15,23,42,.92);
+    }
+    .nav a.active{
+      background: rgba(15,118,110,.16);
+      color: rgba(15,118,110,.98);
+    }
+
+    /* Frame */
+    .page-frame{
+      max-width: var(--max);
+      margin: 16px auto 28px;
+      background: var(--frame);
+      border: 1px solid var(--frameBorder);
+      border-radius: 20px;
+      box-shadow: var(--frameShadow);
+      overflow: clip;
+    }
+    .wrap{ padding: 22px 24px 36px; }
+
+    /* Hero */
+    header{
+      text-align: center;
+      margin-top: 8px;
+    }
+    h1{
+      margin: 0 0 10px 0;
+      font-size: 46px;
+      line-height: 1.06;
+      letter-spacing: -1px;
+      font-weight: 800;
+      color: #0b1220;
+    }
+    .hero-desc{
+      margin: 0 auto 14px auto;
+      max-width: 78ch;
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--muted);
+      font-weight: 500;
+      text-align: center;
+    }
+
+    /* Sections */
+    main{ margin-top: 26px; }
+    section{ margin-top: 40px; }
+    section:first-of-type{ margin-top: 26px; }
+    section{ scroll-margin-top: calc(var(--topbarH) + var(--anchorGap)); }
+
+    h2{
+      margin: 0 0 14px 0;
+      font-size: 24px;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+      font-weight: 800;
+      color: #0b1220;
+      text-align: center;
+      position: relative;
+    }
+    h2::after{
+      content:"";
+      display:block;
+      width: 140px;
+      height: 1px;
+      margin: 12px auto 0;
+      background: rgba(15, 23, 42, 0.14);
+      border-radius: 999px;
+    }
+
+    .section-inner{
+      max-width: 78ch;
+      margin: 0 auto;
+    }
+
+    .prose{
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--muted);
+      text-align: left;
+    }
+    .prose + .prose{ margin-top: 12px; }
+
+    ul.list{
+      margin: 12px 0 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.72;
+      text-align: left;
+    }
+    ul.list li{ margin: 8px 0; }
+    ul.list li::marker{ color: rgba(100,116,139,.78); }
+
+    .note{
+      margin-top: 14px;
+      padding: 12px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(148,163,184,.55);
+      background: rgba(255,255,255,.65);
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    /* Footer */
+    .footer{
+      margin-top: 56px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(148,163,184,.45);
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted2);
+      font-size: 13px;
+    }
+    .footer a{
+      color: rgba(15,23,42,.72);
+      text-decoration:none;
+      font-weight: 800;
+      margin-right: 14px;
+    }
+    .footer a:hover{ text-decoration: underline; }
+
+    @media (max-width: 820px){
+      .page-frame{
+        margin: 12px 12px 22px;
+        border-radius: 16px;
+      }
+      .wrap{ padding: 18px 16px 32px; }
+      h1{ font-size: 32px; letter-spacing: -0.7px; }
+      .hero-desc{ font-size: 16px; }
+      section{ margin-top: 34px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar" id="topbar">
+    <div class="topbar-inner" id="topbar-inner">
+      <nav class="nav" aria-label="Primary navigation" id="nav">
+        <a href="index.html">Home</a>
+        <a href="tableofcontents.html">Table of Contents</a>
+        <a href="/faq/">FAQ</a>
+        <a href="index.html#access">Request Access</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="page-frame">
+    <div class="wrap">
+      <header>
+        <h1>Terms of Use</h1>
+        <p class="hero-desc">
+          These terms govern use of this website and the purchase and internal use of The Real Estate Marketing System.
+        </p>
+      </header>
+
+      <main>
+        <section id="acceptance">
+          <h2>Acceptance of Terms</h2>
+          <div class="section-inner">
+            <p class="prose">
+              By accessing this website or purchasing The Real Estate Marketing System (the “Product”), you agree to these Terms of Use. If you do not agree, do not use the site or purchase the Product.
+            </p>
+          </div>
+        </section>
+
+        <section id="product">
+          <h2>Product Description</h2>
+          <div class="section-inner">
+            <p class="prose">
+              The Product is a Canva-based marketing system that provides standardized base formats, templates, and documentation intended to support consistent, repeatable marketing execution.
+            </p>
+            <div class="note">
+              The Product provides structure and standards only. It does not include marketing strategy, lead generation, performance guarantees, or done-for-you services.
+            </div>
+          </div>
+        </section>
+
+        <section id="license">
+          <h2>License &amp; Permitted Use</h2>
+          <div class="section-inner">
+            <p class="prose">
+              The Product is licensed for internal use within a single organization. Internal sharing with agents, staff, or team members within the same organization is permitted.
+            </p>
+            <ul class="list">
+              <li>You may use the Product across your listings, campaigns, and internal contributors within your organization.</li>
+              <li>You may not resell, redistribute, sublicense, publish, or share the Product externally.</li>
+              <li>You may not represent the Product (or any portion of it) as your own product for resale.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="content">
+          <h2>User Content Responsibility</h2>
+          <div class="section-inner">
+            <p class="prose">
+              Any content you create, upload, or publish using the Product (including text, images, claims, pricing, compliance statements, or advertising content) is your responsibility. You are responsible for ensuring your marketing complies with applicable laws, regulations, MLS rules, brand policies, and platform requirements.
+            </p>
+          </div>
+        </section>
+
+        <section id="delivery">
+          <h2>Access &amp; Delivery</h2>
+          <div class="section-inner">
+            <p class="prose">
+              Access is delivered digitally after purchase, typically immediately. Delivery method may include links, shared folders, or other digital access mechanisms required to provide the Product.
+            </p>
+          </div>
+        </section>
+
+        <section id="refunds">
+          <h2>Refund Policy</h2>
+          <div class="section-inner">
+            <p class="prose">
+              Because this is a digital product delivered immediately, all sales are final and non-refundable unless otherwise required by law.
+            </p>
+          </div>
+        </section>
+
+        <section id="ip">
+          <h2>Intellectual Property</h2>
+          <div class="section-inner">
+            <p class="prose">
+              The Product and all associated materials are owned by Operational Systems, LLC and are protected by intellectual property laws. No ownership rights are transferred to you.
+            </p>
+          </div>
+        </section>
+
+        <section id="warranty">
+          <h2>Disclaimer of Warranties</h2>
+          <div class="section-inner">
+            <p class="prose">
+              The site and Product are provided “as is” and “as available.” We make no warranties of any kind, express or implied, including warranties of merchantability, fitness for a particular purpose, or non-infringement.
+            </p>
+          </div>
+        </section>
+
+        <section id="liability">
+          <h2>Limitation of Liability</h2>
+          <div class="section-inner">
+            <p class="prose">
+              To the fullest extent permitted by law, Operational Systems, LLC will not be liable for any indirect, incidental, consequential, special, or punitive damages, or any loss of profits or revenues, arising from your use of the site or Product.
+            </p>
+          </div>
+        </section>
+
+        <section id="changes">
+          <h2>Changes to These Terms</h2>
+          <div class="section-inner">
+            <p class="prose">
+              We may update these Terms from time to time. Continued use of the site after changes become effective constitutes acceptance of the updated Terms.
+            </p>
+          </div>
+        </section>
+
+        <section id="contact">
+          <h2>Contact</h2>
+          <div class="section-inner">
+            <p class="prose">
+              Questions about these Terms may be directed to Operational Systems, LLC.
+            </p>
+          </div>
+        </section>
+
+        <div class="footer">
+          <div>© Operational Systems, LLC</div>
+          <div>
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const topbar = document.getElementById('topbar');
+      function getTopbarH(){
+        if (!topbar) return 52;
+        return Math.ceil(topbar.getBoundingClientRect().height);
+      }
+      function setTopbarH(){
+        const h = getTopbarH();
+        document.documentElement.style.setProperty('--topbarH', h + 'px');
+        return h;
+      }
+      setTopbarH();
+      requestAnimationFrame(setTopbarH);
+      window.addEventListener('load', setTopbarH);
+      window.addEventListener('resize', setTopbarH);
+    })();
+  </script>
+</body>
+</html>
 

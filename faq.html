@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>FAQ — The Real Estate Marketing System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Frequently asked questions about The Real Estate Marketing System — scope, licensing, delivery, and usage.">
+
+  <!-- Font: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Match Main Page tokens */
+      --bg: #d0d4da;
+      --frame: #edf0f4;
+      --frameBorder: rgba(15, 23, 42, 0.35);
+      --frameShadow: 0 32px 90px rgba(15, 23, 42, 0.22);
+
+      --text: #0f172a;
+      --muted: #475569;
+      --muted2:#64748b;
+      --line: rgba(148,163,184,.45);
+
+      --accent: #0f766e;
+      --accentHover: #115e59;
+      --accentText: #ffffff;
+
+      --max: 980px;
+
+      --topbarH: 52px;
+      --anchorGap: 14px;
+    }
+
+    *{ box-sizing: border-box; }
+
+    html{ scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior: auto; }
+      *{ transition: none !important; }
+    }
+
+    body{
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Sticky nav (pill links) */
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(208,212,218,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar-inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 8px 18px;
+      min-height: var(--topbarH);
+      display:flex;
+      align-items:center;
+      justify-content: center;
+    }
+    .nav{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      align-items:center;
+      justify-content:center;
+    }
+    .nav a{
+      font-size: 13px;
+      color: rgba(15,23,42,.72);
+      text-decoration: none;
+      font-weight: 650;
+      padding: 7px 10px;
+      border-radius: 999px;
+      transition: background .12s ease, color .12s ease;
+    }
+    .nav a:hover{
+      background: rgba(15,23,42,.08);
+      color: rgba(15,23,42,.92);
+    }
+    .nav a.active{
+      background: rgba(15,118,110,.16);
+      color: rgba(15,118,110,.98);
+    }
+
+    /* Content frame */
+    .page-frame{
+      max-width: var(--max);
+      margin: 16px auto 28px;
+      background: var(--frame);
+      border: 1px solid var(--frameBorder);
+      border-radius: 20px;
+      box-shadow: var(--frameShadow);
+      overflow: clip;
+    }
+    .wrap{
+      padding: 22px 24px 36px;
+    }
+
+    /* Hero */
+    header{
+      text-align: center;
+      margin-top: 8px;
+    }
+    h1{
+      margin: 0 0 10px 0;
+      font-size: 46px;
+      line-height: 1.06;
+      letter-spacing: -1px;
+      font-weight: 800;
+      color: #0b1220;
+    }
+    .hero-desc{
+      margin: 0 auto 14px auto;
+      max-width: 78ch;
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--muted);
+      font-weight: 500;
+      text-align: center;
+    }
+
+    /* Buttons */
+    .actions{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items:center;
+      justify-content: center;
+      margin-top: 6px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: .2px;
+      text-decoration: none;
+      background: var(--accent);
+      color: var(--accentText);
+      border: 1px solid rgba(0,0,0,.08);
+      box-shadow: 0 14px 30px rgba(15,118,110,.22);
+      transition: transform .06s ease, box-shadow .12s ease, background .12s ease;
+      min-width: 0;
+    }
+    .btn:hover{
+      background: var(--accentHover);
+      box-shadow: 0 16px 34px rgba(15,118,110,.26);
+    }
+    .btn:active{ transform: translateY(1px); }
+
+    .btn.subtle{
+      box-shadow: 0 12px 26px rgba(15,23,42,.14);
+    }
+    .btn.subtle:hover{
+      box-shadow: 0 14px 30px rgba(15,23,42,.16);
+    }
+
+    /* Main */
+    main{ margin-top: 26px; }
+
+    section{ margin-top: 40px; }
+    section:first-of-type{ margin-top: 26px; }
+    section{ scroll-margin-top: calc(var(--topbarH) + var(--anchorGap)); }
+
+    /* Headline tokens (locked) */
+    h2{
+      margin: 0 0 14px 0;
+      font-size: 24px;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+      font-weight: 800;
+      color: #0b1220;
+      text-align: center;
+      position: relative;
+    }
+    h2::after{
+      content:"";
+      display:block;
+      width: 140px;
+      height: 1px;
+      margin: 12px auto 0;
+      background: rgba(15, 23, 42, 0.14);
+      border-radius: 999px;
+    }
+
+    .section-inner{
+      max-width: 78ch;
+      margin: 0 auto;
+    }
+
+    /* FAQ */
+    .faq-stack{
+      max-width: 78ch;
+      margin: 0 auto;
+    }
+
+    details{
+      border: 1px solid rgba(148,163,184,.55);
+      border-radius: 12px;
+      padding: 12px 12px;
+      margin-bottom: 10px;
+      background: rgba(255,255,255,.72);
+    }
+    summary{
+      cursor: pointer;
+      list-style: none;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      font-weight: 800;
+      color: #0f172a;
+      font-size: 14px;
+      line-height: 1.35;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .chev{
+      width: 10px;
+      height: 10px;
+      border-right: 2px solid rgba(100,116,139,.9);
+      border-bottom: 2px solid rgba(100,116,139,.9);
+      transform: rotate(-45deg);
+      transition: transform .15s ease;
+      flex: 0 0 auto;
+      margin-top: 2px;
+    }
+    details[open] .chev{ transform: rotate(45deg); }
+
+    .answer{
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+      max-width: 76ch;
+    }
+
+    .category-gap{
+      height: 10px;
+    }
+
+    /* Footer (match Main Page) */
+    .footer{
+      margin-top: 56px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(148,163,184,.45);
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted2);
+      font-size: 13px;
+    }
+    .footer a{
+      color: rgba(15,23,42,.72);
+      text-decoration:none;
+      font-weight: 800;
+      margin-right: 14px;
+    }
+    .footer a:hover{ text-decoration: underline; }
+
+    @media (max-width: 820px){
+      .page-frame{
+        margin: 12px 12px 22px;
+        border-radius: 16px;
+      }
+      .wrap{ padding: 18px 16px 32px; }
+      h1{ font-size: 32px; letter-spacing: -0.7px; }
+      .hero-desc{ font-size: 16px; }
+      .btn{ width: 100%; }
+      section{ margin-top: 34px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar" id="topbar">
+    <div class="topbar-inner" id="topbar-inner">
+      <nav class="nav" aria-label="Primary navigation" id="nav">
+        <a href="index.html">Home</a>
+        <a href="tableofcontents.html">Table of Contents</a>
+        <a href="faq.html" class="active">FAQ</a>
+        <a href="index.html#access">Request Access</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="page-frame">
+    <div class="wrap">
+      <header>
+        <h1>FAQ</h1>
+
+        <p class="hero-desc">
+          Answers to common questions about scope, licensing, delivery, and how the system is intended to be used.
+        </p>
+
+        <div class="actions">
+          <a class="btn" href="index.html#access">Request Access</a>
+          <a class="btn subtle" href="tableofcontents.html">View Table of Contents</a>
+        </div>
+      </header>
+
+      <main>
+        <section id="product">
+          <h2>Product &amp; Scope</h2>
+          <div class="section-inner">
+            <div class="faq-stack">
+              <details>
+                <summary>How is this different from buying Canva templates? <span class="chev" aria-hidden="true"></span></summary>
+                <div class="answer">
+                  Most Canva templates are individual designs meant to be customized once and replaced. This product is a standardized marketing system: shared structures, base formats, and usage rules designed to be reused across listings, campaigns, and teams without redesigning layouts each time.
+                </div>
+              </details>
+
+              <details>
+                <summary>What exactly do I receive when I purchase? <span class="chev" aria-hidden="true"></span></summary>
+                <div class="answer">
+                  You receive access to a complete system of <strong>117 standardized base formats</strong> spanning social media, email, print, presentations, and internal documentation. All formats are organized, governed, and designed to support consistent, repeatable marketing outputs over time.
+                </div>
+              </details>
+
+              <details>
+                <summary>Is this built for individual agents or teams? <span class="chev" aria-hidden="true"></span></summary>
+                <div class="answer">
+                  Both. Independent agents benefit from having a reliable, professional system in place, while teams and brokerages benefit from shared standards that keep marketing aligned across multiple agents, listings, and contributors.
+                </div>
+              </details>
+
+              <details>
+                <summary>Does this replace the need for custom design work or branding? <span class="chev" aria-hidden="true"></span></summary>
+                <div class="answer">
+                  The system replaces routine, repeatable marketing design. Custom branding or design work may still be appropriate for logos, brand development, or special campaigns outside the system.
+                </div>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        <section id="usage">
+          <h2>Setup &amp; Usage</h2>
+          <div class="section-inner">
+            <div class="faq-stack">
+              <details>
+                <summary>Can I customize the designs? <span class="chev" aria-hidden="true"></span></summary>
+                <div class="answer">
+                  Yes. All files are fully editable in Canva. Text, images, colors, and branding elements can be updated. The system’s value comes from reusing the underlying structure rather than redesigning layouts from scratch.
+                </div>
+              </details>
+
+              <details>
+                <summary>Are the margins, layouts, or elements locked? <span class="chev" aria-hidden="true"></span></summary>
+                <div class="answer">
+                  No. The system defines standards but does not technically lock files. Users may change any element if desired; however, the purpose of the system is to make layout decisions once rather than revisiting them repeatedly.
+                </div>
+              </details>
+
+              <details>
+                <summary>Do agents need design experience to use this system? <span class="chev" aria-hidden="true"></span></summary>
+                <div class="answer">
+                  No. The system is designed to be usable by non-designers. If an agent can edit text and images in Canva, they can use the system effectively without design training.
+                </div>
+              </details>
+
+              <details>
+                <summary>How does this help maintain consistency across a team? <span class="chev" aria-hidden="true"></span></summary>
+                <div class="answer">
+                  All agents and contributors work from the same base formats, dimensions, and layout structures. This ensures marketing remains visually consistent regardless of who creates the materials, without requiring constant review or oversight.
+                </div>
+              </details>
+
+              <details>
+                <summary>How long does setup take? <span class="chev" aria-hidden="true"></span></summary>
+                <div class="answer">
+                  Setup is performed once by management. This typically involves duplicating the system into a Canva account, applying brand elements, and defining internal usage guidelines. After setup, agents can begin using the system immediately.
+                </div>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        <section id="purchase">
+          <h2>Purchase, Delivery &amp; Licensing</h2>
+          <div class="section-inner">
+            <div class="faq-stack">
+              <details>
+                <summary>How is access delivered after purchase? <span class="chev" aria-hidden="true"></span></summary>
+                <div class="answer">
+                  Access is provided immediately after purchase. Buyers receive organized Canva files that can be duplicated and used without delay.
+                </div>
+              </details>
+
+              <details>
+                <summary>Is this a one-time purchase or a subscription? <span class="chev" aria-hidden="true"></span></summary>
+                <div class="answer">
+                  This is a one-time purchase. There are no subscriptions, renewals, or recurring fees.
+                </div>
+              </details>
+
+              <details>
+                <summary>Are there any usage limits or licensing restrictions? <span class="chev" aria-hidden="true"></span></summary>
+                <div class="answer">
+                  The system is licensed for internal use within a single organization. It may be used across listings, campaigns, and team members. Internal sharing with agents or staff within the organization is permitted. The system may not be resold, redistributed, or shared externally.
+                </div>
+              </details>
+
+              <details>
+                <summary>Are refunds available? <span class="chev" aria-hidden="true"></span></summary>
+                <div class="answer">
+                  Because this is a digital system delivered immediately, all sales are final. Buyers are encouraged to review the full buyer-facing table of contents prior to purchase to confirm suitability.
+                </div>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        <div class="footer">
+          <div>© Operational Systems, LLC</div>
+          <div>
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      // Only one <details> open at a time (page-wide)
+      const all = Array.from(document.querySelectorAll('main details'));
+      all.forEach(d => {
+        d.addEventListener('toggle', () => {
+          if (!d.open) return;
+          all.forEach(other => { if (other !== d) other.open = false; });
+        });
+      });
+
+      const topbar = document.getElementById('topbar');
+
+      function getTopbarH(){
+        if (!topbar) return 52;
+        return Math.ceil(topbar.getBoundingClientRect().height);
+      }
+      function setTopbarH(){
+        const h = getTopbarH();
+        document.documentElement.style.setProperty('--topbarH', h + 'px');
+        return h;
+      }
+
+      setTopbarH();
+      requestAnimationFrame(setTopbarH);
+      window.addEventListener('load', setTopbarH);
+      window.addEventListener('resize', setTopbarH);
+    })();
+  </script>
+</body>
+</html>

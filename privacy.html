@@ -1,11 +1,10 @@
-<!-- privacy.html -->
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <title>Privacy Policy — The Real Estate Marketing System</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Privacy Policy for The Real Estate Marketing System.">
+  <meta name="description" content="Privacy Policy for The Real Estate Marketing System—what information is collected, how it’s used, and how it’s handled in connection with purchase and delivery.">
 
   <!-- Font: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,6 +13,7 @@
 
   <style>
     :root{
+      /* Match your neutral graphite look */
       --bg: #d0d4da;
       --frame: #edf0f4;
       --frameBorder: rgba(15, 23, 42, 0.35);
@@ -94,7 +94,7 @@
       color: rgba(15,118,110,.98);
     }
 
-    /* Frame */
+    /* Content frame */
     .page-frame{
       max-width: var(--max);
       margin: 16px auto 28px;
@@ -104,7 +104,10 @@
       box-shadow: var(--frameShadow);
       overflow: clip;
     }
-    .wrap{ padding: 22px 24px 36px; }
+
+    .wrap{
+      padding: 22px 24px 60px;
+    }
 
     /* Hero */
     header{
@@ -119,8 +122,9 @@
       font-weight: 800;
       color: #0b1220;
     }
+
     .hero-desc{
-      margin: 0 auto 14px auto;
+      margin: 0 auto 18px auto;
       max-width: 78ch;
       font-size: 18px;
       line-height: 1.7;
@@ -130,10 +134,12 @@
     }
 
     /* Sections */
-    main{ margin-top: 26px; }
-    section{ margin-top: 40px; }
-    section:first-of-type{ margin-top: 26px; }
-    section{ scroll-margin-top: calc(var(--topbarH) + var(--anchorGap)); }
+    main{ margin-top: 22px; }
+    section{
+      margin-top: 34px;
+      scroll-margin-top: calc(var(--topbarH) + var(--anchorGap));
+    }
+    section:first-of-type{ margin-top: 14px; }
 
     h2{
       margin: 0 0 14px 0;
@@ -167,7 +173,8 @@
       color: var(--muted);
       text-align: left;
     }
-    .prose + .prose{ margin-top: 12px; }
+
+    .prose + .prose{ margin-top: 10px; }
 
     ul.list{
       margin: 12px 0 0 0;
@@ -180,16 +187,19 @@
     ul.list li{ margin: 8px 0; }
     ul.list li::marker{ color: rgba(100,116,139,.78); }
 
-    .note{
+    /* Callout: make it blend (less white pop) */
+    .callout{
       margin-top: 14px;
-      padding: 12px 12px;
-      border-radius: 12px;
+      padding: 14px 14px;
       border: 1px solid rgba(148,163,184,.55);
-      background: rgba(255,255,255,.65);
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.75;
+      background: rgba(237,240,244,.65); /* closer to frame */
+      border-radius: 12px;
+      color: rgba(15,23,42,.78);
+      font-size: 14px;
+      line-height: 1.65;
+      text-align: left;
     }
+    .callout strong{ color: rgba(15,23,42,.9); }
 
     /* Footer */
     .footer{
@@ -217,10 +227,10 @@
         margin: 12px 12px 22px;
         border-radius: 16px;
       }
-      .wrap{ padding: 18px 16px 32px; }
+      .wrap{ padding: 18px 16px 60px; }
       h1{ font-size: 32px; letter-spacing: -0.7px; }
       .hero-desc{ font-size: 16px; }
-      section{ margin-top: 34px; }
+      section{ margin-top: 30px; }
     }
   </style>
 </head>
@@ -228,11 +238,11 @@
 <body>
   <div class="topbar" id="topbar">
     <div class="topbar-inner" id="topbar-inner">
-      <nav class="nav" aria-label="Primary navigation" id="nav">
-        <a href="index.html">Home</a>
-        <a href="tableofcontents.html">Table of Contents</a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="/index.html">Home</a>
+        <a href="/tableofcontents.html">Table of Contents</a>
         <a href="/faq/">FAQ</a>
-        <a href="index.html#access">Request Access</a>
+        <a href="/purchase.html">Purchase</a>
       </nav>
     </div>
   </div>
@@ -242,7 +252,7 @@
       <header>
         <h1>Privacy Policy</h1>
         <p class="hero-desc">
-          This policy explains what information we collect, how it’s used, and the choices available to you.
+          This policy explains what information is collected through this website, how it’s used, and how it’s handled in connection with purchase and delivery.
         </p>
       </header>
 
@@ -251,13 +261,14 @@
           <h2>Overview</h2>
           <div class="section-inner">
             <p class="prose">
-              Operational Systems, LLC (“we,” “us,” “our”) operates this website to provide information about The Real Estate Marketing System and to support access and delivery for purchasers.
+              Operational Systems, LLC (“we,” “us,” “our”) operates this website to provide information about The Real Estate Marketing System and to support purchase and delivery for buyers.
             </p>
             <p class="prose">
-              This Privacy Policy applies to information collected through this website and related communications.
+              We aim to collect only what is reasonably necessary to operate the site, process transactions through third parties, and deliver access to the product.
             </p>
-            <div class="note">
-              This website may use third-party services for payments, email communication, analytics, or file delivery. Those providers may collect information under their own policies.
+
+            <div class="callout">
+              <strong>Third-party services:</strong> This website may use third-party providers for payments, email communication, analytics, or file delivery. Those providers may process information under their own policies.
             </div>
           </div>
         </section>
@@ -265,12 +276,13 @@
         <section id="collect">
           <h2>Information We Collect</h2>
           <div class="section-inner">
-            <p class="prose">We may collect the following categories of information:</p>
+            <p class="prose">We may collect the following categories of information, depending on how you interact with the site:</p>
+
             <ul class="list">
-              <li><strong>Contact information</strong> (e.g., name, email address) when you request access, make a purchase, or contact us.</li>
-              <li><strong>Transaction information</strong> related to purchases (e.g., purchase confirmation, product access status). Payment details are typically processed by third-party payment providers.</li>
-              <li><strong>Usage data</strong> (e.g., pages viewed, approximate device/browser info) if analytics are enabled on the site.</li>
-              <li><strong>Communications</strong> you send to us (e.g., emails or form messages).</li>
+              <li><strong>Contact information</strong> (for example: name and email address) if you contact us or request support.</li>
+              <li><strong>Transaction-related information</strong> associated with a purchase (for example: confirmation details or delivery status). Payment details are typically handled by third-party payment processors.</li>
+              <li><strong>Usage data</strong> (for example: page views and approximate device/browser information) if analytics are enabled.</li>
+              <li><strong>Communications</strong> you send to us (for example: emails or form submissions).</li>
             </ul>
           </div>
         </section>
@@ -279,12 +291,14 @@
           <h2>How We Use Information</h2>
           <div class="section-inner">
             <p class="prose">We use information for purposes such as:</p>
+
             <ul class="list">
-              <li>Providing access and delivering the product</li>
-              <li>Responding to inquiries and support requests</li>
+              <li>Operating the website and providing requested information</li>
               <li>Processing transactions and confirming purchases (via third-party providers)</li>
+              <li>Delivering access and supporting product delivery</li>
+              <li>Responding to inquiries and support requests</li>
+              <li>Improving site clarity and performance (if analytics are enabled)</li>
               <li>Maintaining site security and preventing abuse</li>
-              <li>Improving site clarity and performance (if analytics are used)</li>
             </ul>
           </div>
         </section>
@@ -293,10 +307,13 @@
           <h2>How We Share Information</h2>
           <div class="section-inner">
             <p class="prose">
-              We do not sell your personal information. We may share information with service providers only as needed to operate the website and deliver the product (for example: payment processing, email delivery, analytics, or file delivery).
+              We do not sell your personal information.
             </p>
             <p class="prose">
-              We may also disclose information if required to comply with applicable law or to protect our rights and the security of the site.
+              We may share information with service providers only as needed to operate the website and deliver the product (for example: payment processing, email communications, analytics, or file delivery).
+            </p>
+            <p class="prose">
+              We may also disclose information if required to comply with applicable law, to protect our rights, or to secure the website.
             </p>
           </div>
         </section>
@@ -314,7 +331,7 @@
           <h2>Data Security</h2>
           <div class="section-inner">
             <p class="prose">
-              We take reasonable measures to protect information collected through the website. No method of transmission or storage is fully secure, so we cannot guarantee absolute security.
+              We take reasonable measures to protect information collected through the website. No method of transmission or storage is guaranteed to be completely secure.
             </p>
           </div>
         </section>
@@ -338,10 +355,10 @@
         </section>
 
         <div class="footer">
-          <div>© Operational Systems, LLC</div>
+          <div>© <a href="https://operational-systems.com">Operational Systems, LLC</a></div>
           <div>
-            <a href="privacy.html">Privacy</a>
-            <a href="terms.html">Terms</a>
+            <a class="active" href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
           </div>
         </div>
       </main>
@@ -350,6 +367,7 @@
 
   <script>
     (function(){
+      // Keep --topbarH accurate
       const topbar = document.getElementById('topbar');
       function getTopbarH(){
         if (!topbar) return 52;

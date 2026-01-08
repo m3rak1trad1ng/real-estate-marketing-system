@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Access &amp; Delivery — The Real Estate Marketing System</title>
+  <title>Purchase — The Real Estate Marketing System</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Access and delivery details for The Real Estate Marketing System.">
+  <meta name="description" content="Purchase details for The Real Estate Marketing System—one-time price, what you receive, delivery method, licensing, and refund policy.">
 
   <!-- Font: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,7 +51,7 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Sticky nav (match TOC style) */
+    /* Sticky nav (slightly larger; same look) */
     .topbar{
       position: sticky;
       top: 0;
@@ -77,11 +77,11 @@
       justify-content:center;
     }
     .nav a{
-      font-size: 13px;
+      font-size: 14px;                 /* was 13px */
       color: rgba(15,23,42,.72);
       text-decoration: none;
       font-weight: 650;
-      padding: 7px 10px;
+      padding: 8px 12px;               /* was 7px 10px */
       border-radius: 999px;
       transition: background .12s ease, color .12s ease;
     }
@@ -106,7 +106,7 @@
     }
 
     .wrap{
-      padding: 22px 24px 60px;
+      padding: 22px 24px 90px;
     }
 
     /* Hero */
@@ -123,23 +123,38 @@
       color: #0b1220;
     }
     .hero-desc{
-      margin: 0 auto 14px auto;
+      margin: 0 auto 12px auto;
       max-width: 78ch;
       font-size: 18px;
-      line-height: 1.7;
+      line-height: 1.52; /* tighter, matches main pairing feel */
       color: var(--muted);
       font-weight: 500;
       text-align: center;
+      text-wrap: pretty;
     }
+    .hero-meta{
+      margin: 10px auto 0;
+      max-width: 78ch;
+      color: rgba(15,23,42,.64);
+      font-size: 13px;
+      line-height: 1.5;
+      text-align: center;
+    }
+    .hero-meta a{
+      color: rgba(15,23,42,.74);
+      font-weight: 800;
+      text-decoration: none;
+    }
+    .hero-meta a:hover{ text-decoration: underline; }
 
-    /* Buttons */
+    /* Primary purchase button only */
     .actions{
       display:flex;
       flex-wrap: wrap;
       gap: 12px;
       align-items:center;
       justify-content: center;
-      margin-top: 6px;
+      margin-top: 12px;
     }
     .btn{
       display:inline-flex;
@@ -164,40 +179,21 @@
     }
     .btn:active{ transform: translateY(1px); }
 
-    .btn.subtle{
-      box-shadow: 0 12px 26px rgba(15,23,42,.14);
-      background: #0f172a;
-      color: #fff;
-    }
-    .btn.subtle:hover{
-      box-shadow: 0 14px 30px rgba(15,23,42,.16);
-    }
-
     /* Sections */
-    main{ margin-top: 30px; }
+    main{ margin-top: 32px; }
 
     section{ margin-top: 40px; }
     section:first-of-type{ margin-top: 26px; }
     section{ scroll-margin-top: calc(var(--topbarH) + var(--anchorGap)); }
 
     h2{
-      margin: 0 0 14px 0;
+      margin: 0 0 12px 0;
       font-size: 24px;
       line-height: 1.2;
       letter-spacing: -0.5px;
       font-weight: 800;
       color: #0b1220;
       text-align: center;
-      position: relative;
-    }
-    h2::after{
-      content:"";
-      display:block;
-      width: 140px;
-      height: 1px;
-      margin: 12px auto 0;
-      background: rgba(15, 23, 42, 0.14);
-      border-radius: 999px;
     }
 
     .section-inner{
@@ -233,16 +229,40 @@
     ul.list li{ margin: 8px 0; }
     ul.list li::marker{ color: rgba(100,116,139,.78); }
 
-    .note{
+    /* Compact info panel (optional visual anchor; not a “card”) */
+    .panel{
       margin-top: 14px;
-      padding: 12px 14px;
+      padding: 14px 14px;
       border: 1px solid rgba(148,163,184,.55);
-      background: rgba(255,255,255,.72);
-      border-radius: 12px;
+      background: rgba(255,255,255,.60);
+      border-radius: 14px;
+    }
+    .panel .row{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      justify-content: space-between;
+      align-items: flex-start;
       color: rgba(15,23,42,.78);
       font-size: 14px;
-      line-height: 1.65;
+      line-height: 1.6;
+      font-weight: 650;
     }
+    .panel .row span{ font-weight: 800; color: rgba(15,23,42,.86); }
+
+    .fineprint{
+      margin-top: 12px;
+      color: rgba(15,23,42,.66);
+      font-size: 13px;
+      line-height: 1.6;
+      text-align: left;
+    }
+    .fineprint a{
+      color: rgba(15,23,42,.74);
+      font-weight: 800;
+      text-decoration: none;
+    }
+    .fineprint a:hover{ text-decoration: underline; }
 
     /* Footer */
     .footer{
@@ -270,9 +290,9 @@
         margin: 12px 12px 22px;
         border-radius: 16px;
       }
-      .wrap{ padding: 18px 16px 60px; }
+      .wrap{ padding: 18px 16px 96px; }
       h1{ font-size: 32px; letter-spacing: -0.7px; }
-      .hero-desc{ font-size: 16px; }
+      .hero-desc{ font-size: 16px; line-height: 1.58; }
       .btn{ width: 100%; }
       section{ margin-top: 34px; }
     }
@@ -285,8 +305,8 @@
       <nav class="nav" aria-label="Primary navigation" id="nav">
         <a href="index.html">Home</a>
         <a href="tableofcontents.html">Table of Contents</a>
-        <a href="/faq/" >FAQ</a>
-        <a href="access.html" class="active">Request Access</a>
+        <a href="/faq/">FAQ</a>
+        <a href="purchase.html" class="active">Purchase</a>
       </nav>
     </div>
   </div>
@@ -294,67 +314,116 @@
   <div class="page-frame">
     <div class="wrap">
       <header>
-        <h1>Access &amp; Delivery</h1>
+        <h1>Purchase</h1>
         <p class="hero-desc">
-          Clear, practical details on how access is provided and what delivery looks like after purchase.
+          One-time purchase. Immediate delivery. A standardized Canva-based marketing system built for repeatable execution across listings, campaigns, and agents.
         </p>
 
-        <div class="actions">
-          <a class="btn" href="index.html">Back to Main Page</a>
-          <a class="btn subtle" href="/faq/">View Full FAQ</a>
+        <div class="actions" id="purchase-cta">
+          <a class="btn" href="purchase.html">Purchase ($999)</a>
+        </div>
+
+        <div class="hero-meta">
+          Want to verify scope first? Review the <a href="tableofcontents.html">full Table of Contents</a> or read the <a href="/faq/">full FAQ</a>.
         </div>
       </header>
 
       <main>
-        <section id="access">
-          <h2>How Access Works</h2>
+        <section id="purchase-details">
+          <h2>Purchase Details</h2>
           <div class="section-inner">
             <p class="lead">
-              This is a one-time purchase. Access is provided immediately after checkout.
+              $999 one-time purchase. No subscriptions. Access delivered immediately after checkout.
             </p>
 
+            <div class="panel" aria-label="Purchase summary">
+              <div class="row">
+                <div><span>Price:</span> $999 (one-time)</div>
+                <div><span>Delivery:</span> Immediate after checkout</div>
+              </div>
+              <div class="row" style="margin-top:6px;">
+                <div><span>Format:</span> Organized Canva files + documentation</div>
+                <div><span>Updates:</span> None (delivered as-is)</div>
+              </div>
+            </div>
+
+            <p class="prose" style="margin-top:14px;">
+              This product is designed to eliminate repeated design decisions and rebuild cycles. You apply one consistent standard across listings, campaigns, and team members—without reinventing layouts each time.
+            </p>
+          </div>
+        </section>
+
+        <section id="receive">
+          <h2>What You Receive</h2>
+          <div class="section-inner">
             <p class="prose">
-              After purchase, you receive access to the complete set of organized Canva files. You can duplicate the system into your Canva account and begin applying your branding and usage rules.
+              You receive a complete, standardized marketing system—organized by channel and use case—designed to be duplicated and reused across your organization.
+            </p>
+
+            <ul class="list">
+              <li>Standardized base formats spanning social, email, print, presentations, and internal documentation</li>
+              <li>Defined structure and consistent sizing for repeat execution</li>
+              <li>Files intended to keep teams aligned without redesigning each time</li>
+            </ul>
+
+            <p class="fineprint">
+              The Table of Contents is the authoritative index of what’s included. Review it here:
+              <a href="tableofcontents.html">View Full Table of Contents</a>.
+            </p>
+          </div>
+        </section>
+
+        <section id="delivery">
+          <h2>Access and Delivery</h2>
+          <div class="section-inner">
+            <p class="prose">
+              After checkout, you receive access to the complete set of organized Canva files. You can duplicate the system into a Canva workspace you control and begin applying your branding and internal usage rules.
             </p>
 
             <ul class="list">
               <li>Delivery: Organized Canva files (ready to duplicate and use)</li>
               <li>Access timing: Immediately after purchase</li>
-              <li>Updates: None required; the system is delivered as-is</li>
+              <li>Canva requirement: A Canva account (Free is sufficient)</li>
             </ul>
 
-            <div class="note">
-              If you experience access or delivery issues, check your purchase confirmation first. If it still isn’t resolved, contact support using the method provided at checkout.
-            </div>
+            <p class="fineprint">
+              If you want deeper detail on Canva requirements, sharing, and usage, the FAQ covers it:
+              <a href="/faq/">Read the Full FAQ</a>.
+            </p>
           </div>
         </section>
 
-        <section id="delivery">
-          <h2>What You Receive</h2>
+        <section id="policy">
+          <h2>License and Refund Policy</h2>
           <div class="section-inner">
             <p class="prose">
-              You receive a complete, standardized marketing system designed for repeatable execution across listings and campaigns. All templates are editable in Canva and intended to be duplicated and reused.
+              The license allows use within a single organization (your business entity and its internal team). The system may not be resold, redistributed, or shared outside your organization.
             </p>
 
-            <ul class="list">
-              <li>Standardized base formats across key marketing channels</li>
-              <li>Defined structure and consistent sizing for repeat execution</li>
-              <li>Files designed to keep teams aligned without redesigning each time</li>
-            </ul>
+            <p class="prose" style="margin-top:12px;">
+              Because this is a digital system delivered immediately, all sales are final.
+            </p>
+
+            <p class="fineprint">
+              Still deciding? Confirm scope on the <a href="tableofcontents.html">Table of Contents</a> and review common questions on the <a href="/faq/">FAQ</a> before purchasing.
+            </p>
           </div>
         </section>
 
-        <section id="next">
-          <h2>Next Steps After Purchase</h2>
+        <section id="final-cta">
+          <h2>Ready to Purchase</h2>
           <div class="section-inner">
             <p class="prose">
-              Setup is performed once by management. Typically this includes duplicating the system, applying brand elements, and defining internal usage guidelines. After setup, agents can begin using the system immediately.
+              One-time purchase. Immediate delivery. No ongoing subscription.
             </p>
 
-            <div class="actions" style="margin-top:16px;">
-              <a class="btn" href="tableofcontents.html">Review the Full Table of Contents</a>
-              <a class="btn subtle" href="index.html#faq">Quick FAQ (Main Page)</a>
+            <div class="actions" style="margin-top:14px;">
+              <a class="btn" href="purchase.html">Purchase ($999)</a>
             </div>
+
+            <p class="fineprint" style="text-align:center; margin-top:10px;">
+              Review scope first: <a href="tableofcontents.html">Table of Contents</a> · <a href="/faq/">FAQ</a>
+            </p>
           </div>
         </section>
 

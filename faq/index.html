@@ -13,7 +13,6 @@
 
   <style>
     :root{
-      /* Match your existing neutral graphite look */
       --bg: #d0d4da;
       --frame: #edf0f4;
       --frameBorder: rgba(15, 23, 42, 0.35);
@@ -122,9 +121,11 @@
       font-weight: 800;
       color: #0b1220;
     }
+
+    /* Two-line intro block (uniform sizing) */
     .hero-desc{
       margin: 0 auto 10px auto;
-      max-width: 78ch;
+      max-width: 80ch;
       font-size: 18px;
       line-height: 1.7;
       color: var(--muted);
@@ -132,7 +133,7 @@
     }
     .hero-meta{
       margin: 0 auto;
-      max-width: 78ch;
+      max-width: 80ch;
       font-size: 16px;
       line-height: 1.65;
       color: rgba(15,23,42,.72);
@@ -147,8 +148,8 @@
 
     /* Sections */
     main{ margin-top: 28px; }
-    section{ margin-top: 40px; }
-    section:first-of-type{ margin-top: 26px; }
+    section{ margin-top: 34px; }
+    section:first-of-type{ margin-top: 22px; }
     section{ scroll-margin-top: calc(var(--topbarH) + var(--anchorGap)); }
 
     h2{
@@ -161,20 +162,6 @@
       text-align: center;
     }
 
-    .section-inner{
-      max-width: 78ch;
-      margin: 0 auto;
-    }
-
-    .prose{
-      margin: 0;
-      font-size: 16px;
-      line-height: 1.75;
-      color: var(--muted);
-      text-align: left;
-    }
-
-    /* FAQ */
     .faq-wrap{
       max-width: 78ch;
       margin: 0 auto;
@@ -226,6 +213,23 @@
     }
     .answer li{ margin: 6px 0; }
 
+    /* Bottom helper line (optional, non-button) */
+    .bottom-note{
+      max-width: 78ch;
+      margin: 14px auto 0;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(15,23,42,.66);
+      font-weight: 600;
+    }
+    .bottom-note a{
+      color: rgba(15,23,42,.82);
+      font-weight: 800;
+      text-decoration: none;
+    }
+    .bottom-note a:hover{ text-decoration: underline; }
+
     /* Footer */
     .footer{
       margin-top: 56px;
@@ -256,7 +260,7 @@
       h1{ font-size: 32px; letter-spacing: -0.7px; }
       .hero-desc{ font-size: 16px; }
       .hero-meta{ font-size: 15px; }
-      section{ margin-top: 34px; }
+      section{ margin-top: 28px; }
     }
   </style>
 </head>
@@ -277,24 +281,21 @@
     <div class="wrap">
       <header>
         <h1>FAQ</h1>
+
+        <!-- Line 1: what this page covers -->
         <p class="hero-desc">
-          Read this to understand exactly what the system is, how it’s used, what you need (Canva), and how licensing and delivery work.
+          This FAQ explains what the system is, what you receive, Canva requirements, licensing, delivery, and refunds.
         </p>
+
+        <!-- Line 2: stronger system definition + simple purchase direction -->
         <p class="hero-meta">
-          Pricing and checkout details are shown on the <a href="/purchase.html">Purchase</a> page.
+          The Real Estate Marketing System replaces fragmented, one-off marketing with a single repeatable standard—so your output stays consistent across listings, campaigns, and agents.
+          <br>
+          Pricing and checkout are on the <a href="/purchase.html">Purchase</a> page.
         </p>
       </header>
 
       <main>
-        <section id="overview">
-          <h2>Overview</h2>
-          <div class="section-inner">
-            <p class="prose">
-              The Real Estate Marketing System is a Canva-based marketing system designed to bring structure and consistency to real estate marketing by replacing fragmented, one-off materials with a single repeatable standard.
-            </p>
-          </div>
-        </section>
-
         <section id="faq">
           <h2>FAQ</h2>
 
@@ -316,7 +317,7 @@
               <div class="answer">
                 <p>Most Canva templates are individual designs meant to be customized once and replaced.</p>
                 <p>
-                  This system is built to function as a reusable internal standard. The goal is that design decisions are made once and applied consistently across listings, campaigns, and team members—so execution stays fast and repeatable.
+                  This system is built to function as a reusable internal standard. Design decisions are made once and applied consistently—so execution stays fast and repeatable.
                 </p>
               </div>
             </details>
@@ -442,22 +443,6 @@
             </details>
 
             <details>
-              <summary>Does this replace the need for custom design work or branding? <span class="chev" aria-hidden="true"></span></summary>
-              <div class="answer">
-                <p>It replaces routine, repeatable marketing design.</p>
-                <p>Custom branding or one-off design work may still be appropriate for logos, rebrands, or special campaigns outside the system.</p>
-              </div>
-            </details>
-
-            <details>
-              <summary>Can I share this with assistants, VAs, or contractors? <span class="chev" aria-hidden="true"></span></summary>
-              <div class="answer">
-                <p>Yes, if they are working <strong>within your organization</strong> and creating materials on your behalf.</p>
-                <p>The system may not be shared with third parties for reuse across other clients or organizations.</p>
-              </div>
-            </details>
-
-            <details>
               <summary>Will I keep access to the system after purchase? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
                 <p>Yes.</p>
@@ -474,12 +459,10 @@
               <div class="answer">
                 <p>No ongoing costs are required to use the system.</p>
                 <p>
-                  The only optional cost some buyers choose is <strong>Canva Pro</strong>—not for the system to function, but to unlock convenience features like Brand Kits,
+                  The only optional cost some buyers choose is <strong>Canva Pro</strong>—not to make the system work, but to unlock convenience features like Brand Kits,
                   premium stock assets, and background removal.
                 </p>
-                <p>
-                  If you choose to use the print formats, any printing/distribution is handled through your normal vendors and processes (this product does not include printing services).
-                </p>
+                <p>If you use print formats, printing/distribution is handled through your existing vendors and processes (this product does not include printing services).</p>
               </div>
             </details>
 
@@ -492,21 +475,17 @@
             </details>
 
             <details>
-              <summary>Do you provide training or onboarding? <span class="chev" aria-hidden="true"></span></summary>
-              <div class="answer">
-                <p>This is a self-serve product.</p>
-                <p>The system includes clear structure and internal documentation designed to make onboarding straightforward without live training or ongoing support.</p>
-              </div>
-            </details>
-
-            <details>
               <summary>Are refunds available? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
                 <p>Because this is a digital system delivered immediately, all sales are final.</p>
                 <p>Buyers are encouraged to review the full buyer-facing table of contents prior to purchase to confirm suitability.</p>
               </div>
             </details>
+          </div>
 
+          <!-- OPTIONAL: tiny non-button backstop link (keep or delete) -->
+          <div class="bottom-note">
+            Ready to buy? Visit the <a href="/purchase.html">Purchase</a> page.
           </div>
         </section>
 

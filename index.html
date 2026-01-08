@@ -123,14 +123,18 @@
       color: #0b1220;
     }
 
-    /* MATCH OTHER PAGES: hero sentence typography */
+    /* ✅ HERO COPY BLOCK (now aligned to match section text below) */
+    .hero-blocks{
+      max-width: 78ch;          /* matches your section-inner width */
+      margin: 0 auto 14px auto; /* centers the block, not the text */
+      text-align: left;         /* aligns copy like the sections */
+    }
     .hero-desc{
-      margin: 0 auto 14px auto;
-      max-width: 78ch;
+      margin: 0;
       font-size: 18px;
       line-height: 1.7;
       color: var(--muted);
-      font-weight: 650; /* changed from 500 to match */
+      font-weight: 500;
     }
 
     /* Buttons */
@@ -265,13 +269,6 @@
       line-height: 1.75;
       max-width: 76ch;
     }
-    .answer p{ margin: 0 0 10px 0; }
-    .answer p:last-child{ margin-bottom: 0; }
-    .answer ul{
-      margin: 8px 0 0 0;
-      padding-left: 18px;
-    }
-    .answer li{ margin: 6px 0; }
 
     /* Footer */
     .footer{
@@ -301,7 +298,7 @@
       }
       .wrap{ padding: 18px 16px 160px; }
       h1{ font-size: 32px; letter-spacing: -0.7px; }
-      .hero-desc{ font-size: 16px; } /* stays matched */
+      .hero-desc{ font-size: 16px; }
       .btn{ width: 100%; }
       section{ margin-top: 34px; }
     }
@@ -327,9 +324,12 @@
       <header>
         <h1>The Real Estate Marketing System</h1>
 
-        <p class="hero-desc">
-          A standardized, Canva-based marketing system that replaces inconsistent, disconnected marketing materials with a single repeatable standard—so your output stays consistent across listings, campaigns, and agents.
-        </p>
+        <!-- ✅ aligned block -->
+        <div class="hero-blocks">
+          <p class="hero-desc">
+            A Canva-based marketing system designed to bring structure and consistency to real estate marketing by replacing fragmented, one-off materials with a single, repeatable standard.
+          </p>
+        </div>
 
         <div class="actions" id="top-cta">
           <a class="btn subtle" href="/purchase.html">Purchase ($999)</a>
@@ -445,41 +445,13 @@
               </div>
             </details>
 
-            <!-- UPDATED: full version (no tightening) -->
             <details>
               <summary>What exactly do I receive when I purchase? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
-                <p>You receive access to a complete, Canva-based marketing system that is organized by channel and use case.</p>
-                <p>Instead of isolated templates, you’re getting a structured library of reusable base formats designed to work together across:</p>
-                <ul>
-                  <li>Social media</li>
-                  <li>Print materials</li>
-                  <li>Email campaigns</li>
-                  <li>Presentations and decks</li>
-                  <li>Internal documentation and governance</li>
-                </ul>
-                <p>
-                  Every included format is listed on the <strong>Full System Table of Contents</strong>, which is the authoritative index of what’s included. This allows you to validate scope before purchase.
-                </p>
-                <p>
-                  After purchase, the system is duplicated into a Canva workspace you control, so you can access it at your convenience and reuse it indefinitely within your organization.
-                </p>
-              </div>
-            </details>
-
-            <!-- ADDED: pricing rationale teaser (full version) -->
-            <details>
-              <summary>Why is the system priced at $999? <span class="chev" aria-hidden="true"></span></summary>
-              <div class="answer">
-                <p>
-                  This is a one-time purchase for a complete, standardized system designed to be reused indefinitely inside your organization.
-                </p>
-                <p>
-                  The value is in eliminating recurring redesign and repeated decision-making. Instead of rebuilding marketing materials for each listing or campaign, you apply one consistent standard across everything you produce.
-                </p>
-                <p>
-                  For most buyers, the cost compares favorably to ongoing design spend, repeated template buying, or internal time spent recreating the same materials.
-                </p>
+                You receive 117 standardized base formats spanning social media, email, print, presentations, and internal documentation—organized so the system can be duplicated and reused consistently over time.
+                <br><br>
+                To validate scope before purchase, review the full buyer-facing index on the
+                <a href="tableofcontents.html">System Table of Contents</a>.
               </div>
             </details>
 

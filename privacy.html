@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <title>Privacy Policy — The Real Estate Marketing System</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Privacy Policy for The Real Estate Marketing System—minimal collection, limited use, and third-party processing only for purchase and delivery." />
+  <meta name="description" content="Privacy Policy for The Real Estate Marketing System. We collect only limited information necessary to process purchases and deliver the product.">
 
   <!-- Font: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +13,6 @@
 
   <style>
     :root{
-      /* Match your existing neutral graphite look */
       --bg: #d0d4da;
       --frame: #edf0f4;
       --frameBorder: rgba(15, 23, 42, 0.35);
@@ -26,7 +25,6 @@
 
       --accent: #0f766e;
       --accentHover: #115e59;
-      --accentText: #ffffff;
 
       --max: 980px;
 
@@ -63,7 +61,7 @@
     .topbar-inner{
       max-width: var(--max);
       margin: 0 auto;
-      padding: 8px 18px;
+      padding: 10px 18px; /* slightly bigger than before */
       min-height: var(--topbarH);
       display:flex;
       align-items:center;
@@ -72,16 +70,16 @@
     .nav{
       display:flex;
       flex-wrap: wrap;
-      gap: 8px 14px;
+      gap: 10px 16px;
       align-items:center;
       justify-content:center;
     }
     .nav a{
-      font-size: 13px;
+      font-size: 14px;              /* slightly bigger */
       color: rgba(15,23,42,.72);
       text-decoration: none;
       font-weight: 650;
-      padding: 7px 10px;
+      padding: 8px 12px;            /* slightly bigger */
       border-radius: 999px;
       transition: background .12s ease, color .12s ease;
     }
@@ -94,7 +92,7 @@
       color: rgba(15,118,110,.98);
     }
 
-    /* Content frame */
+    /* Frame */
     .page-frame{
       max-width: var(--max);
       margin: 16px auto 28px;
@@ -104,12 +102,10 @@
       box-shadow: var(--frameShadow);
       overflow: clip;
     }
-
     .wrap{
-      padding: 22px 24px 60px;
+      padding: 22px 24px 44px;
     }
 
-    /* Hero */
     header{
       text-align: center;
       margin-top: 8px;
@@ -122,41 +118,36 @@
       font-weight: 800;
       color: #0b1220;
     }
-
-    /* Hero copy — centered, clean */
-    .hero-desc{
-      margin: 0 auto 18px auto;
+    .hero{
       max-width: 78ch;
-      font-size: 18px;
-      line-height: 1.7;
+      margin: 0 auto;
+      font-size: 16px;
+      line-height: 1.75;
       color: var(--muted);
-      font-weight: 500;
       text-align: center;
     }
 
-    /* Sections */
-    main{ margin-top: 18px; }
+    main{ margin-top: 24px; }
 
     section{
-      margin-top: 18px;
-      scroll-margin-top: calc(var(--topbarH) + var(--anchorGap));
-    }
-
-    /* Subtle “flow” panel (NOT a loud white box) */
-    .block{
       max-width: 78ch;
       margin: 0 auto;
-      padding: 16px 16px 14px;
-      border: 1px solid rgba(148,163,184,.52);
-      border-radius: 14px;
-      background: rgba(255,255,255,.34); /* intentionally muted */
+      padding-top: 26px;
+      margin-top: 26px;
+      border-top: 1px solid rgba(148,163,184,.40);
+      scroll-margin-top: calc(var(--topbarH) + var(--anchorGap));
+    }
+    section:first-of-type{
+      border-top: 0;
+      padding-top: 10px;
+      margin-top: 10px;
     }
 
     h2{
-      margin: 0 0 12px 0;
-      font-size: 24px;
+      margin: 0 0 10px 0;
+      font-size: 22px;
       line-height: 1.2;
-      letter-spacing: -0.5px;
+      letter-spacing: -0.4px;
       font-weight: 800;
       color: #0b1220;
       text-align: center;
@@ -173,28 +164,27 @@
     }
 
     .prose{
-      margin: 0;
+      margin: 14px 0 0 0;
       font-size: 16px;
-      line-height: 1.75;
+      line-height: 1.78;
       color: var(--muted);
       text-align: left;
     }
-    .prose + .prose{ margin-top: 10px; }
+    .prose strong{ color: rgba(15,23,42,.92); }
 
     ul.list{
       margin: 12px 0 0 0;
       padding-left: 18px;
       color: var(--muted);
       font-size: 16px;
-      line-height: 1.72;
+      line-height: 1.75;
       text-align: left;
     }
     ul.list li{ margin: 8px 0; }
     ul.list li::marker{ color: rgba(100,116,139,.78); }
 
-    /* Footer */
     .footer{
-      margin-top: 56px;
+      margin-top: 44px;
       padding-top: 18px;
       border-top: 1px solid rgba(148,163,184,.45);
       display:flex;
@@ -205,8 +195,6 @@
       color: var(--muted2);
       font-size: 13px;
       max-width: var(--max);
-      margin-left: auto;
-      margin-right: auto;
     }
     .footer a{
       color: rgba(15,23,42,.72);
@@ -221,22 +209,23 @@
         margin: 12px 12px 22px;
         border-radius: 16px;
       }
-      .wrap{ padding: 18px 16px 60px; }
+      .wrap{ padding: 18px 16px 40px; }
       h1{ font-size: 32px; letter-spacing: -0.7px; }
-      .hero-desc{ font-size: 16px; }
-      .block{ padding: 14px 14px 12px; }
+      .hero{ font-size: 15px; }
+      h2{ font-size: 20px; }
+      h2::after{ width: 120px; }
     }
   </style>
 </head>
 
 <body>
   <div class="topbar" id="topbar">
-    <div class="topbar-inner" id="topbar-inner">
+    <div class="topbar-inner">
       <nav class="nav" aria-label="Primary navigation">
-        <a href="/index.html">Home</a>
-        <a href="/tableofcontents.html">Table of Contents</a>
+        <a href="index.html">Home</a>
+        <a href="tableofcontents.html">Table of Contents</a>
         <a href="/faq/">FAQ</a>
-        <a href="/purchase.html">Purchase</a>
+        <a href="purchase.html">Purchase</a>
       </nav>
     </div>
   </div>
@@ -245,136 +234,117 @@
     <div class="wrap">
       <header>
         <h1>Privacy Policy</h1>
-        <p class="hero-desc">
-          This policy explains the limited information we collect through this website, which is restricted to what’s necessary to process purchases and deliver the product.
+        <p class="hero">
+          This policy explains the limited information collected through this website, which is restricted to what is necessary
+          to process purchases and deliver the product.
         </p>
       </header>
 
       <main>
         <section id="overview">
-          <div class="block">
-            <h2>Overview</h2>
-            <p class="prose">
-              Operational Systems, LLC (“we,” “us,” “our”) operates this website to provide information about The Real Estate Marketing System and to support purchase and delivery.
-            </p>
-            <p class="prose">
-              This site is not designed to collect personal data beyond what is required to complete a transaction and deliver access to the product.
-            </p>
-          </div>
+          <h2>Overview</h2>
+          <p class="prose">
+            Operational Systems, LLC (“we,” “us,” “our”) operates this website to provide information about The Real Estate Marketing System and to support purchase and delivery.
+          </p>
+          <p class="prose">
+            We do not sell personal information and we do not collect personal data beyond what is required to complete a transaction and deliver access to the product.
+          </p>
         </section>
 
         <section id="collect">
-          <div class="block">
-            <h2>Information We Collect</h2>
-            <p class="prose">
-              We collect only limited information necessary to operate the website, process purchases, and deliver the product.
-            </p>
-            <p class="prose">This may include:</p>
-            <ul class="list">
-              <li><strong>Contact information</strong> (such as name and email address) if you contact us directly or request support.</li>
-              <li><strong>Transaction-related information</strong> associated with a purchase (such as confirmation details or delivery status). Payment information is processed by third-party payment providers and is not stored by us.</li>
-              <li><strong>Communications you send to us</strong>, including emails or other direct correspondence.</li>
-            </ul>
-            <p class="prose" style="margin-top:10px;">
-              We do not collect behavioral profiles, marketing data, or unnecessary personal information.
-            </p>
-          </div>
+          <h2>Information We Collect</h2>
+          <p class="prose">
+            We collect only the limited information necessary to operate the website, process purchases, and deliver the product. This may include:
+          </p>
+          <ul class="list">
+            <li><strong>Contact information</strong> (for example: name and email address) if you contact us or request support.</li>
+            <li><strong>Transaction-related information</strong> associated with a purchase (for example: confirmation details or delivery status). Payment details are typically handled by third-party payment processors.</li>
+            <li><strong>Communications</strong> you send to us (for example: emails or form submissions).</li>
+          </ul>
+          <p class="prose">
+            We do not collect behavioral profiles, marketing data, or unnecessary personal information.
+          </p>
         </section>
 
         <section id="not-collect">
-          <div class="block">
-            <h2>Information We Do Not Collect</h2>
-            <p class="prose">We do not intentionally collect:</p>
-            <ul class="list">
-              <li>Advertising or tracking data</li>
-              <li>Marketing analytics or user profiling data</li>
-              <li>Sensitive personal information</li>
-              <li>Location data beyond what is inherently provided by standard web requests</li>
-            </ul>
-            <p class="prose" style="margin-top:10px;">
-              If analytics are enabled at any point, they are used only in aggregate to understand general site usage—not individual behavior.
-            </p>
-          </div>
+          <h2>Information We Do Not Collect</h2>
+          <p class="prose">We do not intentionally collect:</p>
+          <ul class="list">
+            <li>Advertising or tracking data</li>
+            <li>Marketing analytics or profiling data</li>
+            <li>Sensitive personal information</li>
+            <li>Precise location data beyond what is inherently provided by standard web requests</li>
+          </ul>
         </section>
 
         <section id="use">
-          <div class="block">
-            <h2>How We Use Information</h2>
-            <p class="prose">Any information collected is used solely to:</p>
-            <ul class="list">
-              <li>Process and confirm purchases</li>
-              <li>Deliver access to the product</li>
-              <li>Respond to inquiries or support requests</li>
-              <li>Maintain basic website functionality</li>
-            </ul>
-            <p class="prose" style="margin-top:10px;">
-              We do not use personal information for advertising, remarketing, or unsolicited outreach.
-            </p>
-          </div>
+          <h2>How We Use Information</h2>
+          <p class="prose">Information collected is used solely to:</p>
+          <ul class="list">
+            <li>Process and confirm purchases</li>
+            <li>Deliver access to the product</li>
+            <li>Respond to support requests or communications you send to us</li>
+            <li>Maintain basic website functionality</li>
+          </ul>
+          <p class="prose">
+            We do not use personal information for advertising, marketing, or unsolicited outreach.
+          </p>
         </section>
 
         <section id="third-party">
-          <div class="block">
-            <h2>Third-Party Services</h2>
-            <p class="prose">
-              This website relies on limited third-party services strictly to process payments and deliver access to purchased products. These providers may process information necessary to complete those actions under their own privacy policies.
-            </p>
-            <p class="prose">
-              We do not use third-party services for advertising, tracking, or marketing analytics.
-            </p>
-          </div>
+          <h2>Third-Party Services</h2>
+          <p class="prose">
+            This website relies on limited third-party services strictly to process payments and deliver access to the product.
+            These providers may process information necessary to complete those actions under their own privacy policies.
+          </p>
+          <p class="prose">
+            We do not use third-party services for advertising, tracking, or marketing analytics.
+          </p>
         </section>
 
         <section id="retention">
-          <div class="block">
-            <h2>Data Retention</h2>
-            <p class="prose">
-              We retain information only for as long as necessary to complete transactions, provide access to purchased materials, and maintain required business records. We do not retain personal information longer than necessary for these purposes.
-            </p>
-          </div>
+          <h2>Data Retention</h2>
+          <p class="prose">
+            We retain information only as long as needed to complete transactions, provide access to purchased materials, and maintain required business records.
+            We do not retain personal information longer than necessary for these purposes.
+          </p>
         </section>
 
         <section id="security">
-          <div class="block">
-            <h2>Data Security</h2>
-            <p class="prose">
-              Reasonable administrative and technical measures are used to protect the limited information we handle. However, no online system can be guaranteed to be completely secure.
-            </p>
-          </div>
+          <h2>Data Security</h2>
+          <p class="prose">
+            Reasonable administrative and technical measures are used to protect the limited information we handle.
+            However, no online system can be guaranteed to be completely secure.
+          </p>
         </section>
 
         <section id="rights">
-          <div class="block">
-            <h2>Your Rights</h2>
-            <p class="prose">
-              If you have questions about the information associated with a purchase or communication, you may contact us for clarification. Because we collect minimal data, there are limited records subject to access or modification.
-            </p>
-          </div>
+          <h2>Your Rights</h2>
+          <p class="prose">
+            If you have questions about information associated with a purchase or communication, you may contact us for clarification.
+            Because we collect minimal data, there are limited records subject to access or modification.
+          </p>
         </section>
 
         <section id="changes">
-          <div class="block">
-            <h2>Changes to This Policy</h2>
-            <p class="prose">
-              This Privacy Policy may be updated periodically to reflect operational or legal changes. Any updates will be posted on this page.
-            </p>
-          </div>
+          <h2>Changes to This Policy</h2>
+          <p class="prose">
+            This Privacy Policy may be updated periodically to reflect operational or legal changes. Any updates will be posted on this page.
+          </p>
         </section>
 
         <section id="contact">
-          <div class="block">
-            <h2>Contact</h2>
-            <p class="prose">
-              If you have questions about this Privacy Policy or how information is handled, contact details are provided on the website.
-            </p>
-          </div>
+          <h2>Contact</h2>
+          <p class="prose">
+            If you have questions about this Privacy Policy or how information is handled, contact details are provided on this website.
+          </p>
         </section>
 
         <div class="footer">
           <div>© <a href="https://operational-systems.com">Operational Systems, LLC</a></div>
           <div>
-            <a class="active" href="/privacy.html">Privacy</a>
-            <a href="/terms.html">Terms</a>
+            <a class="active" href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
           </div>
         </div>
       </main>

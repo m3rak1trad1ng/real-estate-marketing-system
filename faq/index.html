@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <title>FAQ — The Real Estate Marketing System</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="A thorough FAQ for The Real Estate Marketing System—clarity on what it is, what you get, Canva requirements, licensing, delivery, and refunds.">
+  <meta name="description" content="A thorough FAQ for The Real Estate Marketing System—clarity on what it is, what you get, Canva requirements, licensing, pricing rationale, and what to expect at purchase.">
 
   <!-- Font: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,6 +13,7 @@
 
   <style>
     :root{
+      /* Match your existing neutral graphite look */
       --bg: #d0d4da;
       --frame: #edf0f4;
       --frameBorder: rgba(15, 23, 42, 0.35);
@@ -122,31 +123,49 @@
       color: #0b1220;
     }
 
-    .intro{
+    /* Top copy blocks (match your “TOC-style” look) */
+    .hero-blocks{
+      max-width: 78ch;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .hero-line{
+      margin: 0 0 12px 0;
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--muted);
+      font-weight: 650;
+    }
+    .hero-line:last-child{ margin-bottom: 0; }
+
+    /* Sections */
+    main{ margin-top: 28px; }
+    section{ margin-top: 38px; }
+    section:first-of-type{ margin-top: 20px; }
+    section{ scroll-margin-top: calc(var(--topbarH) + var(--anchorGap)); }
+
+    h2{
+      margin: 0 0 12px 0;
+      font-size: 24px;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+      font-weight: 800;
+      color: #0b1220;
+      text-align: center;
+    }
+
+    .section-inner{
       max-width: 78ch;
       margin: 0 auto;
     }
-    .intro p{
+
+    .prose{
       margin: 0;
       font-size: 16px;
       line-height: 1.75;
       color: var(--muted);
-      font-weight: 500;
-      text-align: center;
+      text-align: left;
     }
-    .intro p + p{ margin-top: 12px; }
-
-    .intro-rule{
-      max-width: 78ch;
-      margin: 18px auto 0;
-      height: 1px;
-      background: var(--line);
-    }
-
-    /* Sections */
-    main{ margin-top: 18px; }
-    section{ margin-top: 22px; }
-    section{ scroll-margin-top: calc(var(--topbarH) + var(--anchorGap)); }
 
     /* FAQ */
     .faq-wrap{
@@ -207,7 +226,7 @@
       gap: 12px;
       align-items:center;
       justify-content: center;
-      margin-top: 18px;
+      margin-top: 16px;
     }
     .btn{
       display:inline-flex;
@@ -260,8 +279,9 @@
       }
       .wrap{ padding: 18px 16px 34px; }
       h1{ font-size: 32px; letter-spacing: -0.7px; }
-      .actions{ margin-top: 16px; }
+      .hero-line{ font-size: 16px; }
       .btn{ width: 100%; }
+      section{ margin-top: 34px; }
     }
   </style>
 </head>
@@ -283,30 +303,31 @@
       <header>
         <h1>FAQ</h1>
 
-        <div class="intro">
-          <p>
+        <div class="hero-blocks">
+          <p class="hero-line">
             The Real Estate Marketing System replaces inconsistent marketing materials with a single repeatable standard that stays consistent across listings, campaigns, and agents.
           </p>
-          <p>
+          <p class="hero-line">
             This FAQ explains what the system is, what you receive, Canva requirements, licensing, and delivery so you can purchase with clear expectations.
           </p>
         </div>
-
-        <div class="intro-rule" aria-hidden="true"></div>
       </header>
 
       <main>
-        <section id="all">
-          <div class="faq-wrap" style="margin-top:18px;">
-            <!-- Overview / Fit -->
+        <section id="faq">
+          <h2>FAQ</h2>
+
+          <div class="faq-wrap">
+            <!-- What it is -->
             <details>
               <summary>Is this just a bundle of Canva templates? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
                 <p>No. This is not a collection of one-off designs.</p>
                 <p>
-                  This product is a <strong>standardized marketing system</strong>: reusable base formats, shared structures, and defined usage rules designed to be applied consistently across listings, campaigns, and team members.
+                  This product is a <strong>standardized marketing system</strong>: reusable base formats, shared structures, and defined usage rules
+                  designed to be applied consistently across listings, campaigns, and team members without redesigning layouts each time.
                 </p>
-                <p>If you want disposable templates that change every time, this is not the right product.</p>
+                <p>If you are looking for individual, disposable templates, this is not the right product.</p>
               </div>
             </details>
 
@@ -315,7 +336,8 @@
               <div class="answer">
                 <p>Most Canva templates are individual designs meant to be customized once and replaced.</p>
                 <p>
-                  This product is a <strong>repeatable system</strong>: shared structures, standardized formats, and rules designed to be reused across listings and campaigns without redesigning layouts or re-deciding formatting every time.
+                  This product is a <strong>standardized marketing system</strong>: shared structures, base formats, and usage rules designed to be reused across listings,
+                  campaigns, and teams. The goal is repeatable execution with consistent output, not reinventing layouts every time.
                 </p>
               </div>
             </details>
@@ -333,38 +355,32 @@
                   <li>Internal documentation and governance</li>
                 </ul>
                 <p>
-                  Every included format is listed on the <strong>Full System Table of Contents</strong>, which is the authoritative index of what’s included and allows you to validate scope before purchase.
+                  Every included format is listed on the <strong>Full System Table of Contents</strong>, which is the authoritative index of what’s included.
+                  This allows you to validate scope before purchase.
                 </p>
                 <p>
-                  After purchase, the system is duplicated into your Canva workspace so you can keep it, manage it, and use it at your convenience.
+                  After purchase, the system is duplicated into a Canva workspace you control, so you can access it at your convenience and reuse it indefinitely within your organization.
                 </p>
               </div>
             </details>
 
             <details>
-              <summary>Who is this best suited for? <span class="chev" aria-hidden="true"></span></summary>
+              <summary>Why is the system priced at $999? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
-                <p>This system is built for real estate professionals who want marketing to operate as an internal standard rather than a recurring design project.</p>
-                <ul>
-                  <li>Independent agents who want consistent, professional output without reinventing layouts</li>
-                  <li>Teams and brokerages that need standardization across multiple agents and listings</li>
-                  <li>Marketing coordinators, assistants, and support staff executing materials on behalf of agents</li>
-                  <li>Organizations that value repeatability, speed, and control over creative experimentation</li>
-                </ul>
-              </div>
-            </details>
-
-            <details>
-              <summary>Is this built for individual agents or teams? <span class="chev" aria-hidden="true"></span></summary>
-              <div class="answer">
-                <p>Both.</p>
                 <p>
-                  Independent agents benefit from having a reliable, professional system in place. Teams and brokerages benefit from shared standards that keep marketing consistent across multiple agents, listings, and contributors.
+                  This is a one-time purchase for a complete, standardized system designed to be reused indefinitely inside your organization.
+                </p>
+                <p>
+                  The value is in eliminating recurring redesign and repeated decision-making. Instead of rebuilding marketing materials for each listing or campaign,
+                  you apply one consistent standard across everything you produce.
+                </p>
+                <p>
+                  For most buyers, the cost compares favorably to ongoing design spend, repeated template buying, or internal time spent recreating the same materials.
                 </p>
               </div>
             </details>
 
-            <!-- Canva / Access -->
+            <!-- Canva + access -->
             <details>
               <summary>Do I need a Canva account to use this? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
@@ -373,7 +389,8 @@
                   Canva <strong>Free</strong> is sufficient to duplicate, edit, and export the included formats. You do <strong>not</strong> need Canva Pro for the system to function.
                 </p>
                 <p>
-                  Canva Pro is optional and may be useful for convenience features (such as Brand Kits, premium assets, or one-click resizing), but the system is fully usable without Pro.
+                  Canva Pro is optional and may be useful for convenience features some teams like (for example: Brand Kits, premium assets, and advanced workflow tools),
+                  but the system is fully usable without Pro.
                 </p>
                 <p>
                   You are responsible for maintaining your own Canva account (free or paid, at your discretion). This product does not include Canva access or subscriptions.
@@ -385,36 +402,44 @@
               <summary>How do my agents or team members access the system in Canva? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
                 <p>
-                  After purchase, the system is duplicated into a Canva workspace controlled by the buyer (typically the brokerage, team lead, or account owner).
+                  After purchase, the system is duplicated into a Canva workspace controlled by the buyer (usually the brokerage or team lead).
+                  From there, you have two common options:
                 </p>
-                <p>From there, there are two common ways teams use it:</p>
-                <p><strong>Shared workspace approach (recommended for teams)</strong><br>
-                  Management keeps the “master” system in a shared Canva workspace. Agents duplicate the formats they need into their own working folders. This preserves the master system while keeping standards consistent.
-                </p>
-                <p><strong>Distributed approach</strong><br>
-                  Management duplicates and distributes selected formats to agents or departments as needed.
-                </p>
-                <p>
-                  You do not need everyone using a single Canva login. Access is managed using Canva’s standard sharing and permissions based on how your team is structured.
-                </p>
-                <p>
-                  Exact sharing and permission options may vary depending on your Canva plan.
-                </p>
+                <ul>
+                  <li>
+                    <strong>Shared workspace approach (recommended for teams):</strong> Management keeps the “master” system in a shared Canva workspace and agents duplicate the formats they need into their own working folders. This preserves the master and keeps standards consistent.
+                  </li>
+                  <li>
+                    <strong>Distributed approach:</strong> Management duplicates and distributes selected formats to agents or departments as needed.
+                  </li>
+                </ul>
+                <p>You do not need everyone using a single Canva login. Access can be managed through Canva’s normal sharing and permissions based on how your team is structured.</p>
+                <p><strong>Note:</strong> Exact sharing and permission options can vary depending on your Canva plan.</p>
+              </div>
+            </details>
+
+            <!-- Fit / usage -->
+            <details>
+              <summary>Who is this best suited for? <span class="chev" aria-hidden="true"></span></summary>
+              <div class="answer">
+                <p>This system is built for real estate professionals who want marketing to operate as an internal system rather than a recurring design project.</p>
+                <ul>
+                  <li>Independent agents who want consistent, professional output without redesigning each time</li>
+                  <li>Brokerages and team leaders managing multiple agents, listings, and contributors</li>
+                  <li>Organizations that value repeatability, speed, and control over creative experimentation</li>
+                </ul>
               </div>
             </details>
 
             <details>
-              <summary>Do agents need design experience to use this system? <span class="chev" aria-hidden="true"></span></summary>
+              <summary>Does this include photos, listing descriptions, or marketing copy? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
-                <p>No.</p>
-                <p>
-                  If an agent can edit text and images in Canva, they can use the system effectively without design training.
-                  The system is designed to remove layout and formatting decisions during execution.
-                </p>
+                <p>No. This system provides structure, not listing content.</p>
+                <p>You will supply your own property photos, listing details, market data, and written copy specific to your listings or campaigns.</p>
+                <p>The value of the system is that once those inputs are added, the underlying layout and structure stay consistent across everything you create.</p>
               </div>
             </details>
 
-            <!-- Editing / Workflow -->
             <details>
               <summary>Can I customize the designs? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
@@ -427,18 +452,15 @@
               <summary>Are the margins, layouts, or elements locked? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
                 <p>No.</p>
-                <p>
-                  The system defines standards but does not technically lock files. You can change any element if desired; however, the purpose of the system is to eliminate repeated layout decisions by settling them once.
-                </p>
+                <p>The system defines standards but does not technically lock files. You can change any element if desired; however, the purpose of the system is to eliminate repeated layout decisions by settling them once.</p>
               </div>
             </details>
 
             <details>
-              <summary>Does this include photos, listing descriptions, or marketing copy? <span class="chev" aria-hidden="true"></span></summary>
+              <summary>Do agents need design experience to use this system? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
-                <p>No. This system provides structure, not listing content.</p>
-                <p>You will supply your own property photos, listing details, market data, and written copy specific to your listings or campaigns.</p>
-                <p>The value is that once those inputs are added, the underlying layout and standards stay consistent across everything you create.</p>
+                <p>No.</p>
+                <p>If an agent can edit text and images in Canva, they can use the system effectively without design training. The system is designed to remove the need for layout or formatting decisions during execution.</p>
               </div>
             </details>
 
@@ -446,20 +468,19 @@
               <summary>How does this help maintain consistency across a team? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
                 <p>All users work from the same base formats, dimensions, and layout structures.</p>
-                <p>
-                  This ensures marketing remains visually consistent regardless of who creates it, without requiring constant review, redesign, or centralized design bottlenecks.
-                </p>
+                <p>This ensures marketing remains visually consistent regardless of who creates it, without requiring constant review, redesign, or centralized design bottlenecks.</p>
               </div>
             </details>
 
             <details>
               <summary>How long does setup take? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
-                <p>Setup is performed once—typically by management or whoever owns branding.</p>
+                <p>Setup is done once—typically by management or whoever owns branding.</p>
                 <p>
-                  Time depends on how many brand elements you’re applying, how many people will be using the system, and whether you’re standardizing internal rules across multiple agents or offices.
-                  After setup, agents can begin using the system immediately.
+                  The time required depends on how much branding you apply (logos, colors, fonts) and how your organization wants to standardize internal usage.
+                  Smaller teams may complete setup quickly; larger organizations may take longer if they’re aligning multiple offices, brands, or internal rules.
                 </p>
+                <p>After setup, agents can use the system immediately.</p>
               </div>
             </details>
 
@@ -467,47 +488,42 @@
               <summary>Does this replace the need for custom design work or branding? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
                 <p>It replaces routine, repeatable marketing design.</p>
-                <p>
-                  Custom branding or one-off design work may still be appropriate for logos, rebrands, or special campaigns outside the system.
-                </p>
+                <p>Custom branding or design work may still be appropriate for logos, brand development, or special campaigns outside the system.</p>
               </div>
             </details>
 
             <!-- Licensing -->
             <details>
-              <summary>Can this be used across multiple agents or offices? <span class="chev" aria-hidden="true"></span></summary>
-              <div class="answer">
-                <p>The license allows use within a <strong>single organization</strong>.</p>
-                <p>
-                  “Single organization” means one business entity (and its internal team members) using the system for its own listings and marketing.
-                  Internal use across multiple agents, departments, and locations under that same organization is permitted.
-                </p>
-                <p>
-                  The system may not be shared, resold, or redistributed to other brokerages, separate business entities, or outside organizations.
-                  If your structure is complex (multiple entities, franchises, subsidiaries), use the Purchase page to ask before buying.
-                </p>
-              </div>
-            </details>
-
-            <details>
               <summary>Can I share this with assistants, VAs, or contractors? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
-                <p>Yes—if they are working within your organization and creating materials on your behalf.</p>
+                <p>Yes, if they are working <strong>within your organization</strong> and creating materials on your behalf.</p>
                 <p>
-                  “VA” means <strong>virtual assistant</strong>. Contractors are allowed if they are executing marketing for your organization (not reusing the system for other clients).
+                  This includes assistants or contractors who support your business internally (for example: an admin assistant, a virtual assistant, or a marketing coordinator working for your team).
                 </p>
                 <p>The system may not be shared with third parties for reuse across other clients or organizations.</p>
               </div>
             </details>
 
-            <!-- Purchase / Delivery -->
+            <details>
+              <summary>Can this be used across multiple agents or offices? <span class="chev" aria-hidden="true"></span></summary>
+              <div class="answer">
+                <p>The license allows use within a <strong>single organization</strong>.</p>
+                <p>
+                  “Single organization” means your business entity and its internal team operating under the same ownership and control.
+                  You may use the system across your agents, listings, offices, and internal team members under that organization.
+                </p>
+                <p>It may not be shared, resold, or redistributed outside that organization.</p>
+              </div>
+            </details>
+
+            <!-- Purchase / delivery -->
             <details>
               <summary>How is access delivered after purchase? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
                 <p>Access is delivered immediately after checkout.</p>
                 <p>
-                  You receive organized Canva files that can be duplicated into your Canva workspace and used without delay.
-                  Once duplicated, the system lives in your Canva environment so your team can access it at your convenience.
+                  You receive organized Canva files that can be duplicated into a Canva workspace you control,
+                  so the system becomes part of your Canva environment for ongoing internal reuse.
                 </p>
               </div>
             </details>
@@ -525,7 +541,11 @@
               <div class="answer">
                 <p>No. The product itself is a one-time purchase.</p>
                 <p>
-                  Canva Pro is optional. Some buyers choose it for convenience features (like Brand Kits, premium assets, or resizing tools), but it is not required to use the system.
+                  Canva Pro is optional. Some buyers choose it for convenience features like Brand Kits, premium assets, and workflow tools,
+                  but it is not required to use the system.
+                </p>
+                <p>
+                  Any other costs are entirely optional and depend on your own marketing operations (not required to use the product).
                 </p>
               </div>
             </details>
@@ -534,9 +554,7 @@
               <summary>Do you provide training or onboarding? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
                 <p>This is a self-serve product.</p>
-                <p>
-                  The system includes clear structure and internal documentation designed to make onboarding straightforward without live training or ongoing support.
-                </p>
+                <p>The system includes clear structure and internal documentation designed to make onboarding straightforward without live training or ongoing support.</p>
               </div>
             </details>
 
@@ -545,13 +563,14 @@
               <div class="answer">
                 <p>Because this is a digital system delivered immediately, all sales are final.</p>
                 <p>
-                  The website provides the full Table of Contents and detailed explanations of what this product is (and is not) so buyers can confirm suitability before purchase.
+                  Buyers are encouraged to review the full buyer-facing table of contents prior to purchase to confirm suitability,
+                  and to ask any remaining questions before purchasing so expectations are clear.
                 </p>
               </div>
             </details>
 
-            <!-- Bottom CTA (single button, matches site style) -->
-            <div class="actions">
+            <!-- Bottom CTA only (per your request) -->
+            <div class="actions" style="margin-top:14px;">
               <a class="btn" href="/purchase.html">Purchase</a>
             </div>
           </div>
@@ -579,7 +598,7 @@
         });
       });
 
-      // Keep --topbarH accurate for scroll-margin usage
+      // Keep --topbarH accurate
       const topbar = document.getElementById('topbar');
       function getTopbarH(){
         if (!topbar) return 52;

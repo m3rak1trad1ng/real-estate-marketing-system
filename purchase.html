@@ -198,36 +198,23 @@
       font-size: 16px;
       line-height: 1.72;
     }
-    ul.expect li{ margin: 8px 0; }
+    ul.expect li{ margin: 10px 0; }
     ul.expect li::marker{ color: rgba(100,116,139,.78); }
+    ul.expect strong{ color: rgba(15,23,42,.88); }
 
-    .links{
-      margin-top: 14px;
+    .bottom-links{
+      margin-top: 12px;
       font-size: 13px;
       line-height: 1.6;
       color: rgba(15,23,42,.64);
       text-align: center;
     }
-    .links a{
+    .bottom-links a{
       color: rgba(15,23,42,.74);
       font-weight: 800;
       text-decoration: none;
     }
-    .links a:hover{ text-decoration: underline; }
-
-    .micro{
-      margin-top: 14px;
-      font-size: 13px;
-      line-height: 1.6;
-      color: rgba(15,23,42,.62);
-      text-align: left;
-    }
-    .micro a{
-      color: rgba(15,23,42,.74);
-      font-weight: 800;
-      text-decoration: none;
-    }
-    .micro a:hover{ text-decoration: underline; }
+    .bottom-links a:hover{ text-decoration: underline; }
 
     /* Footer */
     .footer{
@@ -287,39 +274,34 @@
           <!-- Replace href with your actual checkout URL when ready -->
           <a class="btn" href="purchase.html">Purchase ($999)</a>
         </div>
-
-        <div class="links">
-          Verify scope first: <a href="tableofcontents.html">Table of Contents</a> · <a href="/faq/">FAQ</a>
-        </div>
       </header>
 
       <main>
         <div class="section-inner">
           <div class="panel" aria-label="Purchase expectations">
             <div class="panel-title">What to Expect</div>
-            <ul class="expect">
-              <li><strong>Price:</strong> $999 one-time (no subscriptions)</li>
-              <li><strong>Delivery timing:</strong> immediate after checkout</li>
-              <li><strong>Delivery format:</strong> organized Canva files + documentation</li>
-              <li><strong>Canva requirement:</strong> a Canva account (Free is sufficient)</li>
-              <li><strong>Usage:</strong> duplicate into a Canva workspace you control, apply your branding, and reuse across listings/campaigns</li>
-              <li><strong>Updates/support:</strong> none required; self-serve system delivered as-is</li>
-            </ul>
 
-            <div class="micro">
-              <strong>License:</strong> use within a single organization (your business entity and its internal team). Not for resale or redistribution.
-              <br>
-              <strong>Refunds:</strong> because access is delivered immediately, all sales are final. Details are covered in the <a href="/faq/">FAQ</a>.
-            </div>
+            <ul class="expect">
+              <li><strong>Price:</strong> $999 one-time purchase. No subscriptions or recurring fees.</li>
+              <li><strong>Delivery:</strong> Immediate access after checkout.</li>
+              <li><strong>Format:</strong> Organized Canva files with supporting documentation.</li>
+              <li><strong>Canva:</strong> A Canva account is required. Canva Free is sufficient.</li>
+              <li><strong>Usage:</strong> Duplicate the system into a Canva workspace you control, apply your branding, and reuse across listings and campaigns.</li>
+              <li><strong>Updates &amp; Support:</strong> No updates or ongoing support. The system is delivered as-is for self-serve use.</li>
+              <li><strong>License:</strong> Licensed for use within a single organization (your business entity and internal team). Not for resale or redistribution.</li>
+              <li><strong>Refunds:</strong> Because access is delivered immediately, all sales are final. See the FAQ for details.</li>
+            </ul>
           </div>
 
           <div class="actions" style="margin-top:16px;">
-            <!-- Duplicate CTA at the bottom only; still just one action -->
+            <!-- Bottom CTA (primary action) -->
             <a class="btn" href="purchase.html">Purchase ($999)</a>
           </div>
 
-          <div class="links" style="margin-top:10px;">
-            Want to confirm what’s included? <a href="tableofcontents.html">Review the full Table of Contents</a>.
+          <div class="bottom-links">
+            Before purchasing, review what’s included and confirm fit:
+            <a href="tableofcontents.html">View the full Table of Contents</a> ·
+            <a href="/faq/">Read the FAQ</a>
           </div>
         </div>
 

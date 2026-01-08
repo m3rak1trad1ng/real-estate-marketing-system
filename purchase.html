@@ -1,10 +1,10 @@
-<!doctype html>
+=<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <title>Purchase — The Real Estate Marketing System</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Purchase details for The Real Estate Marketing System. One-time purchase with immediate delivery and clear post-checkout expectations.">
+  <meta name="description" content="Purchase details for The Real Estate Marketing System. Immediate delivery with clear expectations for access, usage, licensing, and what you receive.">
 
   <!-- Font: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,6 +37,8 @@
       background:var(--bg);
       color:var(--text);
       font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     /* Top Nav */
@@ -54,18 +56,28 @@
       padding:8px 18px;
       display:flex;
       justify-content:center;
+      min-height: var(--topbarH);
+      align-items: center;
     }
     .nav{
       display:flex;
-      gap:14px;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      align-items:center;
+      justify-content:center;
     }
     .nav a{
       font-size:13px;
       font-weight:650;
       color:rgba(15,23,42,.72);
       text-decoration:none;
-      padding:7px 12px;
+      padding:7px 10px;
       border-radius:999px;
+      transition: background .12s ease, color .12s ease;
+    }
+    .nav a:hover{
+      background: rgba(15,23,42,.08);
+      color: rgba(15,23,42,.92);
     }
     .nav a.active{
       background:rgba(15,118,110,.16);
@@ -80,6 +92,7 @@
       border:1px solid var(--frameBorder);
       border-radius:20px;
       box-shadow:var(--frameShadow);
+      overflow: clip;
     }
     .wrap{
       padding:26px 24px 60px;
@@ -95,6 +108,8 @@
       font-size:46px;
       font-weight:800;
       letter-spacing:-1px;
+      line-height: 1.06;
+      color:#0b1220;
     }
     .hero-desc{
       max-width:78ch;
@@ -102,6 +117,9 @@
       font-size:18px;
       line-height:1.7;
       color:var(--muted);
+      font-weight: 500;
+      text-align:center;
+      text-wrap: pretty;
     }
 
     /* Expectation Card */
@@ -119,6 +137,7 @@
       font-weight:800;
       letter-spacing:.4px;
       text-transform:uppercase;
+      color:#0f172a;
     }
     ul.expect{
       margin:0;
@@ -126,6 +145,7 @@
       font-size:16px;
       line-height:1.7;
       color:var(--muted);
+      text-align:left;
     }
     ul.expect li{
       margin:10px 0;
@@ -145,12 +165,19 @@
       border-radius:14px;
       font-size:15px;
       font-weight:800;
+      letter-spacing: .2px;
       text-decoration:none;
       background:var(--accent);
       color:var(--accentText);
+      border:1px solid rgba(0,0,0,.08);
       box-shadow:0 16px 34px rgba(15,118,110,.26);
+      transition: transform .06s ease, box-shadow .12s ease, background .12s ease;
     }
-    .btn:hover{background:var(--accentHover)}
+    .btn:hover{
+      background: var(--accentHover);
+      box-shadow: 0 18px 38px rgba(15,118,110,.28);
+    }
+    .btn:active{ transform: translateY(1px); }
 
     /* Verification */
     .verify{
@@ -158,6 +185,7 @@
       text-align:center;
       font-size:14px;
       color:var(--muted2);
+      line-height: 1.6;
     }
     .verify-links{
       margin-top:6px;
@@ -176,27 +204,42 @@
       padding-top:18px;
       border-top:1px solid var(--line);
       display:flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
       justify-content:space-between;
+      align-items:center;
       font-size:13px;
       color:var(--muted2);
     }
+    .footer a{
+      color: rgba(15,23,42,.72);
+      text-decoration:none;
+      font-weight: 800;
+      margin-right: 14px;
+    }
+    .footer a:hover{ text-decoration: underline; }
 
     @media(max-width:820px){
-      h1{font-size:32px}
+      .page-frame{
+        margin: 12px 12px 22px;
+        border-radius: 16px;
+      }
+      .wrap{padding:18px 16px 60px}
+      h1{font-size:32px; letter-spacing:-0.7px}
       .hero-desc{font-size:16px}
-      .btn{width:100%;justify-content:center}
+      .btn{width:100%; justify-content:center}
     }
   </style>
 </head>
 
 <body>
-  <div class="topbar">
-    <div class="topbar-inner">
-      <nav class="nav">
-        <a href="index.html">Home</a>
-        <a href="tableofcontents.html">Table of Contents</a>
+  <div class="topbar" id="topbar">
+    <div class="topbar-inner" id="topbar-inner">
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="/index.html">Home</a>
+        <a href="/tableofcontents.html">Table of Contents</a>
         <a href="/faq/">FAQ</a>
-        <a class="active" href="purchase.html">Purchase</a>
+        <a class="active" href="/purchase.html">Purchase</a>
       </nav>
     </div>
   </div>
@@ -206,44 +249,67 @@
       <header>
         <h1>Purchase</h1>
         <p class="hero-desc">
-          One-time purchase. Immediate delivery. Clear expectations for what happens after checkout.
+          Immediate delivery with clear expectations for access, usage, and licensing.
         </p>
       </header>
 
-      <div class="expect-card">
-        <h2>What to Expect</h2>
-        <ul class="expect">
-          <li><strong>Price:</strong> $999 one-time purchase. No subscriptions, renewals, or recurring fees.</li>
-          <li><strong>Delivery:</strong> Immediate access after checkout.</li>
-          <li><strong>Format:</strong> Organized Canva files with supporting documentation.</li>
-          <li><strong>Canva:</strong> A Canva account is required. Canva Free is sufficient.</li>
-          <li><strong>Usage:</strong> Duplicate the system into a Canva workspace you control, apply your branding, and reuse across listings and campaigns.</li>
-          <li><strong>Updates & Support:</strong> No updates or ongoing support. Delivered as-is for self-serve use.</li>
-          <li><strong>License:</strong> Licensed for use within a single organization (your business entity and internal team). Not for resale or redistribution.</li>
-          <li><strong>Refunds:</strong> Because access is delivered immediately, all sales are final.</li>
-        </ul>
-      </div>
+      <main>
+        <div class="expect-card">
+          <h2>What to Expect</h2>
 
-      <div class="cta">
-        <a class="btn" href="YOUR-CHECKOUT-LINK">Purchase ($999)</a>
+          <ul class="expect">
+            <li><strong>Price:</strong> $999 one-time purchase. No subscriptions, renewals, or recurring fees.</li>
+            <li><strong>Delivery:</strong> Access is delivered immediately after checkout.</li>
+            <li><strong>What you receive:</strong> A complete, Canva-based marketing system delivered as organized files with supporting documentation. The system is structured to function as a unified set of reusable formats, not individual one-off templates.</li>
+            <li><strong>Canva requirement:</strong> A Canva account is required. Canva Free is sufficient; Canva Pro is optional.</li>
+            <li><strong>Usage:</strong> The system is duplicated into a Canva workspace you control, where it can be branded and reused across listings, campaigns, and internal marketing.</li>
+            <li><strong>Updates &amp; support:</strong> This is a self-serve product. No updates, training, or ongoing support services are included. The system includes clear structure and documentation designed to be used without additional assistance.</li>
+            <li><strong>License:</strong> Licensed for use within a single organization (your business entity and its internal team). Not for resale or redistribution.</li>
+            <li><strong>Refunds:</strong> This is a digital system delivered in full at purchase. Buyers are responsible for reviewing the included materials before purchase. All sales are final.</li>
+          </ul>
+        </div>
 
-        <div class="verify">
-          Before purchasing, review what’s included and confirm fit.
-          <div class="verify-links">
-            <a href="tableofcontents.html">View the full Table of Contents</a> ·
-            <a href="/faq/">Read the FAQ</a>
+        <div class="cta">
+          <!-- Replace with your real checkout URL when ready -->
+          <a class="btn" href="YOUR-CHECKOUT-LINK">Purchase ($999)</a>
+
+          <div class="verify">
+            We recommend reviewing what’s included prior to purchase to ensure the system is the right fit.
+            <div class="verify-links">
+              <a href="/tableofcontents.html">View the full Table of Contents</a> ·
+              <a href="/faq/">Read the FAQ</a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="footer">
-        <div>© <a href="https://operational-systems.com">Operational Systems, LLC</a></div>
-        <div>
-          <a href="privacy.html">Privacy</a>
-          <a href="terms.html">Terms</a>
+        <div class="footer">
+          <div>© <a href="https://operational-systems.com">Operational Systems, LLC</a></div>
+          <div>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
+          </div>
         </div>
-      </div>
+      </main>
     </div>
   </div>
+
+  <script>
+    (function(){
+      const topbar = document.getElementById('topbar');
+      function getTopbarH(){
+        if (!topbar) return 52;
+        return Math.ceil(topbar.getBoundingClientRect().height);
+      }
+      function setTopbarH(){
+        const h = getTopbarH();
+        document.documentElement.style.setProperty('--topbarH', h + 'px');
+        return h;
+      }
+      setTopbarH();
+      requestAnimationFrame(setTopbarH);
+      window.addEventListener('load', setTopbarH);
+      window.addEventListener('resize', setTopbarH);
+    })();
+  </script>
 </body>
 </html>

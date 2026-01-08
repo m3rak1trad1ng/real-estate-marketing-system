@@ -115,35 +115,30 @@
       margin-top: 8px;
     }
     h1{
-      margin: 0 0 10px 0;
+      margin: 0 0 12px 0;
       font-size: 46px;
       line-height: 1.06;
       letter-spacing: -1px;
       font-weight: 800;
       color: #0b1220;
     }
-    .hero-desc{
-      margin: 0 auto 0 auto;
+
+    /* TOC-style intro block (centered block, left-aligned text) */
+    .intro-block{
       max-width: 78ch;
-      font-size: 18px;
-      line-height: 1.7;
+      margin: 0 auto;
+      text-align: left;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(148,163,184,.45);
+    }
+    .intro-block p{
+      margin: 0 0 14px 0;
+      font-size: 16px;
+      line-height: 1.75;
       color: var(--muted);
       font-weight: 500;
     }
-    .hero-desc + .hero-desc{ margin-top: 10px; }
-    .hero-meta{
-      margin-top: 10px;
-      font-size: 16px;
-      line-height: 1.7;
-      color: rgba(15,23,42,.78);
-      font-weight: 650;
-    }
-    .hero-meta a{
-      color: rgba(15,118,110,.98);
-      text-decoration: none;
-      font-weight: 800;
-    }
-    .hero-meta a:hover{ text-decoration: underline; }
+    .intro-block p:last-child{ margin-bottom: 0; }
 
     /* Buttons */
     .actions{
@@ -152,7 +147,7 @@
       gap: 12px;
       align-items:center;
       justify-content: center;
-      margin-top: 14px;
+      margin-top: 16px;
     }
     .btn{
       display:inline-flex;
@@ -182,11 +177,6 @@
     section{ margin-top: 28px; }
     section:first-of-type{ margin-top: 18px; }
     section{ scroll-margin-top: calc(var(--topbarH) + var(--anchorGap)); }
-
-    .section-inner{
-      max-width: 78ch;
-      margin: 0 auto;
-    }
 
     /* FAQ */
     .faq-wrap{
@@ -268,8 +258,7 @@
       }
       .wrap{ padding: 18px 16px 34px; }
       h1{ font-size: 32px; letter-spacing: -0.7px; }
-      .hero-desc{ font-size: 16px; }
-      .hero-meta{ font-size: 14px; }
+      .intro-block p{ font-size: 15px; }
       .btn{ width: 100%; }
       section{ margin-top: 24px; }
     }
@@ -293,16 +282,16 @@
       <header>
         <h1>FAQ</h1>
 
-        <p class="hero-desc">
-          This FAQ is built to remove confusion. It explains what the system is, what you receive at purchase, Canva requirements, licensing, delivery, and refunds—so you can make an informed buying decision with clear expectations.
-        </p>
-
-        <p class="hero-desc">
-          The Real Estate Marketing System is a Canva-based marketing system designed to bring structure and consistency to real estate marketing by replacing fragmented, one-off materials with a single, repeatable standard used across listings, campaigns, and agents.
-        </p>
-
-        <div class="hero-meta">
-          Pricing and checkout details are available on the <a href="/purchase.html">Purchase</a> page.
+        <!-- Updated: top two blocks match TOC-style formatting -->
+        <div class="intro-block">
+          <p>
+            This FAQ is built to remove confusion. It explains what the system is, what you receive at purchase, Canva requirements,
+            licensing, delivery, and refunds—so you can make an informed buying decision with clear expectations.
+          </p>
+          <p>
+            The Real Estate Marketing System is a Canva-based marketing system designed to bring structure and consistency to real estate marketing
+            by replacing fragmented, one-off materials with a single, repeatable standard used across listings, campaigns, and agents.
+          </p>
         </div>
       </header>
 

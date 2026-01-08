@@ -122,7 +122,6 @@
       font-weight: 800;
       color: #0b1220;
     }
-
     .hero-desc{
       margin: 0 auto 18px auto;
       max-width: 78ch;
@@ -133,19 +132,28 @@
       text-align: center;
     }
 
-    /* Sections */
-    main{ margin-top: 22px; }
+    /* Section cards (this is the big visual change) */
+    main{ margin-top: 18px; }
     section{
-      margin-top: 34px;
+      margin-top: 18px;
       scroll-margin-top: calc(var(--topbarH) + var(--anchorGap));
     }
-    section:first-of-type{ margin-top: 14px; }
+
+    .section-card{
+      max-width: 82ch;
+      margin: 0 auto;
+      padding: 18px 18px 16px;
+      border: 1px solid rgba(148,163,184,.52);
+      border-radius: 14px;
+      background: rgba(255,255,255,.42); /* softer than white */
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    }
 
     h2{
-      margin: 0 0 14px 0;
-      font-size: 24px;
+      margin: 0 0 12px 0;
+      font-size: 22px;
       line-height: 1.2;
-      letter-spacing: -0.5px;
+      letter-spacing: -0.4px;
       font-weight: 800;
       color: #0b1220;
       text-align: center;
@@ -154,16 +162,11 @@
     h2::after{
       content:"";
       display:block;
-      width: 140px;
+      width: 120px;
       height: 1px;
-      margin: 12px auto 0;
+      margin: 10px auto 0;
       background: rgba(15, 23, 42, 0.14);
       border-radius: 999px;
-    }
-
-    .section-inner{
-      max-width: 78ch;
-      margin: 0 auto;
     }
 
     .prose{
@@ -173,7 +176,6 @@
       color: var(--muted);
       text-align: left;
     }
-
     .prose + .prose{ margin-top: 10px; }
 
     ul.list{
@@ -187,19 +189,18 @@
     ul.list li{ margin: 8px 0; }
     ul.list li::marker{ color: rgba(100,116,139,.78); }
 
-    /* Callout: make it blend (less white pop) */
-    .callout{
+    /* Muted note that DOES NOT pop white */
+    .note{
       margin-top: 14px;
-      padding: 14px 14px;
+      padding: 12px 14px;
       border: 1px solid rgba(148,163,184,.55);
-      background: rgba(237,240,244,.65); /* closer to frame */
+      background: rgba(237,240,244,.70);
       border-radius: 12px;
       color: rgba(15,23,42,.78);
       font-size: 14px;
       line-height: 1.65;
-      text-align: left;
     }
-    .callout strong{ color: rgba(15,23,42,.9); }
+    .note strong{ color: rgba(15,23,42,.9); }
 
     /* Footer */
     .footer{
@@ -230,7 +231,7 @@
       .wrap{ padding: 18px 16px 60px; }
       h1{ font-size: 32px; letter-spacing: -0.7px; }
       .hero-desc{ font-size: 16px; }
-      section{ margin-top: 30px; }
+      .section-card{ padding: 16px 14px 14px; }
     }
   </style>
 </head>
@@ -258,26 +259,24 @@
 
       <main>
         <section id="overview">
-          <h2>Overview</h2>
-          <div class="section-inner">
+          <div class="section-card">
+            <h2>Overview</h2>
             <p class="prose">
               Operational Systems, LLC (“we,” “us,” “our”) operates this website to provide information about The Real Estate Marketing System and to support purchase and delivery for buyers.
             </p>
             <p class="prose">
               We aim to collect only what is reasonably necessary to operate the site, process transactions through third parties, and deliver access to the product.
             </p>
-
-            <div class="callout">
+            <div class="note">
               <strong>Third-party services:</strong> This website may use third-party providers for payments, email communication, analytics, or file delivery. Those providers may process information under their own policies.
             </div>
           </div>
         </section>
 
         <section id="collect">
-          <h2>Information We Collect</h2>
-          <div class="section-inner">
-            <p class="prose">We may collect the following categories of information, depending on how you interact with the site:</p>
-
+          <div class="section-card">
+            <h2>Information We Collect</h2>
+            <p class="prose">Depending on how you interact with the site, we may collect:</p>
             <ul class="list">
               <li><strong>Contact information</strong> (for example: name and email address) if you contact us or request support.</li>
               <li><strong>Transaction-related information</strong> associated with a purchase (for example: confirmation details or delivery status). Payment details are typically handled by third-party payment processors.</li>
@@ -288,10 +287,9 @@
         </section>
 
         <section id="use">
-          <h2>How We Use Information</h2>
-          <div class="section-inner">
+          <div class="section-card">
+            <h2>How We Use Information</h2>
             <p class="prose">We use information for purposes such as:</p>
-
             <ul class="list">
               <li>Operating the website and providing requested information</li>
               <li>Processing transactions and confirming purchases (via third-party providers)</li>
@@ -304,11 +302,9 @@
         </section>
 
         <section id="share">
-          <h2>How We Share Information</h2>
-          <div class="section-inner">
-            <p class="prose">
-              We do not sell your personal information.
-            </p>
+          <div class="section-card">
+            <h2>How We Share Information</h2>
+            <p class="prose">We do not sell your personal information.</p>
             <p class="prose">
               We may share information with service providers only as needed to operate the website and deliver the product (for example: payment processing, email communications, analytics, or file delivery).
             </p>
@@ -319,8 +315,8 @@
         </section>
 
         <section id="cookies">
-          <h2>Cookies &amp; Analytics</h2>
-          <div class="section-inner">
+          <div class="section-card">
+            <h2>Cookies &amp; Analytics</h2>
             <p class="prose">
               If enabled, cookies or similar technologies may be used to support basic site functionality and understand site usage. You can control cookies through your browser settings.
             </p>
@@ -328,8 +324,8 @@
         </section>
 
         <section id="security">
-          <h2>Data Security</h2>
-          <div class="section-inner">
+          <div class="section-card">
+            <h2>Data Security</h2>
             <p class="prose">
               We take reasonable measures to protect information collected through the website. No method of transmission or storage is guaranteed to be completely secure.
             </p>
@@ -337,8 +333,8 @@
         </section>
 
         <section id="retention">
-          <h2>Data Retention</h2>
-          <div class="section-inner">
+          <div class="section-card">
+            <h2>Data Retention</h2>
             <p class="prose">
               We retain information only as long as necessary for legitimate business purposes such as providing access, maintaining records, resolving disputes, and complying with legal obligations.
             </p>
@@ -346,8 +342,8 @@
         </section>
 
         <section id="contact">
-          <h2>Contact</h2>
-          <div class="section-inner">
+          <div class="section-card">
+            <h2>Contact</h2>
             <p class="prose">
               If you have questions about this Privacy Policy, contact Operational Systems, LLC.
             </p>
@@ -367,7 +363,6 @@
 
   <script>
     (function(){
-      // Keep --topbarH accurate
       const topbar = document.getElementById('topbar');
       function getTopbarH(){
         if (!topbar) return 52;

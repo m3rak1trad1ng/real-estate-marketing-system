@@ -13,38 +13,35 @@
 
   <style>
     :root{
-      --bg: #d0d4da;
-      --frame: #edf0f4;
-      --frameBorder: rgba(15, 23, 42, 0.35);
-      --frameShadow: 0 32px 90px rgba(15, 23, 42, 0.22);
+      --bg:#d0d4da;
+      --frame:#edf0f4;
+      --frameBorder:rgba(15,23,42,.35);
+      --frameShadow:0 32px 90px rgba(15,23,42,.22);
 
-      --text: #0f172a;
-      --muted: #475569;
+      --text:#0f172a;
+      --muted:#475569;
       --muted2:#64748b;
-      --line: rgba(148,163,184,.35);
+      --line:rgba(148,163,184,.35);
 
-      --accent: #0f766e;
-      --accentHover: #115e59;
-      --accentText: #ffffff;
+      --accent:#0f766e;
+      --accentHover:#115e59;
 
-      --max: 980px;
-      --topbarH: 52px;
+      --max:980px;
     }
 
-    *{ box-sizing:border-box; }
+    *{box-sizing:border-box;}
 
     body{
       margin:0;
       background:var(--bg);
       color:var(--text);
-      font-family:"Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
     }
 
     /* Nav */
     .topbar{
       position:sticky;
       top:0;
-      z-index:50;
       background:rgba(208,212,218,.92);
       backdrop-filter:blur(10px);
       border-bottom:1px solid var(--line);
@@ -82,21 +79,10 @@
       border-radius:20px;
       box-shadow:var(--frameShadow);
     }
+    .wrap{padding:28px 24px 56px;}
 
-    .wrap{
-      padding:28px 24px 56px;
-    }
-
-    header{
-      text-align:center;
-      margin-bottom:28px;
-    }
-    h1{
-      margin:0 0 10px;
-      font-size:46px;
-      font-weight:800;
-      letter-spacing:-1px;
-    }
+    header{text-align:center;margin-bottom:28px;}
+    h1{margin:0 0 10px;font-size:46px;font-weight:800;letter-spacing:-1px;}
     .hero-desc{
       max-width:78ch;
       margin:0 auto;
@@ -105,10 +91,7 @@
       color:var(--muted);
     }
 
-    section{
-      margin-top:40px;
-    }
-
+    section{margin-top:40px;}
     h2{
       font-size:24px;
       font-weight:800;
@@ -129,6 +112,16 @@
       margin:0 auto;
     }
 
+    /* 🔒 LINK COLOR LOCK — FIX */
+    .section-inner a{
+      color:var(--text);
+      text-decoration:none;
+      font-weight:650;
+    }
+    .section-inner a:hover{
+      text-decoration:underline;
+    }
+
     ul.list{
       margin:0;
       padding-left:18px;
@@ -136,16 +129,13 @@
       line-height:1.75;
       font-size:16px;
     }
-    ul.list li{
-      margin:10px 0;
-    }
+    ul.list li{margin:10px 0;}
 
     .actions{
       margin-top:34px;
       display:flex;
       justify-content:center;
     }
-
     .btn{
       padding:12px 22px;
       border-radius:12px;
@@ -164,9 +154,8 @@
       color:var(--muted);
     }
     .footer-links{
-      margin-top:10px;
+      margin-top:12px;
       text-align:center;
-      font-weight:650;
     }
 
     .footer{
@@ -212,8 +201,8 @@
             <li><strong>Canva requirement:</strong> A Canva account is required. Canva Free is sufficient; Canva Pro is optional.</li>
             <li><strong>Usage:</strong> The system is duplicated into a Canva workspace you control and reused across listings, campaigns, and internal marketing.</li>
             <li><strong>Updates & support:</strong> This is a self-serve product. No updates, training, or ongoing support services are included. The system includes clear structure and documentation designed to be used correctly without additional assistance.</li>
-            <li><strong>License:</strong> Licensed for use within a single organization (your business entity and its internal team). Not for resale or redistribution.</li>
-            <li><strong>Refunds:</strong> This is a digital system delivered in full at purchase. Buyers are encouraged to review the buyer-facing Table of Contents and FAQ prior to purchase to confirm suitability. All sales are final.</li>
+            <li><strong>License:</strong> Licensed for use within a single organization. Not for resale or redistribution.</li>
+            <li><strong>Refunds:</strong> This is a digital system delivered in full at purchase. Review the Table of Contents and FAQ prior to purchase. All sales are final.</li>
           </ul>
 
           <div class="actions">
@@ -224,8 +213,7 @@
             Before purchasing, we recommend reviewing what’s included to ensure the system is the right fit.
           </p>
           <p class="footer-links">
-            <a href="/tableofcontents.html">View the full Table of Contents</a>
-            &nbsp;·&nbsp;
+            <a href="/tableofcontents.html">View the full Table of Contents</a> ·
             <a href="/faq/">Read the FAQ</a>
           </p>
         </div>

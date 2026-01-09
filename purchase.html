@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <title>Purchase — The Real Estate Marketing System</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Purchase The Real Estate Marketing System. Immediate delivery with clear expectations around access, usage, and licensing.">
+  <meta name="description" content="Purchase details for The Real Estate Marketing System. One-time purchase with immediate delivery and clear expectations.">
 
   <!-- Font: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,152 +20,163 @@
 
       --text: #0f172a;
       --muted: #475569;
-      --line: rgba(148,163,184,.45);
+      --muted2:#64748b;
+      --line: rgba(148,163,184,.35);
 
       --accent: #0f766e;
       --accentHover: #115e59;
       --accentText: #ffffff;
 
       --max: 980px;
+      --topbarH: 52px;
     }
 
-    *{ box-sizing: border-box; }
+    *{ box-sizing:border-box; }
 
     body{
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:"Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
     }
 
+    /* Nav */
     .topbar{
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(208,212,218,.92);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--line);
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(208,212,218,.92);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
     }
-
     .topbar-inner{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 10px 18px;
+      max-width:var(--max);
+      margin:0 auto;
+      padding:8px 18px;
       display:flex;
       justify-content:center;
     }
-
     .nav{
       display:flex;
-      gap: 14px;
+      gap:14px;
     }
-
     .nav a{
-      font-size: 14px;
-      font-weight: 650;
-      text-decoration: none;
-      color: rgba(15,23,42,.72);
-      padding: 8px 12px;
-      border-radius: 999px;
+      font-size:13px;
+      font-weight:650;
+      text-decoration:none;
+      color:rgba(15,23,42,.72);
+      padding:7px 10px;
+      border-radius:999px;
     }
-
     .nav a.active{
-      background: rgba(15,118,110,.16);
-      color: rgba(15,118,110,.98);
+      background:rgba(15,118,110,.16);
+      color:rgba(15,118,110,.98);
     }
 
+    /* Frame */
     .page-frame{
-      max-width: var(--max);
-      margin: 16px auto 28px;
-      background: var(--frame);
-      border: 1px solid var(--frameBorder);
-      border-radius: 20px;
-      box-shadow: var(--frameShadow);
+      max-width:var(--max);
+      margin:16px auto 28px;
+      background:var(--frame);
+      border:1px solid var(--frameBorder);
+      border-radius:20px;
+      box-shadow:var(--frameShadow);
     }
 
     .wrap{
-      padding: 24px;
+      padding:28px 24px 56px;
     }
 
     header{
-      text-align: center;
+      text-align:center;
+      margin-bottom:28px;
     }
-
     h1{
-      margin: 0 0 12px;
-      font-size: 46px;
-      font-weight: 800;
+      margin:0 0 10px;
+      font-size:46px;
+      font-weight:800;
+      letter-spacing:-1px;
     }
-
     .hero-desc{
-      max-width: 78ch;
-      margin: 0 auto 22px;
-      font-size: 18px;
-      line-height: 1.7;
-      color: var(--muted);
+      max-width:78ch;
+      margin:0 auto;
+      font-size:18px;
+      line-height:1.7;
+      color:var(--muted);
     }
 
-    .card{
-      max-width: 78ch;
-      margin: 0 auto;
-      background: #fff;
-      border: 1px solid rgba(148,163,184,.55);
-      border-radius: 14px;
-      padding: 18px;
+    section{
+      margin-top:40px;
     }
 
-    .card-title{
-      font-weight: 900;
-      font-size: 16px;
-      margin-bottom: 12px;
-      text-transform: uppercase;
+    h2{
+      font-size:24px;
+      font-weight:800;
+      text-align:center;
+      margin:0 0 18px;
+    }
+    h2::after{
+      content:"";
+      display:block;
+      width:120px;
+      height:1px;
+      margin:12px auto 0;
+      background:rgba(15,23,42,.12);
     }
 
-    ul{
-      padding-left: 18px;
-      line-height: 1.75;
-      color: var(--muted);
+    .section-inner{
+      max-width:78ch;
+      margin:0 auto;
     }
 
-    li{ margin: 10px 0; }
-
-    strong{ color: #0f172a; }
+    ul.list{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.75;
+      font-size:16px;
+    }
+    ul.list li{
+      margin:10px 0;
+    }
 
     .actions{
+      margin-top:34px;
       display:flex;
       justify-content:center;
-      margin-top: 22px;
     }
 
     .btn{
-      padding: 12px 18px;
-      background: var(--accent);
-      color: #fff;
-      border-radius: 12px;
-      font-weight: 800;
-      text-decoration: none;
-    }
-
-    .verify{
-      text-align:center;
-      margin-top: 16px;
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .verify a{
-      font-weight: 800;
-      color: rgba(15,23,42,.8);
+      padding:12px 22px;
+      border-radius:12px;
+      background:var(--accent);
+      color:#fff;
+      font-weight:800;
+      font-size:14px;
       text-decoration:none;
+      box-shadow:0 14px 30px rgba(15,118,110,.22);
+    }
+
+    .footer-note{
+      margin-top:30px;
+      text-align:center;
+      font-size:15px;
+      color:var(--muted);
+    }
+    .footer-links{
+      margin-top:10px;
+      text-align:center;
+      font-weight:650;
     }
 
     .footer{
-      margin-top: 56px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(148,163,184,.45);
+      margin-top:56px;
+      padding-top:18px;
+      border-top:1px solid var(--line);
       display:flex;
-      justify-content: space-between;
-      font-size: 13px;
+      justify-content:space-between;
+      font-size:13px;
+      color:var(--muted2);
     }
   </style>
 </head>
@@ -174,10 +185,10 @@
   <div class="topbar">
     <div class="topbar-inner">
       <nav class="nav">
-        <a href="index.html">Home</a>
-        <a href="tableofcontents.html">Table of Contents</a>
+        <a href="/index.html">Home</a>
+        <a href="/tableofcontents.html">Table of Contents</a>
         <a href="/faq/">FAQ</a>
-        <a href="purchase.html" class="active">Purchase</a>
+        <a class="active" href="/purchase.html">Purchase</a>
       </nav>
     </div>
   </div>
@@ -187,55 +198,44 @@
       <header>
         <h1>Purchase</h1>
         <p class="hero-desc">
-          Immediate delivery with clear expectations around access, usage, and licensing.
+          Immediate delivery with clear, upfront expectations around access, usage, and licensing.
         </p>
       </header>
 
-      <div class="card">
-        <div class="card-title">Purchase Details</div>
-        <ul>
-          <li><strong>Price:</strong> $999 one-time purchase. No subscriptions, renewals, or recurring fees.</li>
+      <section>
+        <h2>What to Expect</h2>
+        <div class="section-inner">
+          <ul class="list">
+            <li><strong>Price:</strong> $999 one-time purchase. No subscriptions, renewals, or recurring fees.</li>
+            <li><strong>Delivery:</strong> Access is delivered immediately after checkout. No waiting period.</li>
+            <li><strong>What you receive:</strong> The Real Estate Marketing System replaces inconsistent, disconnected marketing materials with a single repeatable standard—delivered through a structured, Canva-based system used across listings, campaigns, and agents. You receive the organized Canva files and supporting documentation needed to duplicate the system into your workspace and apply your branding.</li>
+            <li><strong>Canva requirement:</strong> A Canva account is required. Canva Free is sufficient; Canva Pro is optional.</li>
+            <li><strong>Usage:</strong> The system is duplicated into a Canva workspace you control and reused across listings, campaigns, and internal marketing.</li>
+            <li><strong>Updates & support:</strong> This is a self-serve product. No updates, training, or ongoing support services are included. The system includes clear structure and documentation designed to be used correctly without additional assistance.</li>
+            <li><strong>License:</strong> Licensed for use within a single organization (your business entity and its internal team). Not for resale or redistribution.</li>
+            <li><strong>Refunds:</strong> This is a digital system delivered in full at purchase. Buyers are encouraged to review the buyer-facing Table of Contents and FAQ prior to purchase to confirm suitability. All sales are final.</li>
+          </ul>
 
-          <li><strong>Delivery:</strong> Access is delivered immediately after checkout.</li>
+          <div class="actions">
+            <a class="btn" href="/purchase.html">Purchase ($999)</a>
+          </div>
 
-          <li>
-            <strong>What you receive:</strong>
-            The Real Estate Marketing System replaces inconsistent, disconnected marketing materials with a single repeatable standard—delivered through a structured, Canva-based system used across listings, campaigns, and agents. You receive the organized Canva files and supporting documentation needed to duplicate the system into your workspace and begin applying your branding.
-          </li>
-
-          <li><strong>Canva requirement:</strong> A Canva account is required. Canva Free is sufficient; Canva Pro is optional.</li>
-
-          <li><strong>Usage:</strong> The system is duplicated into a Canva workspace you control, where it can be branded and reused across listings, campaigns, and internal marketing.</li>
-
-          <li>
-            <strong>Updates &amp; support:</strong>
-            This is a self-serve product. No updates, training, or ongoing support services are included. The system includes clear structure and documentation designed for correct use without additional assistance.
-          </li>
-
-          <li><strong>License:</strong> Licensed for use within a single organization (your business entity and its internal team). Not for resale or redistribution.</li>
-
-          <li>
-            <strong>Refunds:</strong>
-            This is a digital system delivered in full at purchase. Buyers are encouraged to review the full buyer-facing Table of Contents and FAQ prior to purchase to confirm suitability. All sales are final.
-          </li>
-        </ul>
-      </div>
-
-      <div class="actions">
-        <a class="btn" href="/purchase.html">Purchase ($999)</a>
-      </div>
-
-      <div class="verify">
-        Before purchasing, we recommend reviewing what’s included to confirm the system is the right fit for your organization.<br>
-        <a href="tableofcontents.html">View the full Table of Contents</a> ·
-        <a href="/faq/">Read the FAQ</a>
-      </div>
+          <p class="footer-note">
+            Before purchasing, we recommend reviewing what’s included to ensure the system is the right fit.
+          </p>
+          <p class="footer-links">
+            <a href="/tableofcontents.html">View the full Table of Contents</a>
+            &nbsp;·&nbsp;
+            <a href="/faq/">Read the FAQ</a>
+          </p>
+        </div>
+      </section>
 
       <div class="footer">
         <div>© Operational Systems, LLC</div>
         <div>
-          <a href="privacy.html">Privacy</a>
-          <a href="terms.html">Terms</a>
+          <a href="/privacy.html">Privacy</a> ·
+          <a href="/terms.html">Terms</a>
         </div>
       </div>
     </div>

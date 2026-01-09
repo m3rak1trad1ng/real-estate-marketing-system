@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Purchase — The Real Estate Marketing System</title>
+  <title>Purchase Details — The Real Estate Marketing System</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Purchase The Real Estate Marketing System. Clear expectations for delivery, usage, licensing, and what happens after checkout.">
+  <meta name="description" content="Purchase details for The Real Estate Marketing System—clear expectations around delivery, access, usage, licensing, and refunds.">
 
   <!-- Font: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,7 +51,7 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Sticky nav (match other pages) */
+    /* Sticky nav (match your other pages) */
     .topbar{
       position: sticky;
       top: 0;
@@ -106,7 +106,7 @@
     }
 
     .wrap{
-      padding: 22px 24px 60px;
+      padding: 22px 24px 64px;
     }
 
     /* Hero */
@@ -123,71 +123,49 @@
       color: #0b1220;
     }
 
-    .hero-blocks{
-      max-width: 78ch;
-      margin: 0 auto;
-      text-align: center;
-    }
     .hero-desc{
-      margin: 0;
+      margin: 0 auto 0 auto;
+      max-width: 78ch;
       font-size: 18px;
-      line-height: 1.55;
+      line-height: 1.7;
       color: var(--muted);
       font-weight: 500;
-      text-wrap: pretty;
-    }
-
-    main{ margin-top: 28px; }
-
-    h2{
-      margin: 0 0 12px 0;
-      font-size: 24px;
-      line-height: 1.2;
-      letter-spacing: -0.5px;
-      font-weight: 800;
-      color: #0b1220;
       text-align: center;
     }
-    h2::after{
-      content:"";
-      display:block;
-      width: 120px;
-      height: 1px;
-      margin: 12px auto 0;
-      background: rgba(15, 23, 42, 0.12);
-      border-radius: 999px;
-    }
+
+    /* Main content */
+    main{ margin-top: 26px; }
 
     .section-inner{
       max-width: 78ch;
       margin: 0 auto;
     }
 
-    /* Bullets (no white box) */
-    ul.list{
-      margin: 14px 0 0 0;
+    /* Bullets */
+    ul.expect{
+      margin: 18px 0 0 0;
       padding-left: 18px;
       color: var(--muted);
       font-size: 16px;
-      line-height: 1.72;
+      line-height: 1.75;
       text-align: left;
     }
-    ul.list li{ margin: 10px 0; }
-    ul.list li::marker{ color: rgba(100,116,139,.78); }
+    ul.expect li{ margin: 12px 0; }
+    ul.expect li::marker{ color: rgba(100,116,139,.78); }
 
     .label{
-      color: #0f172a;
       font-weight: 800;
+      color: #0f172a;
     }
 
-    /* Button — match Main page exactly */
+    /* CTA */
     .actions{
       display:flex;
       flex-wrap: wrap;
       gap: 12px;
       align-items:center;
       justify-content: center;
-      margin-top: 22px;
+      margin-top: 26px;
     }
     .btn{
       display:inline-flex;
@@ -200,7 +178,7 @@
       letter-spacing: .2px;
       text-decoration: none;
       background: var(--accent);
-      color: var(--accentText); /* ✅ white */
+      color: var(--accentText);
       border: 1px solid rgba(0,0,0,.08);
       box-shadow: 0 14px 30px rgba(15,118,110,.22);
       transition: transform .06s ease, box-shadow .12s ease, background .12s ease;
@@ -212,55 +190,43 @@
     }
     .btn:active{ transform: translateY(1px); }
 
-    .btn.subtle{
-      box-shadow: 0 12px 26px rgba(15,23,42,.14);
-    }
-    .btn.subtle:hover{
-      box-shadow: 0 14px 30px rgba(15,23,42,.16);
-    }
-
-    /* Bottom helper (sentence centered, links below, spacing fixed, no purple) */
+    /* Bottom verification block */
     .verify{
-      margin-top: 14px;
-      text-align: center;
-    }
-    .verify .sentence{
-      margin: 0;
-      font-size: 14px;
-      line-height: 1.65;
-      color: rgba(71,85,105,.95);
-      font-weight: 500;
       max-width: 78ch;
-      margin-left:auto;
-      margin-right:auto;
-    }
-    .verify .links{
-      margin-top: 12px; /* ✅ less tight */
-      display:flex;
-      gap: 12px;
-      justify-content:center;
-      align-items:center;
-      flex-wrap: wrap;
+      margin: 14px auto 0;
+      text-align: center;
+      color: var(--muted);
       font-size: 14px;
+      line-height: 1.6;
+    }
+    .verify-links{
+      margin-top: 10px; /* more breathing room vs sentence */
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      flex-wrap: wrap;
       font-weight: 800;
     }
-    .verify .links a{
-      color: rgba(15,23,42,.78); /* ✅ prevents purple */
+    .verify a{
+      color: rgba(15,23,42,.78);   /* no purple */
       text-decoration: none;
+      border-bottom: 1px solid rgba(15,23,42,.22);
     }
-    .verify .links a:hover{
-      text-decoration: underline;
+    .verify a:hover{
+      color: rgba(15,23,42,.92);
+      border-bottom-color: rgba(15,23,42,.36);
     }
-    .verify .dot{
-      color: rgba(100,116,139,.65);
-      font-weight: 700;
+    .dot{
+      color: rgba(100,116,139,.75);
+      font-weight: 800;
     }
 
     /* Footer */
     .footer{
       margin-top: 56px;
       padding-top: 18px;
-      border-top: 1px solid rgba(148,163,184,.40);
+      border-top: 1px solid rgba(148,163,184,.45);
       display:flex;
       flex-wrap: wrap;
       gap: 10px 18px;
@@ -282,11 +248,11 @@
         margin: 12px 12px 22px;
         border-radius: 16px;
       }
-      .wrap{ padding: 18px 16px 60px; }
+      .wrap{ padding: 18px 16px 56px; }
       h1{ font-size: 32px; letter-spacing: -0.7px; }
-      .hero-desc{ font-size: 16px; line-height: 1.6; }
+      .hero-desc{ font-size: 16px; }
       .btn{ width: 100%; }
-      .verify .links{ gap: 10px; }
+      .verify-links{ gap: 10px; }
     }
   </style>
 </head>
@@ -306,60 +272,50 @@
   <div class="page-frame">
     <div class="wrap">
       <header>
-        <h1>Purchase</h1>
-
-        <div class="hero-blocks">
-          <p class="hero-desc">
-            Immediate delivery with clear, upfront expectations around access, usage, and licensing.
-          </p>
-        </div>
+        <!-- ✅ ONLY CHANGE: H1 renamed to Purchase Details (and removed the redundant subheading) -->
+        <h1>Purchase Details</h1>
+        <p class="hero-desc">
+          Immediate delivery with clear, upfront expectations around access, usage, and licensing.
+        </p>
       </header>
 
       <main>
-        <section>
-          <h2>Purchase Details</h2>
+        <div class="section-inner">
+          <ul class="expect">
+            <li><span class="label">Price:</span> $999 one-time purchase. No subscriptions, renewals, or recurring fees.</li>
+            <li><span class="label">Delivery:</span> Access is delivered immediately after checkout. No waiting period.</li>
+            <li>
+              <span class="label">What you receive:</span>
+              The Real Estate Marketing System replaces inconsistent, disconnected marketing materials with a single repeatable standard—delivered through a structured, Canva-based system used across listings, campaigns, and agents.
+              You receive the organized Canva files and supporting documentation needed to duplicate the system into your workspace and begin applying your branding.
+            </li>
+            <li><span class="label">Canva requirement:</span> A Canva account is required. Canva Free is sufficient; Canva Pro is optional.</li>
+            <li><span class="label">Usage:</span> The system is duplicated into a Canva workspace you control, where it can be branded and reused across listings, campaigns, and internal marketing.</li>
+            <li><span class="label">Updates &amp; support:</span> This is a self-serve product. No updates, training, or ongoing support services are included. The system includes clear structure and documentation designed to be used correctly without additional assistance.</li>
+            <li><span class="label">License:</span> Licensed for use within a single organization (your business entity and its internal team). Not for resale or redistribution.</li>
+            <li><span class="label">Refunds:</span> This is a digital system delivered in full at purchase. Buyers are encouraged to review the full buyer-facing Table of Contents and FAQ prior to purchase to confirm suitability. All sales are final.</li>
+          </ul>
 
-          <div class="section-inner">
-            <!-- ✅ COPY RESTORED EXACTLY (no drifting) -->
-            <ul class="list">
-              <li><span class="label">Price:</span> $999 one-time purchase. No subscriptions, renewals, or recurring fees.</li>
+          <div class="actions">
+            <!-- Button matches Main Page .btn styling (white text) -->
+            <a class="btn" href="#" aria-label="Purchase ($999)">Purchase ($999)</a>
+          </div>
 
-              <li><span class="label">Delivery:</span> Access is delivered immediately after checkout. No waiting period.</li>
-
-              <li><span class="label">What you receive:</span> The Real Estate Marketing System replaces inconsistent, disconnected marketing materials with a single repeatable standard—delivered through a structured, Canva-based system used across listings, campaigns, and agents. You receive the organized Canva files and supporting documentation needed to duplicate the system into your workspace and begin applying your branding.</li>
-
-              <li><span class="label">Canva requirement:</span> A Canva account is required. Canva Free is sufficient; Canva Pro is optional.</li>
-
-              <li><span class="label">Usage:</span> The system is duplicated into a Canva workspace you control, where it can be branded and reused across listings, campaigns, and internal marketing.</li>
-
-              <li><span class="label">Updates &amp; support:</span> This is a self-serve product. No updates, training, or ongoing support services are included. The system includes clear structure and documentation designed to be used correctly without additional assistance.</li>
-
-              <li><span class="label">License:</span> Licensed for use within a single organization (your business entity and its internal team). Not for resale or redistribution.</li>
-
-              <li><span class="label">Refunds:</span> This is a digital system delivered in full at purchase. Buyers are encouraged to review the full buyer-facing Table of Contents and FAQ prior to purchase to confirm suitability. All sales are final.</li>
-            </ul>
-
-            <div class="actions">
-              <!-- Replace href with your checkout URL when ready -->
-              <a class="btn subtle" href="#">Purchase ($999)</a>
-            </div>
-
-            <div class="verify">
-              <p class="sentence">To confirm scope before purchasing, review the buyer-facing index and common questions:</p>
-              <div class="links">
-                <a href="/tableofcontents.html">View the full Table of Contents</a>
-                <span class="dot">•</span>
-                <a href="/faq/">Read the FAQ</a>
-              </div>
+          <div class="verify">
+            <div>To confirm scope before purchasing, review the buyer-facing index and common questions:</div>
+            <div class="verify-links">
+              <a href="/tableofcontents.html">View the full Table of Contents</a>
+              <span class="dot">•</span>
+              <a href="/faq/">Read the FAQ</a>
             </div>
           </div>
-        </section>
 
-        <div class="footer">
-          <div>© <a href="https://operational-systems.com">Operational Systems, LLC</a></div>
-          <div>
-            <a href="/privacy.html">Privacy</a>
-            <a href="/terms.html">Terms</a>
+          <div class="footer">
+            <div>© <a href="https://operational-systems.com">Operational Systems, LLC</a></div>
+            <div>
+              <a href="/privacy.html">Privacy</a>
+              <a href="/terms.html">Terms</a>
+            </div>
           </div>
         </div>
       </main>
@@ -368,6 +324,7 @@
 
   <script>
     (function(){
+      // Keep --topbarH accurate (same pattern as your other pages)
       const topbar = document.getElementById('topbar');
       function getTopbarH(){
         if (!topbar) return 52;

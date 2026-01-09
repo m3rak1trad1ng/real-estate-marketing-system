@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <title>Purchase — The Real Estate Marketing System</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Purchase details for The Real Estate Marketing System. One-time purchase with immediate delivery and clear expectations.">
+  <meta name="description" content="Purchase details for The Real Estate Marketing System—clear expectations for delivery, usage, and licensing.">
 
   <!-- Font: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,167 +13,281 @@
 
   <style>
     :root{
-      --bg:#d0d4da;
-      --frame:#edf0f4;
-      --frameBorder:rgba(15,23,42,.35);
-      --frameShadow:0 32px 90px rgba(15,23,42,.22);
+      /* Match site tokens */
+      --bg: #d0d4da;
+      --frame: #edf0f4;
+      --frameBorder: rgba(15, 23, 42, 0.35);
+      --frameShadow: 0 32px 90px rgba(15, 23, 42, 0.22);
 
-      --text:#0f172a;
-      --muted:#475569;
+      --text: #0f172a;
+      --muted: #475569;
       --muted2:#64748b;
-      --line:rgba(148,163,184,.35);
+      --line: rgba(148,163,184,.45);
 
-      --accent:#0f766e;
-      --accentHover:#115e59;
+      --accent: #0f766e;
+      --accentHover: #115e59;
+      --accentText: #ffffff;
 
-      --max:980px;
+      --max: 980px;
+
+      --topbarH: 52px;
+      --anchorGap: 14px;
     }
 
-    *{box-sizing:border-box;}
+    *{ box-sizing: border-box; }
+
+    html{ scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior: auto; }
+      *{ transition: none !important; }
+    }
 
     body{
-      margin:0;
-      background:var(--bg);
-      color:var(--text);
-      font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Nav */
+    /* Links (prevent purple visited links) */
+    a{
+      color: rgba(15,23,42,.84);
+      text-decoration: none;
+      font-weight: 800;
+    }
+    a:hover{ text-decoration: underline; }
+    a:visited{ color: rgba(15,23,42,.84); }
+
+    /* Sticky nav */
     .topbar{
-      position:sticky;
-      top:0;
-      background:rgba(208,212,218,.92);
-      backdrop-filter:blur(10px);
-      border-bottom:1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(208,212,218,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
     }
     .topbar-inner{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:8px 18px;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 8px 18px;
+      min-height: var(--topbarH);
       display:flex;
-      justify-content:center;
+      align-items:center;
+      justify-content: center;
     }
     .nav{
       display:flex;
-      gap:14px;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      align-items:center;
+      justify-content:center;
     }
     .nav a{
-      font-size:13px;
-      font-weight:650;
-      text-decoration:none;
-      color:rgba(15,23,42,.72);
-      padding:7px 10px;
-      border-radius:999px;
+      font-size: 13px;
+      color: rgba(15,23,42,.72);
+      text-decoration: none;
+      font-weight: 650;
+      padding: 7px 10px;
+      border-radius: 999px;
+      transition: background .12s ease, color .12s ease;
+    }
+    .nav a:hover{
+      background: rgba(15,23,42,.08);
+      color: rgba(15,23,42,.92);
+      text-decoration: none;
     }
     .nav a.active{
-      background:rgba(15,118,110,.16);
-      color:rgba(15,118,110,.98);
+      background: rgba(15,118,110,.16);
+      color: rgba(15,118,110,.98);
     }
 
-    /* Frame */
+    /* Content frame */
     .page-frame{
-      max-width:var(--max);
-      margin:16px auto 28px;
-      background:var(--frame);
-      border:1px solid var(--frameBorder);
-      border-radius:20px;
-      box-shadow:var(--frameShadow);
+      max-width: var(--max);
+      margin: 16px auto 28px;
+      background: var(--frame);
+      border: 1px solid var(--frameBorder);
+      border-radius: 20px;
+      box-shadow: var(--frameShadow);
+      overflow: clip;
     }
-    .wrap{padding:28px 24px 56px;}
+    .wrap{ padding: 22px 24px 52px; }
 
-    header{text-align:center;margin-bottom:28px;}
-    h1{margin:0 0 10px;font-size:46px;font-weight:800;letter-spacing:-1px;}
+    /* Hero */
+    header{
+      text-align: center;
+      margin-top: 8px;
+    }
+    h1{
+      margin: 0 0 12px 0;
+      font-size: 46px;
+      line-height: 1.06;
+      letter-spacing: -1px;
+      font-weight: 800;
+      color: #0b1220;
+    }
     .hero-desc{
-      max-width:78ch;
-      margin:0 auto;
-      font-size:18px;
-      line-height:1.7;
-      color:var(--muted);
+      margin: 0 auto;
+      max-width: 78ch;
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--muted);
+      font-weight: 500;
+      text-align: center;
     }
 
-    section{margin-top:40px;}
+    /* Section headings (match your site) */
+    main{ margin-top: 30px; }
+    section{ margin-top: 34px; }
+    section{ scroll-margin-top: calc(var(--topbarH) + var(--anchorGap)); }
+
     h2{
-      font-size:24px;
-      font-weight:800;
-      text-align:center;
-      margin:0 0 18px;
+      margin: 0 0 14px 0;
+      font-size: 24px;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+      font-weight: 800;
+      color: #0b1220;
+      text-align: center;
+      position: relative;
     }
     h2::after{
       content:"";
       display:block;
-      width:120px;
-      height:1px;
-      margin:12px auto 0;
-      background:rgba(15,23,42,.12);
+      width: 120px; /* slightly tighter to match your current set */
+      height: 1px;
+      margin: 12px auto 0;
+      background: rgba(15, 23, 42, 0.14);
+      border-radius: 999px;
     }
 
     .section-inner{
-      max-width:78ch;
-      margin:0 auto;
+      max-width: 78ch;
+      margin: 0 auto;
     }
 
-    /* 🔒 LINK COLOR LOCK — FIX */
-    .section-inner a{
-      color:var(--text);
-      text-decoration:none;
-      font-weight:650;
-    }
-    .section-inner a:hover{
-      text-decoration:underline;
+    .prose{
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--muted);
+      text-align: left;
     }
 
+    /* Bullets (no box) */
     ul.list{
-      margin:0;
-      padding-left:18px;
-      color:var(--muted);
-      line-height:1.75;
-      font-size:16px;
+      margin: 14px 0 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+      text-align: left;
     }
-    ul.list li{margin:10px 0;}
+    ul.list li{ margin: 10px 0; }
+    ul.list li::marker{ color: rgba(100,116,139,.78); }
 
+    .label{
+      color: #0f172a;
+      font-weight: 800;
+    }
+
+    /* Actions / Buttons (MATCH other pages) */
     .actions{
-      margin-top:34px;
       display:flex;
-      justify-content:center;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items:center;
+      justify-content: center;
+      margin-top: 24px;
     }
     .btn{
-      padding:12px 22px;
-      border-radius:12px;
-      background:var(--accent);
-      color:#fff;
-      font-weight:800;
-      font-size:14px;
-      text-decoration:none;
-      box-shadow:0 14px 30px rgba(15,118,110,.22);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: .2px;
+      text-decoration: none;
+      background: var(--accent);
+      color: var(--accentText);
+      border: 1px solid rgba(0,0,0,.08);
+      box-shadow: 0 14px 30px rgba(15,118,110,.22);
+      transition: transform .06s ease, box-shadow .12s ease, background .12s ease;
+      min-width: 0;
+    }
+    .btn:hover{
+      background: var(--accentHover);
+      box-shadow: 0 16px 34px rgba(15,118,110,.26);
+      text-decoration: none;
+    }
+    .btn:active{ transform: translateY(1px); }
+
+    /* Bottom verify block */
+    .verify{
+      margin-top: 18px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .verify .links{
+      margin-top: 10px; /* more breathing room */
+      font-weight: 800;
+      color: rgba(15,23,42,.82);
+    }
+    .verify .links a{
+      font-weight: 800;
+      color: rgba(15,23,42,.82);
+    }
+    .verify .sep{
+      margin: 0 10px;
+      color: rgba(100,116,139,.7);
+      font-weight: 800;
     }
 
-    .footer-note{
-      margin-top:30px;
-      text-align:center;
-      font-size:15px;
-      color:var(--muted);
-    }
-    .footer-links{
-      margin-top:12px;
-      text-align:center;
-    }
-
+    /* Footer */
     .footer{
-      margin-top:56px;
-      padding-top:18px;
-      border-top:1px solid var(--line);
+      margin-top: 56px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(148,163,184,.40); /* slightly softer */
       display:flex;
-      justify-content:space-between;
-      font-size:13px;
-      color:var(--muted2);
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted2);
+      font-size: 13px;
+    }
+    .footer a{
+      color: rgba(15,23,42,.72);
+      text-decoration:none;
+      font-weight: 800;
+      margin-right: 14px;
+    }
+    .footer a:hover{ text-decoration: underline; }
+
+    @media (max-width: 820px){
+      .page-frame{
+        margin: 12px 12px 22px;
+        border-radius: 16px;
+      }
+      .wrap{ padding: 18px 16px 52px; }
+      h1{ font-size: 32px; letter-spacing: -0.7px; }
+      .hero-desc{ font-size: 16px; }
+      .btn{ width: 100%; }
     }
   </style>
 </head>
 
 <body>
-  <div class="topbar">
-    <div class="topbar-inner">
-      <nav class="nav">
+  <div class="topbar" id="topbar">
+    <div class="topbar-inner" id="topbar-inner">
+      <nav class="nav" aria-label="Primary navigation">
         <a href="/index.html">Home</a>
         <a href="/tableofcontents.html">Table of Contents</a>
         <a href="/faq/">FAQ</a>
@@ -191,42 +305,86 @@
         </p>
       </header>
 
-      <section>
-        <h2>What to Expect</h2>
-        <div class="section-inner">
-          <ul class="list">
-            <li><strong>Price:</strong> $999 one-time purchase. No subscriptions, renewals, or recurring fees.</li>
-            <li><strong>Delivery:</strong> Access is delivered immediately after checkout. No waiting period.</li>
-            <li><strong>What you receive:</strong> The Real Estate Marketing System replaces inconsistent, disconnected marketing materials with a single repeatable standard—delivered through a structured, Canva-based system used across listings, campaigns, and agents. You receive the organized Canva files and supporting documentation needed to duplicate the system into your workspace and apply your branding.</li>
-            <li><strong>Canva requirement:</strong> A Canva account is required. Canva Free is sufficient; Canva Pro is optional.</li>
-            <li><strong>Usage:</strong> The system is duplicated into a Canva workspace you control and reused across listings, campaigns, and internal marketing.</li>
-            <li><strong>Updates & support:</strong> This is a self-serve product. No updates, training, or ongoing support services are included. The system includes clear structure and documentation designed to be used correctly without additional assistance.</li>
-            <li><strong>License:</strong> Licensed for use within a single organization. Not for resale or redistribution.</li>
-            <li><strong>Refunds:</strong> This is a digital system delivered in full at purchase. Review the Table of Contents and FAQ prior to purchase. All sales are final.</li>
-          </ul>
+      <main>
+        <section id="expectations">
+          <h2>Purchase Expectations</h2>
 
-          <div class="actions">
-            <a class="btn" href="/purchase.html">Purchase ($999)</a>
+          <div class="section-inner">
+            <ul class="list">
+              <li><span class="label">Price:</span> $999 one-time purchase. No subscriptions, renewals, or recurring fees.</li>
+
+              <li><span class="label">Delivery:</span> Access is delivered immediately after checkout. No waiting period.</li>
+
+              <li>
+                <span class="label">What you receive:</span>
+                The Real Estate Marketing System replaces inconsistent, disconnected marketing materials with a single repeatable standard—delivered through a structured, Canva-based system used across listings, campaigns, and agents.
+                You receive the organized Canva files and supporting documentation needed to duplicate the system into your workspace and begin applying your branding.
+              </li>
+
+              <li><span class="label">Canva requirement:</span> A Canva account is required. Canva Free is sufficient; Canva Pro is optional.</li>
+
+              <li><span class="label">Usage:</span> Duplicate the system into a Canva workspace you control, apply your branding, and reuse across listings, campaigns, and internal marketing.</li>
+
+              <li>
+                <span class="label">Updates &amp; support:</span>
+                This is a self-serve product. No updates, training, or ongoing support services are included.
+                The system includes clear structure and documentation designed to be used correctly without additional assistance.
+              </li>
+
+              <li><span class="label">License:</span> Licensed for use within a single organization (your business entity and its internal team). Not for resale or redistribution.</li>
+
+              <li>
+                <span class="label">Refunds:</span>
+                Because this is a digital system delivered in full at purchase, all sales are final.
+                Buyers are encouraged to review the full buyer-facing Table of Contents and FAQ prior to purchase to confirm suitability.
+              </li>
+            </ul>
+
+            <div class="actions">
+              <!-- ONLY purchase button (no top button, no extras) -->
+              <a class="btn" href="/purchase.html">Purchase ($999)</a>
+            </div>
+
+            <div class="verify">
+              <div>To confirm scope before purchasing, review the materials below:</div>
+              <div class="links">
+                <a href="/tableofcontents.html">View the full Table of Contents</a>
+                <span class="sep">·</span>
+                <a href="/faq/">Read the FAQ</a>
+              </div>
+            </div>
           </div>
+        </section>
 
-          <p class="footer-note">
-            Before purchasing, we recommend reviewing what’s included to ensure the system is the right fit.
-          </p>
-          <p class="footer-links">
-            <a href="/tableofcontents.html">View the full Table of Contents</a> ·
-            <a href="/faq/">Read the FAQ</a>
-          </p>
+        <div class="footer">
+          <div>© <a href="https://operational-systems.com">Operational Systems, LLC</a></div>
+          <div>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
+          </div>
         </div>
-      </section>
-
-      <div class="footer">
-        <div>© Operational Systems, LLC</div>
-        <div>
-          <a href="/privacy.html">Privacy</a> ·
-          <a href="/terms.html">Terms</a>
-        </div>
-      </div>
+      </main>
     </div>
   </div>
+
+  <script>
+    (function(){
+      // Keep --topbarH accurate
+      const topbar = document.getElementById('topbar');
+      function getTopbarH(){
+        if (!topbar) return 52;
+        return Math.ceil(topbar.getBoundingClientRect().height);
+      }
+      function setTopbarH(){
+        const h = getTopbarH();
+        document.documentElement.style.setProperty('--topbarH', h + 'px');
+        return h;
+      }
+      setTopbarH();
+      requestAnimationFrame(setTopbarH);
+      window.addEventListener('load', setTopbarH);
+      window.addEventListener('resize', setTopbarH);
+    })();
+  </script>
 </body>
 </html>

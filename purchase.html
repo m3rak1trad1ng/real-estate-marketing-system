@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <title>Purchase — The Real Estate Marketing System</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Purchase details for The Real Estate Marketing System—clear expectations for delivery, usage, and licensing.">
+  <meta name="description" content="Purchase The Real Estate Marketing System. One-time purchase with immediate delivery and clear expectations for access, usage, and licensing.">
 
   <!-- Font: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +13,7 @@
 
   <style>
     :root{
-      /* Match site tokens */
+      /* Match Main Page tokens */
       --bg: #d0d4da;
       --frame: #edf0f4;
       --frameBorder: rgba(15, 23, 42, 0.35);
@@ -51,16 +51,12 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Links (prevent purple visited links) */
-    a{
-      color: rgba(15,23,42,.84);
-      text-decoration: none;
-      font-weight: 800;
-    }
-    a:hover{ text-decoration: underline; }
-    a:visited{ color: rgba(15,23,42,.84); }
+    /* Link styling (prevents purple visited links) */
+    a{ color: rgba(15,23,42,.82); }
+    a:visited{ color: rgba(15,23,42,.82); }
+    a:hover{ color: rgba(15,23,42,.92); }
 
-    /* Sticky nav */
+    /* Sticky nav (same as Main/FAQ/TOC) */
     .topbar{
       position: sticky;
       top: 0;
@@ -97,7 +93,6 @@
     .nav a:hover{
       background: rgba(15,23,42,.08);
       color: rgba(15,23,42,.92);
-      text-decoration: none;
     }
     .nav a.active{
       background: rgba(15,118,110,.16);
@@ -114,7 +109,10 @@
       box-shadow: var(--frameShadow);
       overflow: clip;
     }
-    .wrap{ padding: 22px 24px 52px; }
+
+    .wrap{
+      padding: 22px 24px 60px;
+    }
 
     /* Hero */
     header{
@@ -122,7 +120,7 @@
       margin-top: 8px;
     }
     h1{
-      margin: 0 0 12px 0;
+      margin: 0 0 10px 0;
       font-size: 46px;
       line-height: 1.06;
       letter-spacing: -1px;
@@ -130,58 +128,44 @@
       color: #0b1220;
     }
     .hero-desc{
-      margin: 0 auto;
+      margin: 0 auto 0 auto;
       max-width: 78ch;
       font-size: 18px;
-      line-height: 1.7;
+      line-height: 1.65;
       color: var(--muted);
       font-weight: 500;
       text-align: center;
     }
 
-    /* Section headings (match your site) */
+    /* Sections */
     main{ margin-top: 30px; }
-    section{ margin-top: 34px; }
+    section{ margin-top: 26px; }
     section{ scroll-margin-top: calc(var(--topbarH) + var(--anchorGap)); }
 
-    h2{
-      margin: 0 0 14px 0;
-      font-size: 24px;
-      line-height: 1.2;
-      letter-spacing: -0.5px;
-      font-weight: 800;
-      color: #0b1220;
-      text-align: center;
-      position: relative;
-    }
-    h2::after{
-      content:"";
-      display:block;
-      width: 120px; /* slightly tighter to match your current set */
-      height: 1px;
-      margin: 12px auto 0;
-      background: rgba(15, 23, 42, 0.14);
-      border-radius: 999px;
-    }
-
-    .section-inner{
+    /* Card (NOT white — matches site frame tone) */
+    .card{
       max-width: 78ch;
       margin: 0 auto;
+      padding: 18px 18px;
+      border: 1px solid rgba(148,163,184,.55);
+      border-radius: 14px;
+      background: rgba(237,240,244,.35); /* subtle, not white */
     }
 
-    .prose{
-      margin: 0;
-      font-size: 16px;
-      line-height: 1.75;
-      color: var(--muted);
+    .kicker{
+      margin: 0 0 14px 0;
+      font-size: 14px;
+      letter-spacing: .6px;
+      font-weight: 800;
+      color: rgba(15,23,42,.88);
+      text-transform: uppercase;
       text-align: left;
     }
 
-    /* Bullets (no box) */
     ul.list{
-      margin: 14px 0 0 0;
+      margin: 0;
       padding-left: 18px;
-      color: var(--muted);
+      color: rgba(15,23,42,.86);
       font-size: 16px;
       line-height: 1.75;
       text-align: left;
@@ -190,18 +174,21 @@
     ul.list li::marker{ color: rgba(100,116,139,.78); }
 
     .label{
-      color: #0f172a;
       font-weight: 800;
+      color: #0f172a;
+    }
+    .muted{
+      color: var(--muted);
     }
 
-    /* Actions / Buttons (MATCH other pages) */
+    /* Buttons (MATCH MAIN PAGE EXACTLY) */
     .actions{
       display:flex;
       flex-wrap: wrap;
       gap: 12px;
       align-items:center;
       justify-content: center;
-      margin-top: 24px;
+      margin-top: 18px;
     }
     .btn{
       display:inline-flex;
@@ -214,7 +201,7 @@
       letter-spacing: .2px;
       text-decoration: none;
       background: var(--accent);
-      color: var(--accentText);
+      color: var(--accentText); /* ✅ forces WHITE text */
       border: 1px solid rgba(0,0,0,.08);
       box-shadow: 0 14px 30px rgba(15,118,110,.22);
       transition: transform .06s ease, box-shadow .12s ease, background .12s ease;
@@ -223,38 +210,46 @@
     .btn:hover{
       background: var(--accentHover);
       box-shadow: 0 16px 34px rgba(15,118,110,.26);
-      text-decoration: none;
+      color: var(--accentText);
     }
+    .btn:visited{ color: var(--accentText); }
     .btn:active{ transform: translateY(1px); }
 
-    /* Bottom verify block */
-    .verify{
-      margin-top: 18px;
+    .btn.subtle{
+      box-shadow: 0 12px 26px rgba(15,23,42,.14);
+    }
+    .btn.subtle:hover{
+      box-shadow: 0 14px 30px rgba(15,23,42,.16);
+    }
+
+    /* Bottom reassurance + links (sentence centered, links below) */
+    .precheck{
+      max-width: 78ch;
+      margin: 10px auto 0 auto;
       text-align: center;
       color: var(--muted);
       font-size: 14px;
-      line-height: 1.6;
+      line-height: 1.7;
     }
-    .verify .links{
-      margin-top: 10px; /* more breathing room */
-      font-weight: 800;
-      color: rgba(15,23,42,.82);
-    }
-    .verify .links a{
-      font-weight: 800;
-      color: rgba(15,23,42,.82);
-    }
-    .verify .sep{
-      margin: 0 10px;
-      color: rgba(100,116,139,.7);
+    .precheck .links{
+      margin-top: 10px; /* ✅ more breathing room than your screenshot */
+      display:flex;
+      gap: 14px;
+      justify-content:center;
+      flex-wrap: wrap;
       font-weight: 800;
     }
+    .precheck .links a{
+      text-decoration: none;
+      color: rgba(15,23,42,.86);
+    }
+    .precheck .links a:hover{ text-decoration: underline; }
 
     /* Footer */
     .footer{
       margin-top: 56px;
       padding-top: 18px;
-      border-top: 1px solid rgba(148,163,184,.40); /* slightly softer */
+      border-top: 1px solid rgba(148,163,184,.45);
       display:flex;
       flex-wrap: wrap;
       gap: 10px 18px;
@@ -276,10 +271,12 @@
         margin: 12px 12px 22px;
         border-radius: 16px;
       }
-      .wrap{ padding: 18px 16px 52px; }
+      .wrap{ padding: 18px 16px 60px; }
       h1{ font-size: 32px; letter-spacing: -0.7px; }
       .hero-desc{ font-size: 16px; }
       .btn{ width: 100%; }
+      .card{ padding: 16px; }
+      .precheck .links{ gap: 10px; }
     }
   </style>
 </head>
@@ -306,52 +303,71 @@
       </header>
 
       <main>
-        <section id="expectations">
-          <h2>Purchase Expectations</h2>
+        <section aria-label="Purchase expectations">
+          <div class="card">
+            <div class="kicker">What to expect</div>
 
-          <div class="section-inner">
             <ul class="list">
-              <li><span class="label">Price:</span> $999 one-time purchase. No subscriptions, renewals, or recurring fees.</li>
+              <li>
+                <span class="label">Price:</span>
+                $999 one-time purchase.
+                <span class="muted">No subscriptions, renewals, or recurring fees.</span>
+              </li>
 
-              <li><span class="label">Delivery:</span> Access is delivered immediately after checkout. No waiting period.</li>
+              <li>
+                <span class="label">Delivery:</span>
+                Access is delivered immediately after checkout.
+                <span class="muted">No waiting period.</span>
+              </li>
 
               <li>
                 <span class="label">What you receive:</span>
                 The Real Estate Marketing System replaces inconsistent, disconnected marketing materials with a single repeatable standard—delivered through a structured, Canva-based system used across listings, campaigns, and agents.
-                You receive the organized Canva files and supporting documentation needed to duplicate the system into your workspace and begin applying your branding.
+                <span class="muted">You receive organized Canva files plus supporting documentation so you can duplicate the system into your workspace and begin applying your branding.</span>
               </li>
 
-              <li><span class="label">Canva requirement:</span> A Canva account is required. Canva Free is sufficient; Canva Pro is optional.</li>
+              <li>
+                <span class="label">Canva requirement:</span>
+                A Canva account is required.
+                <span class="muted">Canva Free is sufficient; Canva Pro is optional.</span>
+              </li>
 
-              <li><span class="label">Usage:</span> Duplicate the system into a Canva workspace you control, apply your branding, and reuse across listings, campaigns, and internal marketing.</li>
+              <li>
+                <span class="label">Usage:</span>
+                The system is duplicated into a Canva workspace you control, where it can be branded and reused across listings, campaigns, and internal marketing.
+              </li>
 
               <li>
                 <span class="label">Updates &amp; support:</span>
-                This is a self-serve product. No updates, training, or ongoing support services are included.
-                The system includes clear structure and documentation designed to be used correctly without additional assistance.
+                This is a self-serve product.
+                <span class="muted">No updates, training, or ongoing support services are included. The system includes clear structure and documentation designed to be used correctly without additional assistance.</span>
               </li>
 
-              <li><span class="label">License:</span> Licensed for use within a single organization (your business entity and its internal team). Not for resale or redistribution.</li>
+              <li>
+                <span class="label">License:</span>
+                Licensed for use within a single organization (your business entity and its internal team).
+                <span class="muted">Not for resale or redistribution.</span>
+              </li>
 
               <li>
                 <span class="label">Refunds:</span>
-                Because this is a digital system delivered in full at purchase, all sales are final.
-                Buyers are encouraged to review the full buyer-facing Table of Contents and FAQ prior to purchase to confirm suitability.
+                Because this is a digital system delivered immediately, all sales are final.
+                <span class="muted">Buyers are encouraged to review the full buyer-facing Table of Contents and FAQ prior to purchase to confirm suitability.</span>
               </li>
             </ul>
+          </div>
 
-            <div class="actions">
-              <!-- ONLY purchase button (no top button, no extras) -->
-              <a class="btn" href="/purchase.html">Purchase ($999)</a>
-            </div>
+          <div class="actions">
+            <!-- TODO: Replace "#" with your checkout link -->
+            <a class="btn subtle" href="#">Purchase ($999)</a>
+          </div>
 
-            <div class="verify">
-              <div>To confirm scope before purchasing, review the materials below:</div>
-              <div class="links">
-                <a href="/tableofcontents.html">View the full Table of Contents</a>
-                <span class="sep">·</span>
-                <a href="/faq/">Read the FAQ</a>
-              </div>
+          <div class="precheck">
+            Review scope before purchasing so expectations are clear.
+            <div class="links">
+              <a href="/tableofcontents.html">View the full Table of Contents</a>
+              <span aria-hidden="true">•</span>
+              <a href="/faq/">Read the FAQ</a>
             </div>
           </div>
         </section>
@@ -369,7 +385,7 @@
 
   <script>
     (function(){
-      // Keep --topbarH accurate
+      // Keep --topbarH accurate (matches your other pages)
       const topbar = document.getElementById('topbar');
       function getTopbarH(){
         if (!topbar) return 52;

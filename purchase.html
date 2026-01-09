@@ -137,7 +137,6 @@
       text-wrap: pretty;
     }
 
-    /* Sections */
     main{ margin-top: 28px; }
 
     h2{
@@ -181,7 +180,7 @@
       font-weight: 800;
     }
 
-    /* Buttons — EXACT match to Main page */
+    /* Button — match Main page exactly */
     .actions{
       display:flex;
       flex-wrap: wrap;
@@ -201,7 +200,7 @@
       letter-spacing: .2px;
       text-decoration: none;
       background: var(--accent);
-      color: var(--accentText); /* ✅ force white */
+      color: var(--accentText); /* ✅ white */
       border: 1px solid rgba(0,0,0,.08);
       box-shadow: 0 14px 30px rgba(15,118,110,.22);
       transition: transform .06s ease, box-shadow .12s ease, background .12s ease;
@@ -212,6 +211,7 @@
       box-shadow: 0 16px 34px rgba(15,118,110,.26);
     }
     .btn:active{ transform: translateY(1px); }
+
     .btn.subtle{
       box-shadow: 0 12px 26px rgba(15,23,42,.14);
     }
@@ -219,7 +219,7 @@
       box-shadow: 0 14px 30px rgba(15,23,42,.16);
     }
 
-    /* Bottom helper (sentence centered, links below, no purple) */
+    /* Bottom helper (sentence centered, links below, spacing fixed, no purple) */
     .verify{
       margin-top: 14px;
       text-align: center;
@@ -235,7 +235,7 @@
       margin-right:auto;
     }
     .verify .links{
-      margin-top: 10px; /* ✅ spacing fix */
+      margin-top: 12px; /* ✅ less tight */
       display:flex;
       gap: 12px;
       justify-content:center;
@@ -320,34 +320,27 @@
           <h2>What to Expect</h2>
 
           <div class="section-inner">
+            <!-- ✅ COPY RESTORED EXACTLY (no drifting) -->
             <ul class="list">
               <li><span class="label">Price:</span> $999 one-time purchase. No subscriptions, renewals, or recurring fees.</li>
 
               <li><span class="label">Delivery:</span> Access is delivered immediately after checkout. No waiting period.</li>
 
-              <li><span class="label">What you receive:</span>
-                The Real Estate Marketing System replaces inconsistent, disconnected marketing materials with a single repeatable standard—delivered through a structured, Canva-based system used across listings, campaigns, and agents.
-                You receive the organized Canva files and supporting documentation needed to duplicate the system into your workspace and begin applying your branding.
-              </li>
+              <li><span class="label">What you receive:</span> The Real Estate Marketing System replaces inconsistent, disconnected marketing materials with a single repeatable standard—delivered through a structured, Canva-based system used across listings, campaigns, and agents. You receive the organized Canva files and supporting documentation needed to duplicate the system into your workspace and begin applying your branding.</li>
 
               <li><span class="label">Canva requirement:</span> A Canva account is required. Canva Free is sufficient; Canva Pro is optional.</li>
 
               <li><span class="label">Usage:</span> The system is duplicated into a Canva workspace you control, where it can be branded and reused across listings, campaigns, and internal marketing.</li>
 
-              <li><span class="label">Updates &amp; support:</span>
-                This is a self-serve product. No updates, training, or ongoing support services are included.
-                The system includes clear structure and documentation designed to be used correctly without additional assistance.
-              </li>
+              <li><span class="label">Updates &amp; support:</span> This is a self-serve product. No updates, training, or ongoing support services are included. The system includes clear structure and documentation designed to be used correctly without additional assistance.</li>
 
               <li><span class="label">License:</span> Licensed for use within a single organization (your business entity and its internal team). Not for resale or redistribution.</li>
 
-              <li><span class="label">Refunds:</span>
-                Because this is a digital system delivered immediately after checkout, all sales are final.
-                Buyers are encouraged to review the full buyer-facing Table of Contents and FAQ prior to purchase to confirm suitability.
-              </li>
+              <li><span class="label">Refunds:</span> This is a digital system delivered in full at purchase. Buyers are encouraged to review the full buyer-facing Table of Contents and FAQ prior to purchase to confirm suitability. All sales are final.</li>
             </ul>
 
             <div class="actions">
+              <!-- Replace href with your checkout URL when ready -->
               <a class="btn subtle" href="#">Purchase ($999)</a>
             </div>
 

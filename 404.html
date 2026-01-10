@@ -136,7 +136,7 @@
       gap: 12px;
       align-items:center;
       justify-content: center;
-      margin-top: 10px;
+      margin-top: 8px;
     }
     .btn{
       display:inline-flex;
@@ -160,15 +160,6 @@
       box-shadow: 0 16px 34px rgba(15,118,110,.26);
     }
     .btn:active{ transform: translateY(1px); }
-
-    .btn.subtle{
-      box-shadow: 0 12px 26px rgba(15,23,42,.14);
-      background: #0f172a;
-      color: #fff;
-    }
-    .btn.subtle:hover{
-      box-shadow: 0 14px 30px rgba(15,23,42,.16);
-    }
 
     /* Sections */
     main{ margin-top: 26px; }
@@ -205,15 +196,26 @@
       text-align: left;
     }
 
-    .note{
-      margin-top: 14px;
-      padding: 12px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(148,163,184,.55);
-      background: rgba(255,255,255,.65);
-      color: var(--muted);
+    .quicklinks{
+      margin-top: 12px;
       font-size: 15px;
       line-height: 1.75;
+      color: var(--muted);
+      text-align: left;
+    }
+    .quicklinks a{
+      color: rgba(15,23,42,.72);
+      text-decoration: none;
+      font-weight: 800;
+    }
+    .quicklinks a:hover{
+      text-decoration: underline;
+    }
+    .quicklinks .sep{
+      display:inline-block;
+      margin: 0 10px;
+      color: rgba(100,116,139,.7);
+      font-weight: 600;
     }
 
     /* Footer */
@@ -235,6 +237,9 @@
       font-weight: 800;
       margin-right: 14px;
     }
+    .footer a:last-child{
+      margin-right: 0;
+    }
     .footer a:hover{ text-decoration: underline; }
 
     @media (max-width: 820px){
@@ -254,10 +259,10 @@
   <div class="topbar" id="topbar">
     <div class="topbar-inner" id="topbar-inner">
       <nav class="nav" aria-label="Primary navigation" id="nav">
-        <a href="index.html">Home</a>
-        <a href="tableofcontents.html">Table of Contents</a>
+        <a href="/index.html">Home</a>
+        <a href="/tableofcontents.html">Table of Contents</a>
         <a href="/faq/">FAQ</a>
-        <a href="index.html#access">Request Access</a>
+        <a href="/purchase.html">Purchase</a>
       </nav>
     </div>
   </div>
@@ -267,12 +272,11 @@
       <header>
         <h1>404</h1>
         <p class="hero-desc">
-          This page doesn’t exist. The link may be outdated, or the URL may have been typed incorrectly.
+          This page wasn’t found. The link may be outdated or the URL may be incorrect.
         </p>
 
         <div class="actions">
-          <a class="btn" href="index.html">Back to Main Page</a>
-          <a class="btn subtle" href="tableofcontents.html">View Table of Contents</a>
+          <a class="btn" href="/index.html">Back to Home</a>
         </div>
       </header>
 
@@ -281,19 +285,24 @@
           <h2>Quick Links</h2>
           <div class="section-inner">
             <p class="prose">
-              If you were looking for product details, start with the main page. If you were validating scope before purchase, use the table of contents.
+              Most people are looking for the main page or the FAQ.
             </p>
-            <div class="note">
-              Tip: If you’re trying to reach the FAQ, the correct URL is <strong>/faq/</strong>.
-            </div>
+
+            <p class="quicklinks">
+              <a href="/index.html">Home</a>
+              <span class="sep">·</span>
+              <a href="/faq/">FAQ</a>
+              <span class="sep">·</span>
+              <a href="/tableofcontents.html">Table of Contents</a>
+            </p>
           </div>
         </section>
 
         <div class="footer">
-          <div>© Operational Systems, LLC</div>
+          <div>© <a href="https://operational-systems.com">Operational Systems, LLC</a></div>
           <div>
-            <a href="privacy.html">Privacy</a>
-            <a href="terms.html">Terms</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
           </div>
         </div>
       </main>
@@ -320,4 +329,3 @@
   </script>
 </body>
 </html>
-

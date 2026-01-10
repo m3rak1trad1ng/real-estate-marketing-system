@@ -20,7 +20,6 @@
       --text: #0f172a;
       --muted: rgba(15, 23, 42, 0.72);
       --muted2: rgba(15, 23, 42, 0.58);
-      --line: rgba(15, 23, 42, 0.18);
 
       --accent: #2f6b60;
       --radiusOuter: 26px;
@@ -39,7 +38,7 @@
       color: var(--text);
     }
 
-    /* Top nav (keep consistent across pages) */
+    /* Top nav (consistent across pages) */
     .topbar{
       position: sticky;
       top: 0;
@@ -101,8 +100,8 @@
     }
 
     .lede{
-      margin: 0 auto 22px auto;
-      max-width: 780px;
+      margin: 0 auto 10px auto;
+      max-width: 800px;
       font-size: 18px;
       line-height: 1.55;
       color: var(--muted);
@@ -110,40 +109,13 @@
     }
     .lede strong{ font-weight: 800; color: rgba(15, 23, 42, 0.86); }
 
-    /* Actions */
-    .actions{
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      margin: 18px 0 26px 0;
-      flex-wrap: wrap;
-    }
-
-    .btn{
-      appearance: none;
-      border: 0;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      font-weight: 700;
+    .security{
+      margin: 0 auto 26px auto;
+      max-width: 780px;
       font-size: 14px;
-      padding: 12px 18px;
-      border-radius: 14px;
-      min-width: 150px;
-      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
-      transition: transform .12s ease, filter .12s ease;
-      user-select: none;
-    }
-    .btn:active{ transform: translateY(1px); }
-
-    .btn-primary{
-      background: var(--accent);
-      color: #fff;
-    }
-    .btn-primary:hover{
-      filter: brightness(0.98);
+      line-height: 1.55;
+      color: var(--muted2);
+      text-align: center;
     }
 
     /* Sections */
@@ -177,12 +149,8 @@
       font-size: 16px;
       line-height: 1.65;
     }
-    ol.steps li{
-      margin: 10px 0;
-    }
-    ol.steps strong{
-      font-weight: 800;
-    }
+    ol.steps li{ margin: 10px 0; }
+    ol.steps strong{ font-weight: 800; }
 
     /* Notice (subtle, consistent) */
     .notice{
@@ -192,15 +160,6 @@
       border-radius: var(--radiusInner);
       color: var(--muted);
       background: rgba(237, 240, 244, 0.45);
-    }
-    .notice a{
-      color: rgba(15, 23, 42, 0.86);
-      font-weight: 700;
-      text-decoration: none;
-      border-bottom: 1px solid rgba(15, 23, 42, 0.22);
-    }
-    .notice a:hover{
-      border-bottom-color: rgba(15, 23, 42, 0.45);
     }
 
     /* Footer */
@@ -231,7 +190,6 @@
       h1{ font-size: 40px; }
       .frame-inner{ padding: 34px 22px 26px 22px; }
       .topbar-inner{ gap: 16px; }
-      .btn{ min-width: 0; width: auto; }
       .footer{ padding: 16px 18px; }
     }
   </style>
@@ -258,29 +216,29 @@
           Access and delivery instructions are provided via your purchase confirmation email.
         </p>
 
-        <!-- Single CTA (no “Back to Main Page”; nav already handles it) -->
-        <div class="actions">
-          <a class="btn btn-primary" href="faq.html">View FAQ</a>
-        </div>
+        <p class="security">
+          For security, access links are delivered only via email and are not provided on this page.
+        </p>
 
         <section class="section" aria-label="Next Steps">
           <h2>Next Steps</h2>
+
           <ol class="steps">
-            <li><strong>Check your purchase confirmation email.</strong> This email contains access and delivery instructions for duplicating the system into your Canva account.</li>
-            <li><strong>Duplicate the system when prompted.</strong> You’ll be guided to copy the system into your own Canva workspace. No setup is required beforehand.</li>
-            <li><strong>Apply your branding once.</strong> Set your colors, fonts, and logo, then duplicate templates as needed for ongoing use.</li>
+            <li><strong>Check your purchase confirmation email.</strong> It contains your delivery link and instructions to duplicate the system into your Canva account.</li>
+            <li><strong>If you don’t see the email within a few minutes,</strong> check spam/promotions and search your inbox for “Real Estate Marketing System” or “Operational Systems”.</li>
+            <li><strong>Duplicate the system into your Canva account.</strong> You’ll be prompted to copy the full system into your own workspace. A free Canva account is sufficient.</li>
+            <li><strong>Complete initial setup once.</strong> Apply your logo, colors, and fonts, then duplicate templates as needed for ongoing use.</li>
           </ol>
 
           <div class="notice">
-            If you do not see your confirmation email within a few minutes, check your spam or promotions folder.
-            Delivery details and common questions are also covered in the <a href="faq.html">FAQ</a>.
+            If you still can’t locate the confirmation email, refer to the delivery section in the FAQ for troubleshooting steps.
           </div>
         </section>
       </div>
 
       <!-- Footer -->
       <div class="footer">
-        <div>© <a href="index.html">Operational Systems, LLC</a></div>
+        <div>© <a href="https://operational-systems.com/" target="_blank" rel="noopener noreferrer">Operational Systems, LLC</a></div>
         <div>
           <a href="privacy.html">Privacy</a>
           &nbsp;&nbsp;&nbsp;

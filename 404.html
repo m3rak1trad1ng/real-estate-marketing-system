@@ -22,16 +22,14 @@
       --text: #0f172a;
       --muted: #475569;
       --muted2:#64748b;
-      --line: rgba(148,163,184,.45);
+      --line: rgba(148,163,184,.28); /* softened */
 
       --accent: #0f766e;
       --accentHover: #115e59;
       --accentText: #ffffff;
 
       --max: 980px;
-
       --topbarH: 52px;
-      --anchorGap: 14px;
     }
 
     *{ box-sizing: border-box; }
@@ -104,12 +102,13 @@
       box-shadow: var(--frameShadow);
       overflow: clip;
     }
-    .wrap{ padding: 22px 24px 36px; }
+    /* ✅ extra bottom padding to avoid "smushed" look */
+    .wrap{ padding: 26px 24px 110px; }
 
     /* Hero */
     header{
       text-align: center;
-      margin-top: 8px;
+      margin-top: 10px;
     }
     h1{
       margin: 0 0 10px 0;
@@ -136,7 +135,7 @@
       gap: 12px;
       align-items:center;
       justify-content: center;
-      margin-top: 8px;
+      margin-top: 10px;
     }
     .btn{
       display:inline-flex;
@@ -162,7 +161,11 @@
     .btn:active{ transform: translateY(1px); }
 
     /* Sections */
-    main{ margin-top: 26px; }
+    main{ margin-top: 34px; }
+
+    section{
+      margin-top: 42px;
+    }
 
     h2{
       margin: 0 0 14px 0;
@@ -177,50 +180,66 @@
     h2::after{
       content:"";
       display:block;
-      width: 140px;
+      width: 110px; /* match privacy/terms tighter rule */
       height: 1px;
-      margin: 12px auto 0;
-      background: rgba(15, 23, 42, 0.14);
+      margin: 10px auto 0;
+      background: var(--line);
       border-radius: 999px;
     }
 
     .section-inner{
       max-width: 78ch;
       margin: 0 auto;
+      text-align: center; /* ✅ center everything in this section */
     }
+
     .prose{
       margin: 0;
       font-size: 16px;
       line-height: 1.75;
       color: var(--muted);
-      text-align: left;
+      text-align: center; /* ✅ center for 404 */
     }
 
-    .quicklinks{
-      margin-top: 12px;
-      font-size: 15px;
-      line-height: 1.75;
-      color: var(--muted);
-      text-align: left;
+    /* Pill Sitemap */
+    .pills{
+      margin-top: 18px;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px 10px;
+      align-items:center;
+      justify-content:center;
+      padding: 14px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(148,163,184,.45);
+      background: rgba(255,255,255,.40);
+      box-shadow: 0 18px 50px rgba(15,23,42,.06);
     }
-    .quicklinks a{
-      color: rgba(15,23,42,.72);
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 9px 12px;
+      border-radius: 999px;
       text-decoration: none;
+      font-size: 13px;
       font-weight: 800;
+      color: rgba(15,23,42,.78);
+      border: 1px solid rgba(148,163,184,.45);
+      background: rgba(237,240,244,.9);
+      transition: transform .06s ease, background .12s ease, box-shadow .12s ease;
+      white-space: nowrap;
     }
-    .quicklinks a:hover{
-      text-decoration: underline;
+    .pill:hover{
+      background: rgba(237,240,244,1);
+      box-shadow: 0 10px 22px rgba(15,23,42,.10);
     }
-    .quicklinks .sep{
-      display:inline-block;
-      margin: 0 10px;
-      color: rgba(100,116,139,.7);
-      font-weight: 600;
-    }
+    .pill:active{ transform: translateY(1px); }
 
     /* Footer */
     .footer{
-      margin-top: 56px;
+      margin-top: 70px; /* ✅ a touch more breathing room */
       padding-top: 18px;
       border-top: 1px solid rgba(148,163,184,.45);
       display:flex;
@@ -247,10 +266,13 @@
         margin: 12px 12px 22px;
         border-radius: 16px;
       }
-      .wrap{ padding: 18px 16px 32px; }
+      .wrap{ padding: 20px 16px 100px; }
       h1{ font-size: 32px; letter-spacing: -0.7px; }
       .hero-desc{ font-size: 16px; }
       .btn{ width: 100%; }
+      .pills{ padding: 12px 12px; }
+      .pill{ width: 100%; } /* ✅ stacked pills on mobile */
+      .footer{ margin-top: 56px; }
     }
   </style>
 </head>
@@ -285,16 +307,17 @@
           <h2>Quick Links</h2>
           <div class="section-inner">
             <p class="prose">
-              Most people are looking for the main page or the FAQ.
+              Use the links below to navigate to the main sections of the site.
             </p>
 
-            <p class="quicklinks">
-              <a href="/index.html">Home</a>
-              <span class="sep">·</span>
-              <a href="/faq/">FAQ</a>
-              <span class="sep">·</span>
-              <a href="/tableofcontents.html">Table of Contents</a>
-            </p>
+            <div class="pills" role="navigation" aria-label="Site map">
+              <a class="pill" href="/index.html">Home</a>
+              <a class="pill" href="/tableofcontents.html">Table of Contents</a>
+              <a class="pill" href="/faq/">FAQ</a>
+              <a class="pill" href="/purchase.html">Purchase</a>
+              <a class="pill" href="/privacy.html">Privacy</a>
+              <a class="pill" href="/terms.html">Terms</a>
+            </div>
           </div>
         </section>
 

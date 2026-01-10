@@ -22,9 +22,7 @@
       --muted2: rgba(15, 23, 42, 0.58);
       --line: rgba(15, 23, 42, 0.18);
 
-      --accent: #2f6b60; /* your green */
-      --accentDark: #244f47;
-
+      --accent: #2f6b60;
       --radiusOuter: 26px;
       --radiusInner: 18px;
       --shadow: 0 32px 90px rgba(15, 23, 42, 0.22);
@@ -41,7 +39,7 @@
       color: var(--text);
     }
 
-    /* Top nav (match your existing site structure) */
+    /* Top nav (keep consistent across pages) */
     .topbar{
       position: sticky;
       top: 0;
@@ -57,6 +55,7 @@
       display: flex;
       justify-content: center;
       gap: 34px;
+      flex-wrap: wrap;
     }
     .topbar a{
       text-decoration: none;
@@ -103,12 +102,13 @@
 
     .lede{
       margin: 0 auto 22px auto;
-      max-width: 760px;
+      max-width: 780px;
       font-size: 18px;
       line-height: 1.55;
       color: var(--muted);
       text-align: center;
     }
+    .lede strong{ font-weight: 800; color: rgba(15, 23, 42, 0.86); }
 
     /* Actions */
     .actions{
@@ -184,7 +184,7 @@
       font-weight: 800;
     }
 
-    /* Notice (not a white “card”, just a subtle inline block) */
+    /* Notice (subtle, consistent) */
     .notice{
       margin: 18px auto 0 auto;
       padding: 14px 16px;
@@ -201,22 +201,6 @@
     }
     .notice a:hover{
       border-bottom-color: rgba(15, 23, 42, 0.45);
-    }
-
-    .support{
-      margin-top: 26px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.65;
-      text-align: center;
-    }
-
-    .closing{
-      margin-top: 18px;
-      color: var(--muted2);
-      font-size: 14px;
-      line-height: 1.55;
-      text-align: center;
     }
 
     /* Footer */
@@ -246,7 +230,7 @@
     @media (max-width: 720px){
       h1{ font-size: 40px; }
       .frame-inner{ padding: 34px 22px 26px 22px; }
-      .topbar-inner{ gap: 16px; flex-wrap: wrap; }
+      .topbar-inner{ gap: 16px; }
       .btn{ min-width: 0; width: auto; }
       .footer{ padding: 16px 18px; }
     }
@@ -268,12 +252,13 @@
     <div class="frame">
       <div class="frame-inner">
         <h1>Thank You — Your Purchase Is Complete</h1>
+
         <p class="lede">
           Thank you for your purchase. Your access to <strong>The Real Estate Marketing System</strong> is now confirmed.
-          Below is a brief overview of what to expect next and how to begin using the system.
+          Access and delivery instructions are provided via your purchase confirmation email.
         </p>
 
-        <!-- Actions (no “Back to Main Page” button) -->
+        <!-- Single CTA (no “Back to Main Page”; nav already handles it) -->
         <div class="actions">
           <a class="btn btn-primary" href="faq.html">View FAQ</a>
         </div>
@@ -291,20 +276,9 @@
             Delivery details and common questions are also covered in the <a href="faq.html">FAQ</a>.
           </div>
         </section>
-
-        <section class="section" aria-label="Support">
-          <h2>Support &amp; Usage</h2>
-          <p class="support">
-            This is a self-serve product designed for independent use. The FAQ covers delivery, licensing, and usage questions,
-            including common setup scenarios.
-          </p>
-          <p class="closing">
-            You now have access to the complete system as described on the site. No additional purchases or subscriptions are required.
-          </p>
-        </section>
       </div>
 
-      <!-- Footer (Operational Systems link is now live like other pages) -->
+      <!-- Footer -->
       <div class="footer">
         <div>© <a href="index.html">Operational Systems, LLC</a></div>
         <div>

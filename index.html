@@ -24,8 +24,8 @@
       --muted2:#64748b;
       --line: rgba(148,163,184,.45);
 
-      --accent: 2A4B73;
-      --accentHover: 223E60;
+      --accent: #2A4B73;
+      --accentHover: #223E60;
       --accentText: #ffffff;
 
       --max: 980px;
@@ -160,13 +160,13 @@
       background: var(--accent);
       color: var(--accentText);
       border: 1px solid rgba(0,0,0,.08);
-      box-shadow: 0 14px 30px rgba(15,118,110,.22);
+      box-shadow: 0 14px 30px rgba(42,75,115,.22);
       transition: transform .06s ease, box-shadow .12s ease, background .12s ease;
       min-width: 0;
     }
     .btn:hover{
       background: var(--accentHover);
-      box-shadow: 0 16px 34px rgba(15,118,110,.26);
+      box-shadow: 0 16px 34px rgba(42,75,115,.26);
     }
     .btn:active{ transform: translateY(1px); }
 
@@ -587,13 +587,30 @@
       const linkById = new Map(navLinks.map(a => [a.getAttribute('href').slice(1), a]));
 
       const obs = new IntersectionObserver((entries) => {
-        const visible = entries
-          .filter(e => e.isIntersecting)
-          .sort((a,b) => (b.intersectionRatio - a.intersectionRatio))[0];
-        if (!visible) return;
+        // ✅ Stable active link selection (fixes "random" highlight near boundaries)
+        const topbarH = getTopbarH();
+        const gap = getAnchorGap();
+        const thresholdY = topbarH + gap + 2;
+
+        let best = null;
+        let bestDelta = Infinity;
+
+        for (const sec of sections){
+          const heading = sec.querySelector('h2') || sec;
+          const top = heading.getBoundingClientRect().top;
+          const delta = thresholdY - top; // positive = heading has passed the threshold line
+          if (delta >= 0 && delta < bestDelta){
+            bestDelta = delta;
+            best = sec;
+          }
+        }
+
+        // If none have crossed the threshold yet, use the first section.
+        const activeSection = best || sections[0];
+        if (!activeSection) return;
 
         navLinks.forEach(a => a.classList.remove('active'));
-        const link = linkById.get(visible.target.id);
+        const link = linkById.get(activeSection.id);
         if (link) link.classList.add('active');
       }, {
         root: null,

@@ -24,7 +24,7 @@
       --muted2:#64748b;
       --line: rgba(148,163,184,.45);
 
-      /* ✅ Lighter, obvious blue (buttons + active nav) */
+      /* ✅ ONLY COLOR CHANGE: buttons + active nav (lighter blue, obvious) */
       --accent: #3E6A9A;
       --accentHover: #345F89;
       --accentText: #ffffff;
@@ -91,8 +91,8 @@
       color: rgba(15,23,42,.92);
     }
     .nav a.active{
-      background: rgba(62, 106, 154, .18);
-      color: var(--accent);
+      background: rgba(62,106,154,.18);
+      color: rgba(62,106,154,.98);
     }
 
     /* Content frame */
@@ -161,13 +161,14 @@
       background: var(--accent);
       color: var(--accentText);
       border: 1px solid rgba(0,0,0,.08);
-      box-shadow: 0 14px 30px rgba(62, 106, 154, .26);
+      /* ✅ ONLY COLOR CHANGE (shadow tint) */
+      box-shadow: 0 14px 30px rgba(62,106,154,.24);
       transition: transform .06s ease, box-shadow .12s ease, background .12s ease;
       min-width: 0;
     }
     .btn:hover{
       background: var(--accentHover);
-      box-shadow: 0 16px 34px rgba(62, 106, 154, .30);
+      box-shadow: 0 16px 34px rgba(62,106,154,.28);
     }
     .btn:active{ transform: translateY(1px); }
 
@@ -449,7 +450,7 @@
             <details>
               <summary>What exactly do I receive when I purchase? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
-                You receive a complete system of standardized base formats spanning social, email, print, presentations, and internal documentation—organized so the system can be duplicated and reused consistently over time.
+                You receive 117 standardized base formats spanning social media, email, print, presentations, and internal documentation—organized so the system can be duplicated and reused consistently over time.
                 <br><br>
                 To validate scope before purchase, review the full buyer-facing index on the
                 <a href="tableofcontents.html">System Table of Contents</a>.
@@ -560,9 +561,6 @@
         window.scrollTo({ top: Math.max(0, y), behavior: prefersReduced ? 'auto' : 'smooth' });
 
         if (pushState) history.pushState(null, '', '#' + id);
-
-        // After programmatic scroll, re-evaluate active nav
-        setTimeout(() => setActiveByScroll(), 80);
       }
 
       const nav = document.getElementById('nav');
@@ -581,7 +579,6 @@
 
       window.addEventListener('popstate', () => {
         if (location.hash) scrollToHash(location.hash, false);
-        setTimeout(() => setActiveByScroll(), 80);
       });
 
       const navLinks = Array.from(document.querySelectorAll('.nav a'));
@@ -591,44 +588,38 @@
 
       const linkById = new Map(navLinks.map(a => [a.getAttribute('href').slice(1), a]));
 
-      // ✅ Stable mapping (range-based) + bottom-of-page fix
+      /* ✅ FIX: stable, deterministic mapping (no swapping, no bottom edge-case)
+         - Uses scroll position relative to topbar instead of IntersectionObserver
+         - Guarantees Purchase highlights when you're in Purchase
+         - Guarantees FAQ highlights at the bottom when FAQ is reached
+      */
       function setActiveByScroll(){
         if (!sections.length) return;
 
-        const topLine = window.pageYOffset + getTopbarH() + getAnchorGap() + 2;
+        const topbarH = getTopbarH();
+        const gap = getAnchorGap();
+        const thresholdY = topbarH + gap + 2;
 
-        // If we're truly at the bottom, force last section (FAQ)
         const atBottom = (window.innerHeight + window.pageYOffset) >= (document.documentElement.scrollHeight - 2);
+        let current = null;
+
         if (atBottom){
-          navLinks.forEach(a => a.classList.remove('active'));
-          const last = sections[sections.length - 1];
-          const lastLink = linkById.get(last.id);
-          if (lastLink) lastLink.classList.add('active');
-          return;
-        }
-
-        // Find the active section by section start/end boundaries
-        let active = sections[0];
-
-        for (let i = 0; i < sections.length; i++){
-          const cur = sections[i];
-          const next = sections[i + 1];
-
-          const curTop = cur.offsetTop;
-          const nextTop = next ? next.offsetTop : Infinity;
-
-          if (topLine >= curTop && topLine < nextTop){
-            active = cur;
-            break;
+          current = sections[sections.length - 1]; // FAQ
+        } else {
+          for (const sec of sections){
+            const heading = sec.querySelector('h2') || sec;
+            if (heading.getBoundingClientRect().top <= thresholdY){
+              current = sec; // last one above threshold wins
+            }
           }
+          if (!current) current = sections[0];
         }
 
         navLinks.forEach(a => a.classList.remove('active'));
-        const link = linkById.get(active.id);
+        const link = linkById.get(current.id);
         if (link) link.classList.add('active');
       }
 
-      // Throttle scroll updates to animation frames
       let ticking = false;
       function onScroll(){
         if (ticking) return;
@@ -643,7 +634,7 @@
       window.addEventListener('load', setActiveByScroll);
       window.addEventListener('resize', () => { setTopbarH(); setActiveByScroll(); });
 
-      // Initialize
+      // run once immediately
       setActiveByScroll();
     })();
   </script>

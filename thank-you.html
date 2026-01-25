@@ -13,62 +13,60 @@
 
   <style>
     :root{
-      /* Match your other pages */
+      /* Neutral Graphite (match your other pages) */
       --bg: #d0d4da;
       --frame: #edf0f4;
       --frameBorder: rgba(15, 23, 42, 0.35);
-      --frameShadow: 0 32px 90px rgba(15, 23, 42, 0.22);
-
       --text: #0f172a;
-      --muted: #475569;
-      --muted2:#64748b;
-      --line: rgba(148,163,184,.45);
+      --muted: rgba(15, 23, 42, 0.72);
+      --muted2: rgba(15, 23, 42, 0.58);
 
-      /* ✅ Updated blue */
+      /* ✅ UPDATED BLUE (lighter + obvious) */
       --accent: #3E6A9A;
       --accentHover: #345F89;
       --accentText: #ffffff;
 
-      --max: 980px;
+      --radiusOuter: 26px;
+      --radiusInner: 18px;
+      --shadow: 0 32px 90px rgba(15, 23, 42, 0.22);
 
+      --maxW: 980px;
       --topbarH: 52px;
     }
 
     *{ box-sizing:border-box; }
-
-    html{ scroll-behavior: smooth; }
-    @media (prefers-reduced-motion: reduce){
-      html{ scroll-behavior: auto; }
-      *{ transition: none !important; }
-    }
-
+    html,body{ height:100%; }
     body{
       margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
-      font-family: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Sticky nav (match other pages) */
+    /* Top nav (consistent across pages) */
     .topbar{
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(208,212,218,.92);
+      background: rgba(208, 212, 218, 0.86);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid rgba(148,163,184,.45);
     }
     .topbar-inner{
-      max-width: var(--max);
+      max-width: var(--maxW);
       margin: 0 auto;
       padding: 8px 18px;
       min-height: var(--topbarH);
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      display: flex;
+      justify-content: center;
+      gap: 8px 14px;
+      flex-wrap: wrap;
+      align-items: center;
     }
+
+    /* Match site nav pill style */
     .nav{
       display:flex;
       flex-wrap: wrap;
@@ -94,38 +92,39 @@
       color: rgba(62,106,154,.98);
     }
 
-    /* Content frame */
+    /* Frame */
     .wrap{
-      max-width: var(--max);
-      margin: 16px auto 28px;
+      max-width: var(--maxW);
+      margin: 22px auto 34px auto;
       padding: 0 18px;
     }
+
     .frame{
       background: var(--frame);
       border: 1px solid var(--frameBorder);
-      border-radius: 20px;
-      box-shadow: var(--frameShadow);
+      border-radius: var(--radiusOuter);
+      box-shadow: var(--shadow);
       overflow: hidden;
     }
+
     .frame-inner{
-      padding: 34px 54px 26px 54px;
+      padding: 40px 54px 30px 54px;
     }
 
     /* Typography */
     h1{
       margin: 0 0 10px 0;
-      font-size: 46px;          /* ✅ reduced from 54 */
-      line-height: 1.06;
+      font-size: 44px; /* ✅ tighten so it doesn't feel huge */
+      line-height: 1.08;
       font-weight: 800;
       text-align: center;
-      letter-spacing: -0.8px;
+      letter-spacing: -0.7px;
       color: #0b1220;
-      white-space: nowrap;      /* ✅ one line on desktop */
     }
 
     .lede{
-      margin: 0 auto 10px auto;
-      max-width: 78ch;
+      margin: 0 auto 12px auto;
+      max-width: 800px;
       font-size: 18px;
       line-height: 1.55;
       color: var(--muted);
@@ -134,18 +133,9 @@
     }
     .lede strong{ font-weight: 800; color: rgba(15, 23, 42, 0.86); }
 
-    .security{
-      margin: 0 auto 22px auto;
-      max-width: 78ch;
-      font-size: 14px;
-      line-height: 1.55;
-      color: var(--muted2);
-      text-align: center;
-    }
-
     /* Sections */
     .section{
-      margin: 22px auto 0 auto;
+      margin: 26px auto 0 auto;
       max-width: 760px;
     }
 
@@ -178,61 +168,61 @@
     ol.steps li{ margin: 10px 0; }
     ol.steps strong{ font-weight: 800; }
 
-    /* Notice bubble */
+    /* Notice (subtle, consistent) */
     .notice{
       margin: 18px auto 0 auto;
       padding: 14px 16px;
-      border: 1px solid rgba(148,163,184,.55);
-      border-radius: 18px;
+      border: 1px solid rgba(15, 23, 42, 0.14);
+      border-radius: var(--radiusInner);
       color: var(--muted);
       background: rgba(237, 240, 244, 0.45);
+      font-size: 14px;
+      line-height: 1.55;
+      max-width: 760px;
     }
 
     /* Footer */
     .footer{
       border-top: 1px solid rgba(148,163,184,.45);
-      margin-top: 26px;
+      margin-top: 34px;
       padding: 18px 26px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 14px;
-      color: var(--muted2);
+      color: rgba(15, 23, 42, 0.62);
       font-size: 13px;
       flex-wrap: wrap;
     }
     .footer a{
-      color: rgba(15,23,42,.72);
+      color: rgba(15, 23, 42, 0.72);
       text-decoration: none;
       font-weight: 800;
       margin-right: 14px;
     }
     .footer a:last-child{ margin-right: 0; }
     .footer a:hover{
-      color: rgba(15,23,42,.92);
+      color: rgba(15, 23, 42, 0.92);
       text-decoration: underline;
     }
 
     /* Responsive */
     @media (max-width: 720px){
-      .frame-inner{ padding: 28px 22px 22px 22px; }
-      h1{
-        font-size: 32px;
-        white-space: normal;   /* ✅ allow wrap on mobile */
-      }
+      h1{ font-size: 34px; }
       .lede{ font-size: 16px; }
+      .frame-inner{ padding: 30px 22px 24px 22px; }
+      .footer{ padding: 16px 18px; }
     }
   </style>
 </head>
 
 <body>
-  <!-- Top Navigation (post-purchase trimmed) -->
+  <!-- Top Navigation (trimmed for post-purchase) -->
   <div class="topbar" id="topbar">
-    <div class="topbar-inner">
+    <div class="topbar-inner" id="topbar-inner">
       <nav class="nav" aria-label="Primary navigation">
         <a href="/index.html">Home</a>
-        <a href="/faq/">FAQ</a>
-        <a href="/purchase.html">Purchase Details</a>
+        <a href="/tableofcontents.html">Table of Contents</a>
       </nav>
     </div>
   </div>
@@ -240,7 +230,6 @@
   <main class="wrap">
     <div class="frame">
       <div class="frame-inner">
-        <!-- ✅ Title condensed -->
         <h1>Thank You — Purchase Complete</h1>
 
         <p class="lede">
@@ -248,25 +237,23 @@
           Access and delivery instructions are provided via your purchase confirmation email.
         </p>
 
-        <p class="security">
-          For security, access links are delivered only via email and are not provided on this page.
-        </p>
-
         <section class="section" aria-label="Next Steps">
           <h2>Next Steps</h2>
 
+          <p class="lede" style="margin-top:0; margin-bottom:10px; font-size:16px; line-height:1.6; text-align:center;">
+            Follow the steps below to access the system and complete your initial setup.
+          </p>
+
           <ol class="steps">
+            <li><strong>Security note:</strong> Access links are delivered only via your confirmation email and are not shown on this page.</li>
             <li><strong>Check your purchase confirmation email.</strong> It contains your delivery link and instructions to duplicate the system into your Canva account.</li>
-            <li><strong>If you don’t see the email within a few minutes,</strong> check spam/promotions and search your inbox for “Real Estate Marketing System” or “Operational Systems”.</li>
+            <li><strong>If you don’t see the email within a few minutes,</strong> check Spam/Promotions and search your inbox for <strong>“Operational Systems”</strong> or <strong>“Real Estate Marketing System.”</strong></li>
             <li><strong>Duplicate the system into your Canva account.</strong> You’ll be prompted to copy the full system into your own workspace. A free Canva account is sufficient.</li>
             <li><strong>Complete initial setup once.</strong> Apply your logo, colors, and fonts, then duplicate templates as needed for ongoing use.</li>
           </ol>
 
-          <!-- ✅ Option B -->
           <div class="notice">
-            If you still can’t locate the confirmation email, check Spam/Promotions and search for <strong>“Operational Systems”</strong> or <strong>“Real Estate Marketing System.”</strong>
-            <br><br>
-            If it’s still missing, contact support and include <strong>the email used at checkout</strong>, <strong>approximate purchase time</strong>, and <strong>last 4 digits of the card</strong> so we can locate your order quickly.
+            If you still can’t locate the confirmation email, contact support and include <strong>the email used at checkout</strong>, <strong>approximate purchase time</strong>, and <strong>last 4 digits of the card</strong> so we can locate your order quickly.
           </div>
         </section>
       </div>
@@ -281,5 +268,25 @@
       </div>
     </div>
   </main>
+
+  <script>
+    (function(){
+      // Keep --topbarH accurate (same pattern as your other pages)
+      const topbar = document.getElementById('topbar');
+      function getTopbarH(){
+        if (!topbar) return 52;
+        return Math.ceil(topbar.getBoundingClientRect().height);
+      }
+      function setTopbarH(){
+        const h = getTopbarH();
+        document.documentElement.style.setProperty('--topbarH', h + 'px');
+        return h;
+      }
+      setTopbarH();
+      requestAnimationFrame(setTopbarH);
+      window.addEventListener('load', setTopbarH);
+      window.addEventListener('resize', setTopbarH);
+    })();
+  </script>
 </body>
 </html>

@@ -21,7 +21,7 @@
       --text: #0f172a;
       --muted: #475569;
       --muted2:#64748b;
-      --line: rgba(148,163,184,.28);
+      --line: rgba(148,163,184,.28); /* softened */
 
       --max: 980px;
       --topbarH: 52px;
@@ -36,7 +36,6 @@
       font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
     }
 
-    /* Topbar */
     .topbar{
       position: sticky;
       top: 0;
@@ -59,21 +58,21 @@
     .nav{
       display:flex;
       gap: 14px;
-      align-items:center;
-      justify-content:center;
     }
 
     .nav a{
-      display: inline-block; /* ✅ critical */
       font-size: 13px;
       font-weight: 650;
       color: rgba(15,23,42,.72);
       text-decoration: none;
       padding: 7px 10px;
       border-radius: 999px;
+
+      /* ✅ ADDED (match working pages) */
       transition: background .12s ease, color .12s ease;
     }
 
+    /* ✅ ADDED (match working pages) */
     .nav a:hover{
       background: rgba(15,23,42,.08);
       color: rgba(15,23,42,.92);
@@ -84,7 +83,6 @@
       color: rgba(15,118,110,.98);
     }
 
-    /* Frame */
     .page-frame{
       max-width: var(--max);
       margin: 16px auto 28px;
@@ -133,7 +131,7 @@
     h2::after{
       content:"";
       display:block;
-      width: 110px;
+      width: 110px; /* reduced */
       height: 1px;
       margin: 10px auto 0;
       background: var(--line);
@@ -175,11 +173,16 @@
       color: rgba(15,23,42,.72);
       text-decoration: none;
       font-weight: 800;
-      margin-right: 14px;
+        margin-right: 14px;
     }
 
-    .footer a:last-child{ margin-right: 0; }
-    .footer a:hover{ text-decoration: underline; }
+    .footer a:last-child{
+      margin-right: 0;
+    }
+
+    .footer a:hover{
+      text-decoration: underline;
+    }
   </style>
 </head>
 
@@ -204,8 +207,115 @@
         </p>
       </header>
 
-      <!-- CONTENT UNCHANGED -->
-      <!-- (all sections exactly as you provided) -->
+      <section>
+        <h2>Acceptance of Terms</h2>
+        <p>
+          By accessing this website or purchasing The Real Estate Marketing System (the “Product”), you agree to these Terms of Use.
+          If you do not agree, do not use the site or purchase the Product.
+        </p>
+      </section>
+
+      <div class="divider"></div>
+
+      <section>
+        <h2>Product Description</h2>
+        <p>
+          The Product is a Canva-based marketing system that provides standardized base formats, templates, and documentation intended to support consistent, repeatable marketing execution.
+        </p>
+        <p>
+          The Product provides structure and standards only. It does not include marketing strategy, lead generation, performance guarantees, or done-for-you services.
+        </p>
+      </section>
+
+      <div class="divider"></div>
+
+      <section>
+        <h2>License &amp; Permitted Use</h2>
+        <p>
+          The Product is licensed for internal use within a single organization. Internal sharing with agents, staff, or team members within the same organization is permitted.
+        </p>
+        <ul>
+          <li>You may use the Product across your listings, campaigns, and internal contributors within your organization.</li>
+          <li>You may not resell, redistribute, sublicense, publish, or share the Product externally.</li>
+          <li>You may not represent the Product (or any portion of it) as your own product for resale.</li>
+        </ul>
+      </section>
+
+      <div class="divider"></div>
+
+      <section>
+        <h2>User Content Responsibility</h2>
+        <p>
+          Any content you create, upload, or publish using the Product (including text, images, claims, pricing, compliance statements, or advertising content) is your responsibility.
+          You are responsible for ensuring your marketing complies with applicable laws, regulations, MLS rules, brand policies, and platform requirements.
+        </p>
+      </section>
+
+      <div class="divider"></div>
+
+      <section>
+        <h2>Access &amp; Delivery</h2>
+        <p>
+          Access is delivered digitally after purchase, typically immediately. Delivery method may include links, shared folders, or other digital access mechanisms required to provide the Product.
+        </p>
+      </section>
+
+      <div class="divider"></div>
+
+      <section>
+        <h2>Refund Policy</h2>
+        <p>
+          Because this is a digital product delivered immediately, all sales are final and non-refundable unless otherwise required by law.
+        </p>
+      </section>
+
+      <div class="divider"></div>
+
+      <section>
+        <h2>Intellectual Property</h2>
+        <p>
+          The Product and all associated materials are owned by Operational Systems, LLC and are protected by intellectual property laws.
+          No ownership rights are transferred to you.
+        </p>
+      </section>
+
+      <div class="divider"></div>
+
+      <section>
+        <h2>Disclaimer of Warranties</h2>
+        <p>
+          The site and Product are provided “as is” and “as available.” We make no warranties of any kind, express or implied,
+          including warranties of merchantability, fitness for a particular purpose, or non-infringement.
+        </p>
+      </section>
+
+      <div class="divider"></div>
+
+      <section>
+        <h2>Limitation of Liability</h2>
+        <p>
+          To the fullest extent permitted by law, Operational Systems, LLC will not be liable for any indirect, incidental, consequential,
+          special, or punitive damages, or any loss of profits or revenues, arising from your use of the site or Product.
+        </p>
+      </section>
+
+      <div class="divider"></div>
+
+      <section>
+        <h2>Changes to These Terms</h2>
+        <p>
+          We may update these Terms from time to time. Continued use of the site after changes become effective constitutes acceptance of the updated Terms.
+        </p>
+      </section>
+
+      <div class="divider"></div>
+
+      <section>
+        <h2>Contact</h2>
+        <p>
+          Questions about these Terms may be directed to Operational Systems, LLC. Contact details are provided on this website.
+        </p>
+      </section>
 
       <div class="footer">
         <div>© <a href="https://operational-systems.com">Operational Systems, LLC</a></div>
@@ -214,6 +324,7 @@
           <a href="/terms.html">Terms</a>
         </div>
       </div>
+
     </div>
   </div>
 </body>

@@ -24,7 +24,7 @@
       --muted2:#64748b;
       --line: rgba(148,163,184,.45);
 
-      /* ✅ Lighter, obvious blue */
+      /* ✅ Lighter, obvious blue (buttons + active nav) */
       --accent: #3E6A9A;
       --accentHover: #345F89;
       --accentText: #ffffff;
@@ -560,6 +560,9 @@
         window.scrollTo({ top: Math.max(0, y), behavior: prefersReduced ? 'auto' : 'smooth' });
 
         if (pushState) history.pushState(null, '', '#' + id);
+
+        // After programmatic scroll, re-evaluate active nav
+        setTimeout(() => setActiveByScroll(), 80);
       }
 
       const nav = document.getElementById('nav');
@@ -578,6 +581,7 @@
 
       window.addEventListener('popstate', () => {
         if (location.hash) scrollToHash(location.hash, false);
+        setTimeout(() => setActiveByScroll(), 80);
       });
 
       const navLinks = Array.from(document.querySelectorAll('.nav a'));
@@ -587,31 +591,44 @@
 
       const linkById = new Map(navLinks.map(a => [a.getAttribute('href').slice(1), a]));
 
-      // ✅ Stable mapping + FAQ bottom fix
+      // ✅ Stable mapping (range-based) + bottom-of-page fix
       function setActiveByScroll(){
         if (!sections.length) return;
 
-        const nearBottom = (window.innerHeight + window.pageYOffset) >= (document.documentElement.scrollHeight - 2);
-        let current = null;
+        const topLine = window.pageYOffset + getTopbarH() + getAnchorGap() + 2;
 
-        if (nearBottom){
-          current = sections[sections.length - 1];
-        } else {
-          const thresholdY = getTopbarH() + getAnchorGap() + 2;
-          for (const sec of sections){
-            const heading = sec.querySelector('h2') || sec;
-            if (heading.getBoundingClientRect().top <= thresholdY){
-              current = sec;
-            }
+        // If we're truly at the bottom, force last section (FAQ)
+        const atBottom = (window.innerHeight + window.pageYOffset) >= (document.documentElement.scrollHeight - 2);
+        if (atBottom){
+          navLinks.forEach(a => a.classList.remove('active'));
+          const last = sections[sections.length - 1];
+          const lastLink = linkById.get(last.id);
+          if (lastLink) lastLink.classList.add('active');
+          return;
+        }
+
+        // Find the active section by section start/end boundaries
+        let active = sections[0];
+
+        for (let i = 0; i < sections.length; i++){
+          const cur = sections[i];
+          const next = sections[i + 1];
+
+          const curTop = cur.offsetTop;
+          const nextTop = next ? next.offsetTop : Infinity;
+
+          if (topLine >= curTop && topLine < nextTop){
+            active = cur;
+            break;
           }
-          if (!current) current = sections[0];
         }
 
         navLinks.forEach(a => a.classList.remove('active'));
-        const link = linkById.get(current.id);
+        const link = linkById.get(active.id);
         if (link) link.classList.add('active');
       }
 
+      // Throttle scroll updates to animation frames
       let ticking = false;
       function onScroll(){
         if (ticking) return;

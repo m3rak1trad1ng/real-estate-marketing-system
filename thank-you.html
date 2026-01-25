@@ -13,105 +13,130 @@
 
   <style>
     :root{
-      /* Neutral Graphite (match your other pages) */
+      /* Match your other pages */
       --bg: #d0d4da;
       --frame: #edf0f4;
       --frameBorder: rgba(15, 23, 42, 0.35);
+      --frameShadow: 0 32px 90px rgba(15, 23, 42, 0.22);
+
       --text: #0f172a;
-      --muted: rgba(15, 23, 42, 0.72);
-      --muted2: rgba(15, 23, 42, 0.58);
+      --muted: #475569;
+      --muted2:#64748b;
+      --line: rgba(148,163,184,.45);
 
-      --accent: #2f6b60;
-      --radiusOuter: 26px;
-      --radiusInner: 18px;
-      --shadow: 0 32px 90px rgba(15, 23, 42, 0.22);
+      /* ✅ Updated blue */
+      --accent: #3E6A9A;
+      --accentHover: #345F89;
+      --accentText: #ffffff;
 
-      --maxW: 980px;
+      --max: 980px;
+
+      --topbarH: 52px;
     }
 
     *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+
+    html{ scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior: auto; }
+      *{ transition: none !important; }
     }
 
-    /* Top nav (consistent across pages) */
+    body{
+      margin:0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Sticky nav (match other pages) */
     .topbar{
       position: sticky;
       top: 0;
-      z-index: 5;
-      background: rgba(208, 212, 218, 0.86);
+      z-index: 50;
+      background: rgba(208,212,218,.92);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(15, 23, 42, 0.14);
+      border-bottom: 1px solid var(--line);
     }
     .topbar-inner{
-      max-width: var(--maxW);
+      max-width: var(--max);
       margin: 0 auto;
-      padding: 14px 18px;
-      display: flex;
-      justify-content: center;
-      gap: 34px;
+      padding: 8px 18px;
+      min-height: var(--topbarH);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .nav{
+      display:flex;
       flex-wrap: wrap;
+      gap: 8px 14px;
+      align-items:center;
+      justify-content:center;
     }
-    .topbar a{
+    .nav a{
+      font-size: 13px;
+      color: rgba(15,23,42,.72);
       text-decoration: none;
-      color: rgba(15, 23, 42, 0.72);
-      font-weight: 600;
-      font-size: 14px;
-      letter-spacing: 0.2px;
-      padding: 8px 8px;
-      border-radius: 10px;
+      font-weight: 650;
+      padding: 7px 10px;
+      border-radius: 999px;
+      transition: background .12s ease, color .12s ease;
     }
-    .topbar a:hover{
-      color: rgba(15, 23, 42, 0.92);
-      background: rgba(237, 240, 244, 0.65);
+    .nav a:hover{
+      background: rgba(15,23,42,.08);
+      color: rgba(15,23,42,.92);
+    }
+    .nav a.active{
+      background: rgba(62,106,154,.18);
+      color: rgba(62,106,154,.98);
     }
 
-    /* Frame */
+    /* Content frame */
     .wrap{
-      max-width: var(--maxW);
-      margin: 22px auto 34px auto;
+      max-width: var(--max);
+      margin: 16px auto 28px;
       padding: 0 18px;
     }
-
     .frame{
       background: var(--frame);
       border: 1px solid var(--frameBorder);
-      border-radius: var(--radiusOuter);
-      box-shadow: var(--shadow);
+      border-radius: 20px;
+      box-shadow: var(--frameShadow);
       overflow: hidden;
     }
-
     .frame-inner{
-      padding: 44px 54px 34px 54px;
+      padding: 34px 54px 26px 54px;
     }
 
     /* Typography */
     h1{
       margin: 0 0 10px 0;
-      font-size: 54px;
-      line-height: 1.05;
+      font-size: 46px;          /* ✅ reduced from 54 */
+      line-height: 1.06;
       font-weight: 800;
       text-align: center;
       letter-spacing: -0.8px;
+      color: #0b1220;
+      white-space: nowrap;      /* ✅ one line on desktop */
     }
 
     .lede{
       margin: 0 auto 10px auto;
-      max-width: 800px;
+      max-width: 78ch;
       font-size: 18px;
       line-height: 1.55;
       color: var(--muted);
       text-align: center;
+      font-weight: 500;
     }
     .lede strong{ font-weight: 800; color: rgba(15, 23, 42, 0.86); }
 
     .security{
-      margin: 0 auto 26px auto;
-      max-width: 780px;
+      margin: 0 auto 22px auto;
+      max-width: 78ch;
       font-size: 14px;
       line-height: 1.55;
       color: var(--muted2);
@@ -120,7 +145,7 @@
 
     /* Sections */
     .section{
-      margin: 26px auto 0 auto;
+      margin: 22px auto 0 auto;
       max-width: 760px;
     }
 
@@ -131,15 +156,16 @@
       text-align: center;
       position: relative;
       letter-spacing: -0.2px;
+      color: #0b1220;
     }
     .section h2::after{
       content:"";
       display:block;
-      width: 170px;
-      height: 2px;
-      background: rgba(15, 23, 42, 0.18);
+      width: 140px;
+      height: 1px;
+      background: rgba(15, 23, 42, 0.14);
       margin: 12px auto 0 auto;
-      border-radius: 2px;
+      border-radius: 999px;
     }
 
     ol.steps{
@@ -152,64 +178,70 @@
     ol.steps li{ margin: 10px 0; }
     ol.steps strong{ font-weight: 800; }
 
-    /* Notice (subtle, consistent) */
+    /* Notice bubble */
     .notice{
       margin: 18px auto 0 auto;
       padding: 14px 16px;
-      border: 1px solid rgba(15, 23, 42, 0.14);
-      border-radius: var(--radiusInner);
+      border: 1px solid rgba(148,163,184,.55);
+      border-radius: 18px;
       color: var(--muted);
       background: rgba(237, 240, 244, 0.45);
     }
 
     /* Footer */
     .footer{
-      border-top: 1px solid rgba(15, 23, 42, 0.14);
-      margin-top: 34px;
+      border-top: 1px solid rgba(148,163,184,.45);
+      margin-top: 26px;
       padding: 18px 26px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 14px;
-      color: rgba(15, 23, 42, 0.62);
+      color: var(--muted2);
       font-size: 13px;
       flex-wrap: wrap;
     }
     .footer a{
-      color: rgba(15, 23, 42, 0.72);
+      color: rgba(15,23,42,.72);
       text-decoration: none;
-      font-weight: 700;
+      font-weight: 800;
+      margin-right: 14px;
     }
+    .footer a:last-child{ margin-right: 0; }
     .footer a:hover{
-      color: rgba(15, 23, 42, 0.92);
+      color: rgba(15,23,42,.92);
       text-decoration: underline;
     }
 
     /* Responsive */
     @media (max-width: 720px){
-      h1{ font-size: 40px; }
-      .frame-inner{ padding: 34px 22px 26px 22px; }
-      .topbar-inner{ gap: 16px; }
-      .footer{ padding: 16px 18px; }
+      .frame-inner{ padding: 28px 22px 22px 22px; }
+      h1{
+        font-size: 32px;
+        white-space: normal;   /* ✅ allow wrap on mobile */
+      }
+      .lede{ font-size: 16px; }
     }
   </style>
 </head>
 
 <body>
-  <!-- Top Navigation -->
-  <div class="topbar">
+  <!-- Top Navigation (post-purchase trimmed) -->
+  <div class="topbar" id="topbar">
     <div class="topbar-inner">
-      <a href="index.html">Home</a>
-      <a href="table-of-contents.html">Table of Contents</a>
-      <a href="faq.html">FAQ</a>
-      <a href="request-access.html">Request Access</a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="/index.html">Home</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/purchase.html">Purchase Details</a>
+      </nav>
     </div>
   </div>
 
   <main class="wrap">
     <div class="frame">
       <div class="frame-inner">
-        <h1>Thank You — Your Purchase Is Complete</h1>
+        <!-- ✅ Title condensed -->
+        <h1>Thank You — Purchase Complete</h1>
 
         <p class="lede">
           Thank you for your purchase. Your access to <strong>The Real Estate Marketing System</strong> is now confirmed.
@@ -230,8 +262,11 @@
             <li><strong>Complete initial setup once.</strong> Apply your logo, colors, and fonts, then duplicate templates as needed for ongoing use.</li>
           </ol>
 
+          <!-- ✅ Option B -->
           <div class="notice">
-            If you still can’t locate the confirmation email, refer to the delivery section in the FAQ for troubleshooting steps.
+            If you still can’t locate the confirmation email, check Spam/Promotions and search for <strong>“Operational Systems”</strong> or <strong>“Real Estate Marketing System.”</strong>
+            <br><br>
+            If it’s still missing, contact support and include <strong>the email used at checkout</strong>, <strong>approximate purchase time</strong>, and <strong>last 4 digits of the card</strong> so we can locate your order quickly.
           </div>
         </section>
       </div>
@@ -240,9 +275,8 @@
       <div class="footer">
         <div>© <a href="https://operational-systems.com/" target="_blank" rel="noopener noreferrer">Operational Systems, LLC</a></div>
         <div>
-          <a href="privacy.html">Privacy</a>
-          &nbsp;&nbsp;&nbsp;
-          <a href="terms.html">Terms</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
         </div>
       </div>
     </div>

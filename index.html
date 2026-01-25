@@ -508,151 +508,171 @@
     </div>
   </div>
 
-  <script>
-    (function(){
-      // FAQ: only one open at a time
-      const allFaq = Array.from(document.querySelectorAll('#faq details'));
-      allFaq.forEach(d => {
-        d.addEventListener('toggle', () => {
-          if (!d.open) return;
-          allFaq.forEach(other => { if (other !== d) other.open = false; });
-        });
+ <script>
+  (function(){
+    // FAQ: only one open at a time
+    const allFaq = Array.from(document.querySelectorAll('#faq details'));
+    allFaq.forEach(d => {
+      d.addEventListener('toggle', () => {
+        if (!d.open) return;
+        allFaq.forEach(other => { if (other !== d) other.open = false; });
       });
+    });
 
-      const topbar = document.getElementById('topbar');
+    const topbar = document.getElementById('topbar');
 
-      function getTopbarH(){
-        if (!topbar) return 52;
-        return Math.ceil(topbar.getBoundingClientRect().height);
+    function getTopbarH(){
+      if (!topbar) return 52;
+      return Math.ceil(topbar.getBoundingClientRect().height);
+    }
+    function setTopbarH(){
+      const h = getTopbarH();
+      document.documentElement.style.setProperty('--topbarH', h + 'px');
+      return h;
+    }
+
+    setTopbarH();
+    requestAnimationFrame(setTopbarH);
+    window.addEventListener('load', setTopbarH);
+    window.addEventListener('resize', setTopbarH);
+
+    function getAnchorGap(){
+      const raw = getComputedStyle(document.documentElement).getPropertyValue('--anchorGap');
+      const n = parseInt(raw, 10);
+      return Number.isFinite(n) ? n : 14;
+    }
+
+    const nav = document.getElementById('nav');
+    const navLinks = Array.from(document.querySelectorAll('.nav a'));
+
+    function clearActive(){
+      navLinks.forEach(a => a.classList.remove('active'));
+    }
+    function setActiveById(id){
+      clearActive();
+      const link = navLinks.find(a => (a.getAttribute('href') || '').slice(1) === id);
+      if (link) link.classList.add('active');
+    }
+
+    // ✅ NEW: lock active state briefly during programmatic smooth scroll
+    let lockUntil = 0;
+    let lockedId = null;
+    function lockActive(id, ms){
+      lockedId = id;
+      lockUntil = Date.now() + (ms || 600);
+      setActiveById(id);
+    }
+    function isLocked(){
+      return lockedId && Date.now() < lockUntil;
+    }
+
+    function scrollToHash(hash, pushState){
+      const id = (hash || "").replace('#','');
+      if (!id) return;
+
+      const section = document.getElementById(id);
+      if (!section) return;
+
+      const heading = section.querySelector('h2') || section;
+
+      const topbarH = setTopbarH();
+      const gap = getAnchorGap();
+
+      const y = heading.getBoundingClientRect().top + window.pageYOffset - (topbarH + gap);
+
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: Math.max(0, y), behavior: prefersReduced ? 'auto' : 'smooth' });
+
+      if (pushState) history.pushState(null, '', '#' + id);
+
+      // Re-evaluate after scroll settles (but lock prevents overriding too early)
+      setTimeout(setActiveByScroll, 0);
+      setTimeout(setActiveByScroll, prefersReduced ? 0 : 450);
+    }
+
+    if (nav){
+      nav.addEventListener('click', (e) => {
+        const a = e.target.closest('a[href^="#"]');
+        if (!a) return;
+        e.preventDefault();
+
+        const id = a.getAttribute('href').slice(1);
+
+        // ✅ lock highlight so Purchase cannot be overwritten during smooth scroll
+        lockActive(id, 650);
+
+        scrollToHash(a.getAttribute('href'), true);
+      });
+    }
+
+    function setActiveByScroll(){
+      // ✅ if we just clicked, don’t let scroll math override it yet
+      if (isLocked()){
+        setActiveById(lockedId);
+        return;
+      } else {
+        lockedId = null;
       }
-      function setTopbarH(){
-        const h = getTopbarH();
-        document.documentElement.style.setProperty('--topbarH', h + 'px');
-        return h;
-      }
 
-      setTopbarH();
-      requestAnimationFrame(setTopbarH);
-      window.addEventListener('load', setTopbarH);
-      window.addEventListener('resize', setTopbarH);
+      const sections = navLinks
+        .map(a => document.querySelector(a.getAttribute('href')))
+        .filter(Boolean);
 
-      function getAnchorGap(){
-        const raw = getComputedStyle(document.documentElement).getPropertyValue('--anchorGap');
-        const n = parseInt(raw, 10);
-        return Number.isFinite(n) ? n : 14;
-      }
+      if (!sections.length) return;
 
-      function scrollToHash(hash, pushState){
-        const id = (hash || "").replace('#','');
-        if (!id) return;
+      const topbarH = getTopbarH();
+      const gap = getAnchorGap();
 
-        const section = document.getElementById(id);
-        if (!section) return;
+      // small buffer for exact landing on headings
+      const thresholdY = topbarH + gap + 8;
 
-        const heading = section.querySelector('h2') || section;
+      const atBottom = (window.innerHeight + window.pageYOffset) >= (document.documentElement.scrollHeight - 2);
+      let current = null;
 
-        const topbarH = setTopbarH();
-        const gap = getAnchorGap();
-
-        const y = heading.getBoundingClientRect().top + window.pageYOffset - (topbarH + gap);
-
-        const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        window.scrollTo({ top: Math.max(0, y), behavior: prefersReduced ? 'auto' : 'smooth' });
-
-        if (pushState) history.pushState(null, '', '#' + id);
-
-        // ✅ force-update active after the scroll starts/finishes (covers smooth-scroll + rounding)
-        setTimeout(setActiveByScroll, 0);
-        setTimeout(setActiveByScroll, prefersReduced ? 0 : 320);
-      }
-
-      const nav = document.getElementById('nav');
-      const navLinks = Array.from(document.querySelectorAll('.nav a'));
-
-      function clearActive(){
-        navLinks.forEach(a => a.classList.remove('active'));
-      }
-      function setActiveById(id){
-        clearActive();
-        const link = navLinks.find(a => (a.getAttribute('href') || '').slice(1) === id);
-        if (link) link.classList.add('active');
-      }
-
-      if (nav){
-        nav.addEventListener('click', (e) => {
-          const a = e.target.closest('a[href^="#"]');
-          if (!a) return;
-          e.preventDefault();
-
-          const id = a.getAttribute('href').slice(1);
-
-          // ✅ FIX #1: highlight immediately on click (Purchase will always light up)
-          setActiveById(id);
-
-          scrollToHash(a.getAttribute('href'), true);
-        });
-      }
-
-      function setActiveByScroll(){
-        const sections = navLinks
-          .map(a => document.querySelector(a.getAttribute('href')))
-          .filter(Boolean);
-
-        if (!sections.length) return;
-
-        const topbarH = getTopbarH();
-        const gap = getAnchorGap();
-
-        // ✅ FIX #2: give a small buffer so exact-alignment doesn’t miss Purchase
-        const thresholdY = topbarH + gap + 8;
-
-        const atBottom = (window.innerHeight + window.pageYOffset) >= (document.documentElement.scrollHeight - 2);
-        let current = null;
-
-        if (atBottom){
-          current = sections[sections.length - 1]; // FAQ
-        } else {
-          for (const sec of sections){
-            const heading = sec.querySelector('h2') || sec;
-            if (heading.getBoundingClientRect().top <= thresholdY){
-              current = sec;
-            }
+      if (atBottom){
+        current = sections[sections.length - 1]; // FAQ
+      } else {
+        for (const sec of sections){
+          const heading = sec.querySelector('h2') || sec;
+          if (heading.getBoundingClientRect().top <= thresholdY){
+            current = sec;
           }
-          if (!current) current = sections[0];
         }
-
-        clearActive();
-        const id = current.id;
-        setActiveById(id);
+        if (!current) current = sections[0];
       }
 
-      // initial hash support
+      setActiveById(current.id);
+    }
+
+    // initial hash support
+    if (location.hash){
+      lockActive(location.hash.slice(1), 650);
+      setTimeout(() => scrollToHash(location.hash, false), 0);
+    }
+
+    window.addEventListener('popstate', () => {
       if (location.hash){
-        setTimeout(() => scrollToHash(location.hash, false), 0);
+        lockActive(location.hash.slice(1), 650);
+        scrollToHash(location.hash, false);
       }
+    });
 
-      window.addEventListener('popstate', () => {
-        if (location.hash) scrollToHash(location.hash, false);
+    let ticking = false;
+    function onScroll(){
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        setActiveByScroll();
       });
+    }
 
-      // scroll/resize tracking
-      let ticking = false;
-      function onScroll(){
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(() => {
-          ticking = false;
-          setActiveByScroll();
-        });
-      }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('load', setActiveByScroll);
+    window.addEventListener('resize', () => { setTopbarH(); setActiveByScroll(); });
 
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('load', setActiveByScroll);
-      window.addEventListener('resize', () => { setTopbarH(); setActiveByScroll(); });
-
-      // run once now
-      setActiveByScroll();
-    })();
-  </script>
+    setActiveByScroll();
+  })();
+</script>
 </body>
 </html>

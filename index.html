@@ -24,7 +24,7 @@
       --muted2:#64748b;
       --line: rgba(148,163,184,.45);
 
-      /* ✅ ONLY COLOR CHANGE: buttons + active nav (lighter blue, obvious) */
+      /* ✅ UPDATED BLUE (lighter + obvious) */
       --accent: #3E6A9A;
       --accentHover: #345F89;
       --accentText: #ffffff;
@@ -161,7 +161,6 @@
       background: var(--accent);
       color: var(--accentText);
       border: 1px solid rgba(0,0,0,.08);
-      /* ✅ ONLY COLOR CHANGE (shadow tint) */
       box-shadow: 0 14px 30px rgba(62,106,154,.24);
       transition: transform .06s ease, box-shadow .12s ease, background .12s ease;
       min-width: 0;
@@ -450,7 +449,7 @@
             <details>
               <summary>What exactly do I receive when I purchase? <span class="chev" aria-hidden="true"></span></summary>
               <div class="answer">
-                You receive 117 standardized base formats spanning social media, email, print, presentations, and internal documentation—organized so the system can be duplicated and reused consistently over time.
+                You receive a complete system of standardized base formats spanning social media, email, print, presentations, and internal documentation—organized so the system can be duplicated and reused consistently over time.
                 <br><br>
                 To validate scope before purchase, review the full buyer-facing index on the
                 <a href="tableofcontents.html">System Table of Contents</a>.
@@ -561,44 +560,51 @@
         window.scrollTo({ top: Math.max(0, y), behavior: prefersReduced ? 'auto' : 'smooth' });
 
         if (pushState) history.pushState(null, '', '#' + id);
+
+        // ✅ force-update active after the scroll starts/finishes (covers smooth-scroll + rounding)
+        setTimeout(setActiveByScroll, 0);
+        setTimeout(setActiveByScroll, prefersReduced ? 0 : 320);
       }
 
       const nav = document.getElementById('nav');
+      const navLinks = Array.from(document.querySelectorAll('.nav a'));
+
+      function clearActive(){
+        navLinks.forEach(a => a.classList.remove('active'));
+      }
+      function setActiveById(id){
+        clearActive();
+        const link = navLinks.find(a => (a.getAttribute('href') || '').slice(1) === id);
+        if (link) link.classList.add('active');
+      }
+
       if (nav){
         nav.addEventListener('click', (e) => {
           const a = e.target.closest('a[href^="#"]');
           if (!a) return;
           e.preventDefault();
+
+          const id = a.getAttribute('href').slice(1);
+
+          // ✅ FIX #1: highlight immediately on click (Purchase will always light up)
+          setActiveById(id);
+
           scrollToHash(a.getAttribute('href'), true);
         });
       }
 
-      if (location.hash){
-        setTimeout(() => scrollToHash(location.hash, false), 0);
-      }
-
-      window.addEventListener('popstate', () => {
-        if (location.hash) scrollToHash(location.hash, false);
-      });
-
-      const navLinks = Array.from(document.querySelectorAll('.nav a'));
-      const sections = navLinks
-        .map(a => document.querySelector(a.getAttribute('href')))
-        .filter(Boolean);
-
-      const linkById = new Map(navLinks.map(a => [a.getAttribute('href').slice(1), a]));
-
-      /* ✅ FIX: stable, deterministic mapping (no swapping, no bottom edge-case)
-         - Uses scroll position relative to topbar instead of IntersectionObserver
-         - Guarantees Purchase highlights when you're in Purchase
-         - Guarantees FAQ highlights at the bottom when FAQ is reached
-      */
       function setActiveByScroll(){
+        const sections = navLinks
+          .map(a => document.querySelector(a.getAttribute('href')))
+          .filter(Boolean);
+
         if (!sections.length) return;
 
         const topbarH = getTopbarH();
         const gap = getAnchorGap();
-        const thresholdY = topbarH + gap + 2;
+
+        // ✅ FIX #2: give a small buffer so exact-alignment doesn’t miss Purchase
+        const thresholdY = topbarH + gap + 8;
 
         const atBottom = (window.innerHeight + window.pageYOffset) >= (document.documentElement.scrollHeight - 2);
         let current = null;
@@ -609,17 +615,27 @@
           for (const sec of sections){
             const heading = sec.querySelector('h2') || sec;
             if (heading.getBoundingClientRect().top <= thresholdY){
-              current = sec; // last one above threshold wins
+              current = sec;
             }
           }
           if (!current) current = sections[0];
         }
 
-        navLinks.forEach(a => a.classList.remove('active'));
-        const link = linkById.get(current.id);
-        if (link) link.classList.add('active');
+        clearActive();
+        const id = current.id;
+        setActiveById(id);
       }
 
+      // initial hash support
+      if (location.hash){
+        setTimeout(() => scrollToHash(location.hash, false), 0);
+      }
+
+      window.addEventListener('popstate', () => {
+        if (location.hash) scrollToHash(location.hash, false);
+      });
+
+      // scroll/resize tracking
       let ticking = false;
       function onScroll(){
         if (ticking) return;
@@ -634,7 +650,7 @@
       window.addEventListener('load', setActiveByScroll);
       window.addEventListener('resize', () => { setTopbarH(); setActiveByScroll(); });
 
-      // run once immediately
+      // run once now
       setActiveByScroll();
     })();
   </script>

@@ -23,6 +23,9 @@
       --muted2:#64748b;
       --line: rgba(148,163,184,.28); /* softened */
 
+      /* ✅ FIX: match RE index blue active pill */
+      --accent: #3E6A9A;
+
       --max: 980px;
       --topbarH: 52px;
     }
@@ -58,6 +61,8 @@
     .nav{
       display:flex;
       gap: 14px;
+      flex-wrap: wrap;
+      justify-content:center;
     }
 
     .nav a{
@@ -67,20 +72,18 @@
       text-decoration: none;
       padding: 7px 10px;
       border-radius: 999px;
-
-      /* ✅ ADDED (match working pages) */
       transition: background .12s ease, color .12s ease;
     }
 
-    /* ✅ ADDED (match working pages) */
     .nav a:hover{
       background: rgba(15,23,42,.08);
       color: rgba(15,23,42,.92);
     }
 
+    /* ✅ FIX: blue (not teal/green) */
     .nav a.active{
-      background: rgba(15,118,110,.16);
-      color: rgba(15,118,110,.98);
+      background: rgba(62,106,154,.18);
+      color: rgba(62,106,154,.98);
     }
 
     .page-frame{
@@ -173,7 +176,7 @@
       color: rgba(15,23,42,.72);
       text-decoration: none;
       font-weight: 800;
-        margin-right: 14px;
+      margin-right: 14px;
     }
 
     .footer a:last-child{
@@ -218,16 +221,16 @@
       <div class="divider"></div>
 
       <section>
-  <h2>Product Description</h2>
-    <p>
-    The Product is a Canva-based marketing system that provides standardized base formats, templates, and documentation intended to support consistent, repeatable marketing execution.
-    </p>
-    <p>
-    The Product provides structure and standards only. It does not include marketing strategy, lead generation, performance guarantees, or done-for-you services.
-    </p>
-    <p>
-    No representations or guarantees are made regarding business results, income, sales performance, lead generation outcomes, or any specific return on investment. Results depend on individual implementation, market conditions, and external factors beyond our control.
-    </p>
+        <h2>Product Description</h2>
+        <p>
+          The Product is a Canva-based marketing system that provides standardized base formats, templates, and documentation intended to support consistent, repeatable marketing execution.
+        </p>
+        <p>
+          The Product provides structure and standards only. It does not include marketing strategy, lead generation, performance guarantees, or done-for-you services.
+        </p>
+        <p>
+          No representations or guarantees are made regarding business results, income, sales performance, lead generation outcomes, or any specific return on investment. Results depend on individual implementation, market conditions, and external factors beyond our control.
+        </p>
       </section>
 
       <div class="divider"></div>
@@ -267,11 +270,11 @@
 
       <section>
         <h2>Refund Policy</h2>
-          <p>Because this is a digital product delivered immediately upon purchase, all sales are final and non-refundable unless otherwise required by law.</p>
-          <p>By purchasing the Product, you acknowledge and agree that access is provided electronically and typically immediately after payment. Due to the nature of digital delivery, you waive any right to cancel or request a refund once access has been granted.</p>
-          <p>By completing your purchase, you agree not to initiate chargebacks or payment disputes except in cases of unauthorized transactions.</p>
-          <p>Charges will appear on your billing statement as OPERATIONAL SYSTEMS.</p>
-        </section>
+        <p>Because this is a digital product delivered immediately upon purchase, all sales are final and non-refundable unless otherwise required by law.</p>
+        <p>By purchasing the Product, you acknowledge and agree that access is provided electronically and typically immediately after payment. Due to the nature of digital delivery, you waive any right to cancel or request a refund once access has been granted.</p>
+        <p>By completing your purchase, you agree not to initiate chargebacks or payment disputes except in cases of unauthorized transactions.</p>
+        <p>Charges will appear on your billing statement as OPERATIONAL SYSTEMS.</p>
+      </section>
 
       <div class="divider"></div>
 
@@ -295,7 +298,7 @@
 
       <div class="divider"></div>
 
-     <section>
+      <section>
         <h2>Limitation of Liability</h2>
         <p>
           To the fullest extent permitted by law, Operational Systems, LLC will not be liable for any indirect, incidental, consequential, special, exemplary, or punitive damages, including loss of profits, loss of revenue, loss of data, business interruption, or goodwill, arising out of or related to your use of the site or Product.
@@ -303,7 +306,7 @@
         <p>
           In no event shall the total liability of Operational Systems, LLC exceed the amount paid by you for the Product.
         </p>
-    </section>
+      </section>
 
       <div class="divider"></div>
 

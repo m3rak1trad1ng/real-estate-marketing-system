@@ -124,7 +124,7 @@
       color: #0b1220;
     }
 
-    /* ✅ HERO COPY BLOCK */
+    /* ✅ HERO COPY BLOCK (match section width, but keep centered text) */
     .hero-blocks{
       max-width: 78ch;
       margin: 0 auto 14px auto;
@@ -306,7 +306,7 @@
     }
 
     /* =========================================================
-       ✅ PREMIUM IMAGE VIEWER (NO ARROWS, NO JANK)
+       ✅ PREMIUM IMAGE VIEWER (KEEP INSTRUCTIONS, PLATFORM-SPECIFIC)
        ========================================================= */
     img[data-zoomable="true"]{ cursor: zoom-in; }
 
@@ -455,10 +455,15 @@
       pointer-events:none;
       transition: opacity .18s ease;
       white-space: nowrap;
+      text-align: center;
     }
     .lb-hint.show{ opacity: 1; }
 
-    /* Mobile: hide zoom buttons (pinch + dbltap only) */
+    /* ✅ Different instructions per platform */
+    .hint-desktop{ display: inline; }
+    .hint-mobile{ display: none; }
+
+    /* Mobile: hide zoom buttons; show mobile hint */
     @media (max-width: 820px){
       .lightbox{ padding: 10px; }
       .zoom-controls{ display:none !important; }
@@ -468,6 +473,9 @@
         border-radius: 14px;
       }
       .lightbox-viewport{ height: 78vh; }
+
+      .hint-desktop{ display: none; }
+      .hint-mobile{ display: inline; }
     }
   </style>
 </head>
@@ -717,7 +725,11 @@
           <img class="lightbox-img" id="lightbox-img" alt="">
         </div>
 
-        <div class="lb-hint" id="lb-hint">Pinch to zoom • Drag/swipe to move • Double tap/click to zoom</div>
+        <!-- ✅ Platform-specific hint text -->
+        <div class="lb-hint" id="lb-hint">
+          <span class="hint-desktop">Scroll to zoom • Click + drag to move • Double click to zoom</span>
+          <span class="hint-mobile">Pinch to zoom • Swipe to move • Double tap to zoom</span>
+        </div>
       </div>
 
       <div class="lightbox-caption" id="lightbox-caption"></div>
@@ -877,7 +889,7 @@
       setActiveByScroll();
 
       /* =========================================================
-         ✅ PREMIUM LIGHTBOX (PAN FIXED FOR MOBILE + DESKTOP)
+         ✅ PREMIUM LIGHTBOX (PAN + ZOOM)
          ========================================================= */
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
@@ -914,7 +926,6 @@
         const vw = rect.width;
         const vh = rect.height;
 
-        // current displayed image dimensions at scale=1 (fit inside viewport)
         const nw = lightboxImg.naturalWidth || 1;
         const nh = lightboxImg.naturalHeight || 1;
 
@@ -946,7 +957,6 @@
       }
 
       function setGrabState(dragging){
-        if (!viewport) return;
         if (scale > 1.01){
           viewport.classList.add('is-grabbable');
         } else {
@@ -989,7 +999,6 @@
 
         const ratio = next / prev;
 
-        // keep the point under cursor stable
         tx = px - (px - tx) * ratio;
         ty = py - (py - ty) * ratio;
 
@@ -1014,7 +1023,6 @@
         lightbox.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
 
-        // Wait for image to load before resetting
         const onReady = () => {
           resetView();
           showHint();
@@ -1052,11 +1060,9 @@
         closeLightbox();
       });
 
-      // Zoom buttons backup (desktop)
       if (zoomInBtn) zoomInBtn.addEventListener('click', () => zoomBy(0.25));
       if (zoomOutBtn) zoomOutBtn.addEventListener('click', () => zoomBy(-0.25));
 
-      // Wheel zoom desktop
       viewport.addEventListener('wheel', (e) => {
         if (!lightbox.classList.contains('is-open')) return;
         if (isMobile()) return;
@@ -1065,7 +1071,6 @@
         zoomBy(delta, e.clientX, e.clientY);
       }, { passive: false });
 
-      // Double click desktop zoom toggle
       viewport.addEventListener('dblclick', (e) => {
         if (!lightbox.classList.contains('is-open')) return;
         e.preventDefault();
@@ -1073,9 +1078,7 @@
         zoomTo(next, e.clientX, e.clientY);
       });
 
-      /* =========================
-         ✅ DESKTOP PAN (MOUSE DRAG)
-         ========================= */
+      /* Desktop pan */
       let mouseDown = false;
       let mouseStartX = 0, mouseStartY = 0;
       let mouseStartTx = 0, mouseStartTy = 0;
@@ -1111,10 +1114,7 @@
         setGrabState(false);
       });
 
-      /* =========================
-         ✅ MOBILE PAN+PINCH (TOUCH FALLBACK)
-         This is what makes it work "for all devices".
-         ========================= */
+      /* Mobile pan + pinch (touch fallback) */
       let tPanning = false;
       let tStartX = 0, tStartY = 0;
       let tStartTx = 0, tStartTy = 0;
@@ -1134,7 +1134,6 @@
         return { x: (t1.clientX + t2.clientX)/2, y: (t1.clientY + t2.clientY)/2 };
       }
 
-      // Double tap (mobile)
       let lastTapT = 0;
       let lastTapX = 0;
       let lastTapY = 0;
@@ -1148,8 +1147,6 @@
 
       viewport.addEventListener('touchstart', (e) => {
         if (!lightbox.classList.contains('is-open')) return;
-
-        // IMPORTANT: we must prevent default to stop page scroll / native gestures
         e.preventDefault();
 
         const touches = e.touches;
@@ -1157,7 +1154,6 @@
         if (touches.length === 1){
           const t = touches[0];
 
-          // double tap toggle zoom
           const now = Date.now();
           const isDouble = (now - lastTapT) <= DBLTAP_MS && isNear(t.clientX, t.clientY, lastTapX, lastTapY, DBLTAP_DIST);
           lastTapT = now;
@@ -1227,7 +1223,6 @@
 
       viewport.addEventListener('touchend', (e) => {
         if (!lightbox.classList.contains('is-open')) return;
-        // If one finger remains after pinch, don’t auto-start pan until next touchstart
         if (e.touches.length === 0){
           tPanning = false;
           tPinching = false;
@@ -1238,7 +1233,6 @@
         }
       }, { passive: true });
 
-      // Keep clamping sane on resize/orientation
       function onResize(){
         if (!lightbox.classList.contains('is-open')) return;
         applyTransform();

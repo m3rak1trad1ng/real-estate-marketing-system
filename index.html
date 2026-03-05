@@ -133,10 +133,10 @@
     .hero-desc{
       margin: 0;
       font-size: 18px;
-      line-height: 1.55;        /* ✅ tighter so line 2 sits closer */
+      line-height: 1.55;
       color: var(--muted);
       font-weight: 500;
-      text-wrap: pretty;        /* ✅ softer than balance; doesn't shrink line 1 */
+      text-wrap: pretty;
     }
 
     /* Buttons */
@@ -306,7 +306,8 @@
     }
 
     /* =========================================================
-       ✅ CLICK-TO-ENLARGE + ZOOM/PAN (ONLY YOUR INCLUDED PREVIEW IMAGES)
+       ✅ CLICK-TO-ENLARGE + ZOOM + NUDGE (NO DRAG)
+       Only images with data-zoomable="true"
        ========================================================= */
     img[data-zoomable="true"]{ cursor: zoom-in; }
 
@@ -343,15 +344,16 @@
       box-shadow: 0 28px 90px rgba(0,0,0,.45);
     }
 
-    /* viewport that allows pan */
+    /* viewport (no drag) */
     .lightbox-viewport{
       width: 100%;
       max-height: 94vh;
       overflow: hidden;
-      touch-action: none; /* enables custom pinch/pan */
-      cursor: grab;
+      touch-action: none; /* needed for pinch */
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
-    .lightbox-viewport.is-dragging{ cursor: grabbing; }
 
     .lightbox-img{
       width: 100%;
@@ -359,11 +361,10 @@
       display:block;
       object-fit: contain;
       background: rgba(0,0,0,.12);
-      transform-origin: 0 0;
+      transform-origin: center center;
       will-change: transform;
       user-select: none;
       -webkit-user-drag: none;
-      pointer-events: none; /* we handle interaction on viewport */
     }
 
     .lightbox-close{
@@ -384,7 +385,7 @@
       justify-content:center;
       cursor: pointer;
       user-select: none;
-      z-index: 2;
+      z-index: 3;
     }
     .lightbox-close:hover{ background: rgba(15,23,42,.7); }
 
@@ -394,7 +395,7 @@
       top: 10px;
       display:flex;
       gap: 8px;
-      z-index: 2;
+      z-index: 3;
     }
     .zoom-btn{
       width: 42px;
@@ -413,6 +414,61 @@
       user-select: none;
     }
     .zoom-btn:hover{ background: rgba(15,23,42,.7); }
+
+    /* nudge pad (only visible when zoomed) */
+    .nudge-pad{
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      display: none;
+      gap: 8px;
+      align-items:center;
+      z-index: 3;
+    }
+    .nudge-pad.is-visible{ display:flex; }
+
+    .nudge-grid{
+      display:grid;
+      grid-template-columns: 42px 42px 42px;
+      grid-template-rows: 42px 42px 42px;
+      gap: 8px;
+    }
+
+    .nudge-btn{
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(15,23,42,.55);
+      color: #fff;
+      font-weight: 900;
+      font-size: 16px;
+      line-height: 1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .nudge-btn:hover{ background: rgba(15,23,42,.7); }
+
+    .reset-btn{
+      width: 86px;
+      height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(15,23,42,.55);
+      color: #fff;
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: .2px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .reset-btn:hover{ background: rgba(15,23,42,.7); }
 
     .lightbox-caption{
       color: rgba(255,255,255,.86);
@@ -654,7 +710,7 @@
 </div>
 </div>
 
-<!-- ✅ LIGHTBOX OVERLAY (zoom/pan enabled) -->
+<!-- ✅ LIGHTBOX OVERLAY (zoom + controlled nudge, no drag) -->
 <div class="lightbox" id="lightbox" aria-hidden="true">
   <div class="lightbox-inner" role="dialog" aria-modal="true" aria-label="Image preview">
     <div class="lightbox-img-wrap">
@@ -668,7 +724,26 @@
       <div class="lightbox-viewport" id="lightbox-viewport" aria-label="Zoomable image viewport">
         <img class="lightbox-img" id="lightbox-img" alt="">
       </div>
+
+      <div class="nudge-pad" id="nudge-pad" aria-label="Move controls">
+        <div class="nudge-grid" aria-hidden="false">
+          <div></div>
+          <button class="nudge-btn" id="nudge-up" type="button" aria-label="Move up">↑</button>
+          <div></div>
+
+          <button class="nudge-btn" id="nudge-left" type="button" aria-label="Move left">←</button>
+          <button class="nudge-btn" id="nudge-center" type="button" aria-label="Center view">●</button>
+          <button class="nudge-btn" id="nudge-right" type="button" aria-label="Move right">→</button>
+
+          <div></div>
+          <button class="nudge-btn" id="nudge-down" type="button" aria-label="Move down">↓</button>
+          <div></div>
+        </div>
+
+        <button class="reset-btn" id="reset-view" type="button" aria-label="Reset view">Reset</button>
+      </div>
     </div>
+
     <div class="lightbox-caption" id="lightbox-caption"></div>
   </div>
 </div>
@@ -718,7 +793,7 @@
       if (link) link.classList.add('active');
     }
 
-    // ✅ NEW: lock active state briefly during programmatic smooth scroll
+    // lock active during smooth scroll
     let lockUntil = 0;
     let lockedId = null;
     function lockActive(id, ms){
@@ -828,15 +903,24 @@
     setActiveByScroll();
 
     /* =========================================================
-       ✅ LIGHTBOX + ZOOM/PAN
+       ✅ LIGHTBOX: ZOOM + CONTROLLED NUDGE (NO DRAG)
        ========================================================= */
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxCaption = document.getElementById('lightbox-caption');
     const lightboxClose = document.getElementById('lightbox-close');
     const viewport = document.getElementById('lightbox-viewport');
+
     const zoomInBtn = document.getElementById('zoom-in');
     const zoomOutBtn = document.getElementById('zoom-out');
+
+    const nudgePad = document.getElementById('nudge-pad');
+    const nUp = document.getElementById('nudge-up');
+    const nDown = document.getElementById('nudge-down');
+    const nLeft = document.getElementById('nudge-left');
+    const nRight = document.getElementById('nudge-right');
+    const nCenter = document.getElementById('nudge-center');
+    const resetBtn = document.getElementById('reset-view');
 
     const zoomables = Array.from(document.querySelectorAll('img[data-zoomable="true"]'));
 
@@ -852,13 +936,41 @@
     function applyTransform(){
       if (!lightboxImg) return;
       lightboxImg.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+      updateNudgeVisibility();
     }
 
-    function resetZoom(){
+    function resetView(){
       scale = 1;
       tx = 0;
       ty = 0;
       applyTransform();
+    }
+
+    function updateNudgeVisibility(){
+      if (!nudgePad) return;
+      if (scale > 1.01){
+        nudgePad.classList.add('is-visible');
+      } else {
+        nudgePad.classList.remove('is-visible');
+      }
+    }
+
+    // Keep translation from drifting into blank space.
+    // We approximate allowable movement based on viewport size and scale.
+    function clampTranslation(){
+      if (!viewport) return;
+
+      const rect = viewport.getBoundingClientRect();
+      const vw = rect.width;
+      const vh = rect.height;
+
+      // when scaled, image can move at most half of the "extra" size
+      // extra = viewport*(scale-1)
+      const maxX = (vw * (scale - 1)) / 2;
+      const maxY = (vh * (scale - 1)) / 2;
+
+      tx = clamp(tx, -maxX, maxX);
+      ty = clamp(ty, -maxY, maxY);
     }
 
     function openLightboxFrom(img){
@@ -872,7 +984,7 @@
       lightboxImg.alt = alt;
       if (lightboxCaption) lightboxCaption.textContent = alt;
 
-      resetZoom();
+      resetView();
 
       lightbox.classList.add('is-open');
       lightbox.setAttribute('aria-hidden', 'false');
@@ -890,7 +1002,7 @@
       if (lightboxCaption) lightboxCaption.textContent = '';
 
       document.body.style.overflow = '';
-      resetZoom();
+      resetView();
     }
 
     zoomables.forEach(img => {
@@ -906,36 +1018,40 @@
       });
     }
 
-    // Esc closes
     window.addEventListener('keydown', (e) => {
       if (e.key !== 'Escape') return;
       if (!lightbox || !lightbox.classList.contains('is-open')) return;
       closeLightbox();
     });
 
-    // Buttons zoom
-    function zoomBy(delta, centerX, centerY){
+    function zoomTo(next, centerX, centerY){
       if (!viewport) return;
 
       const prev = scale;
-      const next = clamp(scale + delta, MIN_SCALE, MAX_SCALE);
+      next = clamp(next, MIN_SCALE, MAX_SCALE);
       if (next === prev) return;
 
-      // keep zoom centered around pointer/center
+      // zoom around viewport center by default
       const rect = viewport.getBoundingClientRect();
-      const cx = (centerX != null) ? centerX : (rect.left + rect.width / 2);
-      const cy = (centerY != null) ? centerY : (rect.top + rect.height / 2);
+      const cx = (centerX != null) ? centerX : (rect.left + rect.width/2);
+      const cy = (centerY != null) ? centerY : (rect.top + rect.height/2);
 
       const px = cx - rect.left;
       const py = cy - rect.top;
 
-      // adjust translation so point under cursor stays put
+      // adjust translation so the zoom feels stable (centered-ish)
       const ratio = next / prev;
       tx = px - (px - tx) * ratio;
       ty = py - (py - ty) * ratio;
 
       scale = next;
+
+      clampTranslation();
       applyTransform();
+    }
+
+    function zoomBy(delta, centerX, centerY){
+      zoomTo(scale + delta, centerX, centerY);
     }
 
     if (zoomInBtn) zoomInBtn.addEventListener('click', () => zoomBy(0.25));
@@ -951,12 +1067,7 @@
       }, { passive: false });
     }
 
-    // Pan (drag) + pinch (mobile)
-    let isDragging = false;
-    let startX = 0, startY = 0;
-    let startTx = 0, startTy = 0;
-
-    // pinch state
+    // Pinch zoom (mobile) — no drag, only pinch changes scale
     let pinchActive = false;
     let pinchStartDist = 0;
     let pinchStartScale = 1;
@@ -972,13 +1083,10 @@
     }
 
     if (viewport){
+      viewport._pointers = new Map();
+
       viewport.addEventListener('pointerdown', (e) => {
         if (!lightbox || !lightbox.classList.contains('is-open')) return;
-
-        viewport.setPointerCapture(e.pointerId);
-
-        // if second pointer begins -> pinch
-        if (viewport._pointers == null) viewport._pointers = new Map();
         viewport._pointers.set(e.pointerId, e);
 
         if (viewport._pointers.size === 2){
@@ -987,75 +1095,71 @@
           pinchStartDist = dist(pts[0], pts[1]);
           pinchStartScale = scale;
           pinchCenter = mid(pts[0], pts[1]);
-          return;
         }
-
-        // drag pan
-        if (scale <= 1) return; // only pan when zoomed
-        isDragging = true;
-        viewport.classList.add('is-dragging');
-        startX = e.clientX;
-        startY = e.clientY;
-        startTx = tx;
-        startTy = ty;
       });
 
       viewport.addEventListener('pointermove', (e) => {
         if (!lightbox || !lightbox.classList.contains('is-open')) return;
-        if (!viewport._pointers) return;
+        if (!viewport._pointers.has(e.pointerId)) return;
+        viewport._pointers.set(e.pointerId, e);
 
-        // update pointer map
-        if (viewport._pointers.has(e.pointerId)) viewport._pointers.set(e.pointerId, e);
-
-        // pinch
         if (pinchActive && viewport._pointers.size === 2){
           const pts = Array.from(viewport._pointers.values());
           const d = dist(pts[0], pts[1]);
-          const target = clamp(pinchStartScale * (d / pinchStartDist), MIN_SCALE, MAX_SCALE);
-
-          const rect = viewport.getBoundingClientRect();
-          const cx = pinchCenter.x;
-          const cy = pinchCenter.y;
-
-          const prev = scale;
-          const next = target;
-          if (next !== prev){
-            const px = cx - rect.left;
-            const py = cy - rect.top;
-            const ratio = next / prev;
-            tx = px - (px - tx) * ratio;
-            ty = py - (py - ty) * ratio;
-            scale = next;
-            applyTransform();
-          }
-          return;
+          const target = pinchStartScale * (d / pinchStartDist);
+          zoomTo(target, pinchCenter.x, pinchCenter.y);
         }
-
-        // drag
-        if (!isDragging) return;
-        const dx = e.clientX - startX;
-        const dy = e.clientY - startY;
-        tx = startTx + dx;
-        ty = startTy + dy;
-        applyTransform();
       });
 
       function endPointer(e){
-        if (!viewport._pointers) return;
         viewport._pointers.delete(e.pointerId);
-
         if (viewport._pointers.size < 2){
           pinchActive = false;
         }
-
-        isDragging = false;
-        viewport.classList.remove('is-dragging');
       }
-
       viewport.addEventListener('pointerup', endPointer);
       viewport.addEventListener('pointercancel', endPointer);
-      viewport.addEventListener('pointerleave', endPointer);
     }
+
+    // Nudge controls (no drag)
+    function nudge(dx, dy){
+      if (scale <= 1.01) return;
+      tx += dx;
+      ty += dy;
+      clampTranslation();
+      applyTransform();
+    }
+
+    function getNudgeStep(){
+      if (!viewport) return 40;
+      const rect = viewport.getBoundingClientRect();
+      // 6% of viewport, clamped
+      return clamp(Math.round(Math.min(rect.width, rect.height) * 0.06), 26, 60);
+    }
+
+    if (nUp) nUp.addEventListener('click', () => nudge(0, getNudgeStep()));
+    if (nDown) nDown.addEventListener('click', () => nudge(0, -getNudgeStep()));
+    if (nLeft) nLeft.addEventListener('click', () => nudge(getNudgeStep(), 0));
+    if (nRight) nRight.addEventListener('click', () => nudge(-getNudgeStep(), 0));
+    if (nCenter) nCenter.addEventListener('click', () => { tx = 0; ty = 0; applyTransform(); });
+    if (resetBtn) resetBtn.addEventListener('click', resetView);
+
+    // Keyboard nudges when lightbox open
+    window.addEventListener('keydown', (e) => {
+      if (!lightbox || !lightbox.classList.contains('is-open')) return;
+      if (scale <= 1.01) return;
+
+      const step = getNudgeStep();
+      if (e.key === 'ArrowUp'){ e.preventDefault(); nudge(0, step); }
+      if (e.key === 'ArrowDown'){ e.preventDefault(); nudge(0, -step); }
+      if (e.key === 'ArrowLeft'){ e.preventDefault(); nudge(step, 0); }
+      if (e.key === 'ArrowRight'){ e.preventDefault(); nudge(-step, 0); }
+    });
+
+    window.addEventListener('resize', () => {
+      clampTranslation();
+      applyTransform();
+    });
   })();
 </script>
 </body>

@@ -349,7 +349,7 @@
       width: 100%;
       max-height: 94vh;
       overflow: hidden;
-      touch-action: none; /* we handle pinch/swipe */
+      touch-action: none;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -421,7 +421,7 @@
       position: absolute;
       left: 10px;
       bottom: 10px;
-      display: none; /* only when zoomed */
+      display: none;
       gap: 8px;
       align-items:center;
       z-index: 4;
@@ -479,7 +479,7 @@
       padding: 0 10px;
     }
 
-    /* Mobile: clean viewer (no clutter) */
+    /* Mobile: clean viewer */
     @media (max-width: 820px){
       .lightbox{ padding: 10px; }
       .zoom-controls{ display:none !important; }
@@ -488,12 +488,9 @@
         width: 44px;
         height: 44px;
         border-radius: 14px;
-        top: 10px;
-        right: 10px;
       }
     }
 
-    /* subtle one-time hint (mobile) */
     .lb-hint{
       position:absolute;
       left: 50%;
@@ -751,7 +748,6 @@
 <div class="lightbox" id="lightbox" aria-hidden="true">
   <div class="lightbox-inner" role="dialog" aria-modal="true" aria-label="Image preview">
     <div class="lightbox-img-wrap">
-      <!-- Desktop: zoom buttons -->
       <div class="zoom-controls" aria-label="Zoom controls">
         <button class="zoom-btn" id="zoom-out" type="button" aria-label="Zoom out">−</button>
         <button class="zoom-btn" id="zoom-in" type="button" aria-label="Zoom in">+</button>
@@ -763,7 +759,6 @@
         <img class="lightbox-img" id="lightbox-img" alt="">
       </div>
 
-      <!-- Desktop: arrow nudge + reset -->
       <div class="nudge-pad" id="nudge-pad" aria-label="Move controls">
         <div class="nudge-grid" aria-hidden="false">
           <div></div>
@@ -782,14 +777,12 @@
         <button class="reset-btn" id="reset-view" type="button" aria-label="Reset view">Reset</button>
       </div>
 
-      <!-- Mobile hint (only shown briefly) -->
       <div class="lb-hint" id="lb-hint">Pinch to zoom • Swipe to move</div>
     </div>
 
     <div class="lightbox-caption" id="lightbox-caption"></div>
   </div>
 </div>
-<!-- ✅ END lightbox -->
 
  <script>
   (function(){
@@ -945,7 +938,7 @@
     setActiveByScroll();
 
     /* =========================================================
-       ✅ LIGHTBOX: Desktop (buttons + nudge), Mobile (pinch + swipe)
+       ✅ LIGHTBOX: Desktop (buttons + nudge), Mobile (touch pinch + swipe pan)
        ========================================================= */
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
@@ -980,7 +973,6 @@
     const MIN_SCALE = 1;
     const MAX_SCALE = 3.5;
 
-    // base fit size at scale=1 (computed from image aspect + viewport)
     let baseFitW = 0;
     let baseFitH = 0;
 
@@ -996,11 +988,9 @@
       const vpAR = vw / vh;
 
       if (imgAR >= vpAR){
-        // fit to width
         baseFitW = vw;
         baseFitH = vw / imgAR;
       } else {
-        // fit to height
         baseFitH = vh;
         baseFitW = vh * imgAR;
       }
@@ -1043,7 +1033,6 @@
     function updateDesktopControls(){
       if (!nudgePad) return;
       if (isMobile()){
-        // never show on mobile (CSS also hides it)
         nudgePad.classList.remove('is-visible');
         return;
       }
@@ -1057,8 +1046,6 @@
     function showMobileHint(){
       if (!hint) return;
       if (!isMobile()) return;
-
-      // show briefly
       hint.classList.add('show');
       setTimeout(() => { hint.classList.remove('show'); }, 1400);
     }
@@ -1074,7 +1061,6 @@
       lightboxImg.alt = alt;
       if (lightboxCaption) lightboxCaption.textContent = alt;
 
-      // wait for image to load, then compute fit/clamp properly
       const onImgReady = () => {
         computeBaseFit();
         resetView();
@@ -1141,7 +1127,6 @@
       const px = cx - rect.left;
       const py = cy - rect.top;
 
-      // keep zoom stable around point
       const ratio = next / prev;
       tx = px - (px - tx) * ratio;
       ty = py - (py - ty) * ratio;
@@ -1157,11 +1142,9 @@
     if (zoomInBtn) zoomInBtn.addEventListener('click', () => zoomBy(0.25));
     if (zoomOutBtn) zoomOutBtn.addEventListener('click', () => zoomBy(-0.25));
 
-    // Wheel zoom (desktop)
     if (viewport){
       viewport.addEventListener('wheel', (e) => {
         if (!lightbox || !lightbox.classList.contains('is-open')) return;
-        // on mobile browsers, wheel can appear weird; safe to allow only non-mobile
         if (isMobile()) return;
         e.preventDefault();
         const delta = (e.deltaY > 0) ? -0.2 : 0.2;
@@ -1169,98 +1152,7 @@
       }, { passive: false });
     }
 
-    /* ---------------------------
-       Desktop: no drag.
-       Mobile: pinch + swipe pan.
-       --------------------------- */
-    let pointers = new Map();
-    let pinchActive = false;
-    let pinchStartDist = 0;
-    let pinchStartScale = 1;
-    let pinchCenter = { x: 0, y: 0 };
-
-    let panActive = false;
-    let panStartX = 0, panStartY = 0;
-    let panStartTx = 0, panStartTy = 0;
-
-    function dist(a, b){
-      const dx = a.clientX - b.clientX;
-      const dy = a.clientY - b.clientY;
-      return Math.hypot(dx, dy);
-    }
-    function mid(a, b){
-      return { x: (a.clientX + b.clientX)/2, y: (a.clientY + b.clientY)/2 };
-    }
-
-    if (viewport){
-      viewport.addEventListener('pointerdown', (e) => {
-        if (!lightbox || !lightbox.classList.contains('is-open')) return;
-
-        pointers.set(e.pointerId, e);
-        viewport.setPointerCapture(e.pointerId);
-
-        // Mobile only: allow swipe pan when zoomed
-        if (isMobile() && pointers.size === 1 && scale > 1.01){
-          panActive = true;
-          panStartX = e.clientX;
-          panStartY = e.clientY;
-          panStartTx = tx;
-          panStartTy = ty;
-        }
-
-        // start pinch
-        if (pointers.size === 2){
-          const pts = Array.from(pointers.values());
-          pinchActive = true;
-          pinchStartDist = dist(pts[0], pts[1]);
-          pinchStartScale = scale;
-          pinchCenter = mid(pts[0], pts[1]);
-          panActive = false; // pinch overrides pan
-        }
-      });
-
-      viewport.addEventListener('pointermove', (e) => {
-        if (!lightbox || !lightbox.classList.contains('is-open')) return;
-        if (!pointers.has(e.pointerId)) return;
-
-        pointers.set(e.pointerId, e);
-
-        // pinch zoom
-        if (pinchActive && pointers.size === 2){
-          const pts = Array.from(pointers.values());
-          const d = dist(pts[0], pts[1]);
-          const target = pinchStartScale * (d / pinchStartDist);
-          zoomTo(target, pinchCenter.x, pinchCenter.y);
-          return;
-        }
-
-        // mobile swipe pan (only when zoomed)
-        if (isMobile() && panActive && pointers.size === 1 && scale > 1.01){
-          const dx = e.clientX - panStartX;
-          const dy = e.clientY - panStartY;
-          tx = panStartTx + dx;
-          ty = panStartTy + dy;
-          applyTransform();
-        }
-      });
-
-      function endPointer(e){
-        pointers.delete(e.pointerId);
-
-        if (pointers.size < 2){
-          pinchActive = false;
-        }
-        if (pointers.size === 0){
-          panActive = false;
-        }
-      }
-
-      viewport.addEventListener('pointerup', endPointer);
-      viewport.addEventListener('pointercancel', endPointer);
-      viewport.addEventListener('pointerleave', endPointer);
-    }
-
-    /* Desktop nudge (click buttons + arrows) */
+    /* Desktop nudge */
     function nudge(dx, dy){
       if (scale <= 1.01) return;
       tx += dx;
@@ -1283,7 +1175,7 @@
 
     window.addEventListener('keydown', (e) => {
       if (!lightbox || !lightbox.classList.contains('is-open')) return;
-      if (isMobile()) return; // mobile uses gestures
+      if (isMobile()) return;
       if (scale <= 1.01) return;
 
       const step = getNudgeStep();
@@ -1292,6 +1184,89 @@
       if (e.key === 'ArrowLeft'){ e.preventDefault(); nudge(step, 0); }
       if (e.key === 'ArrowRight'){ e.preventDefault(); nudge(-step, 0); }
     });
+
+    /* ✅ MOBILE TOUCH (reliable on iOS): swipe pan + pinch zoom */
+    let tPanning = false;
+    let tStartX = 0, tStartY = 0, tStartTx = 0, tStartTy = 0;
+
+    let tPinching = false;
+    let tPinchStartDist = 0;
+    let tPinchStartScale = 1;
+    let tPinchCenter = { x: 0, y: 0 };
+
+    function touchDist(t1, t2){
+      const dx = t1.clientX - t2.clientX;
+      const dy = t1.clientY - t2.clientY;
+      return Math.hypot(dx, dy);
+    }
+    function touchMid(t1, t2){
+      return { x: (t1.clientX + t2.clientX)/2, y: (t1.clientY + t2.clientY)/2 };
+    }
+
+    if (viewport){
+      viewport.addEventListener('touchstart', (e) => {
+        if (!lightbox || !lightbox.classList.contains('is-open')) return;
+        if (!isMobile()) return;
+
+        if (e.touches.length === 2){
+          tPinching = true;
+          tPanning = false;
+          tPinchStartDist = touchDist(e.touches[0], e.touches[1]);
+          tPinchStartScale = scale;
+          tPinchCenter = touchMid(e.touches[0], e.touches[1]);
+          return;
+        }
+
+        if (e.touches.length === 1 && scale > 1.01){
+          tPanning = true;
+          tPinching = false;
+          tStartX = e.touches[0].clientX;
+          tStartY = e.touches[0].clientY;
+          tStartTx = tx;
+          tStartTy = ty;
+        }
+      }, { passive: true });
+
+      viewport.addEventListener('touchmove', (e) => {
+        if (!lightbox || !lightbox.classList.contains('is-open')) return;
+        if (!isMobile()) return;
+
+        // IMPORTANT: allow our own pan/zoom, stop page scrolling
+        if (tPinching || tPanning) e.preventDefault();
+
+        if (tPinching && e.touches.length === 2){
+          const d = touchDist(e.touches[0], e.touches[1]);
+          const target = tPinchStartScale * (d / tPinchStartDist);
+          zoomTo(target, tPinchCenter.x, tPinchCenter.y);
+          return;
+        }
+
+        if (tPanning && e.touches.length === 1 && scale > 1.01){
+          const dx = e.touches[0].clientX - tStartX;
+          const dy = e.touches[0].clientY - tStartY;
+          tx = tStartTx + dx;
+          ty = tStartTy + dy;
+          applyTransform();
+        }
+      }, { passive: false });
+
+      viewport.addEventListener('touchend', (e) => {
+        if (!isMobile()) return;
+        if (e.touches.length === 0){
+          tPanning = false;
+          tPinching = false;
+        }
+        if (e.touches.length === 1){
+          tPinching = false;
+          // if still zoomed, you can continue panning on next touchstart
+        }
+      }, { passive: true });
+
+      viewport.addEventListener('touchcancel', () => {
+        tPanning = false;
+        tPinching = false;
+      }, { passive: true });
+    }
 
     function onResize(){
       if (!lightbox || !lightbox.classList.contains('is-open')) return;

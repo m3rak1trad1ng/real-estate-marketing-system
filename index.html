@@ -124,7 +124,6 @@
       color: #0b1220;
     }
 
-    /* ✅ HERO COPY BLOCK (match section width, but keep centered text) */
     .hero-blocks{
       max-width: 78ch;
       margin: 0 auto 14px auto;
@@ -306,9 +305,10 @@
     }
 
     /* =========================================================
-       ✅ CLICK-TO-ENLARGE VIEWER (fixed pan everywhere)
-       Desktop: wheel zoom + drag-to-pan + optional arrow pad
-       Mobile: pinch zoom + swipe pan, no cluttered controls
+       ✅ PREMIUM CLICK-TO-ENLARGE VIEWER
+       - Desktop: wheel zoom + drag-to-pan + dblclick zoom
+       - Mobile: pinch zoom + swipe pan + dbltap zoom
+       - Optional: press-and-hold arrows + reset
        ========================================================= */
     img[data-zoomable="true"]{ cursor: zoom-in; }
 
@@ -353,14 +353,12 @@
       align-items:center;
       justify-content:center;
 
-      /* Critical: allow us to receive/preserve pan + pinch gestures */
       touch-action: none;
       overscroll-behavior: contain;
       -webkit-user-select: none;
       user-select: none;
     }
 
-    /* Cursor is controlled via JS state classes */
     .lightbox-viewport.is-grabbable{ cursor: grab; }
     .lightbox-viewport.is-dragging{ cursor: grabbing; }
 
@@ -374,7 +372,7 @@
       will-change: transform;
       user-select: none;
       -webkit-user-drag: none;
-      pointer-events: none; /* important: viewport gets the gestures */
+      pointer-events: none;
     }
 
     .lightbox-close{
@@ -399,7 +397,6 @@
     }
     .lightbox-close:hover{ background: rgba(15,23,42,.7); }
 
-    /* Desktop controls (kept as backup) */
     .zoom-controls{
       position: absolute;
       left: 10px;
@@ -430,7 +427,7 @@
       position: absolute;
       left: 10px;
       bottom: 10px;
-      display: none; /* only when zoomed (desktop) */
+      display: none;
       gap: 8px;
       align-items:center;
       z-index: 4;
@@ -459,6 +456,7 @@
       justify-content:center;
       cursor: pointer;
       user-select: none;
+      touch-action: none;
     }
     .nudge-btn:hover{ background: rgba(15,23,42,.7); }
 
@@ -488,7 +486,6 @@
       padding: 0 10px;
     }
 
-    /* Mobile: clean viewer */
     @media (max-width: 820px){
       .lightbox{ padding: 10px; }
       .zoom-controls{ display:none !important; }
@@ -735,7 +732,7 @@
               </div>
             </details>
 
-             <div class="actions" style="margin-top:14px; margin-bottom:18px;">
+            <div class="actions" style="margin-top:14px; margin-bottom:18px;">
               <a class="btn subtle" href="/faq/">View Full FAQ</a>
             </div>
           </div>
@@ -786,7 +783,7 @@
           <button class="reset-btn" id="reset-view" type="button" aria-label="Reset view">Reset</button>
         </div>
 
-        <div class="lb-hint" id="lb-hint">Pinch to zoom • Drag/swipe to move</div>
+        <div class="lb-hint" id="lb-hint">Pinch to zoom • Drag/swipe to move • Double tap/click to zoom</div>
       </div>
 
       <div class="lightbox-caption" id="lightbox-caption"></div>
@@ -946,9 +943,7 @@
       setActiveByScroll();
 
       /* =========================================================
-         ✅ LIGHTBOX: robust pan/zoom (mobile + desktop)
-         - Desktop: wheel zoom + DRAG to pan (only when zoomed)
-         - Mobile: pinch zoom + swipe pan
+         ✅ PREMIUM LIGHTBOX
          ========================================================= */
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
@@ -1066,7 +1061,7 @@
       function showHint(){
         if (!hint) return;
         hint.classList.add('show');
-        setTimeout(() => { hint.classList.remove('show'); }, 1400);
+        setTimeout(() => { hint.classList.remove('show'); }, 1600);
       }
 
       function openLightboxFrom(img){
@@ -1170,7 +1165,23 @@
         }, { passive: false });
       }
 
-      /* Arrow pad backup */
+      /* ✅ Double-click zoom (desktop) */
+      if (viewport){
+        viewport.addEventListener('dblclick', (e) => {
+          if (!lightbox || !lightbox.classList.contains('is-open')) return;
+          e.preventDefault();
+          const next = (scale <= 1.01) ? 2.0 : 1.0;
+          zoomTo(next, e.clientX, e.clientY);
+        });
+      }
+
+      /* Arrow pad: nudge + press-and-hold (desktop backup) */
+      function getNudgeStep(){
+        if (!viewport) return 40;
+        const rect = viewport.getBoundingClientRect();
+        return clamp(Math.round(Math.min(rect.width, rect.height) * 0.06), 26, 60);
+      }
+
       function nudge(dx, dy){
         if (scale <= 1.01) return;
         tx += dx;
@@ -1178,16 +1189,45 @@
         applyTransform();
       }
 
-      function getNudgeStep(){
-        if (!viewport) return 40;
-        const rect = viewport.getBoundingClientRect();
-        return clamp(Math.round(Math.min(rect.width, rect.height) * 0.06), 26, 60);
+      function startHold(dx, dy){
+        // One immediate move, then repeat
+        nudge(dx, dy);
+        const stepTimer = setInterval(() => nudge(dx, dy), 45);
+        return () => clearInterval(stepTimer);
       }
 
-      if (nUp) nUp.addEventListener('click', () => nudge(0, getNudgeStep()));
-      if (nDown) nDown.addEventListener('click', () => nudge(0, -getNudgeStep()));
-      if (nLeft) nLeft.addEventListener('click', () => nudge(getNudgeStep(), 0));
-      if (nRight) nRight.addEventListener('click', () => nudge(-getNudgeStep(), 0));
+      function bindHold(btn, getDelta){
+        if (!btn) return;
+
+        let stop = null;
+
+        const down = (e) => {
+          if (isMobile()) return; // mobile hides pad anyway
+          if (scale <= 1.01) return;
+          e.preventDefault();
+
+          const { dx, dy } = getDelta();
+          stop = startHold(dx, dy);
+        };
+
+        const up = () => {
+          if (stop){
+            stop();
+            stop = null;
+          }
+        };
+
+        btn.addEventListener('pointerdown', down);
+        window.addEventListener('pointerup', up);
+        window.addEventListener('pointercancel', up);
+        btn.addEventListener('lostpointercapture', up);
+      }
+
+      bindHold(nUp, () => ({ dx: 0, dy: getNudgeStep() }));
+      bindHold(nDown, () => ({ dx: 0, dy: -getNudgeStep() }));
+      bindHold(nLeft, () => ({ dx: getNudgeStep(), dy: 0 }));
+      bindHold(nRight, () => ({ dx: -getNudgeStep(), dy: 0 }));
+
       if (nCenter) nCenter.addEventListener('click', () => { tx = 0; ty = 0; applyTransform(); });
       if (resetBtn) resetBtn.addEventListener('click', () => resetView());
 
@@ -1204,11 +1244,13 @@
       });
 
       /* =========================================================
-         ✅ Unified Pointer Gestures (WORKS across modern browsers)
+         ✅ Unified Pointer Gestures (works across modern browsers)
          - 1 pointer: drag pan (only when zoomed)
          - 2 pointers: pinch zoom
+         - double-tap zoom (mobile): implemented via timing below
          ========================================================= */
       let pointers = new Map();
+
       let panActive = false;
       let panStartX = 0, panStartY = 0;
       let panStartTx = 0, panStartTy = 0;
@@ -1234,12 +1276,44 @@
         viewport?.classList.remove('is-dragging');
       }
 
+      // ✅ Double-tap detection (mobile) – only when 1 pointer
+      let lastTapT = 0;
+      let lastTapX = 0;
+      let lastTapY = 0;
+      const DBLTAP_MS = 320;
+      const DBLTAP_DIST = 22;
+
+      function isNear(x1,y1,x2,y2,distPx){
+        const dx = x1-x2, dy = y1-y2;
+        return (dx*dx + dy*dy) <= distPx*distPx;
+      }
+
       if (viewport){
         viewport.addEventListener('pointerdown', (e) => {
           if (!lightbox || !lightbox.classList.contains('is-open')) return;
 
           pointers.set(e.pointerId, e);
           viewport.setPointerCapture(e.pointerId);
+
+          // Double-tap zoom (mobile/coarse pointer)
+          if (isMobile() && pointers.size === 1){
+            const now = Date.now();
+            const isDouble = (now - lastTapT) <= DBLTAP_MS && isNear(e.clientX, e.clientY, lastTapX, lastTapY, DBLTAP_DIST);
+            lastTapT = now;
+            lastTapX = e.clientX;
+            lastTapY = e.clientY;
+
+            if (isDouble){
+              // toggle zoom
+              const next = (scale <= 1.01) ? 2.0 : 1.0;
+              zoomTo(next, e.clientX, e.clientY);
+              // prevent this tap from starting a pan
+              panActive = false;
+              pinchActive = false;
+              viewport.classList.remove('is-dragging');
+              return;
+            }
+          }
 
           // Start pan if 1 pointer and zoomed
           if (pointers.size === 1 && scale > 1.01){
@@ -1298,16 +1372,11 @@
             panActive = false;
             viewport.classList.remove('is-dragging');
           }
-
-          // If we lifted one finger from pinch and still zoomed, we can pan on next down.
         }
 
         viewport.addEventListener('pointerup', endPointer, { passive: true });
         viewport.addEventListener('pointercancel', endPointer, { passive: true });
-        viewport.addEventListener('lostpointercapture', () => {
-          // Safety: some browsers drop capture during gestures
-          stopAllGestures();
-        }, { passive: true });
+        viewport.addEventListener('lostpointercapture', () => stopAllGestures(), { passive: true });
       }
 
       function onResize(){

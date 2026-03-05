@@ -304,6 +304,88 @@
       .btn{ width: 100%; }
       section{ margin-top: 34px; }
     }
+
+    /* =========================================================
+       ✅ CLICK-TO-ENLARGE (ONLY YOUR INCLUDED PREVIEW IMAGES)
+       Targeted via [data-zoomable="true"] so nothing else changes.
+       ========================================================= */
+    img[data-zoomable="true"]{
+      cursor: zoom-in;
+    }
+
+    .lightbox{
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(15,23,42,.78);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .lightbox.is-open{ display:flex; }
+
+    .lightbox-inner{
+      width: 100%;
+      max-width: min(1100px, 96vw);
+      max-height: 90vh;
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .lightbox-img-wrap{
+      position: relative;
+      width: 100%;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 28px 90px rgba(0,0,0,.45);
+    }
+
+    .lightbox-img{
+      width: 100%;
+      height: auto;
+      display:block;
+      max-height: 90vh;
+      object-fit: contain;
+      cursor: zoom-out;
+      background: rgba(0,0,0,.12);
+    }
+
+    .lightbox-close{
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(15,23,42,.55);
+      color: #fff;
+      font-weight: 900;
+      font-size: 18px;
+      line-height: 1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .lightbox-close:hover{
+      background: rgba(15,23,42,.7);
+    }
+
+    .lightbox-caption{
+      color: rgba(255,255,255,.86);
+      font-size: 13px;
+      line-height: 1.35;
+      text-align: center;
+      padding: 0 10px;
+    }
   </style>
 </head>
 
@@ -390,18 +472,21 @@
                 alt="Real Estate system example — social formats"
                 style="width:100%; height:auto; display:block; border-radius:12px; border:1px solid rgba(148,163,184,.55);"
                 loading="lazy"
+                data-zoomable="true"
               >
               <img
                 src="/assets/re/re-email-preview-v2.png"
                 alt="Real Estate system example — email campaign formats"
                 style="width:100%; height:auto; display:block; border-radius:12px; border:1px solid rgba(148,163,184,.55);"
                 loading="lazy"
+                data-zoomable="true"
               >
               <img
                 src="/assets/re/re-print-preview-v2.png"
                 alt="Real Estate system example — print and operational materials"
                 style="width:100%; height:auto; display:block; border-radius:12px; border:1px solid rgba(148,163,184,.55);"
                 loading="lazy"
+                data-zoomable="true"
               >
             </div>
             <!-- ✅ END addition -->
@@ -535,6 +620,18 @@
 </main>
 </div>
 </div>
+
+<!-- ✅ LIGHTBOX OVERLAY (added; does not affect layout) -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <div class="lightbox-inner" role="dialog" aria-modal="true" aria-label="Image preview">
+    <div class="lightbox-img-wrap">
+      <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Close image preview">×</button>
+      <img class="lightbox-img" id="lightbox-img" alt="">
+    </div>
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+</div>
+<!-- ✅ END lightbox -->
 
  <script>
   (function(){
@@ -700,6 +797,82 @@
     window.addEventListener('resize', () => { setTopbarH(); setActiveByScroll(); });
 
     setActiveByScroll();
+
+    /* =========================================================
+       ✅ LIGHTBOX WIRING (ONLY images with data-zoomable="true")
+       ========================================================= */
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    const zoomables = Array.from(document.querySelectorAll('img[data-zoomable="true"]'));
+
+    function openLightboxFrom(img){
+      if (!lightbox || !lightboxImg) return;
+
+      const src = img.getAttribute('src') || '';
+      const alt = img.getAttribute('alt') || '';
+
+      if (!src) return;
+
+      lightboxImg.src = src;
+      lightboxImg.alt = alt;
+
+      if (lightboxCaption) lightboxCaption.textContent = alt;
+
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+
+      // prevent background scroll while open
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(){
+      if (!lightbox || !lightboxImg) return;
+
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+
+      // cleanup
+      lightboxImg.src = '';
+      lightboxImg.alt = '';
+      if (lightboxCaption) lightboxCaption.textContent = '';
+
+      document.body.style.overflow = '';
+    }
+
+    zoomables.forEach(img => {
+      img.addEventListener('click', () => openLightboxFrom(img));
+      img.addEventListener('keydown', (e) => {
+        // if you ever add tabindex to images later, this enables Enter/Space
+        if (e.key === 'Enter' || e.key === ' ') openLightboxFrom(img);
+      });
+    });
+
+    if (lightboxClose){
+      lightboxClose.addEventListener('click', closeLightbox);
+    }
+
+    if (lightbox){
+      // click outside image closes
+      lightbox.addEventListener('click', (e) => {
+        const inner = e.target.closest('.lightbox-img-wrap');
+        if (!inner) closeLightbox();
+      });
+    }
+
+    // clicking the image also closes (common UX)
+    if (lightboxImg){
+      lightboxImg.addEventListener('click', closeLightbox);
+    }
+
+    // Esc closes
+    window.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      if (!lightbox || !lightbox.classList.contains('is-open')) return;
+      closeLightbox();
+    });
   })();
 </script>
 </body>

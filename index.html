@@ -126,9 +126,9 @@
 
     /* ✅ HERO COPY BLOCK (match section width, but keep centered text) */
     .hero-blocks{
-      max-width: 78ch;          /* matches your section-inner width */
-      margin: 0 auto 14px auto; /* centers the block */
-      text-align: center;       /* centers all lines */
+      max-width: 78ch;
+      margin: 0 auto 14px auto;
+      text-align: center;
     }
     .hero-desc{
       margin: 0;
@@ -306,8 +306,9 @@
     }
 
     /* =========================================================
-       ✅ CLICK-TO-ENLARGE + ZOOM + NUDGE (NO DRAG)
-       Only images with data-zoomable="true"
+       ✅ CLICK-TO-ENLARGE VIEWER
+       Desktop: zoom buttons + arrow nudge + reset
+       Mobile: clean (pinch + swipe only, no controls except close)
        ========================================================= */
     img[data-zoomable="true"]{ cursor: zoom-in; }
 
@@ -344,15 +345,15 @@
       box-shadow: 0 28px 90px rgba(0,0,0,.45);
     }
 
-    /* viewport (no drag) */
     .lightbox-viewport{
       width: 100%;
       max-height: 94vh;
       overflow: hidden;
-      touch-action: none; /* needed for pinch */
+      touch-action: none; /* we handle pinch/swipe */
       display:flex;
       align-items:center;
       justify-content:center;
+      cursor: default;
     }
 
     .lightbox-img{
@@ -385,17 +386,18 @@
       justify-content:center;
       cursor: pointer;
       user-select: none;
-      z-index: 3;
+      z-index: 4;
     }
     .lightbox-close:hover{ background: rgba(15,23,42,.7); }
 
+    /* Desktop controls */
     .zoom-controls{
       position: absolute;
       left: 10px;
       top: 10px;
       display:flex;
       gap: 8px;
-      z-index: 3;
+      z-index: 4;
     }
     .zoom-btn{
       width: 42px;
@@ -415,15 +417,14 @@
     }
     .zoom-btn:hover{ background: rgba(15,23,42,.7); }
 
-    /* nudge pad (only visible when zoomed) */
     .nudge-pad{
       position: absolute;
       left: 10px;
       bottom: 10px;
-      display: none;
+      display: none; /* only when zoomed */
       gap: 8px;
       align-items:center;
-      z-index: 3;
+      z-index: 4;
     }
     .nudge-pad.is-visible{ display:flex; }
 
@@ -477,6 +478,42 @@
       text-align: center;
       padding: 0 10px;
     }
+
+    /* Mobile: clean viewer (no clutter) */
+    @media (max-width: 820px){
+      .lightbox{ padding: 10px; }
+      .zoom-controls{ display:none !important; }
+      .nudge-pad{ display:none !important; }
+      .lightbox-close{
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
+        top: 10px;
+        right: 10px;
+      }
+    }
+
+    /* subtle one-time hint (mobile) */
+    .lb-hint{
+      position:absolute;
+      left: 50%;
+      bottom: 14px;
+      transform: translateX(-50%);
+      background: rgba(15,23,42,.62);
+      border: 1px solid rgba(255,255,255,.18);
+      color: rgba(255,255,255,.92);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .2px;
+      z-index: 5;
+      opacity: 0;
+      pointer-events:none;
+      transition: opacity .18s ease;
+      white-space: nowrap;
+    }
+    .lb-hint.show{ opacity: 1; }
   </style>
 </head>
 
@@ -710,10 +747,11 @@
 </div>
 </div>
 
-<!-- ✅ LIGHTBOX OVERLAY (zoom + controlled nudge, no drag) -->
+<!-- ✅ LIGHTBOX OVERLAY -->
 <div class="lightbox" id="lightbox" aria-hidden="true">
   <div class="lightbox-inner" role="dialog" aria-modal="true" aria-label="Image preview">
     <div class="lightbox-img-wrap">
+      <!-- Desktop: zoom buttons -->
       <div class="zoom-controls" aria-label="Zoom controls">
         <button class="zoom-btn" id="zoom-out" type="button" aria-label="Zoom out">−</button>
         <button class="zoom-btn" id="zoom-in" type="button" aria-label="Zoom in">+</button>
@@ -725,6 +763,7 @@
         <img class="lightbox-img" id="lightbox-img" alt="">
       </div>
 
+      <!-- Desktop: arrow nudge + reset -->
       <div class="nudge-pad" id="nudge-pad" aria-label="Move controls">
         <div class="nudge-grid" aria-hidden="false">
           <div></div>
@@ -742,6 +781,9 @@
 
         <button class="reset-btn" id="reset-view" type="button" aria-label="Reset view">Reset</button>
       </div>
+
+      <!-- Mobile hint (only shown briefly) -->
+      <div class="lb-hint" id="lb-hint">Pinch to zoom • Swipe to move</div>
     </div>
 
     <div class="lightbox-caption" id="lightbox-caption"></div>
@@ -903,7 +945,7 @@
     setActiveByScroll();
 
     /* =========================================================
-       ✅ LIGHTBOX: ZOOM + CONTROLLED NUDGE (NO DRAG)
+       ✅ LIGHTBOX: Desktop (buttons + nudge), Mobile (pinch + swipe)
        ========================================================= */
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
@@ -922,7 +964,14 @@
     const nCenter = document.getElementById('nudge-center');
     const resetBtn = document.getElementById('reset-view');
 
+    const hint = document.getElementById('lb-hint');
+
     const zoomables = Array.from(document.querySelectorAll('img[data-zoomable="true"]'));
+
+    const mqMobile = window.matchMedia('(max-width: 820px)');
+    function isMobile(){
+      return mqMobile.matches || (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+    }
 
     let scale = 1;
     let tx = 0;
@@ -931,12 +980,57 @@
     const MIN_SCALE = 1;
     const MAX_SCALE = 3.5;
 
+    // base fit size at scale=1 (computed from image aspect + viewport)
+    let baseFitW = 0;
+    let baseFitH = 0;
+
     function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+
+    function computeBaseFit(){
+      if (!viewport || !lightboxImg || !lightboxImg.naturalWidth || !lightboxImg.naturalHeight) return;
+      const rect = viewport.getBoundingClientRect();
+      const vw = rect.width;
+      const vh = rect.height;
+
+      const imgAR = lightboxImg.naturalWidth / lightboxImg.naturalHeight;
+      const vpAR = vw / vh;
+
+      if (imgAR >= vpAR){
+        // fit to width
+        baseFitW = vw;
+        baseFitH = vw / imgAR;
+      } else {
+        // fit to height
+        baseFitH = vh;
+        baseFitW = vh * imgAR;
+      }
+    }
+
+    function maxTranslation(){
+      if (!viewport) return { maxX: 0, maxY: 0 };
+      const rect = viewport.getBoundingClientRect();
+      const vw = rect.width;
+      const vh = rect.height;
+
+      const scaledW = baseFitW * scale;
+      const scaledH = baseFitH * scale;
+
+      const maxX = Math.max(0, (scaledW - vw) / 2);
+      const maxY = Math.max(0, (scaledH - vh) / 2);
+      return { maxX, maxY };
+    }
+
+    function clampTranslation(){
+      const { maxX, maxY } = maxTranslation();
+      tx = clamp(tx, -maxX, maxX);
+      ty = clamp(ty, -maxY, maxY);
+    }
 
     function applyTransform(){
       if (!lightboxImg) return;
+      clampTranslation();
       lightboxImg.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
-      updateNudgeVisibility();
+      updateDesktopControls();
     }
 
     function resetView(){
@@ -946,8 +1040,13 @@
       applyTransform();
     }
 
-    function updateNudgeVisibility(){
+    function updateDesktopControls(){
       if (!nudgePad) return;
+      if (isMobile()){
+        // never show on mobile (CSS also hides it)
+        nudgePad.classList.remove('is-visible');
+        return;
+      }
       if (scale > 1.01){
         nudgePad.classList.add('is-visible');
       } else {
@@ -955,22 +1054,13 @@
       }
     }
 
-    // Keep translation from drifting into blank space.
-    // We approximate allowable movement based on viewport size and scale.
-    function clampTranslation(){
-      if (!viewport) return;
+    function showMobileHint(){
+      if (!hint) return;
+      if (!isMobile()) return;
 
-      const rect = viewport.getBoundingClientRect();
-      const vw = rect.width;
-      const vh = rect.height;
-
-      // when scaled, image can move at most half of the "extra" size
-      // extra = viewport*(scale-1)
-      const maxX = (vw * (scale - 1)) / 2;
-      const maxY = (vh * (scale - 1)) / 2;
-
-      tx = clamp(tx, -maxX, maxX);
-      ty = clamp(ty, -maxY, maxY);
+      // show briefly
+      hint.classList.add('show');
+      setTimeout(() => { hint.classList.remove('show'); }, 1400);
     }
 
     function openLightboxFrom(img){
@@ -984,7 +1074,18 @@
       lightboxImg.alt = alt;
       if (lightboxCaption) lightboxCaption.textContent = alt;
 
-      resetView();
+      // wait for image to load, then compute fit/clamp properly
+      const onImgReady = () => {
+        computeBaseFit();
+        resetView();
+        showMobileHint();
+      };
+
+      if (lightboxImg.complete && lightboxImg.naturalWidth){
+        onImgReady();
+      } else {
+        lightboxImg.onload = () => onImgReady();
+      }
 
       lightbox.classList.add('is-open');
       lightbox.setAttribute('aria-hidden', 'false');
@@ -1002,6 +1103,8 @@
       if (lightboxCaption) lightboxCaption.textContent = '';
 
       document.body.style.overflow = '';
+      baseFitW = 0;
+      baseFitH = 0;
       resetView();
     }
 
@@ -1031,7 +1134,6 @@
       next = clamp(next, MIN_SCALE, MAX_SCALE);
       if (next === prev) return;
 
-      // zoom around viewport center by default
       const rect = viewport.getBoundingClientRect();
       const cx = (centerX != null) ? centerX : (rect.left + rect.width/2);
       const cy = (centerY != null) ? centerY : (rect.top + rect.height/2);
@@ -1039,14 +1141,12 @@
       const px = cx - rect.left;
       const py = cy - rect.top;
 
-      // adjust translation so the zoom feels stable (centered-ish)
+      // keep zoom stable around point
       const ratio = next / prev;
       tx = px - (px - tx) * ratio;
       ty = py - (py - ty) * ratio;
 
       scale = next;
-
-      clampTranslation();
       applyTransform();
     }
 
@@ -1061,17 +1161,27 @@
     if (viewport){
       viewport.addEventListener('wheel', (e) => {
         if (!lightbox || !lightbox.classList.contains('is-open')) return;
+        // on mobile browsers, wheel can appear weird; safe to allow only non-mobile
+        if (isMobile()) return;
         e.preventDefault();
         const delta = (e.deltaY > 0) ? -0.2 : 0.2;
         zoomBy(delta, e.clientX, e.clientY);
       }, { passive: false });
     }
 
-    // Pinch zoom (mobile) — no drag, only pinch changes scale
+    /* ---------------------------
+       Desktop: no drag.
+       Mobile: pinch + swipe pan.
+       --------------------------- */
+    let pointers = new Map();
     let pinchActive = false;
     let pinchStartDist = 0;
     let pinchStartScale = 1;
     let pinchCenter = { x: 0, y: 0 };
+
+    let panActive = false;
+    let panStartX = 0, panStartY = 0;
+    let panStartTx = 0, panStartTy = 0;
 
     function dist(a, b){
       const dx = a.clientX - b.clientX;
@@ -1083,57 +1193,84 @@
     }
 
     if (viewport){
-      viewport._pointers = new Map();
-
       viewport.addEventListener('pointerdown', (e) => {
         if (!lightbox || !lightbox.classList.contains('is-open')) return;
-        viewport._pointers.set(e.pointerId, e);
 
-        if (viewport._pointers.size === 2){
-          const pts = Array.from(viewport._pointers.values());
+        pointers.set(e.pointerId, e);
+        viewport.setPointerCapture(e.pointerId);
+
+        // Mobile only: allow swipe pan when zoomed
+        if (isMobile() && pointers.size === 1 && scale > 1.01){
+          panActive = true;
+          panStartX = e.clientX;
+          panStartY = e.clientY;
+          panStartTx = tx;
+          panStartTy = ty;
+        }
+
+        // start pinch
+        if (pointers.size === 2){
+          const pts = Array.from(pointers.values());
           pinchActive = true;
           pinchStartDist = dist(pts[0], pts[1]);
           pinchStartScale = scale;
           pinchCenter = mid(pts[0], pts[1]);
+          panActive = false; // pinch overrides pan
         }
       });
 
       viewport.addEventListener('pointermove', (e) => {
         if (!lightbox || !lightbox.classList.contains('is-open')) return;
-        if (!viewport._pointers.has(e.pointerId)) return;
-        viewport._pointers.set(e.pointerId, e);
+        if (!pointers.has(e.pointerId)) return;
 
-        if (pinchActive && viewport._pointers.size === 2){
-          const pts = Array.from(viewport._pointers.values());
+        pointers.set(e.pointerId, e);
+
+        // pinch zoom
+        if (pinchActive && pointers.size === 2){
+          const pts = Array.from(pointers.values());
           const d = dist(pts[0], pts[1]);
           const target = pinchStartScale * (d / pinchStartDist);
           zoomTo(target, pinchCenter.x, pinchCenter.y);
+          return;
+        }
+
+        // mobile swipe pan (only when zoomed)
+        if (isMobile() && panActive && pointers.size === 1 && scale > 1.01){
+          const dx = e.clientX - panStartX;
+          const dy = e.clientY - panStartY;
+          tx = panStartTx + dx;
+          ty = panStartTy + dy;
+          applyTransform();
         }
       });
 
       function endPointer(e){
-        viewport._pointers.delete(e.pointerId);
-        if (viewport._pointers.size < 2){
+        pointers.delete(e.pointerId);
+
+        if (pointers.size < 2){
           pinchActive = false;
         }
+        if (pointers.size === 0){
+          panActive = false;
+        }
       }
+
       viewport.addEventListener('pointerup', endPointer);
       viewport.addEventListener('pointercancel', endPointer);
+      viewport.addEventListener('pointerleave', endPointer);
     }
 
-    // Nudge controls (no drag)
+    /* Desktop nudge (click buttons + arrows) */
     function nudge(dx, dy){
       if (scale <= 1.01) return;
       tx += dx;
       ty += dy;
-      clampTranslation();
       applyTransform();
     }
 
     function getNudgeStep(){
       if (!viewport) return 40;
       const rect = viewport.getBoundingClientRect();
-      // 6% of viewport, clamped
       return clamp(Math.round(Math.min(rect.width, rect.height) * 0.06), 26, 60);
     }
 
@@ -1142,11 +1279,11 @@
     if (nLeft) nLeft.addEventListener('click', () => nudge(getNudgeStep(), 0));
     if (nRight) nRight.addEventListener('click', () => nudge(-getNudgeStep(), 0));
     if (nCenter) nCenter.addEventListener('click', () => { tx = 0; ty = 0; applyTransform(); });
-    if (resetBtn) resetBtn.addEventListener('click', resetView);
+    if (resetBtn) resetBtn.addEventListener('click', () => resetView());
 
-    // Keyboard nudges when lightbox open
     window.addEventListener('keydown', (e) => {
       if (!lightbox || !lightbox.classList.contains('is-open')) return;
+      if (isMobile()) return; // mobile uses gestures
       if (scale <= 1.01) return;
 
       const step = getNudgeStep();
@@ -1156,10 +1293,13 @@
       if (e.key === 'ArrowRight'){ e.preventDefault(); nudge(-step, 0); }
     });
 
-    window.addEventListener('resize', () => {
-      clampTranslation();
+    function onResize(){
+      if (!lightbox || !lightbox.classList.contains('is-open')) return;
+      computeBaseFit();
       applyTransform();
-    });
+    }
+    window.addEventListener('resize', onResize);
+    mqMobile.addEventListener?.('change', onResize);
   })();
 </script>
 </body>

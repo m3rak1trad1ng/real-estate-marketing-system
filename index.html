@@ -320,7 +320,7 @@
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 18px;
+      padding: 12px; /* ✅ slightly less padding = slightly bigger image */
       background: rgba(15,23,42,.78);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
@@ -329,8 +329,8 @@
 
     .lightbox-inner{
       width: 100%;
-      max-width: min(1100px, 96vw);
-      max-height: 90vh;
+      max-width: min(1300px, 98vw); /* ✅ was 1100px/96vw */
+      max-height: 94vh;            /* ✅ gives a touch more vertical room */
       display:flex;
       flex-direction: column;
       gap: 10px;
@@ -350,7 +350,7 @@
       width: 100%;
       height: auto;
       display:block;
-      max-height: 90vh;
+      max-height: 94vh;     /* ✅ was 90vh */
       object-fit: contain;
       cursor: zoom-out;
       background: rgba(0,0,0,.12);

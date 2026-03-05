@@ -124,6 +124,7 @@
       color: #0b1220;
     }
 
+    /* ✅ HERO COPY BLOCK */
     .hero-blocks{
       max-width: 78ch;
       margin: 0 auto 14px auto;
@@ -305,10 +306,7 @@
     }
 
     /* =========================================================
-       ✅ PREMIUM CLICK-TO-ENLARGE VIEWER
-       - Desktop: wheel zoom + drag-to-pan + dblclick zoom
-       - Mobile: pinch zoom + swipe pan + dbltap zoom
-       - Optional: press-and-hold arrows + reset
+       ✅ PREMIUM IMAGE VIEWER (NO ARROWS, NO JANK)
        ========================================================= */
     img[data-zoomable="true"]{ cursor: zoom-in; }
 
@@ -347,31 +345,38 @@
 
     .lightbox-viewport{
       width: 100%;
-      max-height: 94vh;
+      height: min(78vh, 900px);
       overflow: hidden;
       display:flex;
       align-items:center;
       justify-content:center;
 
+      /* These are non-negotiable for mobile pan */
       touch-action: none;
       overscroll-behavior: contain;
       -webkit-user-select: none;
       user-select: none;
+      -webkit-touch-callout: none;
+      background: rgba(0,0,0,.08);
     }
 
+    /* Cursor states */
     .lightbox-viewport.is-grabbable{ cursor: grab; }
     .lightbox-viewport.is-dragging{ cursor: grabbing; }
 
     .lightbox-img{
-      width: 100%;
+      width: auto;
       height: auto;
+      max-width: 100%;
+      max-height: 100%;
       display:block;
       object-fit: contain;
-      background: rgba(0,0,0,.12);
       transform-origin: center center;
       will-change: transform;
       user-select: none;
       -webkit-user-drag: none;
+
+      /* viewport receives all gestures */
       pointer-events: none;
     }
 
@@ -397,6 +402,7 @@
     }
     .lightbox-close:hover{ background: rgba(15,23,42,.7); }
 
+    /* Minimal zoom buttons: desktop only, optional backup */
     .zoom-controls{
       position: absolute;
       left: 10px;
@@ -423,78 +429,12 @@
     }
     .zoom-btn:hover{ background: rgba(15,23,42,.7); }
 
-    .nudge-pad{
-      position: absolute;
-      left: 10px;
-      bottom: 10px;
-      display: none;
-      gap: 8px;
-      align-items:center;
-      z-index: 4;
-    }
-    .nudge-pad.is-visible{ display:flex; }
-
-    .nudge-grid{
-      display:grid;
-      grid-template-columns: 42px 42px 42px;
-      grid-template-rows: 42px 42px 42px;
-      gap: 8px;
-    }
-
-    .nudge-btn{
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.25);
-      background: rgba(15,23,42,.55);
-      color: #fff;
-      font-weight: 900;
-      font-size: 16px;
-      line-height: 1;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      cursor: pointer;
-      user-select: none;
-      touch-action: none;
-    }
-    .nudge-btn:hover{ background: rgba(15,23,42,.7); }
-
-    .reset-btn{
-      width: 86px;
-      height: 42px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.25);
-      background: rgba(15,23,42,.55);
-      color: #fff;
-      font-weight: 900;
-      font-size: 13px;
-      letter-spacing: .2px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      cursor: pointer;
-      user-select: none;
-    }
-    .reset-btn:hover{ background: rgba(15,23,42,.7); }
-
     .lightbox-caption{
       color: rgba(255,255,255,.86);
       font-size: 13px;
       line-height: 1.35;
       text-align: center;
       padding: 0 10px;
-    }
-
-    @media (max-width: 820px){
-      .lightbox{ padding: 10px; }
-      .zoom-controls{ display:none !important; }
-      .nudge-pad{ display:none !important; }
-      .lightbox-close{
-        width: 44px;
-        height: 44px;
-        border-radius: 14px;
-      }
     }
 
     .lb-hint{
@@ -517,6 +457,18 @@
       white-space: nowrap;
     }
     .lb-hint.show{ opacity: 1; }
+
+    /* Mobile: hide zoom buttons (pinch + dbltap only) */
+    @media (max-width: 820px){
+      .lightbox{ padding: 10px; }
+      .zoom-controls{ display:none !important; }
+      .lightbox-close{
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
+      }
+      .lightbox-viewport{ height: 78vh; }
+    }
   </style>
 </head>
 
@@ -732,7 +684,7 @@
               </div>
             </details>
 
-            <div class="actions" style="margin-top:14px; margin-bottom:18px;">
+             <div class="actions" style="margin-top:14px; margin-bottom:18px;">
               <a class="btn subtle" href="/faq/">View Full FAQ</a>
             </div>
           </div>
@@ -763,24 +715,6 @@
 
         <div class="lightbox-viewport" id="lightbox-viewport" aria-label="Zoomable image viewport">
           <img class="lightbox-img" id="lightbox-img" alt="">
-        </div>
-
-        <div class="nudge-pad" id="nudge-pad" aria-label="Move controls">
-          <div class="nudge-grid" aria-hidden="false">
-            <div></div>
-            <button class="nudge-btn" id="nudge-up" type="button" aria-label="Move up">↑</button>
-            <div></div>
-
-            <button class="nudge-btn" id="nudge-left" type="button" aria-label="Move left">←</button>
-            <button class="nudge-btn" id="nudge-center" type="button" aria-label="Center view">●</button>
-            <button class="nudge-btn" id="nudge-right" type="button" aria-label="Move right">→</button>
-
-            <div></div>
-            <button class="nudge-btn" id="nudge-down" type="button" aria-label="Move down">↓</button>
-            <div></div>
-          </div>
-
-          <button class="reset-btn" id="reset-view" type="button" aria-label="Reset view">Reset</button>
         </div>
 
         <div class="lb-hint" id="lb-hint">Pinch to zoom • Drag/swipe to move • Double tap/click to zoom</div>
@@ -943,26 +877,18 @@
       setActiveByScroll();
 
       /* =========================================================
-         ✅ PREMIUM LIGHTBOX
+         ✅ PREMIUM LIGHTBOX (PAN FIXED FOR MOBILE + DESKTOP)
          ========================================================= */
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
       const lightboxCaption = document.getElementById('lightbox-caption');
       const lightboxClose = document.getElementById('lightbox-close');
       const viewport = document.getElementById('lightbox-viewport');
+      const hint = document.getElementById('lb-hint');
 
       const zoomInBtn = document.getElementById('zoom-in');
       const zoomOutBtn = document.getElementById('zoom-out');
 
-      const nudgePad = document.getElementById('nudge-pad');
-      const nUp = document.getElementById('nudge-up');
-      const nDown = document.getElementById('nudge-down');
-      const nLeft = document.getElementById('nudge-left');
-      const nRight = document.getElementById('nudge-right');
-      const nCenter = document.getElementById('nudge-center');
-      const resetBtn = document.getElementById('reset-view');
-
-      const hint = document.getElementById('lb-hint');
       const zoomables = Array.from(document.querySelectorAll('img[data-zoomable="true"]'));
 
       const mqMobile = window.matchMedia('(max-width: 820px)');
@@ -975,42 +901,41 @@
       let ty = 0;
 
       const MIN_SCALE = 1;
-      const MAX_SCALE = 3.5;
-
-      let baseFitW = 0;
-      let baseFitH = 0;
+      const MAX_SCALE = 3.75;
 
       function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
 
-      function computeBaseFit(){
-        if (!viewport || !lightboxImg || !lightboxImg.naturalWidth || !lightboxImg.naturalHeight) return;
-        const rect = viewport.getBoundingClientRect();
-        const vw = rect.width;
-        const vh = rect.height;
-
-        const imgAR = lightboxImg.naturalWidth / lightboxImg.naturalHeight;
-        const vpAR = vw / vh;
-
-        if (imgAR >= vpAR){
-          baseFitW = vw;
-          baseFitH = vw / imgAR;
-        } else {
-          baseFitH = vh;
-          baseFitW = vh * imgAR;
-        }
+      function viewportRect(){
+        return viewport.getBoundingClientRect();
       }
 
       function maxTranslation(){
-        if (!viewport) return { maxX: 0, maxY: 0 };
-        const rect = viewport.getBoundingClientRect();
+        const rect = viewportRect();
         const vw = rect.width;
         const vh = rect.height;
 
-        const scaledW = baseFitW * scale;
-        const scaledH = baseFitH * scale;
+        // current displayed image dimensions at scale=1 (fit inside viewport)
+        const nw = lightboxImg.naturalWidth || 1;
+        const nh = lightboxImg.naturalHeight || 1;
+
+        const imgAR = nw / nh;
+        const vpAR = vw / vh;
+
+        let fitW, fitH;
+        if (imgAR >= vpAR){
+          fitW = vw;
+          fitH = vw / imgAR;
+        } else {
+          fitH = vh;
+          fitW = vh * imgAR;
+        }
+
+        const scaledW = fitW * scale;
+        const scaledH = fitH * scale;
 
         const maxX = Math.max(0, (scaledW - vw) / 2);
         const maxY = Math.max(0, (scaledH - vh) / 2);
+
         return { maxX, maxY };
       }
 
@@ -1020,22 +945,21 @@
         ty = clamp(ty, -maxY, maxY);
       }
 
-      function setGrabState(){
+      function setGrabState(dragging){
         if (!viewport) return;
         if (scale > 1.01){
           viewport.classList.add('is-grabbable');
         } else {
           viewport.classList.remove('is-grabbable');
-          viewport.classList.remove('is-dragging');
         }
+        if (dragging) viewport.classList.add('is-dragging');
+        else viewport.classList.remove('is-dragging');
       }
 
       function applyTransform(){
-        if (!lightboxImg) return;
         clampTranslation();
         lightboxImg.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
-        updateDesktopControls();
-        setGrabState();
+        setGrabState(false);
       }
 
       function resetView(){
@@ -1045,28 +969,39 @@
         applyTransform();
       }
 
-      function updateDesktopControls(){
-        if (!nudgePad) return;
-        if (isMobile()){
-          nudgePad.classList.remove('is-visible');
-          return;
-        }
-        if (scale > 1.01){
-          nudgePad.classList.add('is-visible');
-        } else {
-          nudgePad.classList.remove('is-visible');
-        }
-      }
-
       function showHint(){
         if (!hint) return;
         hint.classList.add('show');
-        setTimeout(() => { hint.classList.remove('show'); }, 1600);
+        setTimeout(() => hint.classList.remove('show'), 1600);
+      }
+
+      function zoomTo(next, clientX, clientY){
+        const prev = scale;
+        next = clamp(next, MIN_SCALE, MAX_SCALE);
+        if (next === prev) return;
+
+        const rect = viewportRect();
+        const cx = (clientX != null) ? clientX : (rect.left + rect.width/2);
+        const cy = (clientY != null) ? clientY : (rect.top + rect.height/2);
+
+        const px = cx - rect.left;
+        const py = cy - rect.top;
+
+        const ratio = next / prev;
+
+        // keep the point under cursor stable
+        tx = px - (px - tx) * ratio;
+        ty = py - (py - ty) * ratio;
+
+        scale = next;
+        applyTransform();
+      }
+
+      function zoomBy(delta, clientX, clientY){
+        zoomTo(scale + delta, clientX, clientY);
       }
 
       function openLightboxFrom(img){
-        if (!lightbox || !lightboxImg) return;
-
         const src = img.getAttribute('src') || '';
         const alt = img.getAttribute('alt') || '';
         if (!src) return;
@@ -1075,208 +1010,131 @@
         lightboxImg.alt = alt;
         if (lightboxCaption) lightboxCaption.textContent = alt;
 
-        const onImgReady = () => {
-          computeBaseFit();
-          resetView();
-          showHint();
-        };
-
-        if (lightboxImg.complete && lightboxImg.naturalWidth){
-          onImgReady();
-        } else {
-          lightboxImg.onload = () => onImgReady();
-        }
-
         lightbox.classList.add('is-open');
         lightbox.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
+
+        // Wait for image to load before resetting
+        const onReady = () => {
+          resetView();
+          showHint();
+        };
+        if (lightboxImg.complete && lightboxImg.naturalWidth){
+          onReady();
+        } else {
+          lightboxImg.onload = () => onReady();
+        }
       }
 
       function closeLightbox(){
-        if (!lightbox || !lightboxImg) return;
-
         lightbox.classList.remove('is-open');
         lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
 
         lightboxImg.src = '';
         lightboxImg.alt = '';
         if (lightboxCaption) lightboxCaption.textContent = '';
 
-        document.body.style.overflow = '';
-        baseFitW = 0;
-        baseFitH = 0;
         resetView();
       }
 
       zoomables.forEach(img => img.addEventListener('click', () => openLightboxFrom(img)));
+      lightboxClose.addEventListener('click', closeLightbox);
 
-      if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
-
-      if (lightbox){
-        lightbox.addEventListener('click', (e) => {
-          const inner = e.target.closest('.lightbox-img-wrap');
-          if (!inner) closeLightbox();
-        });
-      }
+      lightbox.addEventListener('click', (e) => {
+        const inner = e.target.closest('.lightbox-img-wrap');
+        if (!inner) closeLightbox();
+      });
 
       window.addEventListener('keydown', (e) => {
         if (e.key !== 'Escape') return;
-        if (!lightbox || !lightbox.classList.contains('is-open')) return;
+        if (!lightbox.classList.contains('is-open')) return;
         closeLightbox();
       });
 
-      function zoomTo(next, centerX, centerY){
-        if (!viewport) return;
-
-        const prev = scale;
-        next = clamp(next, MIN_SCALE, MAX_SCALE);
-        if (next === prev) return;
-
-        const rect = viewport.getBoundingClientRect();
-        const cx = (centerX != null) ? centerX : (rect.left + rect.width/2);
-        const cy = (centerY != null) ? centerY : (rect.top + rect.height/2);
-
-        const px = cx - rect.left;
-        const py = cy - rect.top;
-
-        const ratio = next / prev;
-        tx = px - (px - tx) * ratio;
-        ty = py - (py - ty) * ratio;
-
-        scale = next;
-        applyTransform();
-      }
-
-      function zoomBy(delta, centerX, centerY){
-        zoomTo(scale + delta, centerX, centerY);
-      }
-
+      // Zoom buttons backup (desktop)
       if (zoomInBtn) zoomInBtn.addEventListener('click', () => zoomBy(0.25));
       if (zoomOutBtn) zoomOutBtn.addEventListener('click', () => zoomBy(-0.25));
 
-      // Wheel zoom (desktop)
-      if (viewport){
-        viewport.addEventListener('wheel', (e) => {
-          if (!lightbox || !lightbox.classList.contains('is-open')) return;
-          if (isMobile()) return;
-          e.preventDefault();
-          const delta = (e.deltaY > 0) ? -0.2 : 0.2;
-          zoomBy(delta, e.clientX, e.clientY);
-        }, { passive: false });
-      }
+      // Wheel zoom desktop
+      viewport.addEventListener('wheel', (e) => {
+        if (!lightbox.classList.contains('is-open')) return;
+        if (isMobile()) return;
+        e.preventDefault();
+        const delta = (e.deltaY > 0) ? -0.22 : 0.22;
+        zoomBy(delta, e.clientX, e.clientY);
+      }, { passive: false });
 
-      /* ✅ Double-click zoom (desktop) */
-      if (viewport){
-        viewport.addEventListener('dblclick', (e) => {
-          if (!lightbox || !lightbox.classList.contains('is-open')) return;
-          e.preventDefault();
-          const next = (scale <= 1.01) ? 2.0 : 1.0;
-          zoomTo(next, e.clientX, e.clientY);
-        });
-      }
+      // Double click desktop zoom toggle
+      viewport.addEventListener('dblclick', (e) => {
+        if (!lightbox.classList.contains('is-open')) return;
+        e.preventDefault();
+        const next = (scale <= 1.01) ? 2.2 : 1.0;
+        zoomTo(next, e.clientX, e.clientY);
+      });
 
-      /* Arrow pad: nudge + press-and-hold (desktop backup) */
-      function getNudgeStep(){
-        if (!viewport) return 40;
-        const rect = viewport.getBoundingClientRect();
-        return clamp(Math.round(Math.min(rect.width, rect.height) * 0.06), 26, 60);
-      }
+      /* =========================
+         ✅ DESKTOP PAN (MOUSE DRAG)
+         ========================= */
+      let mouseDown = false;
+      let mouseStartX = 0, mouseStartY = 0;
+      let mouseStartTx = 0, mouseStartTy = 0;
 
-      function nudge(dx, dy){
-        if (scale <= 1.01) return;
-        tx += dx;
-        ty += dy;
-        applyTransform();
-      }
-
-      function startHold(dx, dy){
-        // One immediate move, then repeat
-        nudge(dx, dy);
-        const stepTimer = setInterval(() => nudge(dx, dy), 45);
-        return () => clearInterval(stepTimer);
-      }
-
-      function bindHold(btn, getDelta){
-        if (!btn) return;
-
-        let stop = null;
-
-        const down = (e) => {
-          if (isMobile()) return; // mobile hides pad anyway
-          if (scale <= 1.01) return;
-          e.preventDefault();
-
-          const { dx, dy } = getDelta();
-          stop = startHold(dx, dy);
-        };
-
-        const up = () => {
-          if (stop){
-            stop();
-            stop = null;
-          }
-        };
-
-        btn.addEventListener('pointerdown', down);
-        window.addEventListener('pointerup', up);
-        window.addEventListener('pointercancel', up);
-        btn.addEventListener('lostpointercapture', up);
-      }
-
-      bindHold(nUp, () => ({ dx: 0, dy: getNudgeStep() }));
-      bindHold(nDown, () => ({ dx: 0, dy: -getNudgeStep() }));
-      bindHold(nLeft, () => ({ dx: getNudgeStep(), dy: 0 }));
-      bindHold(nRight, () => ({ dx: -getNudgeStep(), dy: 0 }));
-
-      if (nCenter) nCenter.addEventListener('click', () => { tx = 0; ty = 0; applyTransform(); });
-      if (resetBtn) resetBtn.addEventListener('click', () => resetView());
-
-      window.addEventListener('keydown', (e) => {
-        if (!lightbox || !lightbox.classList.contains('is-open')) return;
+      viewport.addEventListener('mousedown', (e) => {
+        if (!lightbox.classList.contains('is-open')) return;
         if (isMobile()) return;
         if (scale <= 1.01) return;
 
-        const step = getNudgeStep();
-        if (e.key === 'ArrowUp'){ e.preventDefault(); nudge(0, step); }
-        if (e.key === 'ArrowDown'){ e.preventDefault(); nudge(0, -step); }
-        if (e.key === 'ArrowLeft'){ e.preventDefault(); nudge(step, 0); }
-        if (e.key === 'ArrowRight'){ e.preventDefault(); nudge(-step, 0); }
+        e.preventDefault();
+        mouseDown = true;
+        mouseStartX = e.clientX;
+        mouseStartY = e.clientY;
+        mouseStartTx = tx;
+        mouseStartTy = ty;
+        setGrabState(true);
       });
 
-      /* =========================================================
-         ✅ Unified Pointer Gestures (works across modern browsers)
-         - 1 pointer: drag pan (only when zoomed)
-         - 2 pointers: pinch zoom
-         - double-tap zoom (mobile): implemented via timing below
-         ========================================================= */
-      let pointers = new Map();
+      window.addEventListener('mousemove', (e) => {
+        if (!mouseDown) return;
+        const dx = e.clientX - mouseStartX;
+        const dy = e.clientY - mouseStartY;
+        tx = mouseStartTx + dx;
+        ty = mouseStartTy + dy;
+        clampTranslation();
+        lightboxImg.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+        setGrabState(true);
+      });
 
-      let panActive = false;
-      let panStartX = 0, panStartY = 0;
-      let panStartTx = 0, panStartTy = 0;
+      window.addEventListener('mouseup', () => {
+        if (!mouseDown) return;
+        mouseDown = false;
+        setGrabState(false);
+      });
 
-      let pinchActive = false;
-      let pinchStartDist = 0;
-      let pinchStartScale = 1;
-      let pinchCenter = { x: 0, y: 0 };
+      /* =========================
+         ✅ MOBILE PAN+PINCH (TOUCH FALLBACK)
+         This is what makes it work "for all devices".
+         ========================= */
+      let tPanning = false;
+      let tStartX = 0, tStartY = 0;
+      let tStartTx = 0, tStartTy = 0;
 
-      function dist(a, b){
-        const dx = a.clientX - b.clientX;
-        const dy = a.clientY - b.clientY;
+      let tPinching = false;
+      let tPinchStartDist = 0;
+      let tPinchStartScale = 1;
+      let tPinchCenterX = 0;
+      let tPinchCenterY = 0;
+
+      function touchDist(t1, t2){
+        const dx = t1.clientX - t2.clientX;
+        const dy = t1.clientY - t2.clientY;
         return Math.hypot(dx, dy);
       }
-      function mid(a, b){
-        return { x: (a.clientX + b.clientX)/2, y: (a.clientY + b.clientY)/2 };
+      function touchMid(t1, t2){
+        return { x: (t1.clientX + t2.clientX)/2, y: (t1.clientY + t2.clientY)/2 };
       }
 
-      function stopAllGestures(){
-        panActive = false;
-        pinchActive = false;
-        pointers.clear();
-        viewport?.classList.remove('is-dragging');
-      }
-
-      // ✅ Double-tap detection (mobile) – only when 1 pointer
+      // Double tap (mobile)
       let lastTapT = 0;
       let lastTapX = 0;
       let lastTapY = 0;
@@ -1288,104 +1146,106 @@
         return (dx*dx + dy*dy) <= distPx*distPx;
       }
 
-      if (viewport){
-        viewport.addEventListener('pointerdown', (e) => {
-          if (!lightbox || !lightbox.classList.contains('is-open')) return;
+      viewport.addEventListener('touchstart', (e) => {
+        if (!lightbox.classList.contains('is-open')) return;
 
-          pointers.set(e.pointerId, e);
-          viewport.setPointerCapture(e.pointerId);
+        // IMPORTANT: we must prevent default to stop page scroll / native gestures
+        e.preventDefault();
 
-          // Double-tap zoom (mobile/coarse pointer)
-          if (isMobile() && pointers.size === 1){
-            const now = Date.now();
-            const isDouble = (now - lastTapT) <= DBLTAP_MS && isNear(e.clientX, e.clientY, lastTapX, lastTapY, DBLTAP_DIST);
-            lastTapT = now;
-            lastTapX = e.clientX;
-            lastTapY = e.clientY;
+        const touches = e.touches;
 
-            if (isDouble){
-              // toggle zoom
-              const next = (scale <= 1.01) ? 2.0 : 1.0;
-              zoomTo(next, e.clientX, e.clientY);
-              // prevent this tap from starting a pan
-              panActive = false;
-              pinchActive = false;
-              viewport.classList.remove('is-dragging');
-              return;
-            }
-          }
+        if (touches.length === 1){
+          const t = touches[0];
 
-          // Start pan if 1 pointer and zoomed
-          if (pointers.size === 1 && scale > 1.01){
-            panActive = true;
-            pinchActive = false;
-            panStartX = e.clientX;
-            panStartY = e.clientY;
-            panStartTx = tx;
-            panStartTy = ty;
-            viewport.classList.add('is-dragging');
-          }
+          // double tap toggle zoom
+          const now = Date.now();
+          const isDouble = (now - lastTapT) <= DBLTAP_MS && isNear(t.clientX, t.clientY, lastTapX, lastTapY, DBLTAP_DIST);
+          lastTapT = now;
+          lastTapX = t.clientX;
+          lastTapY = t.clientY;
 
-          // Start pinch if 2 pointers
-          if (pointers.size === 2){
-            const pts = Array.from(pointers.values());
-            pinchActive = true;
-            panActive = false;
-            viewport.classList.remove('is-dragging');
-            pinchStartDist = dist(pts[0], pts[1]);
-            pinchStartScale = scale;
-            pinchCenter = mid(pts[0], pts[1]);
-          }
-        }, { passive: true });
-
-        viewport.addEventListener('pointermove', (e) => {
-          if (!lightbox || !lightbox.classList.contains('is-open')) return;
-          if (!pointers.has(e.pointerId)) return;
-
-          // Critical: prevent browser scroll/zoom conflicts while we gesture
-          if (panActive || pinchActive) e.preventDefault();
-
-          pointers.set(e.pointerId, e);
-
-          if (pinchActive && pointers.size === 2){
-            const pts = Array.from(pointers.values());
-            const d = dist(pts[0], pts[1]);
-            const target = pinchStartScale * (d / pinchStartDist);
-            zoomTo(target, pinchCenter.x, pinchCenter.y);
+          if (isDouble){
+            const next = (scale <= 1.01) ? 2.2 : 1.0;
+            zoomTo(next, t.clientX, t.clientY);
+            tPanning = false;
+            tPinching = false;
             return;
           }
 
-          if (panActive && pointers.size === 1 && scale > 1.01){
-            const dx = e.clientX - panStartX;
-            const dy = e.clientY - panStartY;
-            tx = panStartTx + dx;
-            ty = panStartTy + dy;
-            applyTransform();
-          }
-        }, { passive: false });
-
-        function endPointer(e){
-          pointers.delete(e.pointerId);
-
-          if (pointers.size < 2) pinchActive = false;
-          if (pointers.size === 0){
-            panActive = false;
-            viewport.classList.remove('is-dragging');
+          if (scale > 1.01){
+            tPanning = true;
+            tPinching = false;
+            tStartX = t.clientX;
+            tStartY = t.clientY;
+            tStartTx = tx;
+            tStartTy = ty;
+          } else {
+            tPanning = false;
           }
         }
 
-        viewport.addEventListener('pointerup', endPointer, { passive: true });
-        viewport.addEventListener('pointercancel', endPointer, { passive: true });
-        viewport.addEventListener('lostpointercapture', () => stopAllGestures(), { passive: true });
-      }
+        if (touches.length === 2){
+          const t1 = touches[0];
+          const t2 = touches[1];
+          const mid = touchMid(t1, t2);
 
+          tPinching = true;
+          tPanning = false;
+
+          tPinchStartDist = touchDist(t1, t2);
+          tPinchStartScale = scale;
+          tPinchCenterX = mid.x;
+          tPinchCenterY = mid.y;
+        }
+      }, { passive: false });
+
+      viewport.addEventListener('touchmove', (e) => {
+        if (!lightbox.classList.contains('is-open')) return;
+        e.preventDefault();
+
+        const touches = e.touches;
+
+        if (tPinching && touches.length === 2){
+          const t1 = touches[0];
+          const t2 = touches[1];
+          const d = touchDist(t1, t2);
+          const target = tPinchStartScale * (d / Math.max(1, tPinchStartDist));
+          zoomTo(target, tPinchCenterX, tPinchCenterY);
+          return;
+        }
+
+        if (tPanning && touches.length === 1 && scale > 1.01){
+          const t = touches[0];
+          const dx = t.clientX - tStartX;
+          const dy = t.clientY - tStartY;
+          tx = tStartTx + dx;
+          ty = tStartTy + dy;
+          clampTranslation();
+          lightboxImg.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+        }
+      }, { passive: false });
+
+      viewport.addEventListener('touchend', (e) => {
+        if (!lightbox.classList.contains('is-open')) return;
+        // If one finger remains after pinch, don’t auto-start pan until next touchstart
+        if (e.touches.length === 0){
+          tPanning = false;
+          tPinching = false;
+        }
+        if (e.touches.length === 1){
+          tPinching = false;
+          tPanning = false;
+        }
+      }, { passive: true });
+
+      // Keep clamping sane on resize/orientation
       function onResize(){
-        if (!lightbox || !lightbox.classList.contains('is-open')) return;
-        computeBaseFit();
+        if (!lightbox.classList.contains('is-open')) return;
         applyTransform();
       }
       window.addEventListener('resize', onResize);
       mqMobile.addEventListener?.('change', onResize);
+
     })();
   </script>
 </body>
